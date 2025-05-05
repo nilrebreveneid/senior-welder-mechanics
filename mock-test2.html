@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mock Lok Sewa Exam - 50 MCQs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+    .question {
+      margin-bottom: 1.5rem;
+    }
+    .question p {
+      font-weight: 600;
+    }
+    .options button {
+      display: block;
+      margin: 0.5rem 0;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      text-align: left;
+      background-color: #f1f1f1;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .options button.correct {
+      background-color: #c8f7c5;
+    }
+    .options button.wrong {
+      background-color: #f7c5c5;
+    }
+  </style>
+</head>
+<body>
+  <h1>Mock Lok Sewa Exam - 50 MCQs</h1>
+  <div class="container" id="quiz"></div>
+
+  <script>
+    const questions = [
+      { q: "Handle of soldering iron rod is made up of plastic because plastic is a:", options: ["Good conductor of heat", "Good insulator of heat"], answer: 1 },
+      { q: "Magnetism is a property of:", options: ["Plastic", "Iron"], answer: 1 },
+      { q: "Which power plant is free from environmental problems?", options: ["Thermal power plant", "Geothermal power plant"], answer: 1 },
+      { q: "In a steam power plant, which components are used?", options: ["Condenser", "All of the above"], answer: 1 },
+      { q: "Coal used in power plant is also known as:", options: ["Charcoal", "Steam coal"], answer: 1 },
+      { q: "TIG Welding मा कुन ग्यास प्रयोग हुन्छ?", options: ["हाइड्रोजन र अक्सिजन", "आर्गन र हाइड्रोजन"], answer: 1 },
+      { q: "Arc welding मा कुन प्रकारको Electrode Coating Material हो?", options: ["Slag", "Flux"], answer: 1 },
+      { q: "The edge of sheet metal made by folding is called", options: ["seam", "hem"], answer: 1 },
+      { q: "कुन उपकरण Welding tools मा पर्दैन?", options: ["Radiator", "Electrode"], answer: 0 },
+      { q: "Excavator को हाइड्रोलिक खोच खनेर गर्ने कार्यमा कुन प्रकारको वेल्डिङ प्रयोग गरिन्छ?", options: ["Gas Welding", "Arc Welding"], answer: 1 },
+      { q: "Tachometer is used to measure:", options: ["Speed", "Engine RPM"], answer: 1 },
+      { q: "The basic purpose of tyres is:", options: ["To substitute for springs", "For braking"], answer: 1 },
+      { q: "A tyre is designated as 175/65 R14 82 S. Then aspect ratio of tyre is:", options: ["14", "65"], answer: 1 },
+      { q: "The truck has tyre of 11.00×20-12PR. What does 20 mean?", options: ["Height of tyre in inches", "Diameter of rims in inches"], answer: 1 },
+      { q: "Periodic maintenance भन्नाले के बुझिन्छ?", options: ["Overhauling", "तय गरिएको अवधि वा period मा गरिने maintenance"], answer: 1 },
+      { q: "In the hydraulic system, valves are used to control:", options: ["Direction of flow of hydraulic oil", "All of the above"], answer: 1 },
+      { q: "In hydraulic system if the filter is not serviced, then:", options: ["The oil will heat up", "The relief valve may open"], answer: 1 },
+      { q: "The basic principle that makes hydraulic system possible is:", options: ["Bernoulli’s theorem", "Pascal’s principle"], answer: 1 },
+      { q: "Which of the following is not a part of the hydraulic system?", options: ["Alternator", "Cylinder"], answer: 0 },
+      { q: "When hydraulic oil is dirty and contaminated, it:", options: ["It damages engine", "It damages control valve and hydraulic cylinder"], answer: 1 },
+      { q: "The main function of a shock absorber is:", options: ["To release the energy", "To dissipate the energy"], answer: 1 },
+      { q: "Steel spring is of following type:", options: ["Leaf spring", "All of the above"], answer: 1 },
+      { q: "Suspension system मा गाडीको वजन सपोर्ट गर्ने घटक कुन हो?", options: ["Spring", "Shock absorber"], answer: 1 },
+      { q: "What is the common problem in suspension system of automobile?", options: ["Propeller shaft vibration", "Shock absorber and ball joint wear out"], answer: 1 },
+      { q: "The vehicle ride will be comfortable if:", options: ["Sprung mass is kept minimum", "Unsprung mass is kept minimum"], answer: 1 },
+      { q: "The commonly used material for the insulator of spark plug is:", options: ["Bakelite", "Asbestos"], answer: 1 },
+      { q: "Facing is an operation of:", options: ["Beveling the extreme end", "Machining ends of workpiece to produce flat surface"], answer: 1 },
+      { q: "Which of the following is not a cutting fluid?", options: ["Gasoline", "Mineral oil"], answer: 0 },
+      { q: "Specific gravity of a battery is checked by:", options: ["Manometer", "Hydrometer"], answer: 1 },
+      { q: "Tool used to measure valve tappet clearance:", options: ["Vernier caliper", "Feeler gauge"], answer: 1 },
+      { q: "The function of radiator fan is:", options: ["Drive water pump", "Divert cool air to radiator"], answer: 1 },
+      { q: "Water jacket in engine cooling system surrounds:", options: ["Radiator", "Engine block"], answer: 1 },
+      { q: "The thermostat valve starts to open at:", options: ["90°C", "60°C"], answer: 1 },
+      { q: "पानी circulate गर्न कारमा कुन प्रकारको pump प्रयोग हुन्छ?", options: ["Vane type", "Centrifugal type"], answer: 1 },
+      { q: "The commonly used antifreeze solution in automobile engine is:", options: ["Carbon disulphate", "Ethylene glycol"], answer: 1 },
+      { q: "The brakes employed in cars are usually operated:", options: ["Mechanically", "Hydraulically"], answer: 1 },
+      { q: "Disc र Drum-type brake मा के फरक छ?", options: ["Disc type घुम्दैन", "Disc type मा कम friction"], answer: 1 },
+      { q: "Brake is required to stop the machine:", options: ["Within the shortest possible distance", "Within certain distance"], answer: 1 },
+      { q: "What may be the cause of brake pedal going to floor?", options: ["Excessively worn brake lining", "All of the above"], answer: 1 },
+      { q: "When brake is applied on a moving vehicle, the kinetic energy is converted into?", options: ["Light energy", "Heat energy"], answer: 1 },
+      { q: "Steam engines are:", options: ["External combustion engine", "Internal combustion engine"], answer: 0 },
+      { q: "Which of the following part is not present in diesel engine?", options: ["Oil ring", "Spark plug"], answer: 1 },
+      { q: "A diesel engine is also known as:", options: ["Spark ignition engine", "Compression ignition engine"], answer: 1 },
+      { q: "The petrol engines are also known as:", options: ["Steam engine", "Spark Ignition (SI) engine"], answer: 1 },
+      { q: "Otto cycle is also known as:", options: ["Constant pressure cycle", "Constant volume cycle"], answer: 1 },
+      { q: "A feeler gauge is used to measure:", options: ["Thickness of a plate", "Space between surfaces"], answer: 1 },
+      { q: "For compaction during road construction we use:", options: ["Excavator", "Road roller"], answer: 1 },
+      { q: "Hydraulic excavator को काम के हो?", options: ["Compactor गर्ने", "खाल्डो खन्ने"], answer: 1 },
+      { q: "Motor Grader are used mostly for:", options: ["Purely excavation", "Finishing, shaping"], answer: 1 },
+      { q: "Lifting hook प्रयोग गर्दा प्रयोग गरिने औजार कुन हो ?", options: ["ट्रक", "क्रेन"], answer: 1 }
+    ];
+
+    const quizDiv = document.getElementById("quiz");
+    questions.forEach((q, index) => {
+      const shuffled = q.options.map((opt, i) => ({ opt, i }))
+        .sort(() => Math.random() - 0.5);
+      const div = document.createElement("div");
+      div.className = "question";
+      div.innerHTML = `<p><strong>Q${index + 1}:</strong> ${q.q}</p>`;
+
+      const optDiv = document.createElement("div");
+      optDiv.className = "options";
+      shuffled.forEach(({ opt, i }) => {
+        const btn = document.createElement("button");
+        btn.textContent = opt;
+        btn.onclick = () => {
+          if (i === q.answer) {
+            btn.classList.add("correct");
+          } else {
+            btn.classList.add("wrong");
+          }
+          [...optDiv.children].forEach(b => b.disabled = true);
+        };
+        optDiv.appendChild(btn);
+      });
+      div.appendChild(optDiv);
+      quizDiv.appendChild(div);
+    });
+  </script>
+</body>
+</html>
