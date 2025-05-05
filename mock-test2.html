@@ -3,56 +3,67 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mock Lok Sewa Exam - 50 MCQs</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <title>Mock Lok Sewa Exam – 50 Questions</title>
   <style>
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f9f9f9;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #f8ffae, #43c6ac);
       margin: 0;
       padding: 2rem;
+      color: #333;
+    }
+    .quiz-container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
     }
     h1 {
       text-align: center;
-      color: #334;
-    }
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      background: #fff;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+      margin-bottom: 1rem;
     }
     .question {
       margin-bottom: 1.5rem;
     }
     .question p {
-      font-weight: 600;
+      font-weight: bold;
     }
     .options button {
       display: block;
       margin: 0.5rem 0;
       padding: 0.75rem 1rem;
       width: 100%;
-      text-align: left;
-      background-color: #f1f1f1;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+      background: #e3f2fd;
+      border: none;
+      border-radius: 5px;
       cursor: pointer;
       transition: background 0.3s;
     }
-    .options button.correct {
-      background-color: #c8f7c5;
+    .options button:hover {
+      background: #bbdefb;
     }
-    .options button.wrong {
-      background-color: #f7c5c5;
+    .correct {
+      background-color: #c8e6c9 !important;
+    }
+    .wrong {
+      background-color: #ffcdd2 !important;
+    }
+    #score {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <h1>Mock Lok Sewa Exam - 50 MCQs</h1>
-  <div class="container" id="quiz"></div>
+  <div class="quiz-container">
+    <h1>Mock Lok Sewa Exam – 50 Questions</h1>
+    <div id="quiz"></div>
+    <div id="score"></div>
+  </div>
 
   <script>
     const questions = [
@@ -108,32 +119,46 @@
       { q: "Lifting hook प्रयोग गर्दा प्रयोग गरिने औजार कुन हो ?", options: ["ट्रक", "क्रेन"], answer: 1 }
     ];
 
-    const quizDiv = document.getElementById("quiz");
-    questions.forEach((q, index) => {
-      const shuffled = q.options.map((opt, i) => ({ opt, i }))
-        .sort(() => Math.random() - 0.5);
-      const div = document.createElement("div");
-      div.className = "question";
-      div.innerHTML = `<p><strong>Q${index + 1}:</strong> ${q.q}</p>`;
+    let current = 0;
+    let score = 0;
 
-      const optDiv = document.createElement("div");
-      optDiv.className = "options";
-      shuffled.forEach(({ opt, i }) => {
-        const btn = document.createElement("button");
-        btn.textContent = opt;
-        btn.onclick = () => {
-          if (i === q.answer) {
-            btn.classList.add("correct");
-          } else {
-            btn.classList.add("wrong");
-          }
-          [...optDiv.children].forEach(b => b.disabled = true);
-        };
-        optDiv.appendChild(btn);
+    const quizEl = document.getElementById("quiz");
+    const scoreEl = document.getElementById("score");
+
+    function showQuestion(index) {
+      const q = questions[index];
+      quizEl.innerHTML = `
+        <div class="question">
+          <p>Q${index + 1}. ${q.q}</p>
+          <div class="options">
+            <button onclick="checkAnswer(this, 0)">${q.options[0]}</button>
+            <button onclick="checkAnswer(this, 1)">${q.options[1]}</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function checkAnswer(button, selected) {
+      const correct = questions[current].answer;
+      const buttons = button.parentElement.querySelectorAll("button");
+      buttons.forEach((btn, i) => {
+        btn.disabled = true;
+        if (i === correct) btn.classList.add("correct");
+        if (i === selected && i !== correct) btn.classList.add("wrong");
       });
-      div.appendChild(optDiv);
-      quizDiv.appendChild(div);
-    });
+      if (selected === correct) score++;
+      setTimeout(() => {
+        current++;
+        if (current < questions.length) {
+          showQuestion(current);
+        } else {
+          quizEl.innerHTML = "";
+          scoreEl.innerHTML = `Your score: ${score} / ${questions.length}`;
+        }
+      }, 1000);
+    }
+
+    showQuestion(current);
   </script>
 </body>
 </html>
