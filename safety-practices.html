@@ -1,0 +1,206 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>steering-clutch </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f7fa;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .quiz-container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question p {
+            font-weight: bold;
+            color: #444;
+        }
+
+        .options button {
+            display: block;
+            margin: 6px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .options button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .options button.correct {
+            background-color: #c8f7c5;
+        }
+
+        .options button.wrong {
+            background-color: #f7c5c5;
+        }
+
+        .score {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>safety practise and mock test</h1>
+    <div class="quiz-container" id="quiz"></div>
+    <div class="score" id="score"></div>
+
+    <script> 
+
+const questions = [
+  { q: "Muffler (साइलेन्सर) को मुख्य काम के हो ?", options: ["इञ्जिनबाट निस्कने तातो हावा निकाल्ने", "इञ्जिनबाट निस्कने ध्वनी नियन्त्रित गरि बाहिर निकाल्ने"], answer: 1 },
+  { q: "Function of cutting fluids is to", options: ["Increase friction between tool and the workpiece", "Decrease friction between tool and the workpiece"], answer: 1 },
+  { q: "The feeler gauge is used to check", options: ["Internal diameter", "Clearance between two mating surface"], answer: 1 },
+  { q: "Which of the following statements is false?", options: ["Cutting fluid should be non-corrosive", "Cutting fluid should be acidic in nature"], answer: 1 },
+  { q: "Function of cutting fluid is:", options: ["Flushing chips away from cutting zone", "All of the above"], answer: 1 },
+  { q: "Which of the following is not a cutting fluid?", options: ["Straight oil", "Gasoline"], answer: 1 },
+  { q: "Detonation is said to take place in an automotive engine when:", options: ["Temperature is very high", "The pressure rise is instantaneous"], answer: 1 },
+  { q: "The purpose of a crosshead in a steam engine is to:", options: ["Translate linear motion into angular motion", "Facilitate piston to reciprocate"], answer: 1 },
+  { q: "The total cost is the sum of:", options: ["Variable cost", "Accounting cost"], answer: 1 },
+  { q: "Assets of a company include:", options: ["Machinery", "All of the above"], answer: 1 },
+  { q: "A cost that has already been made and cannot be recovered is called:", options: ["Fixed cost", "Sunk cost"], answer: 1 },
+  { q: "Which of the following is not a fundamental quantity?", options: ["Time", "Weight"], answer: 1 },
+  { q: "Non-SI unit used with SI is:", options: ["Dalton", "Steradian"], answer: 1 },
+  { q: "Factors to determine serviceability of bearing are:", options: ["Discoloration, cracked/damaged races, shields/seals", "Any of the above"], answer: 1 },
+  { q: "A job costing system accumulates the following information:", options: ["Direct labour and overhead", "Direct material and overhead"], answer: 1 },
+  { q: "Individual stock ledger card shall be updated:", options: ["Every month", "Every time part is issued or received"], answer: 1 },
+  { q: "Unit “Pound” is the unit to measure:", options: ["Time", "Weight"], answer: 1 },
+  { q: "Stress concentration factor for a machine component is dependent:", options: ["Only on the material of the component", "Only on the geometry of the component"], answer: 1 },
+  { q: "In which projections angles are different between the three principal axes and three scale ratios are required?", options: ["Dimetric", "Trimetric"], answer: 1 },
+  { q: "Production drawings show:", options: ["How to design the product", "How to manufacture the product"], answer: 1 },
+  { q: "Which one of the following is not a characteristic of management?", options: ["Goal oriented", "Single man activity"], answer: 1 },
+  { q: "Operation management is applicable:", options: ["Mostly to service sector", "To manufacturing and service sector"], answer: 1 },
+  { q: "Routing:", options: ["Determines the programme for the operations", "Prescribes the sequence of operations to be followed"], answer: 1 },
+  { q: "Plant layout is the most effective physical arrangement to achieve:", options: ["4 Ms (Man power, Materials, Machines and Methods)", "4 Ms (Man power, Materials, Manufacture and Machines)"], answer: 1 },
+  { q: "Programme Evaluation and Review Technique (PERT) would be useful in:", options: ["Financial management", "Production schedule"], answer: 1 },
+  { q: "Critical path method (CPM):", options: ["Helps in ascertaining time schedules", "All of the above"], answer: 1 },
+  { q: "The most important function of inventory control is:", options: ["To run the stores effectively", "All of the above"], answer: 1 },
+  { q: "Forecasting implies:", options: ["Preparation of specifications", "Estimation of future work"], answer: 1 },
+  { q: "Discarded material substances having some value is:", options: ["Waste", "Scrap"], answer: 1 },
+  { q: "The product cost includes:", options: ["Production overhead", "All of the above"], answer: 1 },
+  { q: "According to Civil Service Act, 2049, pension after retirement is calculated by:", options: ["No. of years of service × latest salary / 40", "No. of years of service × latest salary / 50"], answer: 1 },
+  { q: "Which of the following class is not in non-gazetted civil service?", options: ["Second", "Special"], answer: 1 },
+  { q: "के.उ.प. सेवाका निजामती कर्मचारीले विदाको बेलामा विश्वविद्यालयीय शैक्षिक कार्यक्रम पूरा गर्न को प्रमाणपत्र पेश गर्दा कुन सुविधा प्राप्त गर्ने व्यवस्था छ?", options: ["बिदा नसमेटिएको कार्यकालको तलब सुविधा", "बिदा नसमेटिएको सम्पूर्ण कार्यकालको तलब सुविधा"], answer: 1 },
+  { q: "The current Constitution of Nepal was announced on:", options: ["3rd Bhadra 2072 B.S.", "3rd Aswin 2072 B.S."], answer: 1 },
+  { q: "Which of the following is used as permanent fastening?", options: ["Cotter", "Rivet"], answer: 1 },
+  { q: "Handle of soldering iron rod is made up of plastic because plastic is a:", options: ["Good conductor of heat", "Good insulator of heat"], answer: 1 },
+  { q: "Magnetism is a property of:", options: ["Plastic", "Iron"], answer: 1 },
+  { q: "If friction and mechanical advantage are given, then:", options: ["Velocity ratio = friction / mechanical advantage", "Mechanical advantage = friction × velocity ratio"], answer: 1 },
+  { q: "Which power plant is free from environmental problems?", options: ["Thermal power plant", "Geothermal power plant"], answer: 1 },
+  { q: "In a steam power plant, which components are used?", options: ["Condenser", "All of the above"], answer: 1 },
+  { q: "Coal used in power plant is also known as:", options: ["Charcoal", "Steam coal"], answer: 1 },
+  { q: "In a steam power plant, the … is used as prime mover:", options: ["I.C. engine only", "Turbine only"], answer: 1 },
+  { q: "नहरको के ऊचाईबाट पानी झारेर बत्ती उत्पादन गरिन्छ?", options: ["टरबाइनको रोटर", "टरबाइनका पङ्खाहरु"], answer: 1 },
+  { q: "If one of the belts has broken in a multiple V-belt drive system, it requires:", options: ["Replacement of broken belt only", "Replacement of the broken belt and the belts on either side of it"], answer: 1 },
+  { q: "1 HP is known as:", options: ["Horse Power = 467 Watt", "Horse Power = 746 Watt"], answer: 1 },
+  { q: "V-belt drives are generally used in:", options: ["Tube well pump", "Power transmission"], answer: 1 },
+  { q: "An impulse turbine is:", options: ["Not exposed to mud", "Most suited for high head installation"], answer: 1 },
+  { q: "A relatively low-speed turbine that receives water from a pipe line is:", options: ["Propeller type turbine", "Francis turbine"], answer: 1 },
+  { q: "Pelton wheels are used for a minimum head of:", options: ["180 mm or above", "400 mm or above"], answer: 1 },
+  { q: "Higher specific speed turbine (300-1000) is:", options: ["Francis", "Kaplan"], answer: 1 },
+  { q: "Speed in aeronautics is given in:", options: ["Km/hr", "Knot"], answer: 1 },
+  { q: "DC Motors are used for:", options: ["Light loads", "Smooth operation"], answer: 1 },
+  { q: "ग्यास वेल्डिङ्गमा कति प्रकारका फ्लेम हुन्छन्?", options: ["२ प्रकार", "३ प्रकार"], answer: 1 },
+  { q: "नेपाल सवारी साधन उत्सर्जन मापदण्ड २०६९ अनुसार, यात्रु कारको लागि कार्बन मोनोअक्साइड (CO) को सीमा हो:", options: ["०.१५%", "०.१%"], answer: 1 },
+  { q: "Maximum energy loss in boiler occurs due to:", options: ["Incomplete combustion", "Unburnt carbon in ash"], answer: 1 },
+  { q: "The type of boiler that can be maintained while in use:", options: ["Vertical fire tube type", "Horizontal fire tube type"], answer: 1 },
+  { q: "Increase in temperature of I.C. engine increases its efficiency will:", options: ["Remain same", "Increase"], answer: 1 },
+  { q: "The force required on a plunger (given A = 15cm² and P = 1 ton) is:", options: ["100kg", "1000kg"], answer: 1 },
+  { q: "The mechanical power developed by the D.C. motor is maximum when back e.m.f. is equal to:", options: ["Applied voltage", "Half the applied voltage"], answer: 1 },
+  { q: "A D.C. generator consists of:", options: ["An armature", "All of the above"], answer: 1 },
+  { q: "Which of the following is a permanent joint?", options: ["Spline joints", "Keys joints"], answer: 1 },
+  { q: "The mechanical power developed by the d.c. motor is maximum when back e.m.f. is equal to", options: ["Applied voltage", "Twice the applied voltage"], answer: 1 },
+  { q: "A d.c. generator consists of", options: ["An armature", "All of the above"], answer: 1 },
+  { q: "गाडीको स्पीड बढी हुँदा गाडीको हेडलाइटमा प्राप्त हुने प्रकाशको असरलाई के भनिन्छ ?", options: ["हेडलाइट इन्टेन्सिटी", "हेडलाइट बीम डाइवरेशन"], answer: 1 },
+  { q: "मेट्रिक सिस्टम (metric system) का लम्बाइ इकाइ के हो ?", options: ["फिट", "मिटर"], answer: 1 },
+  { q: "Vernier caliper को प्रयोगबाट के मापन गर्न सकिन्छ ?", options: ["उचाइ", "भित्री र बाहिरी दुबै मापन"], answer: 1 },
+  { q: "तल दिइएको मध्ये कुन भाग shaper machine सँग सम्बन्धित छैन ?", options: ["Tool post", "Tailstock"], answer: 1 },
+  { q: "Metal is cut in its ___ during filing.", options: ["Return stroke", "Forward stroke"], answer: 1 },
+  { q: "HSS भनेको संक्षेपमा के को पुरा रूप हो ?", options: ["Heavy strength Steel", "High Speed Steel"], answer: 1 },
+  { q: "Which type of mirror is used in headlight of a motorcycle?", options: ["Convex mirror", "Concave mirror"], answer: 1 }
+];
+
+      
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        const quizContainer = document.getElementById('quiz');
+        const scoreContainer = document.getElementById('score');
+        let score = 0;
+
+        questions.forEach((q, i) => {
+            const div = document.createElement('div');
+            div.classList.add('question');
+            div.innerHTML = `<p>${i + 1}. ${q.q}</p>`;
+
+            const optsDiv = document.createElement('div');
+            optsDiv.classList.add('options');
+
+            const shuffled = shuffle(q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.answer })));
+
+            shuffled.forEach(({ text, isCorrect }) => {
+                const btn = document.createElement('button');
+                btn.textContent = text;
+                btn.onclick = () => {
+                    if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+                    if (isCorrect) {
+                        btn.classList.add('correct');
+                        score++;
+                    } else {
+                        btn.classList.add('wrong');
+                        optsDiv.querySelectorAll('button').forEach(b => {
+                            if (b.textContent === shuffled.find(o => o.isCorrect).text) {
+                                b.classList.add('correct');
+                            }
+                        });
+                    }
+                    if (i === questions.length - 1) {
+                        scoreContainer.textContent = `✅ Your Score: ${score} out of ${questions.length}`;
+                    }
+                };
+                optsDiv.appendChild(btn);
+            });
+
+            div.appendChild(optsDiv);
+            quizContainer.appendChild(div);
+        });
+    </script>
+</body>
+
+</html>

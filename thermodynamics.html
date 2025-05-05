@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thermodynamics MCQ Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f5f7fa;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .quiz-container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .question p {
+      font-weight: bold;
+      color: #444;
+    }
+    .options button {
+      display: block;
+      margin: 6px 0;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+    .options button:hover {
+      background-color: #e0e0e0;
+    }
+    .options button.correct {
+      background-color: #c8f7c5;
+    }
+    .options button.wrong {
+      background-color: #f7c5c5;
+    }
+  </style>
+</head>
+<body>
+  <h1>Thermodynamics MCQ Quiz</h1>
+  <div class="quiz-container" id="quiz"></div>
+
+
+<script>
+    const thermoQuestions = [
+        { q: "The unit of temperature is based on:", options: ["Boiling point of mercury", "Triple point of water"], answer: 1 },
+        { q: "Absolute zero temperature is taken as:", options: ["237°C", "273°C"], answer: 1 },
+        { q: "Essential condition for heat transfer is:", options: ["Difference in conductivity", "Difference in temperature"], answer: 1 },
+        { q: "A constant volume air thermometer works on:", options: ["Archimedes’ principle", "Charles’ Law"], answer: 1 },
+        { q: "The greater the temperature difference:", options: ["lower is the heat transfer rate", "higher is the heat transfer rate"], answer: 1 },
+        { q: "The calorific value of gaseous fuel is expressed in:", options: ["kcal/min", "kcal/m³"], answer: 1 },
+        { q: "When expansion/compression follows PVⁿ = constant, it is:", options: ["Hyperbolic process", "Polytropic process"], answer: 1 },
+        { q: "Change in enthalpy equals heat supplied at:", options: ["Constant temperature", "Constant pressure"], answer: 1 },
+        { q: "The value of Cp/Cv for air is:", options: ["1.2", "1.4"], answer: 1 },
+        { q: "Isothermal and adiabatic processes are identical at:", options: ["Saturation temperature", "Critical temperature"], answer: 1 },
+        { q: "The property of a working substance that increases or decreases as heat is supplied or removed:", options: ["External energy", "Internal energy"], answer: 1 },
+        { q: "A gas behaves as an ideal gas at:", options: ["Very high pressure", "Low pressure"], answer: 1 },
+        { q: "The efficiency of the Joule cycle is:", options: ["Greater than Carnot cycle", "Less than Carnot cycle"], answer: 1 },
+        { q: "In water cooling, water in the jacket obtains heat due to:", options: ["Radiation", "All of the above"], answer: 1 },
+        { q: "Heat engine attains 100% thermal efficiency: it violates —", options: ["First law of thermodynamics", "Second law of thermodynamics"], answer: 1 },
+        { q: "Suction, compression, expansion, and exhaust strokes take place in:", options: ["Steam engine", "Diesel engine"], answer: 1 },
+        { q: "Which power plant engine is rarely used in civil aircraft?", options: ["None of the above", "Turbo propeller engine"], answer: 1 },
+        { q: "Second law of thermodynamics defines:", options: ["Entropy", "Work"], answer: 0 },
+        { q: "Internal energy and enthalpy of ideal gas are the function of:", options: ["Pressure only", "Temperature only"], answer: 1 },
+        { q: "When a process undergoes a complete cycle, the change of entropy is:", options: ["Positive", "Zero value"], answer: 1 },
+        { q: "The specific heat of air at constant volume is equal to:", options: ["0.17", "0.21"], answer: 1 },
+        { q: "The change in enthalpy of an ideal gas during an adiabatic process is:", options: ["mCᵥ(T₂ − T₁)", "mCₚ(T₂ − T₁)"], answer: 1 },
+        { q: "Heat transferred to a closed system during an isochoric process is equal to:", options: ["Change in internal energy", "Change in enthalpy"], answer: 1 },
+        { q: "Gas heated such that PV = const. Heat supplied is equal to:", options: ["Change in internal energy", "Product of pressure and volume"], answer: 1 },
+        { q: "Water at 48 kg/cm² and 160°C when exposed to atmosphere will:", options: ["Cool down", "Flash i.e. get converted into steam"], answer: 1 },
+        { q: "The device that converts heat energy into work during cyclic process is:", options: ["Heat pump", "Heat engine"], answer: 1 },
+        { q: "Work done in a free expansion process is:", options: ["Zero", "Positive"], answer: 0 },
+        { q: "Which coal has the highest calorific value?", options: ["Bituminous coal", "Anthracite coal"], answer: 1 },
+        { q: "In an isothermal process:", options: ["There is no change in enthalpy", "All of the above"], answer: 1 },
+        { q: "According to the 1st Law of Thermodynamics:", options: ["Mass and light are mutually convertible", "Heat and work are mutually convertible"], answer: 1 },
+        { q: "Which of the following parameter changes during an isothermal process?", options: ["Internal energy", "Temperature"], answer: 1 },
+        { q: "Which characteristic does not change in a reversible isothermal process?", options: ["Enthalpy", "Entropy"], answer: 1 },
+        { q: "For any natural process, the entropy change would be:", options: ["Negative", "Positive"], answer: 1 },
+        { q: "Which laws apply to behavior of perfect gas?", options: ["Boyle’s law", "Both Boyle’s law and Charles’s law"], answer: 1 },
+        { q: "Water at standard atmospheric conditions:", options: ["Is mostly liquid", "Behaves as an ideal gas"], answer: 1 },
+        { q: "Increase in entropy of a system means:", options: ["Increase in availability of energy", "Degradation of energy"], answer: 1 },
+        { q: "Step 2 in Carnot cycle is:", options: ["Isentropic expansion", "Isentropic compression"], answer: 1 },
+        { q: "Thermal power plants operate on which cycle?", options: ["Otto cycle", "Rankine cycle"], answer: 1 },
+        { q: "Carnot cycle has maximum efficiency for:", options: ["Irreversible engine", "Reversible engine"], answer: 1 },
+        { q: "General gas equation is:", options: ["PV = mRT", "PV = nRT"], answer: 1 },
+        { q: "In an isothermal process:", options: ["Pressure is constant", "Temperature is constant"], answer: 1 },
+        { q: "Change in enthalpy of a system is the heat supplied at:", options: ["Constant temperature", "Constant volume"], answer: 1 },
+        { q: "Energy can neither be created nor destroyed. This is:", options: ["3rd law of thermodynamics", "1st law of thermodynamics"], answer: 1 },
+        { q: "Water is a ____ fluid.", options: ["Real", "Ideal"], answer: 1 },
+        { q: "As octane number increases, knocking tendency of petrol engine:", options: ["Remains same", "Increases"], answer: 1 },
+        { q: "Bar is the unit of:", options: ["Power", "Pressure"], answer: 1 },
+        { q: "Which refrigerant has the highest latent heat?", options: ["Freon-12", "Ammonia"], answer: 1 },
+        { q: "Closeness of measured value to true value is:", options: ["Accuracy", "Precision"], answer: 1 },
+        { q: "Product of pressure and volume constant (PV = const):", options: ["Gas law", "Boyle’s law"], answer: 1 },
+        { q: "As temperature of I.C. engine increases, efficiency will:", options: ["Decrease", "Increase"], answer: 1 },
+        { q: "Nepal Vehicle Mass Emission Standard 2069 is equivalent to:", options: ["ISO 9001", "Euro III"], answer: 1 },
+        { q: "The unit of temperature is based on:", options: ["Boiling point of mercury", "Freezing point of water"], answer: 1 },
+        { q: "Absolute zero temperature is taken as:", options: ["237°C", "-273°C"], answer: 1 },
+        { q: "Essential condition for heat transfer:", options: ["Difference in resistance", "Difference in temperature"], answer: 1 },
+        { q: "Constant volume thermometer works on:", options: ["Pascal’s law", "Charles’ law"], answer: 1 },
+        { q: "The two basic types of internal combustion engines are:", options: ["Piston and reciprocating", "Reciprocating and rotary"], answer: 1 },
+        { q: "If hot and cold water are mixed, the entropy of the system will:", options: ["Decrease", "Increase"], answer: 1 },
+        { q: "The change in internal energy of an ideal gas during an adiabatic process is:", options: ["mCp ln(T₂ / T₁)", "mCv(T₂ − T₁)"], answer: 1 },
+        { q: "The heating and expanding of a gas is called:", options: ["Thermodynamic system", "Thermodynamic process"], answer: 1 },
+        { q: "In an irreversible process there is:", options: ["No loss of heat", "Loss of heat"], answer: 1 },
+        { q: "Equation of state gives relationship between:", options: ["Volume and temperature", "Pressure, volume, and temperature"], answer: 1 },
+        { q: "The constant volume cycle is also called:", options: ["Carnot cycle", "Otto cycle"], answer: 1 },
+        { q: "Specific fuel consumption is defined as:", options: ["Fuel consumption per BHP", "Fuel consumption per hour"], answer: 1 },
+        { q: "The expression which does not give the efficiency of Otto cycle is:", options: ["Temperature after compression", "Temperature before expansion"], answer: 1 },
+        { q: "Any process in which no heat can flow into or out of the system is called:", options: ["Isothermal process", "Adiabatic process"], answer: 1 },
+        { q: "First law of thermodynamics deals with:", options: ["Conservation of mass", "Conservation of energy"], answer: 1 },
+        { q: "Internal energy of a substance depends on:", options: ["Volume", "Temperature"], answer: 1 },
+        { q: "A thermodynamic system refers to:", options: ["Any defined region in space", "A prescribed and identifiable quantity of matter"], answer: 1 },
+        { q: "Enthalpy is defined as the sum of:", options: ["Volume and pressure", "Internal energy and the product of pressure and volume"], answer: 1 },
+        { q: "Heat transferred during an isobaric process is equal to:", options: ["Change in internal energy", "Change in enthalpy"], answer: 1 },
+        { q: "Which does not change during reversible adiabatic process?", options: ["Internal energy", "Entropy"], answer: 1 },
+        { q: "Most gases behave as ideal gases at:", options: ["High pressure and low temperature", "Low pressure and high temperature"], answer: 1 },
+        { q: "Which is not a property of thermodynamic system?", options: ["Heat", "Thermal conductivity"], answer: 1 },
+        { q: "Entropy is a property of the system because:", options: ["It depends on path", "It has same value at each equilibrium state"], answer: 1 },
+        { q: "Temperature of a gas is due to:", options: ["Its heating value", "Kinetic energy of molecules"], answer: 1 },
+        { q: "When expansion/compression occurs under PVⁿ = constant:", options: ["Adiabatic process", "Polytropic process"], answer: 1 },
+        { q: "Which of the following is not an external combustion engine?", options: ["Steam engine", "Pelton turbine"], answer: 1 },
+        { q: "The engine in which fuel combusts inside the cylinder is called:", options: ["Internal combustion engine", "Both A and B"], answer: 1 },
+        { q: "Compression ratio of diesel engine:", options: ["10 to 15", "16 to 20"], answer: 1 },
+        { q: "Otto cycle is also known as:", options: ["Constant pressure cycle", "Constant volume cycle"], answer: 1 },
+        { q: "Diesel engine operates on:", options: ["Constant volume cycle", "Constant pressure cycle"], answer: 1 },
+        { q: "Which of the following is not an internal combustion engine?", options: ["Diesel engine", "Gas turbine"], answer: 1 },
+        { q: "A reversible cycle means:", options: ["Irreversible cycle", "Reversible cycle"], answer: 1 },
+        { q: "Under what condition does enthalpy change equal heat supplied?", options: ["Constant volume", "Constant pressure"], answer: 1 },
+        { q: "The value of Cp/Cv for air is:", options: ["1.2", "1.4"], answer: 1 },
+        { q: "Isothermal and adiabatic processes are identical at:", options: ["Saturation temperature", "All of the above"], answer: 1 },
+        { q: "Gas laws are least valid for:", options: ["Mono-atomic gases", "Real gases"], answer: 1 },
+        { q: "As compared to real gas at high pressure, ideal gas occupies:", options: ["More volume", "Less volume"], answer: 1 },
+        { q: "Condensing steam engine is:", options: ["Slow speed engine", "Condensing steam engine"], answer: 1 },
+        { q: "Steam engines are:", options: ["Internal combustion engine", "External combustion engine"], answer: 1 },
+        { q: "Steam vs automotive engine:", options: ["Otto vs Rankine cycle", "I.C. vs external combustion"], answer: 1 },
+        { q: "All steam engines follow:", options: ["Zeroth law of thermodynamics", "Second law of thermodynamics"], answer: 1 },
+        { q: "Chemically correct air-fuel ratio is:", options: ["7:1", "15:1"], answer: 1 },
+        { q: "Heat cannot flow from cold to hot body by itself. This is:", options: ["Zeroth law", "Second law of thermodynamics"], answer: 1 },
+        { q: "Two constant volume + two adiabatic processes = ?", options: ["Joule cycle", "Otto cycle"], answer: 1 },
+        { q: "At TDC, volume above piston is:", options: ["Compression ratio", "Clearance volume"], answer: 1 },
+        { q: "Engine with 100% thermal efficiency violates:", options: ["First law", "Second law of thermodynamics"], answer: 1 },
+        { q: "Suction, compression, exhaust strokes happen in:", options: ["Diesel engine", "Petrol engine"], answer: 1 },
+        { q: "Second law of thermodynamics defines:", options: ["Heat", "Entropy"], answer: 1 },
+        { q: "Entropy after a complete cycle is:", options: ["Positive", "Zero"], answer: 1 },
+        { q: "Specific heat at constant volume is:", options: ["1.20", "1.00"], answer: 1 },
+        { q: "Heat during polytropic process is:", options: ["Product of pressure and volume", "Change in entropy"], answer: 1 },
+        { q: "No heat exchange, only work transfer:", options: ["Isothermal", "Adiabatic"], answer: 1 },
+        { q: "Study of energy transfer and conversion:", options: ["Heat transfer", "Thermodynamics"], answer: 1 },
+        { q: "Step 2 of Carnot cycle is:", options: ["Isothermal expansion", "Isentropic expansion"], answer: 1 },
+        { q: "In adiabatic process, which stays constant?", options: ["Temperature", "Total heat of system"], answer: 1 },
+        { q: "Entropy change between two points via any path is:", options: ["Different", "Same"], answer: 1 },
+        { q: "Absolute zero is taken as:", options: ["273°C", "-273°C"], answer: 1 },
+        { q: "Thermodynamic law for energy conservation is:", options: ["Conservation of mass", "Conservation of energy"], answer: 1 },
+        { q: "Ideal gas behavior is shown best at:", options: ["High pressure & temp", "Low pressure & high temperature"], answer: 1 },
+        { q: "Not a property of thermodynamic system:", options: ["Pressure", "Thermal conductivity"], answer: 1 },
+        { q: "Entropy is a property because:", options: ["Depends on path", "Has same value at equilibrium"], answer: 1 },
+        { q: "Temperature of gas comes from:", options: ["Its heating value", "Kinetic energy of molecules"], answer: 1 },
+        { q: "PVⁿ = constant process is:", options: ["Adiabatic", "Polytropic"], answer: 1 },
+        { q: "Internal energy depends on:", options: ["Volume", "Temperature"], answer: 1 },
+        { q: "Thermodynamic system is:", options: ["Region in space", "Defined quantity of matter"], answer: 1 },
+        { q: "Modes of heat transfer:", options: ["Conduction", "All of the above"], answer: 1 },
+        { q: "SI unit of compressibility:", options: ["Nsec²", "N/m²"], answer: 1 },
+        { q: "Correct about flow meters:", options: ["Orifice more accurate than nozzle", "Venturi meter more accurate"], answer: 1 },
+        { q: "Cycle used in gas turbines:", options: ["Otto", "Brayton"], answer: 1 },
+        { q: "Heat to raise 1kg by 1°C:", options: ["Heat treatment", "Specific heat capacity"], answer: 1 },
+        { q: "1st law of thermodynamics:", options: ["dQ = dU - dW", "dQ = dU + dW"], answer: 1 },
+        { q: "No heat flow, but work occurs:", options: ["Reversible", "Adiabatic"], answer: 1 },
+        { q: "Boyle’s Law is:", options: ["Charles’s law", "P ∝ 1/V"], answer: 1 },
+        { q: "Open thermodynamic system example:", options: ["Pressure cooker", "Centrifugal pump"], answer: 1 },
+        { q: "Compression ratio definition:", options: ["Swept volume / cylinder volume", "Volume before / after compression"], answer: 1 },
+        { q: "Gas constant (R) is:", options: ["Sum of Cp & Cv", "Difference of Cp & Cv"], answer: 1 }
+    ];
+
+    function shuffleOptions(questions) {
+      return questions.map(q => {
+        const correct = q.options[q.answer];
+        const shuffled = [...q.options].sort(() => Math.random() - 0.5);
+        return {
+          q: q.q,
+          options: shuffled,
+          answer: shuffled.indexOf(correct)
+        };
+      });
+    }
+
+    const randomizedQuestions = shuffleOptions(thermoQuestions);
+    const quizContainer = document.getElementById("quiz");
+
+    randomizedQuestions.forEach((question, index) => {
+      const qDiv = document.createElement("div");
+      qDiv.classList.add("question");
+
+      const qText = document.createElement("p");
+      qText.innerText = `${index + 1}. ${question.q}`;
+      qDiv.appendChild(qText);
+
+      const optionsDiv = document.createElement("div");
+      optionsDiv.classList.add("options");
+
+      question.options.forEach((option, i) => {
+        const btn = document.createElement("button");
+        btn.innerText = option;
+        btn.addEventListener("click", function () {
+          const buttons = optionsDiv.querySelectorAll("button");
+          buttons.forEach(b => b.disabled = true);
+
+          if (i === question.answer) {
+            btn.classList.add("correct");
+          } else {
+            btn.classList.add("wrong");
+            buttons[question.answer].classList.add("correct");
+          }
+        });
+        optionsDiv.appendChild(btn);
+      });
+
+      qDiv.appendChild(optionsDiv);
+      quizContainer.appendChild(qDiv);
+    });
+</script>
+</body>
+</html>

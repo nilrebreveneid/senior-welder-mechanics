@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Record keeping</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f7fa;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .quiz-container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question p {
+            font-weight: bold;
+            color: #444;
+        }
+
+        .options button {
+            display: block;
+            margin: 6px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .options button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .options button.correct {
+            background-color: #c8f7c5;
+        }
+
+        .options button.wrong {
+            background-color: #f7c5c5;
+        }
+
+        .score {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Record keeping mcq</h1>
+    <div class="quiz-container" id="quiz"></div>
+    <div class="score" id="score"></div>
+
+    <script>
+        const questions = [
+  { q: "What is the importance of record keeping?", options: ["To analyse equipment’s loss or profit", "All of the above"], answer: 1 },
+  { q: "Which is not a safety tool for mechanic?", options: ["Shirt and pant", "Apron and safety boots"], answer: 0 },
+  { q: "Personal safety device मा पर्ने कुन हो?", options: ["Safety helmet", "Fan belt cover"], answer: 0 },
+  { q: "Vehicle maintenance job card is used to record maintenance by:", options: ["Mechanic", "Mechanic and Transport Officer"], answer: 1 },
+  { q: "A job card is a form that contains:", options: ["Description of job only", "All of the above"], answer: 1 },
+  { q: "ट्याक्सीमा फाइदा कति भयो भन्न कुन सूचक प्रयोग गरिन्छ?", options: ["गाडी संख्या", "गाडी वजन"], answer: 0 },
+  { q: "गाडीको हाईब्रिड ब्रेक फ्लुइड कहिले परिवर्तन गर्नु पर्छ?", options: ["मेन्टिनेन्सका बेला", "जब गाडी बिग्रिन्छ"], answer: 0 },
+  { q: "रेडिएटरको पानीको मात्रा मापन गर्ने तरिका कुन हो?", options: ["आँखाले हेरेर", "मेसिनको तापक्रम हेरेर"], answer: 0 },
+  { q: "गाडीको मिटर पढ्न पाइन्छ कि पाइँदैन?", options: ["पाइन्छ", "पाइँदैन"], answer: 0 },
+  { q: "Which of the following is the standard format for recording defects in a vehicle at a service station?", options: ["Job card", "Maintenance manual"], answer: 0 },
+  { q: "निम्नमध्ये कुन कार्यस्थल सुरक्षाका संकेत हुन्?", options: ["सूचना", "सूचना पाटी"], answer: 1 },
+  { q: "At which interval should safety foot wear be inspected?", options: ["Prior to each use", "Every 15 days"], answer: 0 },
+  { q: "Personal protective equipment is required when:", options: ["Engineering controls are not enough", "An employee asks for it"], answer: 0 },
+  { q: "Machine safeguarding is necessary because:", options: ["It makes the machine look attractive", "It minimizes the risk of accident for operator"], answer: 1 },
+  { q: "An activity in which people practice leaving a building quickly is called:", options: ["Fire play", "Fire drill"], answer: 1 },
+  { q: "The general safety rules for a shop mechanic does not include:", options: ["Do not wear an apron jacket or shirt", "Do not wear tie or jewelry"], answer: 1 },
+  { q: "The safety device used during arc welding for eye protection is:", options: ["Black glasses", "Welder helmet"], answer: 1 },
+  { q: "Personal safety tools/device include:", options: ["Apron", "Gloves"], answer: 1 },
+  { q: "The safety device used during arc welding for protection of eye is ……", options: ["Black glasses", "Mask"], answer: 0 },
+  { q: "Safe guarding of machine is a type of", options: ["Safety device", "Personal protective equipment"], answer: 0 },
+  { q: "Methods which show how to perform a task with minimum risk are known as", options: ["Safety devices", "Safe work practices"], answer: 1 },
+  { q: "काम गर्दा निम्नमध्ये कुन सुरक्षा उपकरण प्रयोग गर्नुपर्छ?", options: ["Stick and umbrella", "Safety vest and safety boots"], answer: 1 },
+  { q: "विद्युत् सर्किट बुझ्न प्रयोग गरिने एउटा प्रमुख उपकरण कुन हो?", options: ["स्पीडो मिटर", "भोल्ट मिटर"], answer: 1 },
+  { q: "Which of the following is a safety tool?", options: ["Goggles", "Hammer"], answer: 0 },
+  { q: "Electronic force meter (Measuring Instrument) is:", options: ["Voltmeter", "Dynamometer"], answer: 1 },
+  { q: "व्यक्तिगत सुरक्षा उपकरण के हो?", options: ["पन्जा", "चस्मा"], answer: 0 },
+  { q: "Machine को मर्मत, सञ्चालन, समायोजन आदि जान्न दिइने सूचना कुन manual बाट पाउने ?", options: ["Workshop Manual", "Parts Manual"], answer: 0 },
+  { q: "मेसिनको सञ्चालन, मर्मत गर्न कुन manual चाहिन्छ ?", options: ["Workshop Manual", "Instruction Chart"], answer: 0 },
+  { q: "मेसिनको operation manual कुन प्रकारको जानकारी उपलब्ध गराउँछ ?", options: ["प्रयोगको तरिका र मर्मत", "प्रयोगको तरिका मात्र"], answer: 0 },
+  { q: "Which document is used to track daily usage and issues of a vehicle?", options: ["Log book", "Bill book"], answer: 0 },
+  { q: "Who is responsible for signing the maintenance job card?", options: ["Mechanic and Supervisor", "Driver only"], answer: 0 },
+  { q: "In a workshop, dangerous tools should be stored:", options: ["Out of reach and labeled", "Near entrance"], answer: 0 },
+  { q: "What is the color of a typical safety sign for danger?", options: ["Red", "Blue"], answer: 0 },
+  { q: "Which one is a PPE (Personal Protective Equipment)?", options: ["Helmet", "Spanner"], answer: 0 },
+  { q: "Record keeping helps in:", options: ["Tracking maintenance cost", "Only employee attendance"], answer: 0 },
+  { q: "What should you do before starting maintenance on electrical machines?", options: ["Disconnect the power supply", "Wear gloves only"], answer: 0 },
+  { q: "Safety posters in workshops are used to:", options: ["Create awareness", "Decorate walls"], answer: 0 },
+  { q: "Which of the following is essential in fire-prone areas?", options: ["Fire extinguisher", "Screwdriver"], answer: 0 },
+  { q: "Which safety color code indicates caution?", options: ["Yellow", "Green"], answer: 0 }
+];
+      
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        const quizContainer = document.getElementById('quiz');
+        const scoreContainer = document.getElementById('score');
+        let score = 0;
+
+        questions.forEach((q, i) => {
+            const div = document.createElement('div');
+            div.classList.add('question');
+            div.innerHTML = `<p>${i + 1}. ${q.q}</p>`;
+
+            const optsDiv = document.createElement('div');
+            optsDiv.classList.add('options');
+
+            const shuffled = shuffle(q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.answer })));
+
+            shuffled.forEach(({ text, isCorrect }) => {
+                const btn = document.createElement('button');
+                btn.textContent = text;
+                btn.onclick = () => {
+                    if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+                    if (isCorrect) {
+                        btn.classList.add('correct');
+                        score++;
+                    } else {
+                        btn.classList.add('wrong');
+                        optsDiv.querySelectorAll('button').forEach(b => {
+                            if (b.textContent === shuffled.find(o => o.isCorrect).text) {
+                                b.classList.add('correct');
+                            }
+                        });
+                    }
+                    if (i === questions.length - 1) {
+                        scoreContainer.textContent = `✅ Your Score: ${score} out of ${questions.length}`;
+                    }
+                };
+                optsDiv.appendChild(btn);
+            });
+
+            div.appendChild(optsDiv);
+            quizContainer.appendChild(div);
+        });
+    </script>
+</body>
+
+</html>

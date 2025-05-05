@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>steering-clutch </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f7fa;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .quiz-container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question p {
+            font-weight: bold;
+            color: #444;
+        }
+
+        .options button {
+            display: block;
+            margin: 6px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .options button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .options button.correct {
+            background-color: #c8f7c5;
+        }
+
+        .options button.wrong {
+            background-color: #f7c5c5;
+        }
+
+        .score {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>steering-clutch mcq</h1>
+    <div class="quiz-container" id="quiz"></div>
+    <div class="score" id="score"></div>
+
+    <script>
+
+        const questions = [
+
+            { q: "Which of the following is the gear used in steering system?", options: ["Worm and wheel steering gear", "Rack and pinion steering gear"], answer: 1 },
+            { q: "The first thing to check for stiff steering wheel of a vehicle with hydraulic power system is:", options: ["To check the condition of hydraulic hoses", "To check the hydraulic level in the reservoir"], answer: 1 },
+            { q: "The propeller shaft is tubular instead of solid because:", options: ["Solid shaft is weaker", "Its sag is smaller"], answer: 1 },
+            { q: "The function of the steering system is:", options: ["To achieve angular motion of the front wheel", "All of the above"], answer: 1 },
+            { q: "The function of a universal joint is to allow the propeller shaft to:", options: ["Bend sideways", "Transfer torque at an angle"], answer: 1 },
+            { q: "The basic function of a clutch is:", options: ["To transmit the torque of engine to transmission", "To let the vehicle run at uniform speed"], answer: 0 },
+            { q: "The engine crankshaft is automatically engaged with the clutch shaft and disengaged by:", options: ["Single plate clutch", "Cone clutch"], answer: 0 },
+            { q: "Steering gear मा gear sector वा toothed roller को mesh कुनसँग हुन्छ?", options: ["Roller bearing", "Worm"], answer: 1 },
+            { q: "Clutch ले प्राय: कति टोक़ ट्रान्समिट गर्छ?", options: ["80 percent of the maximum engine torque", "150 percent of the maximum engine torque"], answer: 1 },
+            { q: "कुन पार्ट स्टेरिङ सिस्टममा समावेश हुन्छ?", options: ["टायर (Tyre)", "गियर (Gear)"], answer: 1 },
+            { q: "स्टेरिङ सिस्टमको मुख्य काम के हो?", options: ["गाडी रोक्ने", "गाडी घुमाउने"], answer: 1 },
+            { q: "The component that is responsible for converting the rotation of the steering wheel into motion is:", options: ["Steering shaft", "Steering gearbox"], answer: 1 },
+            { q: "The excessive play in steering wheel causes ……", options: ["Easy to turn the vehicles in turning", "Difficult to control vehicle"], answer: 1 },
+            { q: "Which is the cause of over-steering of an automobile?", options: ["Low tyre pressure", "Loose steering linkage components"], answer: 1 },
+            { q: "Which is not a type of gear?", options: ["Visible plate clutch", "Synchronising type"], answer: 1 },
+            { q: "Automobile steering system मा निम्न मध्ये कुन पाइनिन्छ ?", options: ["Toe-in", "Caster"], answer: 1 },
+            { q: "The component that converts steering wheel rotation into lateral motion is the:", options: ["Steering shaft", "Steering gearbox"], answer: 1 },
+            { q: "The excessive play in steering wheel causes …", options: ["Easy to turn steering wheel", "Difficult to control vehicle"], answer: 1 },
+            { q: "गाडीको स्टेरिङ्ग प्रणालीमा प्रयोग हुने टायर्ड एन्ड (tierod end) को कार्य के हुन्छ?", options: ["काम गर्दा स्टेरिङ्ग तोल्तो बनाउने", "काम गर्दा स्टेरिङ्ग बलियो बनाउने"], answer: 1 },
+            { q: "गाडीको स्टेरिङ्ग ह्यान्डलमा कुन-कुन भाग हुन्छ?", options: ["ब्रेक, हब", "स्पोक, हब, रिम"], answer: 1 },
+            { q: "Flywheel helps in:", options: ["Facilitate start of machine", "Smooth out power impulses"], answer: 1 },
+            { q: "Clutch in a vehicle system helps to:", options: ["Transmit power from engine to transmission", "Reduce engine temperature"], answer: 0 },
+            { q: "In a simple planetary gear set of automatic transmission, the output member to increase torque is always:", options: ["The ring gear", "The sun gear"], answer: 1 },
+            { q: "In order to enable gear change unit of an automatic transmission, a ___ is used.", options: ["Synchronizer", "Hydraulic multi plate clutch"], answer: 1 },
+            { q: "In a single dry plate clutch, torsional vibrations are absorbed by:", options: ["Cushion spring", "Coil springs known as torsional spring"], answer: 1 },
+            { q: "Which component connects the clutch pedal to the clutch mechanism?", options: ["Clutch disc", "Clutch cable or linkage"], answer: 1 },
+            { q: "What is the primary purpose of the steering damper?", options: ["To improve acceleration", "To reduce steering vibrations"], answer: 1 },
+            { q: "Which gear provides maximum torque multiplication in a manual transmission?", options: ["4th gear", "1st gear"], answer: 1 },
+            { q: "Which part allows angular movement of front wheels for smooth turning?", options: ["Differential", "Kingpin"], answer: 1 },
+            { q: "In front-wheel drive vehicles, the transmission system is placed:", options: ["At the rear of the vehicle", "Alongside the engine"], answer: 1 }
+
+
+
+        ];
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        const quizContainer = document.getElementById('quiz');
+        const scoreContainer = document.getElementById('score');
+        let score = 0;
+
+        questions.forEach((q, i) => {
+            const div = document.createElement('div');
+            div.classList.add('question');
+            div.innerHTML = `<p>${i + 1}. ${q.q}</p>`;
+
+            const optsDiv = document.createElement('div');
+            optsDiv.classList.add('options');
+
+            const shuffled = shuffle(q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.answer })));
+
+            shuffled.forEach(({ text, isCorrect }) => {
+                const btn = document.createElement('button');
+                btn.textContent = text;
+                btn.onclick = () => {
+                    if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+                    if (isCorrect) {
+                        btn.classList.add('correct');
+                        score++;
+                    } else {
+                        btn.classList.add('wrong');
+                        optsDiv.querySelectorAll('button').forEach(b => {
+                            if (b.textContent === shuffled.find(o => o.isCorrect).text) {
+                                b.classList.add('correct');
+                            }
+                        });
+                    }
+                    if (i === questions.length - 1) {
+                        scoreContainer.textContent = `✅ Your Score: ${score} out of ${questions.length}`;
+                    }
+                };
+                optsDiv.appendChild(btn);
+            });
+
+            div.appendChild(optsDiv);
+            quizContainer.appendChild(div);
+        });
+    </script>
+</body>
+
+</html>

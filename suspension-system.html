@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Suspension system </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f7fa;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .quiz-container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question p {
+            font-weight: bold;
+            color: #444;
+        }
+
+        .options button {
+            display: block;
+            margin: 6px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .options button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .options button.correct {
+            background-color: #c8f7c5;
+        }
+
+        .options button.wrong {
+            background-color: #f7c5c5;
+        }
+
+        .score {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Suspension system mcq</h1>
+    <div class="quiz-container" id="quiz"></div>
+    <div class="score" id="score"></div>
+
+    <script>
+       const questions = [
+  { q: "Steel spring is of following type:", options: ["Leaf spring", "All of the above"], answer: 1 },
+  { q: "The main function of a shock absorber in the suspension system of a vehicle is:", options: ["To release the energy", "To dissipate the energy"], answer: 1 },
+  { q: "The vehicle ride will be comfortable if:", options: ["Unsprung mass is kept minimum", "Sprung mass is kept minimum"], answer: 0 },
+  { q: "What is the common problem in suspension system of automobile?", options: ["Propeller shaft vibration", "Shock absorber and ball joint wear out"], answer: 1 },
+  { q: "Suspension system मा गाडीको वजन सपोर्ट गर्ने घटक कुन हो?", options: ["Spring", "Shock absorber"], answer: 1 },
+  { q: "Complete suspension system को उद्देश्य के हो?", options: ["To isolate the vehicle from road shocks and vibrations", "To provide directional stability to the vehicle"], answer: 0 },
+  { q: "Which one is a part of suspension system of a truck?", options: ["Shock absorber", "Propeller shaft"], answer: 0 },
+  { q: "निम्नमध्ये कुन suspension system मा पर्दैन ?", options: ["Differential", "Spring coil"], answer: 0 },
+  { q: "सस्पेन्सन प्रणालीमा प्रायः पत्ता पत्तिको प्रयोग किन गरिन्छ ?", options: ["धेरै लोड सहन सक्ने भएकाले", "सस्तो हुने भएकाले"], answer: 0 },
+  { q: "सस्पेन्सन प्रणालीको मुख्य काम के हो ?", options: ["गाडीको झटका कम गराउने", "इन्जिनको भार घटाउने"], answer: 0 },
+  { q: "Jack Rod कुन system मा पर्दछ?", options: ["Suspension system", "Steering system"], answer: 1 },
+  { q: "गाडीको निलम्बन प्रणालीमा प्रायः कुन स्प्रिङ्ग प्रयोग हुन्छ?", options: ["Coil spring", "Leaf spring"], answer: 1 },
+  { q: "अर्को सस्पेन्सन प्रणाली तत्त्वलाई कुन भाग भनिन्छ?", options: ["Leaf Spring", "Differential"], answer: 1 },
+  { q: "गाडीको सस्पेन्सन सिस्टमको मुख्य काम के हो?", options: ["गाडीको तौल सहन सक्ने क्षमता वृद्धि गर्नु", "सस्पेन्सनको कारण गाडी झम्काउने प्रभाव घटाउनु"], answer: 0 },
+  { q: "गाडीको निलम्बन प्रणाली कस्तो हुन्छ?", options: ["स्प्रिङ्गयुक्त", "निलम्बन रहित"], answer: 0 },
+  { q: "कम्प्युटरको फ्यान कुन-कुन प्रकारको हुन्छ?", options: ["ब्लोअर र एक्सोस", "एक्सोस फ्यान"], answer: 0 }
+];
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        const quizContainer = document.getElementById('quiz');
+        const scoreContainer = document.getElementById('score');
+        let score = 0;
+
+        questions.forEach((q, i) => {
+            const div = document.createElement('div');
+            div.classList.add('question');
+            div.innerHTML = `<p>${i + 1}. ${q.q}</p>`;
+
+            const optsDiv = document.createElement('div');
+            optsDiv.classList.add('options');
+
+            const shuffled = shuffle(q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.answer })));
+
+            shuffled.forEach(({ text, isCorrect }) => {
+                const btn = document.createElement('button');
+                btn.textContent = text;
+                btn.onclick = () => {
+                    if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+                    if (isCorrect) {
+                        btn.classList.add('correct');
+                        score++;
+                    } else {
+                        btn.classList.add('wrong');
+                        optsDiv.querySelectorAll('button').forEach(b => {
+                            if (b.textContent === shuffled.find(o => o.isCorrect).text) {
+                                b.classList.add('correct');
+                            }
+                        });
+                    }
+                    if (i === questions.length - 1) {
+                        scoreContainer.textContent = `✅ Your Score: ${score} out of ${questions.length}`;
+                    }
+                };
+                optsDiv.appendChild(btn);
+            });
+
+            div.appendChild(optsDiv);
+            quizContainer.appendChild(div);
+        });
+    </script>
+</body>
+
+</html>

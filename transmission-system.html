@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transmision system </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f7fa;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .quiz-container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question p {
+            font-weight: bold;
+            color: #444;
+        }
+
+        .options button {
+            display: block;
+            margin: 6px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .options button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .options button.correct {
+            background-color: #c8f7c5;
+        }
+
+        .options button.wrong {
+            background-color: #f7c5c5;
+        }
+
+        .score {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Transmision system mcq</h1>
+    <div class="quiz-container" id="quiz"></div>
+    <div class="score" id="score"></div>
+
+    <script>
+        const questions = [
+            { q: "Main components of transmission system is …", options: ["Gear box, propeller shaft and differential", "Dynamo, ignition key and self starter"], answer: 0 },
+            { q: "The propeller shaft transmits the power from gear box to ……", options: ["Differential", "Real axle"], answer: 0 },
+            { q: "When a gear box has four forward speeds and one reverse speed, it is said to be", options: ["5-speed gearbox", "4-speed gearbox"], answer: 1 },
+            { q: "When a car is to overcome greater resistance, it should run at", options: ["4th gear", "1st gear"], answer: 1 },
+            { q: "गाडी अगाडि बढाउँदा कुन गियर प्रयोग हुन्छ?", options: ["पहिलो गियर", "तेस्रो गियर"], answer: 0 },
+            { q: "गाडीको गति देखाउने यन्त्र ‘Tachometer’ ले के देखाउँछ?", options: ["इन्जिनको गति", "गाडीको तौल"], answer: 0 },
+            { q: "When two shafts are perpendicular to each other, the gear used to transmit power is", options: ["Helical gear", "Bevel gear"], answer: 1 },
+            { q: "Spur gear is made by:", options: ["Shaper machine", "Milling machine"], answer: 1 },
+            { q: "The part of shaper machine which reciprocates during operation is called:", options: ["Tool post", "Ram"], answer: 1 },
+            { q: "In the top view, a square-based pyramid will appear as:", options: ["Square with 4 triangles inside it", "Square with 3 triangles inside it"], answer: 0 },
+            { q: "A typical set of mechanical working drawings includes:", options: ["Exploded assembly", "All of the above"], answer: 1 },
+            { q: "In an automobile, the function of the gearbox is to:", options: ["Increase speed", "Provide variable speed"], answer: 1 },
+            { q: "Which gear is used for high speed but low torque transmission?", options: ["1st gear", "4th gear"], answer: 1 },
+            { q: "Universal joint is used to connect:", options: ["Propeller shaft and differential", "Gearbox and steering"], answer: 0 },
+            { q: "Slip joint in propeller shaft is used for:", options: ["Length variation", "Lubrication"], answer: 0 },
+            { q: "Clutch is placed between:", options: ["Engine and gearbox", "Gearbox and wheels"], answer: 0 },
+            { q: "The function of a differential is to:", options: ["Transfer equal speed to both wheels", "Allow wheels to rotate at different speeds"], answer: 1 },
+            { q: "Which shaft transfers power from engine to the gearbox?", options: ["Main shaft", "Clutch shaft"], answer: 1 },
+            { q: "A helical gear is used when:", options: ["High noise is required", "Smooth and quiet operation is desired"], answer: 1 },
+            { q: "Which part in the transmission absorbs jerks and shocks?", options: ["Clutch", "Flywheel"], answer: 0 },
+            { q: "In machine drawing, thick continuous lines are used for:", options: ["Hidden edges", "Visible outlines"], answer: 1 },
+            { q: "Which device is used to disconnect power flow without stopping the engine?", options: ["Clutch", "Brake"], answer: 0 },
+            { q: "Which component converts rotary motion into reciprocating motion in a shaper?", options: ["Ram", "Crank mechanism"], answer: 1 },
+            { q: "Which type of key is used for mounting, shifting gears in gearboxes?", options: ["Saddle key", "Square key"], answer: 1 },
+            { q: "रियर एक्सेल ड्राइभ प्रणाली भएको गाडीमा टायर्ड एन्ड (tierod end) को कस्तो प्रभाव पर्छ ?", options: ["प्रयोग गर्नुपर्ने हुन्छ", "कुनै प्रभाव पर्दैन"], answer: 1 }
+        ];
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        const quizContainer = document.getElementById('quiz');
+        const scoreContainer = document.getElementById('score');
+        let score = 0;
+
+        questions.forEach((q, i) => {
+            const div = document.createElement('div');
+            div.classList.add('question');
+            div.innerHTML = `<p>${i + 1}. ${q.q}</p>`;
+
+            const optsDiv = document.createElement('div');
+            optsDiv.classList.add('options');
+
+            const shuffled = shuffle(q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.answer })));
+
+            shuffled.forEach(({ text, isCorrect }) => {
+                const btn = document.createElement('button');
+                btn.textContent = text;
+                btn.onclick = () => {
+                    if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+                    if (isCorrect) {
+                        btn.classList.add('correct');
+                        score++;
+                    } else {
+                        btn.classList.add('wrong');
+                        optsDiv.querySelectorAll('button').forEach(b => {
+                            if (b.textContent === shuffled.find(o => o.isCorrect).text) {
+                                b.classList.add('correct');
+                            }
+                        });
+                    }
+                    if (i === questions.length - 1) {
+                        scoreContainer.textContent = `✅ Your Score: ${score} out of ${questions.length}`;
+                    }
+                };
+                optsDiv.appendChild(btn);
+            });
+
+            div.appendChild(optsDiv);
+            quizContainer.appendChild(div);
+        });
+    </script>
+</body>
+
+</html>

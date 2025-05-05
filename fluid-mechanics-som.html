@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fluid mechanics & som</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f7fa;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .quiz-container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question p {
+            font-weight: bold;
+            color: #444;
+        }
+
+        .options button {
+            display: block;
+            margin: 6px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .options button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .options button.correct {
+            background-color: #c8f7c5;
+        }
+
+        .options button.wrong {
+            background-color: #f7c5c5;
+        }
+
+        .score {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Fluid mechanic & som mcq</h1>
+    <div class="quiz-container" id="quiz"></div>
+    <div class="score" id="score"></div>
+
+    <script> 
+
+const questions = [
+  { q: "If the angle of contact of a drop of liquid is acute, then:", options: ["Cohesion is more than adhesion", "Cohesion is less than adhesion"], answer: 1 },
+  { q: "The impeller of a centrifugal pump may have:", options: ["Vortex casing", "Any one of these"], answer: 1 },
+  { q: "When two capillary tubes of different diameters are dipped vertically, the rise of the liquid is:", options: ["more in the tube of larger diameter", "more in the tube of smaller diameter"], answer: 1 },
+  { q: "The amount of water vapor in air is known as:", options: ["Saturation point", "Humidity"], answer: 1 },
+  { q: "1 kg/cm² of pressure is equivalent to:", options: ["10 meter of water column", "100 meter of water column"], answer: 1 },
+  { q: "“Piezoelectric” opening pressure is used for measuring:", options: ["The total pressure", "The pressure in the static fluid"], answer: 1 },
+  { q: "The property of a fluid by which molecules of different kinds of fluid are not attracted to each other is:", options: ["Cohesion", "Adhesion"], answer: 1 },
+  { q: "Venturimeter is used to measure:", options: ["Pressure", "Velocity"], answer: 1 },
+  { q: "In the case of flow through series pipes, which is true?", options: ["Head loss in each pipe is same", "Flow in each pipe is same"], answer: 1 },
+  { q: "Pitot tube is used to measure:", options: ["Static pressure", "Velocity"], answer: 1 },
+  { q: "Fluid is a substance that can:", options: ["Resist shear stress", "Flow under applied force"], answer: 1 },
+  { q: "The SI unit of viscosity is:", options: ["Pascal-second", "Newton-meter"], answer: 0 },
+  { q: "Which device is used to measure fluid pressure?", options: ["Manometer", "Barometer"], answer: 0 },
+  { q: "Which principle does a Venturimeter work on?", options: ["Bernoulli’s principle", "Pascal’s law"], answer: 0 },
+  { q: "Pascal’s Law states that pressure applied to a confined fluid is:", options: ["Transmitted equally in all directions", "Absorbed completely"], answer: 0 },
+  { q: "Turbulence in fluid flow occurs when Reynolds number is:", options: ["Greater than 4000", "Less than 2000"], answer: 0 },
+  { q: "The upward force experienced by a body submerged in fluid is:", options: ["Buoyant force", "Drag force"], answer: 0 },
+  { q: "Continuity equation is based on conservation of:", options: ["Mass", "Energy"], answer: 0 },
+  { q: "Bernoulli’s equation is applicable to:", options: ["Ideal incompressible fluid", "Compressible viscous fluid"], answer: 0 },
+  { q: "A device used to measure the velocity of fluid is:", options: ["Pitot tube", "Orifice meter"], answer: 0 },
+  { q: "Viscosity of water is ___ than that of oil.", options: ["Lower", "Higher"], answer: 0 },
+  { q: "Surface tension is due to:", options: ["Cohesion", "Adhesion"], answer: 0 },
+  { q: "Which instrument is used to measure very low pressure?", options: ["McLeod gauge", "Manometer"], answer: 0 },
+  { q: "Capillary rise is higher in:", options: ["Narrow tubes", "Wider tubes"], answer: 0 },
+  { q: "Which component increases pressure in a hydraulic system?", options: ["Pump", "Valve"], answer: 0 },
+  { q: "Specific gravity is defined as:", options: ["Ratio of fluid density to water density", "Mass per unit volume"], answer: 0 },
+  { q: "Flow of fluid in which layers slide smoothly is called:", options: ["Laminar flow", "Turbulent flow"], answer: 0 },
+  { q: "Which of the following is not a property of fluid?", options: ["Elasticity", "Viscosity"], answer: 0 },
+  { q: "Bulk modulus is related to:", options: ["Compressibility", "Viscosity"], answer: 0 },
+  { q: "The velocity of fluid is maximum at:", options: ["Center of pipe", "Pipe wall"], answer: 0 },
+  { q: "The property of a material which enables it to resist fracture due to high impact loads is known as:", options: ["Elasticity", "Strength"], answer: 1 },
+  { q: "The property of a material which enables it to be drawn into wires is:", options: ["Toughness", "Ductility"], answer: 1 },
+  { q: "Medium carbon steel contains:", options: ["0.15% carbon", "0.8 to 1.5% carbon"], answer: 1 },
+  { q: "Bronze is an alloy of:", options: ["Copper and zinc", "Copper and tin"], answer: 1 },
+  { q: "In a structure, the degree of freedom is:", options: ["1", "2"], answer: 1 },
+  { q: "Kinematic pairs are those which have:", options: ["Pairs of elements having surface contact", "Two elements that permit relative motion"], answer: 1 },
+  { q: "According to maximum normal stress theory:", options: ["Failure will occur when the magnitude of the major principal stress reaches that which causes fracture in a simple tension test", "Yielding will occur when the magnitude of the principal stress reaches that which causes fracture in a simple tension test"], answer: 1 },
+  { q: "Where l = number of links, p = number of pairs, the relation is:", options: ["l = 2p + 4", "l = 2p - 4"], answer: 1 },
+  { q: "If a machine member is subjected to direct tensile stress σ and shear stress τ, the maximum normal stress is:", options: ["σ/2 - ½ √(σ² - 4τ²)", "σ/2 + ½ √(σ² + 4τ²)"], answer: 1 },
+  { q: "Factor of safety for fatigue loading is the ratio of:", options: ["Elastic limit to the working stress", "Endurance limit to the working stress"], answer: 1 },
+  { q: "Stress concentration factor is defined as the ratio of:", options: ["Nominal stress to the maximum stress", "Maximum stress to the nominal stress"], answer: 1 },
+  { q: "Strain is defined as:", options: ["Change in length / Original length", "Original length / Change in length"], answer: 0 },
+  { q: "The unit of stress is:", options: ["N/m²", "m/N²"], answer: 0 },
+  { q: "Modulus of elasticity is the ratio of:", options: ["Stress / Strain", "Strain / Stress"], answer: 0 },
+  { q: "Poisson’s ratio is the ratio of:", options: ["Lateral strain / Longitudinal strain", "Longitudinal strain / Lateral strain"], answer: 0 },
+  { q: "Hooke’s law is valid up to:", options: ["Elastic limit", "Yield point"], answer: 0 },
+  { q: "The energy stored in a body within elastic limit is called:", options: ["Strain energy", "Kinetic energy"], answer: 0 },
+  { q: "A material is said to be brittle if it:", options: ["Fails without much deformation", "Shows high elongation before failure"], answer: 0 },
+  { q: "Shear stress acts:", options: ["Tangential to surface", "Normal to surface"], answer: 0 },
+  { q: "In a cantilever beam, maximum bending moment occurs at:", options: ["Fixed end", "Free end"], answer: 0 },
+  { q: "A simply supported beam has maximum deflection at:", options: ["Center of span", "Support"], answer: 0 },
+  { q: "The section modulus is used in:", options: ["Bending stress calculations", "Shear stress calculations"], answer: 0 },
+  { q: "Principal stresses are:", options: ["Maximum normal stresses", "Maximum shear stresses"], answer: 0 },
+  { q: "Torsion is a result of:", options: ["Twisting moment", "Axial force"], answer: 0 },
+  { q: "The neutral axis in bending is:", options: ["The axis with zero stress", "The axis with maximum stress"], answer: 0 },
+  { q: "The slenderness ratio is defined for:", options: ["Columns", "Beams"], answer: 0 }
+];
+
+      
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        const quizContainer = document.getElementById('quiz');
+        const scoreContainer = document.getElementById('score');
+        let score = 0;
+
+        questions.forEach((q, i) => {
+            const div = document.createElement('div');
+            div.classList.add('question');
+            div.innerHTML = `<p>${i + 1}. ${q.q}</p>`;
+
+            const optsDiv = document.createElement('div');
+            optsDiv.classList.add('options');
+
+            const shuffled = shuffle(q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.answer })));
+
+            shuffled.forEach(({ text, isCorrect }) => {
+                const btn = document.createElement('button');
+                btn.textContent = text;
+                btn.onclick = () => {
+                    if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+                    if (isCorrect) {
+                        btn.classList.add('correct');
+                        score++;
+                    } else {
+                        btn.classList.add('wrong');
+                        optsDiv.querySelectorAll('button').forEach(b => {
+                            if (b.textContent === shuffled.find(o => o.isCorrect).text) {
+                                b.classList.add('correct');
+                            }
+                        });
+                    }
+                    if (i === questions.length - 1) {
+                        scoreContainer.textContent = `✅ Your Score: ${score} out of ${questions.length}`;
+                    }
+                };
+                optsDiv.appendChild(btn);
+            });
+
+            div.appendChild(optsDiv);
+            quizContainer.appendChild(div);
+        });
+    </script>
+</body>
+
+</html>

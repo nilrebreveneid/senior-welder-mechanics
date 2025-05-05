@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Electrical system </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f7fa;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .quiz-container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question p {
+            font-weight: bold;
+            color: #444;
+        }
+
+        .options button {
+            display: block;
+            margin: 6px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .options button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .options button.correct {
+            background-color: #c8f7c5;
+        }
+
+        .options button.wrong {
+            background-color: #f7c5c5;
+        }
+
+        .score {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Electricalsystem mcq</h1>
+    <div class="quiz-container" id="quiz"></div>
+    <div class="score" id="score"></div>
+
+    <script>
+const questions = [
+{ q: "What would be the problem if the starting motor pinion engages with flywheel teeth but cannot crank the flywheel?", options: ["Defective over-running clutch", "Discharged battery"], answer: 1 },
+{ q: "Which of the following tests is performed in the battery using a hydrometer?", options: ["Open circuit voltage test", "Specific gravity test"], answer: 1 },
+{ q: "A 12-volt battery has how many cells?", options: ["12", "6"], answer: 1 },
+{ q: "Vehicle headlight is connected in:", options: ["Series circuit", "Parallel circuit"], answer: 1 },
+{ q: "The commonly used color for fog light is:", options: ["Green", "Yellow"], answer: 1 },
+{ q: "5-cell battery supplies how many volts?", options: ["2V", "10V"], answer: 1 },
+{ q: "ग्यासलाइन थ्री फिल्टर प्रयोग गर्दा कुन टर्मिनल जोडिन्छ?", options: ["-ve", "सकरात्मक दुईवटा टर्मिनल"], answer: 1 },
+{ q: "विद्युत् उपकरणहरू कसरी जडान गरिन्छ?", options: ["Series connection", "Parallel connection"], answer: 0 },
+{ q: "फ्लो मिटरको कार्य के हो?", options: ["ताप मापन", "इन्धनको प्रवाह मापन गर्नु"], answer: 1 },
+{ q: "रेक्टिफायरको कार्य के हो?", options: ["डीसी विद्युतलाई एसीमा परिवर्तन", "एसी विद्युतलाई डीसीमा परिवर्तन गर्नु"], answer: 1 },
+{ q: "Function of relay switch in a circuit is to:", options: ["Increase voltage", "To control a circuit by a separate low power signal"], answer: 1 },
+{ q: "What should be checked first if the headlight of an equipment does not work?", options: ["Battery connection", "Fuse of headlight"], answer: 1 },
+{ q: "Application of DC motor is restricted to low-load speed because:", options: ["Cost of motor is high", "Problems with mechanical commutation"], answer: 1 },
+{ q: "In a hydropower plant, which device converts mechanical to electrical energy?", options: ["Pump", "Generator"], answer: 1 },
+{ q: "In generators, the principle used to convert mechanical motion into electrical energy is:", options: ["Electrical attraction", "Magnetic induction"], answer: 1 },
+{ q: "In left hand rule for generators, the middle finger indicates:", options: ["Direction of motion", "Direction of current flow"], answer: 1 },
+{ q: "Difference in speed between stator field and rotor is:", options: ["Full load speed", "Slip"], answer: 1 },
+{ q: "How many cells are used in a 12-volt car battery?", options: ["8", "6"], answer: 1 },
+{ q: "२ सेलको ५ वाट घाममा चल्ने सौर्य बत्तामा कति भोल्टको बल्ब हुन्छ?", options: ["10V", "2V"], answer: 1 },
+{ q: "गाडीमा सामान्यतः के Defect हुन्छ ?", options: ["Switch contact loose", "Fuse जलेर"], answer: 1 },
+{ q: "When electrical devices are connected in parallel…", options: ["Current flow in each device will be same", "Voltage across each device will be same"], answer: 1 },
+{ q: "यो चित्र कुन भाग हो ?", options: ["क्यापेसिटर", "फ्यूज"], answer: 1 },
+{ q: "कुन तरल पदार्थ मात्र ब्याट्रीमा प्रयोग हुन्छ ?", options: ["Grease", "Distilled water"], answer: 1 },
+{ q: "मोटर स्टार्टरमा कुन प्रकारको एसी प्रकार्य प्रणाली रहन्छ ?", options: ["A Type", "All of the above"], answer: 1 },
+{ q: "इन्जिनमा पेट्रोलको आगो लाग्नको लागि सर्वप्रथम के जरुरी छ ?", options: ["न्यूनतम तापमान", "आत्मप्रज्वलन तापमान"], answer: 1 },
+{ q: "कुन किसिमको इन्धन सस्तो पर्छ ?", options: ["पेट्रोल", "डिजेल"], answer: 1 },
+{ q: "White lead light is used in:", options: ["Failure mode analysis circuit", "Wheatstone bridge circuit"], answer: 1 },
+{ q: "An equipment or device used to convert electrical energy into mechanical energy is:", options: ["Generator", "Motor"], answer: 1 },
+{ q: "Power factor of an alternator depends on:", options: ["Core loss", "Load it connected"], answer: 1 },
+{ q: "Which DC motor is used in machine tool?", options: ["Series motor", "Shunt motor"], answer: 1 },
+{ q: "The power factor of an alternator depends on:", options: ["Speed of rotor", "Load"], answer: 1 },
+{ q: "A machine that converts mechanical energy into electrical energy is known as:", options: ["D.C. motor", "Generator"], answer: 1 },
+{ q: "An equipment or device used to convert mechanical energy into electrical energy is:", options: ["Pump", "Motor"], answer: 1 },
+{ q: "The current in a circuit is directly proportional to total EMF and inversely proportional to resistance is:", options: ["Ohm’s Law", "Kirchhoff’s Law"], answer: 1 },
+{ q: "“Squirrel cage” is the type of:", options: ["Diesel engine", "Electric motor"], answer: 1 },
+{ q: "Joule is a unit of:", options: ["Force", "Energy"], answer: 1 }
+    ];
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        const quizContainer = document.getElementById('quiz');
+        const scoreContainer = document.getElementById('score');
+        let score = 0;
+
+        questions.forEach((q, i) => {
+            const div = document.createElement('div');
+            div.classList.add('question');
+            div.innerHTML = `<p>${i + 1}. ${q.q}</p>`;
+
+            const optsDiv = document.createElement('div');
+            optsDiv.classList.add('options');
+
+            const shuffled = shuffle(q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.answer })));
+
+            shuffled.forEach(({ text, isCorrect }) => {
+                const btn = document.createElement('button');
+                btn.textContent = text;
+                btn.onclick = () => {
+                    if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+                    if (isCorrect) {
+                        btn.classList.add('correct');
+                        score++;
+                    } else {
+                        btn.classList.add('wrong');
+                        optsDiv.querySelectorAll('button').forEach(b => {
+                            if (b.textContent === shuffled.find(o => o.isCorrect).text) {
+                                b.classList.add('correct');
+                            }
+                        });
+                    }
+                    if (i === questions.length - 1) {
+                        scoreContainer.textContent = `✅ Your Score: ${score} out of ${questions.length}`;
+                    }
+                };
+                optsDiv.appendChild(btn);
+            });
+
+            div.appendChild(optsDiv);
+            quizContainer.appendChild(div);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cooling System Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f7fa;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .quiz-container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question p {
+            font-weight: bold;
+            color: #444;
+        }
+
+        .options button {
+            display: block;
+            margin: 6px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .options button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .options button.correct {
+            background-color: #c8f7c5;
+        }
+
+        .options button.wrong {
+            background-color: #f7c5c5;
+        }
+
+        .score {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Cooling System Quiz</h1>
+    <div class="quiz-container" id="quiz"></div>
+    <div class="score" id="score"></div>
+    <script>
+        const questions = [
+            { q: "At what time ‘choke’ used in the engine:", options: ["When the vehicle is idling", "When the engine is cold"], answer: 1 },
+            { q: "The function of radiator fan is:", options: ["Drive water pump", "Divert cool air to radiator to facilitate heat exchange"], answer: 1 },
+            { q: "Water jacket in engine cooling system is the casing surrounding:", options: ["Engine block", "Radiator"], answer: 0 },
+            { q: "The purpose of a thermostat in an engine cooling system is to:", options: ["Prevent the coolant from boiling", "Allow the engine to warm up quickly"], answer: 1 },
+            { q: "The temperature at which tyre inflation pressure should be checked is:", options: ["25°C", "Ambient temperature"], answer: 1 },
+            { q: "Turbochargers are classified as:", options: ["Centrifugal compressors", "Ventilators"], answer: 0 },
+            { q: "Which of the following is commonly used for cooling motorcycle engine?", options: ["Air cooling", "Oil cooling"], answer: 0 },
+            { q: "The purpose of thermostat in engine cooling system is:", options: ["To prevent water from boiling", "All of the above"], answer: 1 },
+            { q: "The thermostat valve of engine cooling system starts to open at about:", options: ["90°C", "60°C"], answer: 1 },
+            { q: "Cooling system का मुख्य भाग कुन हो?", options: ["Fuel filter and fuel pump", "Water pump and radiator"], answer: 1 },
+            { q: "पानी circulate गर्न कारमा कुन प्रकारको pump प्रयोग हुन्छ?", options: ["Vane type", "Centrifugal type"], answer: 1 },
+            { q: "निम्न मध्ये कुन भागले पानी पम्प गर्छ?", options: ["Expansion valve", "Water Pump"], answer: 1 },
+            { q: "Fuel injection pump को काम के हो?", options: ["Fuel supply गर्ने", "Air supply गर्ने"], answer: 0 },
+            { q: "इन्जिन Overheat हुनुको प्रमुख कारण के हो?", options: ["एयर फिल्टर बन्द हुनु", "माशिन्त्र त्रुटि (Mechanical fault)"], answer: 1 },
+            { q: "थर्मोस्टेट भल्भ को मुख्य काम के हो?", options: ["Over heating गर्ने", "इन्जिनको उपयुक्त तापक्रममा राख्ने"], answer: 1 },
+            { q: "डिजेल लोड नभएको कारण के हुन सक्छ?", options: ["फ्युल फिल्टर क्लग भएको", "एयर फिल्टर फ्लो नभएको"], answer: 1 },
+            { q: "In air cooling system, …… is used for increasing surface area to enhance engine cooling:", options: ["Radiator", "Fins"], answer: 1 },
+            { q: "इञ्जिनको चिस्याउने प्रणाली (cooling system) को प्रमुख काम के हो ?", options: ["इन्धनको आयातमा कमी ल्याउनु", "इञ्जिनको ताप को मात्रा घटाउनु"], answer: 1 },
+            { q: "इञ्जिनको चिस्याउने प्रणालीमा Antifreeze राख्नुको सही तरिका कुन हो ?", options: ["इञ्जिन आइडल अवस्थामा हुँदा रेडिएटर फिलर क्याप खोलेर हाल्ने", "इञ्जिन बन्द भएपछि एण्टिफ्रिज बाहिरी ट्याङ्की (coolant reservoir) मा राख्ने"], answer: 1 },
+            { q: "The commonly used antifreeze solution in automobile engine is:", options: ["Carbon disulphate", "Ethylene glycol"], answer: 1 },
+            { q: "Radiator is a part of:", options: ["Thermostat", "Engine को cooling system"], answer: 1 },
+            { q: "Cylinder of internal combustion engine is measured in terms of its:", options: ["Displacement and efficiency", "Diameter and bore"], answer: 1 },
+            { q: "Carbon deposit in cylinder is removed by:", options: ["Ignition system", "Clearance volume बढाउने"], answer: 1 },
+            { q: "Turbocharged engine:", options: ["Is less efficient due to power absorbed in driving turbocharger", "Is more efficient because it uses energy from the exhaust gas that would otherwise be wasted"], answer: 1 },
+            { q: "The purpose of the gearbox is:", options: ["To multiply the torque being transmitted by the engine", "All of the above"], answer: 1 },
+            { q: "The following is considered as best antifreeze solution:", options: ["Distilled glycerine", "Ethylene glycol"], answer: 1 },
+            { q: "कूलिङ्ग प्रणालीमा पानी कहिले हाल्न उपयुक्त समय कुन हो?", options: ["सवेरे", "इन्जिन चिसो भएपछि"], answer: 1 },
+            { q: "रेडिएटरमा पानी हाल्ने बेलामा कुन प्रकारको पानी प्रयोग गर्नु उपयुक्त हुन्छ?", options: ["नर्मल पानी", "ट्याङ्की पानी"], answer: 1 },
+            { q: "रेडिएटरमा पानी हाल्न कुन यन्त्र प्रयोग गरिन्छ?", options: ["हातले", "हाइड्रोलिक होज"], answer: 1 },
+            { q: "हाईब्रिड हाइन्ड्रलिक प्रणाली प्रयोग गर्दा कस्तो ब्रेक फ्लुइड प्रयोग गर्नुपर्छ?", options: ["मेसिनको वाटर फ्लुइड", "हाइड्रोलिक ब्रेक लिक्विड प्रयोग गर्न सकिन्छ"], answer: 1 },
+            { q: "रेडिएटरको तापक्रम नाप्ने यन्त्र कुन हो?", options: ["गाडीको बत्ती", "थर्मामीटर"], answer: 1 },
+            { q: "रेडिएटरको क्याप निकाल्दा इन्जिनको अवस्था कस्तो हुनुपर्छ?", options: ["इन्जिन तातो अवस्थामा", "इन्जिन चिसो अवस्थामा हुनुपर्छ"], answer: 1 },
+            { q: "रेडिएटरमा आवश्यक पानीको मात्रा कति हुनुपर्छ?", options: ["इन्जिनको सिलिन्डरको मात्रा भन्दा बढी", "इन्जिनको सिलिन्डरको मात्रा बराबर"], answer: 1 },
+            { q: "रेडिएटरको प्रमुख कार्य के हो?", options: ["इन्धन जलाउनु", "ताप निकाल्नु"], answer: 1 }
+        ];
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        const quizContainer = document.getElementById('quiz');
+        const scoreContainer = document.getElementById('score');
+        let score = 0;
+
+        questions.forEach((q, i) => {
+            const div = document.createElement('div');
+            div.classList.add('question');
+            div.innerHTML = `<p>${i + 1}. ${q.q}</p>`;
+
+            const optsDiv = document.createElement('div');
+            optsDiv.classList.add('options');
+
+            const shuffled = shuffle(q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.answer })));
+
+            shuffled.forEach(({ text, isCorrect }) => {
+                const btn = document.createElement('button');
+                btn.textContent = text;
+                btn.onclick = () => {
+                    if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+                    if (isCorrect) {
+                        btn.classList.add('correct');
+                        score++;
+                    } else {
+                        btn.classList.add('wrong');
+                        optsDiv.querySelectorAll('button').forEach(b => {
+                            if (b.textContent === shuffled.find(o => o.isCorrect).text) {
+                                b.classList.add('correct');
+                            }
+                        });
+                    }
+                    if (i === questions.length - 1) {
+                        scoreContainer.textContent = `✅ Your Score: ${score} out of ${questions.length}`;
+                    }
+                };
+                optsDiv.appendChild(btn);
+            });
+
+            div.appendChild(optsDiv);
+            quizContainer.appendChild(div);
+        });
+    </script>
+</body>
+
+</html>

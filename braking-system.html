@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Braking System Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f5f7fa;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .quiz-container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .question p {
+      font-weight: bold;
+      color: #444;
+    }
+    .options button {
+      display: block;
+      margin: 6px 0;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+    .options button:hover {
+      background-color: #e0e0e0;
+    }
+    .options button.correct {
+      background-color: #c8f7c5;
+    }
+    .options button.wrong {
+      background-color: #f7c5c5;
+    }
+    .score {
+      font-size: 1.2em;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Braking System Quiz</h1>
+  <div class="quiz-container" id="quiz"></div>
+  <div class="score" id="score"></div>
+  <script>
+    const questions = [
+  
+  { q: "The brakes employed in cars are usually operated:", options: ["Mechanically", "Hydraulically"], answer: 1 },
+  { q: "Disc र Drum-type brake मा के फरक छ?", options: ["Disc type घुम्दैन र drum type घुम्दछ", "Disc type मा कम र drum type मा बढी friction लग हुन्छ"], answer: 1 },
+  { q: "Brake is required to stop the machine:", options: ["Within the shortest possible distance", "Within certain distance according to road surface"], answer: 1 },
+  { q: "What may be the cause of brake pedal going to floor without producing brake action?", options: ["Excessively worn brake lining", "All of the above"], answer: 1 },
+  { q: "The term Brake Horse Power (BHP) means:", options: ["Power available at the shaft", "Power generated in the engine"], answer: 1 },
+  { q: "Which of the following applications is series motor invariably used?", options: ["Motor for operation in AC or DC", "Starter for car"], answer: 1 },
+  { q: "A fully charged 6 cell automotive battery should indicate:", options: ["12V", "12.6V"], answer: 1 },
+  { q: "The energy of expanding gases is transferred by piston to connecting rod through:", options: ["Bearing", "Gudgeon pin"], answer: 1 },
+  { q: "Tachometer measures the:", options: ["Temperature", "Speed of a flywheel"], answer: 1 },
+  { q: "If the car pulls to one side when the brakes are being applied, the cause could not be:", options: ["Low rear tire pressure", "Broken spring or centre bolt"], answer: 1 },
+  { q: "ब्रेक सिस्टमको मुख्य काम के हो?", options: ["गाडीको गियर बढाउने", "गाडी रोक्ने"], answer: 1 },
+  { q: "डिस्क ब्रेकमा कुन पार्ट ब्रेक सिस्टममा समावेश हुन्छ?", options: ["टायर हब", "माशिन्त्त्र पङ्खा (Pad)"], answer: 1 },
+  { q: "हाइड्रोलिक ब्रेक सिस्टममा प्रयोग गरिने भाग कुन हो?", options: ["ह्याण्ड ब्रेक", "माशिन्त्त्र पङ्खा (Pad)"], answer: 1 },
+  { q: "ब्रेक लिङ्केज प्रणालीमा समावेश हुने भाग:", options: ["ह्याण्ड सिलिन्डर (Hand Cylinder)", "टॉर्सन बार"], answer: 0 },
+  { q: "गाडीमा ब्रेक लाइटको काम के हो?", options: ["गाडीको गतिमा वृद्धि गर्नु", "ब्रेक लागेको संकेत दिनु"], answer: 1 },
+  { q: "When brake is applied on a moving vehicle, the kinetic energy is converted into?", options: ["Light energy", "Heat energy"], answer: 1 },
+  { q: "The advantage of a tubeless tyre over tubed tyre is:", options: ["Slow air leakage", "Less chances of running flat"], answer: 1 },
+  { q: "The parking brakes employed in vehicles are generally operated:", options: ["Hydraulically", "Mechanically"], answer: 1 },
+  { q: "The parking brake generally acts on:", options: ["Front wheels", "Rear wheels"], answer: 1 },
+  { q: "इन्जिनमा गाडीको ब्रेक लगाउँदा के हुन्छ?", options: ["गति बढ्न थाल्छ", "इन्जिनबाट ताप उत्सर्जन हुन्छ"], answer: 1 },
+  { q: "The air inside hydraulic line of braking system results in:", options: ["Both (A) and (B)", "Poor braking action"], answer: 1 },
+  { q: "तलको ब्रेकिङ्ग प्रणालीको कार्य के हो?", options: ["इन्धन इन्क्जेक्सनलाई मात्रा नियन्त्रण गर्नु", "सवारीलाई चलायमान अवस्था नियन्त्रण गर्नु"], answer: 1 },
+  { q: "एयर ब्रेक प्रणालीको असफलताका कारण कारको ब्रेक प्रणालीको मर्मत गर्नुपर्ने कारणहरू के हुन सक्छ?", options: ["चापमा आएको परिवर्तन", "पिस्टनमा भएको क्षति"], answer: 1 },
+  { q: "Crank and crankshaft को कार्य के हो?", options: ["Cooling water सापूर्ति गर्ने", "Reciprocating motion लाई rotary मा परिवर्तन गर्ने"], answer: 1 },
+  { q: "गाडीमा बैक हुँदा सहायक ब्रेकको आवश्यकता किन पर्छ ?", options: ["सहायक ब्रेकले प्रणालीलाई सन्तुलनमा राख्छ", "ब्रेक प्रणालीले ब्रेक आवश्यक भन्दा कम काम गर्छ"], answer: 1 },
+  { q: "उकालो चढ्दा गाडीलाई कसरी रोक्न सकिन्छ ?", options: ["ब्रेक मात्र लगाउने", "इञ्जिनको निमार्ता ब्रेकिङ्ग सिस्टम प्रयोग गर्ने"], answer: 1 },
+  { q: "गाडीमा प्रयोग हुने डिफरन्सियलको मुख्य काम के हो ?", options: ["गाडीलाई चिप्लो बाटोमा बढी गतिको सहारा दिने", "घुमाउँदा आन्तरिक र बाह्य पाङ्ग्राहरूको गतिको भिन्नता अनुसार शक्ति वितरण गर्नु"], answer: 1 },
+  { q: "उकालो तथा ओरालो सडकमा कुन सवारीलाई पहिलो प्राथमिकता दिइन्छ ?", options: ["ओरालो", "उकालो"], answer: 1 }
+];
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    const quizContainer = document.getElementById('quiz');
+    const scoreContainer = document.getElementById('score');
+    let score = 0;
+
+    questions.forEach((q, i) => {
+      const div = document.createElement('div');
+      div.classList.add('question');
+      div.innerHTML = `<p>${i + 1}. ${q.q}</p>`;
+
+      const optsDiv = document.createElement('div');
+      optsDiv.classList.add('options');
+
+      const shuffled = shuffle(q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.answer })));
+
+      shuffled.forEach(({ text, isCorrect }) => {
+        const btn = document.createElement('button');
+        btn.textContent = text;
+        btn.onclick = () => {
+          if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+          if (isCorrect) {
+            btn.classList.add('correct');
+            score++;
+          } else {
+            btn.classList.add('wrong');
+            optsDiv.querySelectorAll('button').forEach(b => {
+              if (b.textContent === shuffled.find(o => o.isCorrect).text) {
+                b.classList.add('correct');
+              }
+            });
+          }
+          if (i === questions.length - 1) {
+            scoreContainer.textContent = `✅ Your Score: ${score} out of ${questions.length}`;
+          }
+        };
+        optsDiv.appendChild(btn);
+      });
+
+      div.appendChild(optsDiv);
+      quizContainer.appendChild(div);
+    });
+  </script>
+</body>
+</html>

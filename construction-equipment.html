@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Construction Equipment Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f5f7fa;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .quiz-container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .question p {
+      font-weight: bold;
+      color: #444;
+    }
+    .options button {
+      display: block;
+      margin: 6px 0;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+    .options button:hover {
+      background-color: #e0e0e0;
+    }
+    .options button.correct {
+      background-color: #c8f7c5;
+    }
+    .options button.wrong {
+      background-color: #f7c5c5;
+    }
+    .score {
+      font-size: 1.2em;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Construction Equipment Quiz</h1>
+  <div class="quiz-container" id="quiz"></div>
+  <div class="score" id="score"></div>
+
+  <script>
+    const questions = [
+      { q: "A feeler gauge is used to measure:", options: ["Thickness of a plate", "Space (gap) between two surfaces"], answer: 1 },
+      { q: "The accuracy of micrometer, caliper, and dial indicator can be checked by:", options: ["Feeler gauge", "Slip gauge"], answer: 1 },
+      { q: "A twist drill is specified by:", options: ["An alphabet specifying hole size", "A number specifying hole size"], answer: 1 },
+      { q: "In comparison with a radial ply tyre, one advantage of a cross ply tyre is:", options: ["Longer life", "Smoother ride at lower speed"], answer: 1 },
+      { q: "The advantage of wheel mounted machine over the track mounted one is:", options: ["It is easy to mobilize", "All of the above"], answer: 1 },
+      { q: "For which of the following operation, dozer is not suitable?", options: ["Leveling", "Spreading"], answer: 1 },
+      { q: "For compaction during road construction we use:", options: ["Excavator", "Road roller"], answer: 1 },
+      { q: "The main component to drive the track chain of an excavator is:", options: ["Heavy duty belt", "Scarifier teeth"], answer: 1 },
+      { q: "If a 100 kVA diesel generator is to be loaded in a truck, which equipment should be used?", options: ["Loader", "Crane"], answer: 1 },
+      { q: "To determine the owning cost per hour of a bulldozer over its life we do not need:", options: ["Cost of fuel required for operation", "Insurance costs"], answer: 1 },
+      { q: "To determine the operating costs over a period for a bulldozer we consider:", options: ["Operator’s wages", "All of the above"], answer: 1 },
+      { q: "For earth cutting and moving earth over a distance of 50 meters we use:", options: ["Excavator", "Dragline"], answer: 1 },
+      { q: "The main attachment on the front of a bulldozer is called:", options: ["Mold board", "Blade"], answer: 1 },
+      { q: "Motor Grader are used mostly for:", options: ["Purely excavation", "Finishing, shaping, bank sloping and ditching"], answer: 1 },
+      { q: "Compaction को लागि प्रयोग हुने मुख्य उपकरण:", options: ["Mobile crane", "Road roller"], answer: 1 },
+      { q: "Hydraulic excavator को काम के हो?", options: ["Compactor गर्ने", "खाल्डो खन्ने (To dig pit)"], answer: 1 },
+      { q: "निम्न मध्ये कुन उपकरण गाड्ने हो?", options: ["लोडर (Loader)", "ग्रेडर (Grader)"], answer: 1 },
+      { q: "In grading operation, a guinea hopper is responsible for:", options: ["Setting the grade hubs", "Directing the trucks dumping the material"], answer: 1 },
+      { q: "In order to raise and shift heavy loads from one place to another, the …… are employed in the construction of big works.", options: ["Trucks", "Cranes"], answer: 1 },
+      { q: "If engine starts but stalls on idle, problem may be …", options: ["Fuel low in tank", "All of the above"], answer: 1 },
+      { q: "Lifting hook प्रयोग गर्दा प्रयोग गरिने औजार कुन हो ?", options: ["ट्रक", "क्रेन"], answer: 1 },
+      { q: "तलका मध्ये कुन machine ले सवारी साधन ट्रकमा राख्न सकिन्छ ?", options: ["Grader machine", "Crane machine"], answer: 1 },
+      { q: "To break rock, rock breaker is attached to:", options: ["Truck", "Excavator"], answer: 1 },
+      { q: "In order to raise and shift heavy loads from one place to another, the ___ are employed in the construction of big works.", options: ["Conveyors", "Cranes"], answer: 1 },
+      { q: "In order to raise and shift heavy loads from one place to another, the ___ are employed in the construction of big works.", options: ["Conveyors", "Cranes"], answer: 1 },
+      { q: "भारी सवारी साधन टायर चेक गर्न शेरर स्क्रिन मेसिनमा कुन यन्त्र प्रयोग गरिन्छ?", options: ["कम्प्रेसर", "एअर इन्जेक्टर"], answer: 1 },
+      { q: "ट्रयाक्टर प्रयोग गरिएपछि निम्नमध्ये के कार्य गर्नुपर्छ?", options: ["रेसिंग गरेर सफा गर्नु", "गाडी सफा गर्नु"], answer: 1 },
+      { q: "The track life is mainly affected by the condition of:", options: ["Bushings", "All of the above"], answer: 1 },
+      { q: "In grading operation, a guinea hopper is responsible for:", options: ["Setting the grade hubs", "Directing the trucks that are dumping the material to be spread"], answer: 1 },
+      { q: "Loader कुन कार्यमा प्रयोग हुन्छ?", options: ["रोलरले सम्याउने कार्य", "ढुंगा माटो समातेर राख्न"], answer: 1 },
+      { q: "Jack-type equipment:", options: ["माटो हटाउने यन्त्र", "गाडा उठाउने यन्त्र"], answer: 1 },
+      { q: "For lifting a load 10 feet high you will use:", options: ["Excavator", "Crane"], answer: 1 }
+    ];
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    const quizContainer = document.getElementById('quiz');
+    const scoreContainer = document.getElementById('score');
+    let score = 0;
+
+    questions.forEach((q, i) => {
+      const div = document.createElement('div');
+      div.classList.add('question');
+      div.innerHTML = `<p>${i + 1}. ${q.q}</p>`;
+
+      const optsDiv = document.createElement('div');
+      optsDiv.classList.add('options');
+
+      const shuffled = shuffle(q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.answer })));
+
+      shuffled.forEach(({ text, isCorrect }) => {
+        const btn = document.createElement('button');
+        btn.textContent = text;
+        btn.onclick = () => {
+          if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+          if (isCorrect) {
+            btn.classList.add('correct');
+            score++;
+          } else {
+            btn.classList.add('wrong');
+            optsDiv.querySelectorAll('button').forEach(b => {
+              if (b.textContent === shuffled.find(o => o.isCorrect).text) {
+                b.classList.add('correct');
+              }
+            });
+          }
+          if (i === questions.length - 1) {
+            scoreContainer.textContent = `✅ Your Score: ${score} out of ${questions.length}`;
+          }
+        };
+        optsDiv.appendChild(btn);
+      });
+
+      div.appendChild(optsDiv);
+      quizContainer.appendChild(div);
+    });
+  </script>
+</body>
+</html>

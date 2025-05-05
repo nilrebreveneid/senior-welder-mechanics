@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Suspension system </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f7fa;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .quiz-container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question p {
+            font-weight: bold;
+            color: #444;
+        }
+
+        .options button {
+            display: block;
+            margin: 6px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .options button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .options button.correct {
+            background-color: #c8f7c5;
+        }
+
+        .options button.wrong {
+            background-color: #f7c5c5;
+        }
+
+        .score {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Suspension system mcq</h1>
+    <div class="quiz-container" id="quiz"></div>
+    <div class="score" id="score"></div>
+
+    <script>
+      const questions = [
+  { q: "Engine starting system includes:", options: ["Battery, starter, and ignition switch", "Battery and alternator"], answer: 0 },
+  { q: "Tachometer is used to measure:", options: ["Speed", "Engine RPM"], answer: 1 },
+  { q: "The engine starting system includes:", options: ["Battery and alternator", "Distributor and alternator"], answer: 0 },
+  { q: "गाडी स्टार्ट गर्ने हाइड्रोलिक सिस्टममा प्रयोग हुने पार्ट कुन हो?", options: ["अल्टरनेटर", "स्टार्टर मोटर"], answer: 0 },
+  { q: "This is not the component/part of a starting system:", options: ["The battery and ignition switch", "Timing belt"], answer: 1 },
+  { q: "Contact breaker points are opened by the cam and closed by the:", options: ["Same cam", "Spring tension"], answer: 1 },
+  { q: "Which of the following motor have high starting torque?", options: ["AC motor", "DC series motor"], answer: 1 },
+  { q: "When the engine is cold, the starting of the engine is usually:", options: ["Difficult", "Both (A) and (B)"], answer: 0 },
+
+  // Tyre & Wheel
+  { q: "The basic purpose of tyres is:", options: ["To substitute for springs", "For braking"], answer: 1 },
+  { q: "A tyre is designated as 175/65 R14 82 S. Then aspect ratio of tyre is:", options: ["14", "65"], answer: 1 },
+  { q: "This is not the type of wheel used in automobiles:", options: ["Light alloy cast wheel", "Rim with wedge"], answer: 1 },
+  { q: "A truck tyre has stamped marking of 10.00x20-14 ply rating, the marking 20 denotes:", options: ["Width of wheel rim in centimeter", "Diameter of wheel rim in inches"], answer: 1 },
+  { q: "What is the purpose of tyre rotation on automobile?", options: ["Avoid ply separation", "Equalize wear"], answer: 1 },
+  { q: "The type of wheel which can’t be used with a tubeless tyre is:", options: ["Alloy wheel", "Wire wheel"], answer: 1 },
+  { q: "Periodic maintenance भन्नाले के बुझिन्छ?", options: ["तय गरिएको अवधि वा period मा गरिने maintenance", "Overhauling"], answer: 0 },
+  { q: "The maintenance helps to improve ……", options: ["Safety", "All of the above"], answer: 1 },
+  { q: "Lead wires are made of", options: ["Steel", "Copper"], answer: 1 },
+  { q: "The truck has tyre of 11.00×20-12PR. What does 20 mean?", options: ["Height of tyre in inches", "Diameter of rims in inches"], answer: 1 },
+  { q: "When getting under vehicle, make sure:", options: ["Gear is in neutral position", "All tyres are inflated"], answer: 1 },
+  { q: "Tyre size 205-25 represents Rim diameter (D) ____ inch and Tyre Width (W) ____ mm.", options: ["D=20.5, W=2.5", "D=205, W=250"], answer: 1 },
+  { q: "The bleeding system in an automobile serves to free the system from:", options: ["Excess pressure", "Air"], answer: 1 },
+  { q: "What is the purpose of tyre rotation on automobile?", options: ["Avoid ply separation", "Equalize wear"], answer: 1 },
+  { q: "The type of wheel which can’t be used with a tubeless tyre is:", options: ["disc wheel", "wire wheel"], answer: 1 },
+  { q: "RPS टायरको साइज अनुसार चिनिन्छ –", options: ["मिटर", "इञ्च"], answer: 1 },
+  { q: "गाडीको टायरको दाब मापन गर्न कुन उपकरण आवश्यक छ?", options: ["टायर गेज", "मीटर"], answer: 0 },
+  { q: "गाडीको टायर चिप्लिन नदिन के गर्नुपर्छ?", options: ["टायरमा ब्रेक लगाउनु", "टायरको अवस्था राम्रो राख्नु"], answer: 1 }
+];
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        const quizContainer = document.getElementById('quiz');
+        const scoreContainer = document.getElementById('score');
+        let score = 0;
+
+        questions.forEach((q, i) => {
+            const div = document.createElement('div');
+            div.classList.add('question');
+            div.innerHTML = `<p>${i + 1}. ${q.q}</p>`;
+
+            const optsDiv = document.createElement('div');
+            optsDiv.classList.add('options');
+
+            const shuffled = shuffle(q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.answer })));
+
+            shuffled.forEach(({ text, isCorrect }) => {
+                const btn = document.createElement('button');
+                btn.textContent = text;
+                btn.onclick = () => {
+                    if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+                    if (isCorrect) {
+                        btn.classList.add('correct');
+                        score++;
+                    } else {
+                        btn.classList.add('wrong');
+                        optsDiv.querySelectorAll('button').forEach(b => {
+                            if (b.textContent === shuffled.find(o => o.isCorrect).text) {
+                                b.classList.add('correct');
+                            }
+                        });
+                    }
+                    if (i === questions.length - 1) {
+                        scoreContainer.textContent = `✅ Your Score: ${score} out of ${questions.length}`;
+                    }
+                };
+                optsDiv.appendChild(btn);
+            });
+
+            div.appendChild(optsDiv);
+            quizContainer.appendChild(div);
+        });
+    </script>
+</body>
+
+</html>

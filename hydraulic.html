@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Suspension system </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f7fa;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .quiz-container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question p {
+            font-weight: bold;
+            color: #444;
+        }
+
+        .options button {
+            display: block;
+            margin: 6px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .options button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .options button.correct {
+            background-color: #c8f7c5;
+        }
+
+        .options button.wrong {
+            background-color: #f7c5c5;
+        }
+
+        .score {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Suspension system mcq</h1>
+    <div class="quiz-container" id="quiz"></div>
+    <div class="score" id="score"></div>
+
+    <script>
+       const questions = [
+  { q: "In the hydraulic system, valves are used to control:", options: ["Direction of flow of hydraulic oil", "All of the above"], answer: 1 },
+  { q: "Air passing through the fins of hydraulic oil cooler is from:", options: ["Air conditioning system of the machine", "Radiator fan of hydraulic cooling system"], answer: 1 },
+  { q: "In hydraulic system if the filter is not serviced when the indicator shows potential problem, then which will happen:", options: ["The oil will heat up", "The relief valve may open, dumping dirty oil into the system"], answer: 1 },
+  { q: "The component of the torque converter that drives the oil is:", options: ["Impellor", "Stator"], answer: 0 },
+  { q: "निम्न मध्ये हाइड्रोलिक प्रणालीको घटक कुन हो?", options: ["Control valve", "पिस्टन"], answer: 0 },
+  { q: "Which of the following is not a part of the hydraulic system?", options: ["Alternator", "Cylinder"], answer: 0 },
+  { q: "The pressure at the outlet of a refrigeration compressor is called:", options: ["Suction pressure", "Discharge pressure"], answer: 1 },
+  { q: "Which of the following equipment/device/system uses hydraulic system?", options: ["Braking system", "Hydraulic jack"], answer: 1 },
+  { q: "Which is the component of hydraulic system?", options: ["Universal joint", "Control valve"], answer: 1 },
+  { q: "The basic principle that makes hydraulic system possible is", options: ["Pascal’s principle", "Bernoulli’s theorem"], answer: 0 },
+  { q: "A hydraulic system is", options: ["All of the above", "Capable of moving heavier loads than mechanical system"], answer: 0 },
+  { q: "Which of the following is not a part of hydraulic system?", options: ["Pressure relief valve", "Cylinder"], answer: 0 },
+  { q: "निम्नमध्ये कुन फिल्टरलाई हाइड्रोलिक सिस्टमको आवश्यक तत्वका रूपमा प्रयोग गर्न सकिँदैन?", options: ["हाइड्रोलिक आयल फिल्टर", "हाइड्रोलिक पम्प"], answer: 0 },
+  { q: "Which of the following equipment/device/system uses hydraulic system?", options: ["Hydraulic jack", "All of the above"], answer: 0 },
+  { q: "Which is the component of hydraulic system?", options: ["Universal joint", "Control valve"], answer: 1 },
+  { q: "हाइड्रोलिक सिस्टम कुन सिद्धान्तमा आधारित छ?", options: ["पास्कलको सिद्धान्त", "न्यूटनको"], answer: 0 },
+  { q: "The performance of a hydraulic pump is based on:", options: ["Amount of oil pump can deliver in a minute", "All of the above"], answer: 1 },
+  { q: "When hydraulic oil is dirty and contaminated, then what will be its effect on machine?", options: ["It damages engine", "It damages control valve and hydraulic cylinder"], answer: 1 },
+  { q: "निम्नमध्ये कुन कार्य हाईड्रोलिक प्रणाली प्रयोग नभई हाईड्रोलिक प्रणाली नभएको गाडीमा गर्न सकिँदैन ?", options: ["इन्जिन स्टार्ट गर्न", "स्टेरिङ चलाउन"], answer: 1 },
+  { q: "हाईड्रोलिक ब्रेक प्रणालीमा तेलको कमी भएमा के हुन्छ ?", options: ["ब्रेक चाँडो लाग्ने", "ब्रेक नलाग्ने"], answer: 1 },
+  { q: "For weighing large loads, weighing system is mostly used:", options: ["Lever system", "Hydraulic weighing system"], answer: 1 },
+  { q: "The air inside hydraulic line of braking system results …", options: ["poor braking action", "Both (A) and (B)"], answer: 1 }
+];
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        const quizContainer = document.getElementById('quiz');
+        const scoreContainer = document.getElementById('score');
+        let score = 0;
+
+        questions.forEach((q, i) => {
+            const div = document.createElement('div');
+            div.classList.add('question');
+            div.innerHTML = `<p>${i + 1}. ${q.q}</p>`;
+
+            const optsDiv = document.createElement('div');
+            optsDiv.classList.add('options');
+
+            const shuffled = shuffle(q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.answer })));
+
+            shuffled.forEach(({ text, isCorrect }) => {
+                const btn = document.createElement('button');
+                btn.textContent = text;
+                btn.onclick = () => {
+                    if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+                    if (isCorrect) {
+                        btn.classList.add('correct');
+                        score++;
+                    } else {
+                        btn.classList.add('wrong');
+                        optsDiv.querySelectorAll('button').forEach(b => {
+                            if (b.textContent === shuffled.find(o => o.isCorrect).text) {
+                                b.classList.add('correct');
+                            }
+                        });
+                    }
+                    if (i === questions.length - 1) {
+                        scoreContainer.textContent = `✅ Your Score: ${score} out of ${questions.length}`;
+                    }
+                };
+                optsDiv.appendChild(btn);
+            });
+
+            div.appendChild(optsDiv);
+            quizContainer.appendChild(div);
+        });
+    </script>
+</body>
+
+</html>

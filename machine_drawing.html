@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Machine Drawing MCQ Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f5f7fa;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .quiz-container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .question p {
+      font-weight: bold;
+      color: #444;
+    }
+    .options button {
+      display: block;
+      margin: 6px 0;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+    .options button:hover {
+      background-color: #e0e0e0;
+    }
+    .options button.correct {
+      background-color: #c8f7c5;
+    }
+    .options button.wrong {
+      background-color: #f7c5c5;
+    }
+    #score {
+      font-size: 18px;
+      text-align: center;
+      margin-top: 30px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Machine Drawing MCQ Quiz</h1>
+  <div class="quiz-container" id="quiz"></div>
+  <div id="score"></div>
+
+<script>
+  const questions = [
+    { q: "Which is the correct conventional representation of a splined hole (BS 308)?", options: ["⭘ with vertical line", "⭘ with zig-zag and center marking"], answer: 1 },
+    { q: "A drawing instrument set usually contains all except:", options: ["Bow compass", "Extra lead"], answer: 1 },
+    { q: "A title block contains all the following information except:", options: ["Part list", "Drawing No."], answer: 0 },
+    { q: "Which type of projection uses 45° lines for depth?", options: ["Oblique projection", "Isometric projection"], answer: 0 },
+    { q: "What is the standard angle between isometric axes?", options: ["120°", "90°"], answer: 0 },
+    { q: "Which symbol is used to denote surface roughness?", options: ["Check mark (✓)", "Tick with triangle (⏜✓)"], answer: 1 },
+    { q: "Which of the following is not a type of section?", options: ["Offset section", "Rough section"], answer: 1 },
+    { q: "Which component lists part name, material, and quantity?", options: ["Bill of Materials", "Title Block"], answer: 0 },
+    { q: "In assembly drawing, hatching is used to show:", options: ["Material cut in section", "Hole center lines"], answer: 0 },
+    { q: "Which drawing represents the exact shape and size of an object?", options: ["Scale drawing", "Freehand sketch"], answer: 0 },
+    { q: "Which of the following is not included in a machine drawing set?", options: ["Production schedule", "Detail drawing"], answer: 0 },
+    { q: "In AutoCAD, what is the function of the ORTHO mode?", options: ["Constrains cursor to 90° angles", "Mirrors the object"], answer: 0 },
+    { q: "Which method is used to develop a cone’s surface?", options: ["Radial line development", "Parallel line development"], answer: 0 },
+    { q: "Threads are represented in drawings using:", options: ["Thick solid lines", "Thin continuous lines with zigzag"], answer: 1 },
+    { q: "What is the typical symbol for a counterbore?", options: ["⌀", "⏃"], answer: 1 },
+    { q: "What does the symbol ⌀ represent in machine drawing?", options: ["Radius", "Diameter"], answer: 1 },
+    { q: "What is a break line used for?", options: ["Show removed portion", "Indicate center"], answer: 0 },
+    { q: "Which one of the following lines is used for hidden features?", options: ["Dashed line", "Solid line"], answer: 0 },
+    { q: "Which of the following is a permanent joint?", options: ["Welded joint", "Nut and bolt"], answer: 0 },
+    { q: "Section lines are generally drawn at an angle of:", options: ["45°", "60°"], answer: 0 },
+    { q: "The drawing scale 2:1 means:", options: ["Drawing is half the size of object", "Drawing is double the size of object"], answer: 1 },
+    { q: "Which view is generally considered as the front view?", options: ["Longest and most detailed side", "Top view"], answer: 0 },
+    { q: "Center lines are represented by:", options: ["Chain thin lines", "Thick solid lines"], answer: 0 },
+    { q: "Which line is used to show symmetry?", options: ["Centerline", "Object line"], answer: 0 },
+    { q: "Which tool is used to draw large circles?", options: ["Beam compass", "Divider"], answer: 0 },
+    { q: "Why is a sectional view used?", options: ["To show internal features", "To reduce drawing size"], answer: 0 },
+    { q: "What does a 'chain' line represent in a drawing?", options: ["Center of gravity", "Pitch circle diameter"], answer: 1 },
+    { q: "In drawing, the term 'R' is used for:", options: ["Radius", "Revolution"], answer: 0 },
+    { q: "Sectional views are generally shown using:", options: ["Hatching lines", "Dimension lines"], answer: 0 },
+    { q: "A projection that shows three faces of an object equally is called:", options: ["Isometric projection", "Orthographic projection"], answer: 0 },
+    { q: "Which CAD command is used to copy objects?", options: ["COPY", "MIRROR"], answer: 0 },
+    { q: "What is a taper in machine drawing?", options: ["Gradual reduction in diameter", "Notch in shaft"], answer: 0 },
+    { q: "A dimension with ⌀ symbol refers to:", options: ["Radius", "Diameter"], answer: 1 },
+    { q: "The projection method used in Nepal is:", options: ["First angle", "Third angle"], answer: 0 },
+    { q: "Which drawing is used for manufacturing individual parts?", options: ["Detail drawing", "Assembly drawing"], answer: 0 },
+    { q: "Which instrument is used for measuring angle?", options: ["Protractor", "Divider"], answer: 0 }, 
+    { q: "Which line type is thin and light?", options: ["All of the above", "Construction lines"], answer: 1 },
+      { q: "Which type of line is particular to section drawings?", options: ["Break lines", "Cutting plane lines"], answer: 1 },
+      { q: "Projection with parallel lines perpendicular to plane is:", options: ["Perspective projection", "Orthographic projection"], answer: 1 },
+      { q: "Correct layout for third angle system projection:", options: ["D", "B"], answer: 1 },
+      { q: "Top view of the given solid is:", options: ["A", "C"], answer: 1 },
+      { q: "Circle appears as in isometric drawing:", options: ["Circle", "Ellipse"], answer: 1 },
+      { q: "Which is not a pictorial drawing?", options: ["Isometric", "Multiview"], answer: 1 },
+      { q: "Hidden lines are drawn as:", options: ["Dashed wide lines", "Dashed narrow lines"], answer: 1 },
+      { q: "Common projection angles in drawing:", options: ["1st and 2nd", "1st and 3rd"], answer: 1 },
+      { q: "Assembly drawing should start with:", options: ["Title block", "Part list"], answer: 1 },
+      { q: "Screw thread axial advance is:", options: ["Turn", "Lead"], answer: 1 },
+      { q: "Lead in threads is:", options: ["Parallel axis distance", "Axial advance per turn"], answer: 1 },
+      { q: "Not a practical welded joint:", options: ["Butt joint", "Tree joint"], answer: 1 },
+      { q: "Ø50 H7 denotes:", options: ["Shaft basis clearance fit", "Hole basis interference fit"], answer: 1 },
+      { q: "Loading error type:", options: ["Systematic error", "Random error"], answer: 1 },
+      { q: "Orthographic projection is:", options: ["Side view projection", "All of the above"], answer: 1 },
+      { q: "Not a personal safety device:", options: ["Shoe", "Fan belt cover"], answer: 1 },
+      { q: "Correct top view for object:", options: ["B", "C"], answer: 1 },
+      { q: "Taper magnitude of keys:", options: ["1:100", "1:50"], answer: 0 },
+      { q: "Line for hidden outlines:", options: ["Continuous thick", "Short dashed narrow"], answer: 1 },
+      { q: "Pictorial drawing:", options: ["Orthographic", "Axonometric"], answer: 1 },
+      { q: "Hatching line angle:", options: ["30°", "45°"], answer: 1 },
+      { q: "Required elements of welding symbol:", options: ["Arrow and finish symbol", "Arrow and weld symbol"], answer: 1 },
+      { q: "Sectional view importance:", options: ["To beautify the drawing", "To see internal details"], answer: 1 },
+      { q: "Orthographic projection done in:", options: ["Second and third angle", "First and third angle"], answer: 1 },
+      { q: "Plane parallel to projection appears:", options: ["Foreshortened", "True size"], answer: 1 },
+      { q: "Key used for shifting gears:", options: ["Flat key", "Square key"], answer: 1 },
+      { q: "If axis is perpendicular to HP:", options: ["Front view drawn first", "Top view drawn first"], answer: 1 },
+      { q: "Three view object projection:", options: ["Perspective", "Orthographic"], answer: 1 },
+      { q: "BS 308 splined hole symbol:", options: ["Vertical line", "Zig-zag with center"], answer: 1 },
+      { q: "Drawing set lacks:", options: ["Bow compass", "Extra lead"], answer: 1 },
+      { q: "Title block missing info:", options: ["Part list", "Drawing No."], answer: 1 },
+      { q: "True statement:", options: ["No dimension in assembly", "Balloon numbers in sequence"], answer: 1 },
+      { q: "Isometric drawing circle is:", options: ["Circle", "Ellipse"], answer: 1 },
+      { q: "Two types of projection:", options: ["Parallel and Convergent", "Perspective and Parallel"], answer: 1 }
+  ];
+
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  let score = 0;
+  const quizContainer = document.getElementById('quiz');
+
+  questions.forEach((item, index) => {
+    const qDiv = document.createElement('div');
+    qDiv.className = 'question';
+
+    const qText = document.createElement('p');
+    qText.innerText = `${index + 1}. ${item.q}`;
+    qDiv.appendChild(qText);
+
+    const optsDiv = document.createElement('div');
+    optsDiv.className = 'options';
+
+    const shuffled = shuffle(item.options.map((opt, i) => ({ text: opt, isCorrect: i === item.answer })));
+
+    shuffled.forEach(({ text, isCorrect }) => {
+      const btn = document.createElement('button');
+      btn.innerText = text;
+      btn.onclick = () => {
+        if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+        if (isCorrect) {
+          btn.classList.add('correct');
+          score++;
+        } else {
+          btn.classList.add('wrong');
+          optsDiv.querySelectorAll('button').forEach(b => {
+            if (b.innerText === shuffled.find(o => o.isCorrect).text) {
+              b.classList.add('correct');
+            }
+          });
+        }
+        if (index === questions.length - 1) {
+          document.getElementById('score').innerText = `✅ Your Score: ${score}/${questions.length}`;
+        }
+      };
+      optsDiv.appendChild(btn);
+    });
+
+    qDiv.appendChild(optsDiv);
+    quizContainer.appendChild(qDiv);
+  });
+</script>
+</body>
+</html>
