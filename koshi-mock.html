@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mock Test – 50 Questions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #f8ffae, #43c6ac);
+      margin: 0;
+      padding: 2rem;
+      color: #333;
+    }
+    .quiz-container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .question {
+      margin-bottom: 1.5rem;
+    }
+    .question p {
+      font-weight: bold;
+    }
+    .options button {
+      display: block;
+      margin: 0.5rem 0;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      background: #e3f2fd;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .options button:hover {
+      background: #bbdefb;
+    }
+    .correct {
+      background-color: #c8e6c9 !important;
+    }
+    .wrong {
+      background-color: #ffcdd2 !important;
+    }
+    #score {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Mock Test – 50 Questions</h1>
+    <div id="quiz"></div>
+    <div id="score"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {q: "In machining, which of the following is the feed rate?", options: ["The rate at which the cutting tool advances into the workpiece", "The speed at which the cutting tool rotates"], answer: 0},
+      {q: "What is the purpose of the coating on an arc welding electrode?", options: ["To make it shiny", "To create a shielding gas"], answer: 1},
+      {q: "If 'd' is the diameter of the drill, then the formula for depth of cut in drilling is ………..", options: ["d/4", "d/2"], answer: 1},
+      {q: "Which of the following tools is used to measure the thickness of an object with high precision?", options: ["Micrometer", "Vernier calipers"], answer: 0},
+      {q: "Which machine tool uses a rotating multi-point cutter to remove material from a workpiece?", options: ["Drilling Machine", "Milling Machine"], answer: 1},
+      {q: "Which tool is used for removing metal chips and burrs from a workpiece?", options: ["File", "Chisel"], answer: 1},
+      {q: "Which of the following is a derived unit?", options: ["Second", "Volt"], answer: 1},
+      {q: "Which of the following is a basic unit of measurement in the SI units?", options: ["Inch", "Meter"], answer: 1},
+      {q: "The shape of warning sign is:", options: ["Square", "Triangular"], answer: 1},
+      {q: "Which hazard is characterized by excessive noise levels that may cause hearing damage?", options: ["Chemical hazard", "Physical hazard"], answer: 1},
+      {q: "What should be checked to prevent excessive wear on a conveyor belt?", options: ["Belt tracking and alignment", "Pulley diameter"], answer: 0},
+      {q: "Which of the following is NOT the major component of a refrigeration system?", options: ["Compressor", "Absorber"], answer: 1},
+      {q: "In a series circuit, what is the total resistance?", options: ["Equal to the sum of the individual resistances", "Equal to the largest of all the resistances"], answer: 0},
+      {q: "Which of the following is the cheapest plant in operation and maintenance?", options: ["Hydro-power plant", "Diesel power plant"], answer: 0},
+      {q: "What is a disadvantage of using diesel power plants for electricity generation?", options: ["High emissions and environmental pollution", "Low energy efficiency"], answer: 0},
+      {q: "Which of the following is the main disadvantage of a biomass power plant?", options: ["May cause deforestation", "Emits more carbon dioxide than coal"], answer: 0},
+      {q: "If your vehicle’s battery terminals are corroded, what is the most likely issue it will cause?", options: ["Difficulty starting the vehicle", "Reduced fuel efficiency"], answer: 0},
+      {q: "The component that connects the steering rack to the knuckles is:", options: ["Tie-rod", "Sector gear"], answer: 0},
+      {q: "Engine misfiring is likely to result from:", options: ["Spark plug gap too small", "Spark plug gap too wide"], answer: 1},
+      {q: "Which of the following automobile parts require regular lubrication?", options: ["Pistons and camshaft", "Brake pads"], answer: 0},
+      {q: "Overheating of an engine can cause damage to which component?", options: ["Radiator", "Spark plug"], answer: 1},
+      {q: "The problems caused by the wheel imbalance are ……………", options: ["Poor acceleration and hard steering", "Poor acceleration and reduced fuel efficiency"], answer: 1},
+      {q: "What is the most common sign that lubricant needs to be changed?", options: ["Contamination or change in color or viscosity", "Decreased machine noise"], answer: 0},
+      {q: "Which of the following is a characteristic of a good lubricant?", options: ["Resistance to oxidation and breakdown", "High flammability"], answer: 0},
+      {q: "Which of the following would be most useful for tracking raw material usage in a workshop?", options: ["Machine maintenance report", "Material requisition form"], answer: 1},
+      {q: "Which of the following can be tracked by using a job card?", options: ["Time spent on each task", "Electricity consumption per maintenance task"], answer: 0},
+      {q: "Why is it important to record data accurately in an operation log sheet?", options: ["To ensure accurate troubleshooting and analysis of operational issues", "To record personal history"], answer: 0},
+      {q: "What is the symbol for centerline in engineering drawings?", options: ["A long-short-long dashed line", "A dashed line"], answer: 0},
+      {q: "Which of the following is a temporary joint?", options: ["Brazed joint", "Bolted joint"], answer: 1},
+      {q: "What is the standard unit used in engineering drawings?", options: ["Millimeters", "Centimeters"], answer: 0},
+      {q: "नेपालको संविधान अनुसार प्रदेश प्रमुखको पदावधि कति वर्षको हुन्छ ?", options: ["५ वर्ष", "४ वर्ष"], answer: 0},
+      {q: "प्रदेश निजामती सेवा ऐन अनुसार अधिकृतस्तर नवौं तहको कर्मचारीको सेवा कस्तो रहन्छ ?", options: ["आन्तरिक मामिला तथा कानून मन्त्री", "प्रदेश सरकार"], answer: 1},
+      {q: "स्थानीय सरकारी सेवा ऐन अनुसार समावेशी पदपूर्तिसम्बन्धी जोडा कुन हो?", options: ["a-1, b-2, c-3", "a-1, b-3, c-2"], answer: 1},
+      {q: "प्रदेश लोक सेवा आयोगको अध्यक्ष र सदस्यको कार्यावधि कति वर्षको हुन्छ ?", options: ["६ वर्ष", "५ वर्ष"], answer: 1},
+      {q: "Which type of maintenance is shown by regularly lubricating machine parts?", options: ["Preventive Maintenance", "Run-to-Failure Maintenance"], answer: 0},
+      {q: "What is the primary purpose of shutdown maintenance?", options: ["To perform comprehensive maintenance during planned operational halts", "To monitor equipment continuously"], answer: 0},
+      {q: "Why is lubrication important in machine maintenance?", options: ["It reduces wear and tear", "It makes machines heavier"], answer: 0},
+      {q: "Which maintenance strategy is the most cost-effective for non-critical, low-cost equipment?", options: ["Preventive maintenance", "Corrective maintenance"], answer: 0},
+      {q: "To ensure that an equipment works at maximum efficiency through scheduled checks is:", options: ["Condition-based maintenance", "Breakdown maintenance"], answer: 0},
+      {q: "Which component of a forklift is responsible for raising and lowering the forks?", options: ["The mast and hydraulic cylinders", "The steering wheel"], answer: 0},
+      {q: "Which tool is commonly used for marking straight lines on metal surfaces?", options: ["Scriber", "Hammer"], answer: 0},
+      {q: "Which tool is typically used for cutting thin sheet metal by hand?", options: ["Tin snips", "Hacksaw"], answer: 0},
+      {q: "Which of the following is NOT a characteristic of brazing?", options: ["Requires higher temperatures than soldering", "Creates a metallurgical bond"], answer: 0},
+      {q: "In sheet metal work, the thickness of the metal is usually measured in …………………", options: ["Gauge", "Yards"], answer: 0}
+    ];
+
+    let current = 0;
+    let score = 0;
+    const quizEl = document.getElementById("quiz");
+    const scoreEl = document.getElementById("score");
+
+    function showQuestion(index) {
+      const q = questions[index];
+      quizEl.innerHTML = `
+        <div class="question">
+          <p>Q${index + 1}. ${q.q}</p>
+          <div class="options">
+            <button onclick="checkAnswer(this, 0)">${q.options[0]}</button>
+            <button onclick="checkAnswer(this, 1)">${q.options[1]}</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function checkAnswer(button, selected) {
+      const correct = questions[current].answer;
+      const buttons = button.parentElement.querySelectorAll("button");
+      buttons.forEach((btn, i) => {
+        btn.disabled = true;
+        if (i === correct) btn.classList.add("correct");
+        if (i === selected && i !== correct) btn.classList.add("wrong");
+      });
+      if (selected === correct) score++;
+      setTimeout(() => {
+        current++;
+        if (current < questions.length) {
+          showQuestion(current);
+        } else {
+          quizEl.innerHTML = "";
+          scoreEl.innerHTML = `Your score: ${score} / ${questions.length}`;
+        }
+      }, 1000);
+    }
+
+    showQuestion(current);
+  </script>
+</body>
+</html>
