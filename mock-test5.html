@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mock Test 25 MCQs</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f8ff;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    .question-card {
+      background: white;
+      padding: 20px;
+      margin: 10px 0;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .options button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: none;
+      border-radius: 8px;
+      background: #e0e0e0;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .options button.correct {
+      background-color: #a5d6a7 !important;
+    }
+    .options button.wrong {
+      background-color: #ef9a9a !important;
+    }
+    .options button:disabled {
+      cursor: not-allowed;
+    }
+    .controls {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .skip-btn {
+      padding: 10px 20px;
+      background: #64b5f6;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .summary {
+      margin-top: 20px;
+    }
+    .summary ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    .summary li {
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="quiz"></div>
+    <div class="controls">
+      <button class="skip-btn" onclick="skipQuestion()">Skip</button>
+    </div>
+    <div class="summary" id="summary" style="display: none">
+      <h3>Skipped Questions:</h3>
+      <ul id="skippedList"></ul>
+    </div>
+  </div>
+  <script>
+    const questions = [
+      { q: "The unit of temperature is based on:", options: ["Boiling point of mercury", "Triple point of water", "Freezing point of water", "Steam temperature"], answer: 1 },
+      { q: "Which device converts mechanical to electrical energy?", options: ["Pump", "Generator", "Motor", "Battery"], answer: 1 },
+      { q: "Main function of lubricants is:", options: ["Reduce corrosion", "To lessen friction between two surfaces", "Transfer heat", "Clean engine parts"], answer: 1 },
+      { q: "Which of the following is a safety tool?", options: ["Goggles", "Wrench", "Cutter", "File"], answer: 0 },
+      { q: "Absolute zero temperature is taken as:", options: ["-237°C", "-273°C", "0°C", "100°C"], answer: 1 },
+      { q: "Which of the following refrigerants has the highest ozone depletion potential (ODP)?", options: ["R12", "R134a", "R22", "R410A"], answer: 0 },
+      { q: "Vehicle headlight is connected in:", options: ["Series circuit", "Parallel circuit", "Single circuit", "Diagonal circuit"], answer: 1 },
+      { q: "Function of relay switch in a circuit is to:", options: ["Increase voltage", "To control a circuit by a separate low power signal", "Amplify signal", "Control current"], answer: 1 },
+      { q: "Function of cutting fluids is to:", options: ["Increase friction", "Decrease friction", "Heat the tool", "Cool the bed"], answer: 1 },
+      { q: "Which view is generally considered as the front view?", options: ["Longest and most detailed side", "Top view", "Bottom view", "Isometric view"], answer: 0 },
+      { q: "The component responsible for motion from steering wheel is:", options: ["Steering shaft", "Steering gearbox", "Flywheel", "Suspension arm"], answer: 1 },
+      { q: "What happens if engine oil level is too low?", options: ["Better mileage", "Increased engine wear", "High performance", "No change"], answer: 1 },
+      { q: "Which gear provides maximum torque in manual transmission?", options: ["4th gear", "1st gear", "5th gear", "2nd gear"], answer: 1 },
+      { q: "Essential condition for heat transfer is:", options: ["Temperature difference", "Equal pressure", "Equal volume", "Equal mass"], answer: 0 },
+      { q: "Unit of viscosity is:", options: ["Newton-sec per meter²", "Pascal", "Bar", "Joule"], answer: 0 },
+      { q: "Purpose of oil filter in engine is to:", options: ["Cool the oil", "Remove impurities", "Increase flow", "Add thickness"], answer: 1 },
+      { q: "Air conditioning controls:", options: ["Temperature", "All of the above", "Humidity", "Air purity"], answer: 1 },
+      { q: "Internal energy of ideal gas depends on:", options: ["Pressure", "Temperature", "Volume", "Entropy"], answer: 1 },
+      { q: "A machine that converts mechanical to electrical energy is:", options: ["Motor", "Generator", "Inverter", "Pump"], answer: 1 },
+      { q: "Which part allows angular wheel movement during turning?", options: ["Differential", "Kingpin", "Hub", "Spring"], answer: 1 },
+      { q: "Power factor of an alternator depends on:", options: ["Core loss", "Load connected", "Speed", "Voltage"], answer: 1 },
+      { q: "The excessive play in steering wheel causes:", options: ["Better control", "Difficult to control", "Fast turning", "Noise"], answer: 1 },
+      { q: "Main components of transmission system:", options: ["Gear box, propeller shaft, differential", "Dynamo, ignition key, starter", "Battery, clutch, tyre", "Frame, light, indicator"], answer: 0 },
+      { q: "Which safety color indicates caution?", options: ["Red", "Yellow", "Blue", "Green"], answer: 1 },
+      { q: "Heat transferred in isobaric process equals:", options: ["Change in volume", "Change in enthalpy", "Change in temperature", "Change in pressure"], answer: 1 },
+      { q: "Brake is required to stop the machine:", options: ["Within the shortest possible distance", "Within certain distance according to road surface", "Gradually as per comfort", "Never"], answer: 1 },
+      { q: "Disc र Drum-type brake मा के फरक छ?", options: ["Disc type घुम्दैन र drum type घुम्दछ", "Disc type मा कम र drum type मा बढी friction लग हुन्छ", "Drum brake is only for trucks", "Disc uses belt"], answer: 1 },
+      { q: "A feeler gauge is used to measure:", options: ["Space (gap) between two surfaces", "Pressure", "Diameter", "Resistance"], answer: 0 },
+      { q: "The function of radiator fan is:", options: ["Drive water pump", "Divert cool air to radiator to facilitate heat exchange", "Cool the cabin", "Power the alternator"], answer: 1 },
+      { q: "The pressure at the outlet of a refrigeration compressor is called:", options: ["Suction pressure", "Discharge pressure", "Intermediate pressure", "Atmospheric pressure"], answer: 1 },
+      { q: "Compression rings of automotive engines are generally made of:", options: ["High carbon steel", "Cast iron and steel", "Plastic", "Bronze"], answer: 1 },
+      { q: "Predictive maintenance involves:", options: ["Performing activities in predictive manner", "Performing maintenance from expert mechanics", "Guessing failures", "No maintenance"], answer: 1 },
+      { q: "What is the primary function of catalytic converter?", options: ["Reduce noise of engine", "Burns the remaining hydrocarbon and carbon monoxide", "Cool the exhaust", "Boost power"], answer: 1 },
+      { q: "The main function of a shock absorber in the suspension system of a vehicle is:", options: ["To release the energy", "To dissipate the energy", "To amplify shock", "To control torque"], answer: 1 },
+      { q: "The type of wheel which can’t be used with a tubeless tyre is:", options: ["Alloy wheel", "Wire wheel", "Disc wheel", "Magnesium rim"], answer: 1 },
+      { q: "Which combination of gas is used in gas welding?", options: ["Oxygen and acetylene", "Oxygen and hydrogen", "Oxygen and argon", "Nitrogen and acetylene"], answer: 0 },
+      { q: "Facing is an operation of:", options: ["Beveling the extreme end of a workpiece", "Machining ends of workpiece to produce flat surface", "Chamfering", "Polishing"], answer: 1 },
+      { q: "The component of the torque converter that drives the oil is:", options: ["Impellor", "Stator", "Rotor", "Clutch"], answer: 0 },
+      { q: "Engine को inlet valve को आकार outlet valve संग तुलना गर्दा:", options: ["Small", "More", "Equal", "Varies"], answer: 1 },
+      { q: "Which gas causes global warming?", options: ["Carbon dioxide", "Oxygen", "Nitrogen", "Hydrogen"], answer: 0 },
+      { q: "The short dashed medium line is used for:", options: ["Centre line", "Hidden outlines and edges", "Dimensioning", "Section"], answer: 1 },
+      { q: "Fuel injection pump को काम के हो?", options: ["Fuel supply गर्ने", "Air supply गर्ने", "Oil filter गर्ने", "Battery charge गर्ने"], answer: 0 },
+      { q: "Which of the following is not an internal combustion engine?", options: ["2-stroke petrol engine", "Gas turbine", "Diesel engine", "4-stroke petrol engine"], answer: 1 },
+      { q: "Maintenance document with detailed repair procedures:", options: ["Workshop Manual", "Spare Part Manual", "User Guide", "Service Invoice"], answer: 0 },
+      { q: "The ply rating of an earth-moving equipment’s tyre gives:", options: ["Diameter of the rim", "Number of plies in the tyre", "Air pressure", "Load capacity only"], answer: 1 },
+      { q: "Jack Rod कुन system मा पर्दछ?", options: ["Suspension system", "Steering system", "Ignition", "Cooling system"], answer: 1 },
+      { q: "Nepal Vehicle Mass Emission Standard 2069 is associated with the emission standard:", options: ["Euro I", "Euro III", "Euro V", "Bharat IV"], answer: 1 },
+      { q: "The bleeding system in an automobile serves to free the system from:", options: ["Excess pressure", "Air", "Coolant", "Fuel vapor"], answer: 1 },
+      { q: "When brake is applied on a moving vehicle, the kinetic energy is converted into?", options: ["Light energy", "Heat energy", "Sound energy", "Friction energy"], answer: 1 },
+      { q: "Brake system को मुख्य काम के हो?", options: ["गाडीको गियर बढाउने", "गाडी रोक्ने", "गति बढाउने", "ताप उत्पन्न गर्ने"], answer: 1 }
+    ];
+
+    let current = 0;
+    let skipped = [];
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+    shuffle(questions);
+
+    function showQuestion(index) {
+      const q = questions[index];
+      const options = shuffle([...q.options]);
+      const container = document.getElementById("quiz");
+      container.innerHTML = `<div class="question-card">
+        <h3>Q${index + 1}. ${q.q}</h3>
+        <div class="options">
+          ${options
+            .map(
+              (opt, i) =>
+                `<button onclick="checkAnswer(this, '${opt}', '${q.options[q.answer]}')">${opt}</button>`
+            )
+            .join("")}
+        </div>
+      </div>`;
+    }
+
+    function checkAnswer(btn, selected, correct) {
+      const buttons = btn.parentNode.querySelectorAll("button");
+      buttons.forEach(b => (b.disabled = true));
+      if (selected === correct) {
+        btn.classList.add("correct");
+      } else {
+        btn.classList.add("wrong");
+        [...buttons].find(b => b.textContent === correct).classList.add("correct");
+      }
+    }
+
+    function skipQuestion() {
+      skipped.push(questions[current].q);
+      current++;
+      if (current < questions.length) {
+        showQuestion(current);
+      } else {
+        document.getElementById("quiz").innerHTML = "<h3>Quiz Complete!</h3>";
+        document.getElementById("summary").style.display = "block";
+        const list = document.getElementById("skippedList");
+        skipped.forEach((q, i) => {
+          const li = document.createElement("li");
+          li.textContent = `Q${i + 1}: ${q}`;
+          list.appendChild(li);
+        });
+      }
+    }
+
+    showQuestion(current);
+  </script>
+</body>
+</html>
