@@ -1,81 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mock Test 25 MCQs</title>
+  <title>Mock Test – 50 Questions</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f0f8ff;
+      background: linear-gradient(to right, #f8ffae, #43c6ac);
       margin: 0;
-      padding: 0;
+      padding: 2rem;
+      color: #333;
     }
-    .container {
+
+    .quiz-container {
       max-width: 800px;
       margin: auto;
-      padding: 20px;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     }
-    .question-card {
-      background: white;
-      padding: 20px;
-      margin: 10px 0;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
     }
+
+    .question {
+      margin-bottom: 1.5rem;
+    }
+
+    .question p {
+      font-weight: bold;
+    }
+
     .options button {
       display: block;
+      margin: 0.5rem 0;
+      padding: 0.75rem 1rem;
       width: 100%;
-      padding: 10px;
-      margin: 5px 0;
+      background: #e3f2fd;
       border: none;
-      border-radius: 8px;
-      background: #e0e0e0;
+      border-radius: 5px;
       cursor: pointer;
-      font-size: 16px;
+      transition: background 0.3s;
     }
-    .options button.correct {
-      background-color: #a5d6a7 !important;
+
+    .options button:hover {
+      background: #bbdefb;
     }
-    .options button.wrong {
-      background-color: #ef9a9a !important;
+
+    .correct {
+      background-color: #c8e6c9 !important;
     }
-    .options button:disabled {
-      cursor: not-allowed;
+
+    .wrong {
+      background-color: #ffcdd2 !important;
     }
-    .controls {
+
+    #score {
       text-align: center;
-      margin-top: 20px;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      font-weight: bold;
     }
-    .skip-btn {
-      padding: 10px 20px;
-      background: #64b5f6;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
+
+    #skipped-list {
+      margin-top: 2rem;
     }
-    .summary {
-      margin-top: 20px;
-    }
-    .summary ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    .summary li {
-      padding: 5px;
+
+    .hidden {
+      display: none;
     }
   </style>
 </head>
+
 <body>
-  <div class="container">
+  <div class="quiz-container">
+    <h1>Mock Test – 50 Questions</h1>
     <div id="quiz"></div>
-    <div class="controls">
-      <button class="skip-btn" onclick="skipQuestion()">Skip</button>
-    </div>
-    <div class="summary" id="summary" style="display: none">
-      <h3>Skipped Questions:</h3>
-      <ul id="skippedList"></ul>
+    <div id="score"></div>
+    <div id="skipped-list" class="hidden">
+      <h2>Skipped Questions</h2>
+      <ul id="skipped"></ul>
     </div>
   </div>
   <script>
@@ -133,7 +142,13 @@
     ];
 
     let current = 0;
+    let score = 0;
     let skipped = [];
+
+    const quizEl = document.getElementById("quiz");
+    const scoreEl = document.getElementById("score");
+    const skippedEl = document.getElementById("skipped-list");
+    const skippedList = document.getElementById("skipped");
 
     function shuffle(array) {
       for (let i = array.length - 1; i > 0; i--) {
@@ -142,54 +157,65 @@
       }
       return array;
     }
+
     shuffle(questions);
 
     function showQuestion(index) {
       const q = questions[index];
-      const options = shuffle([...q.options]);
-      const container = document.getElementById("quiz");
-      container.innerHTML = `<div class="question-card">
-        <h3>Q${index + 1}. ${q.q}</h3>
-        <div class="options">
-          ${options
-            .map(
-              (opt, i) =>
-                `<button onclick="checkAnswer(this, '${opt}', '${q.options[q.answer]}')">${opt}</button>`
-            )
-            .join("")}
+      const shuffledOptions = shuffle([...q.options]);
+      const optionHTML = shuffledOptions
+        .map((opt, i) => `<button onclick="checkAnswer(this, '${opt}', '${q.options[q.answer]}')">${opt}</button>`) 
+        .join('');
+
+      quizEl.innerHTML = `
+        <div class="question">
+          <p>Q${index + 1}. ${q.q}</p>
+          <div class="options">${optionHTML}</div>
+          <button onclick="skipQuestion()">Skip</button>
         </div>
-      </div>`;
+      `;
     }
 
-    function checkAnswer(btn, selected, correct) {
-      const buttons = btn.parentNode.querySelectorAll("button");
-      buttons.forEach(b => (b.disabled = true));
-      if (selected === correct) {
-        btn.classList.add("correct");
-      } else {
-        btn.classList.add("wrong");
-        [...buttons].find(b => b.textContent === correct).classList.add("correct");
-      }
+    function checkAnswer(button, selected, correct) {
+      const buttons = button.parentElement.querySelectorAll("button");
+      buttons.forEach((btn) => {
+        btn.disabled = true;
+        if (btn.textContent === correct) btn.classList.add("correct");
+        else if (btn.textContent === selected) btn.classList.add("wrong");
+      });
+      if (selected === correct) score++;
+
+      setTimeout(() => {
+        current++;
+        if (current < questions.length) {
+          showQuestion(current);
+        } else {
+          endQuiz();
+        }
+      }, 800);
     }
 
     function skipQuestion() {
-      skipped.push(questions[current].q);
+      skipped.push(questions[current]);
       current++;
       if (current < questions.length) {
         showQuestion(current);
       } else {
-        document.getElementById("quiz").innerHTML = "<h3>Quiz Complete!</h3>";
-        document.getElementById("summary").style.display = "block";
-        const list = document.getElementById("skippedList");
-        skipped.forEach((q, i) => {
-          const li = document.createElement("li");
-          li.textContent = `Q${i + 1}: ${q}`;
-          list.appendChild(li);
-        });
+        endQuiz();
+      }
+    }
+
+    function endQuiz() {
+      quizEl.innerHTML = "";
+      scoreEl.innerHTML = `Your score: ${score} / ${questions.length}`;
+      if (skipped.length > 0) {
+        skippedEl.classList.remove("hidden");
+        skippedList.innerHTML = skipped.map((q, i) => `<li>${i + 1}. ${q.q}</li>`).join('');
       }
     }
 
     showQuestion(current);
   </script>
 </body>
+
 </html>
