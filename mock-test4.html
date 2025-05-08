@@ -1,95 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mock Test 4 - Live Quiz</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mock Test – 50 Questions</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #f8ffae, #43c6ac);
       margin: 0;
-      padding: 0;
-      background: #f7f8fc;
+      padding: 2rem;
       color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    }
+    .quiz-container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
     }
     h1 {
-      background: #5c67f2;
-      color: white;
-      padding: 1rem;
       text-align: center;
-      width: 100%;
-      margin: 0;
-    }
-    #quiz-container {
-      max-width: 800px;
-      background: white;
-      padding: 20px;
-      margin: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1rem;
     }
     .question {
-      font-size: 1.2rem;
-      margin-bottom: 10px;
+      margin-bottom: 1.5rem;
+    }
+    .question p {
+      font-weight: bold;
     }
     .options button {
       display: block;
-      margin: 10px 0;
-      padding: 10px;
+      margin: 0.5rem 0;
+      padding: 0.75rem 1rem;
       width: 100%;
-      font-size: 1rem;
-      background: #e4e6f7;
+      background: #e3f2fd;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      transition: background 0.3s;
     }
-    .options button.correct {
-      background-color: #b2f2bb;
+    .options button:hover {
+      background: #bbdefb;
     }
-    .options button.wrong {
-      background-color: #ffa8a8;
+    .correct {
+      background-color: #c8e6c9 !important;
     }
-    .controls {
-      margin-top: 20px;
-      display: flex;
-      justify-content: space-between;
+    .wrong {
+      background-color: #ffcdd2 !important;
     }
-    #timer {
+    #score {
+      text-align: center;
       font-size: 1.2rem;
-      color: #f03e3e;
+      margin-top: 2rem;
+      font-weight: bold;
     }
     #skipped-list {
-      margin-top: 30px;
+      margin-top: 2rem;
     }
     .hidden {
       display: none;
     }
   </style>
 </head>
-
 <body>
-  <h1>Mock Test 4 - Live Quiz</h1>
-  <div id="quiz-container">
-    <div id="timer">Time Left: <span id="time">60</span> sec</div>
-    <div id="question-box">
-      <div class="question" id="question"></div>
-      <div class="options" id="options"></div>
-    </div>
-    <div class="controls">
-      <button onclick="skipQuestion()">Skip</button>
-      <button onclick="nextQuestion()">Next</button>
+  <div class="quiz-container">
+    <h1>Mock Test – 50 Questions</h1>
+    <div id="quiz"></div>
+    <div id="score"></div>
+    <div id="skipped-list" class="hidden">
+      <h2>Skipped Questions</h2>
+      <ul id="skipped"></ul>
     </div>
   </div>
-
-  <div id="skipped-list" class="hidden">
-    <h2>Skipped Questions</h2>
-    <ul id="skipped-questions"></ul>
-  </div>
-
   <script>
     const questions = [
       { q: "The brakes employed in cars are usually operated:", options: ["Pneumatically", "Mechanically", "Hydraulically", "Magnetically"], answer: 2 },
@@ -125,7 +109,7 @@
       { q: "Main purpose of cooling system:", options: ["Start engine", "Reduce heat", "Lubricate engine", "Charge battery"], answer: 1 },
       { q: "Component of suspension system:", options: ["Shock absorber", "Fuel pump", "Water pump", "Crankshaft"], answer: 0 },
       { q: "Purpose of spark plug:", options: ["Deliver fuel", "Ignite air-fuel mix", "Cool piston", "Pump air"], answer: 1 },
-      { q: "Thermostat opens at:", options: ["50°C", "60°C", "90°C", "120°C"], answer: 1 },
+      { q: "Thermostat opens at:", options: ["50°C", "60°C", "90°C", "120°C"], answer: 2 },
       { q: "Function of dozer:", options: ["Drill hole", "Spread material", "Compact soil", "Move earth"], answer: 3 },
       { q: "Pascal's law is used in:", options: ["Electric system", "Hydraulic system", "Braking system", "Fuel system"], answer: 1 },
       { q: "Brake lights indicate:", options: ["Car starts", "Engine off", "Brake applied", "Fuel low"], answer: 2 },
@@ -133,99 +117,69 @@
       { q: "A flat tyre is dangerous because:", options: ["Looks bad", "More speed", "Risk of burst", "None"], answer: 2 },
       { q: "Welding rod coating is called:", options: ["Coat", "Flux", "Slag", "Paste"], answer: 1 },
       { q: "Oxygen acetylene produces:", options: ["Blue flame", "Neutral flame", "Oxidizing flame", "Red flame"], answer: 2 },
-      { q: "Which engine does not need spark plug?", options: ["Petrol", "Diesel", "Gas", "CNG"], answer: 1 },
-      { q: "IC engine means:", options: ["Internal combustion", "Ignition chamber", "Idle combustion", "Inner coolant"], answer: 0 },
-      { q: "Maintenance checklist is recorded in:", options: ["Notebook", "Invoice", "Job card", "Receipt"], answer: 2 },
-      { q: "Main cause of overheating:", options: ["Coolant leak", "Low fuel", "Weak battery", "Old tyres"], answer: 0 },
-      { q: "Roller is used for:", options: ["Grading", "Digging", "Compacting", "Drilling"], answer: 2 },
-      { q: "Turbocharger uses:", options: ["Fresh air", "Exhaust gases", "Fuel", "Coolant"], answer: 1 },
-      { q: "Primary antifreeze used:", options: ["Ethanol", "Ethylene glycol", "Glycerine", "Methanol"], answer: 1 },
+      { q: "Which engine does not need spark plug?", options: ["Petrol", "Diesel", "Gas", "CNG"], answer: 1 }
     ];
 
-    let currentQuestion = 0;
+    let current = 0;
+    let score = 0;
     let skipped = [];
-    let timer;
 
-    function shuffleArray(arr) {
-      for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-      }
+    const quizEl = document.getElementById("quiz");
+    const scoreEl = document.getElementById("score");
+    const skippedEl = document.getElementById("skipped-list");
+    const skippedList = document.getElementById("skipped");
+
+    function showQuestion(index) {
+      const q = questions[index];
+      const options = q.options.map((opt, i) => `<button onclick="checkAnswer(this, ${i})">${opt}</button>`).join('');
+      quizEl.innerHTML = `
+        <div class="question">
+          <p>Q${index + 1}. ${q.q}</p>
+          <div class="options">${options}</div>
+          <button onclick="skipQuestion()">Skip</button>
+        </div>
+      `;
     }
 
-    shuffleArray(questions);
-
-    function showQuestion() {
-      const q = questions[currentQuestion];
-      document.getElementById('question').textContent = `${currentQuestion + 1}. ${q.q}`;
-      const optionsBox = document.getElementById('options');
-      optionsBox.innerHTML = '';
-
-      const optionIndexes = [0, 1, 2, 3];
-      shuffleArray(optionIndexes);
-
-      optionIndexes.forEach(index => {
-        const btn = document.createElement('button');
-        btn.textContent = q.options[index];
-        btn.onclick = () => selectAnswer(index);
-        optionsBox.appendChild(btn);
-      });
-
-      resetTimer();
-    }
-
-    function selectAnswer(selectedIndex) {
-      const buttons = document.querySelectorAll('#options button');
-      const correctIndex = questions[currentQuestion].answer;
-
-      buttons.forEach((btn, idx) => {
-        if (idx === correctIndex) btn.classList.add('correct');
-        if (idx === selectedIndex && idx !== correctIndex) btn.classList.add('wrong');
+    function checkAnswer(button, selected) {
+      const correct = questions[current].answer;
+      const buttons = button.parentElement.querySelectorAll("button");
+      buttons.forEach((btn, i) => {
         btn.disabled = true;
+        if (i === correct) btn.classList.add("correct");
+        if (i === selected && i !== correct) btn.classList.add("wrong");
       });
+      if (selected === correct) score++;
+      setTimeout(() => {
+        current++;
+        if (current < questions.length) {
+          showQuestion(current);
+        } else {
+          endQuiz();
+        }
+      }, 800);
     }
 
     function skipQuestion() {
-      skipped.push(questions[currentQuestion]);
-      nextQuestion();
-    }
-
-    function nextQuestion() {
-      currentQuestion++;
-      if (currentQuestion < questions.length) {
-        showQuestion();
+      skipped.push(questions[current]);
+      current++;
+      if (current < questions.length) {
+        showQuestion(current);
       } else {
-        document.getElementById('quiz-container').innerHTML = '<h2>Quiz Completed!</h2>';
-        if (skipped.length > 0) showSkipped();
+        endQuiz();
       }
     }
 
-    function showSkipped() {
-      document.getElementById('skipped-list').classList.remove('hidden');
-      const ul = document.getElementById('skipped-questions');
-      skipped.forEach((q, idx) => {
-        const li = document.createElement('li');
-        li.textContent = `${idx + 1}. ${q.q}`;
-        ul.appendChild(li);
-      });
+    function endQuiz() {
+      quizEl.innerHTML = "";
+      scoreEl.innerHTML = `Your score: ${score} / ${questions.length}`;
+      if (skipped.length > 0) {
+        skippedEl.classList.remove("hidden");
+        skippedList.innerHTML = skipped.map((q, i) => `<li>${i + 1}. ${q.q}</li>`).join('');
+      }
     }
 
-    function resetTimer() {
-      let time = 60;
-      document.getElementById('time').textContent = time;
-      clearInterval(timer);
-      timer = setInterval(() => {
-        time--;
-        document.getElementById('time').textContent = time;
-        if (time === 0) {
-          clearInterval(timer);
-          skipQuestion();
-        }
-      }, 1000);
-    }
-
-    showQuestion();
+    showQuestion(current);
   </script>
 </body>
-
 </html>
