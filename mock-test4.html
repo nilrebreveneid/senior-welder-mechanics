@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mock Test 4 - Live Quiz</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f7f8fc;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      background: #5c67f2;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      width: 100%;
+      margin: 0;
+    }
+    #quiz-container {
+      max-width: 800px;
+      background: white;
+      padding: 20px;
+      margin: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+    .question {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    .options button {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+      font-size: 1rem;
+      background: #e4e6f7;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .options button.correct {
+      background-color: #b2f2bb;
+    }
+    .options button.wrong {
+      background-color: #ffa8a8;
+    }
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    #timer {
+      font-size: 1.2rem;
+      color: #f03e3e;
+    }
+    #skipped-list {
+      margin-top: 30px;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Mock Test 4 - Live Quiz</h1>
+  <div id="quiz-container">
+    <div id="timer">Time Left: <span id="time">60</span> sec</div>
+    <div id="question-box">
+      <div class="question" id="question"></div>
+      <div class="options" id="options"></div>
+    </div>
+    <div class="controls">
+      <button onclick="skipQuestion()">Skip</button>
+      <button onclick="nextQuestion()">Next</button>
+    </div>
+  </div>
+
+  <div id="skipped-list" class="hidden">
+    <h2>Skipped Questions</h2>
+    <ul id="skipped-questions"></ul>
+  </div>
+
+  <script>
+    const questions = [
+      { q: "The brakes employed in cars are usually operated:", options: ["Pneumatically", "Mechanically", "Hydraulically", "Magnetically"], answer: 2 },
+      { q: "Which of the following gas combination is used in gas welding?", options: ["Oxygen and hydrogen", "Argon and CO2", "Oxygen and acetylene", "Helium and nitrogen"], answer: 2 },
+      { q: "Function of radiator in cooling system is:", options: ["Ignite fuel", "Lubricate engine", "Dissipate heat", "Start engine"], answer: 2 },
+      { q: "Steel spring is of following type:", options: ["Rubber", "Hydraulic", "Pneumatic", "Leaf spring"], answer: 3 },
+      { q: "Basic purpose of tyres is:", options: ["For suspension", "For braking", "To generate power", "To lubricate engine"], answer: 1 },
+      { q: "Spot welding is the process of:", options: ["Gas welding", "Arc welding", "Laser welding", "Electric resistance welding"], answer: 3 },
+      { q: "The main function of thermostat is:", options: ["Regulate fuel", "Warm up engine quickly", "Generate spark", "Lubricate parts"], answer: 1 },
+      { q: "Which engine part converts reciprocating motion into rotary motion?", options: ["Camshaft", "Crankshaft", "Timing belt", "Push rod"], answer: 1 },
+      { q: "A crane is used in construction to:", options: ["Mix concrete", "Shift heavy loads", "Dig earth", "Level ground"], answer: 1 },
+      { q: "In hydraulic system, valves are used to control:", options: ["Voltage", "Fuel flow", "Direction of oil flow", "Air pressure"], answer: 2 },
+      { q: "Which device reduces CO, HC, NOx emissions in vehicles?", options: ["Carburetor", "Turbocharger", "Catalytic converter", "Air filter"], answer: 2 },
+      { q: "Jack Rod is part of which system?", options: ["Suspension", "Steering", "Braking", "Cooling"], answer: 0 },
+      { q: "Purpose of tyre rotation:", options: ["Equalize wear", "Increase pressure", "Change size", "Improve color"], answer: 0 },
+      { q: "Arc welding produces temperature of:", options: ["6000°C to 7000°C", "100°C", "300°C", "2000°C"], answer: 0 },
+      { q: "Which part helps to measure valve tappet clearance?", options: ["Micrometer", "Feeler gauge", "Vernier caliper", "Dial gauge"], answer: 1 },
+      { q: "Purpose of maintenance:", options: ["Change color", "Improve design", "Keep vehicle operational", "Reduce weight"], answer: 2 },
+      { q: "Four-stroke engine completes its cycle in how many revolutions?", options: ["1", "2", "3", "4"], answer: 1 },
+      { q: "Which emission gas causes acid rain?", options: ["CO", "NO", "SO2", "CH4"], answer: 2 },
+      { q: "Camshaft of 4-stroke engine at 1500 rpm rotates at:", options: ["3000 rpm", "750 rpm", "1500 rpm", "1000 rpm"], answer: 1 },
+      { q: "Maintenance done after failure is called:", options: ["Preventive", "Predictive", "Corrective", "Breakdown"], answer: 3 },
+      { q: "Brake system converts kinetic energy into:", options: ["Sound", "Heat", "Light", "Cold"], answer: 1 },
+      { q: "Cross ply tyre gives:", options: ["More heat", "Smoother ride at low speed", "More wear", "High bounce"], answer: 1 },
+      { q: "Which tool is used in shaping flat surfaces?", options: ["Lathe", "Grinder", "Shaper", "Milling machine"], answer: 2 },
+      { q: "The combustion inside engine cylinder means it’s a:", options: ["External combustion", "Rocket", "Steam engine", "Internal combustion"], answer: 3 },
+      { q: "Which gauge checks air gaps?", options: ["Depth gauge", "Feeler gauge", "Micrometer", "Slip gauge"], answer: 1 },
+      { q: "Greasing moving parts is:", options: ["Breakdown maintenance", "Corrective", "Preventive", "None"], answer: 2 },
+      { q: "Function of starter motor:", options: ["Cool engine", "Pump fuel", "Ignite spark", "Crank engine"], answer: 3 },
+      { q: "TIG welding uses which gas?", options: ["Oxygen", "Acetylene", "Argon", "CO2"], answer: 2 },
+      { q: "Which tool measures shaft diameter?", options: ["Try square", "Ring gauge", "Feeler gauge", "Scale"], answer: 1 },
+      { q: "Welding defect found visually:", options: ["Blow hole", "Crack", "Undercut", "All of the above"], answer: 3 },
+      { q: "Main purpose of cooling system:", options: ["Start engine", "Reduce heat", "Lubricate engine", "Charge battery"], answer: 1 },
+      { q: "Component of suspension system:", options: ["Shock absorber", "Fuel pump", "Water pump", "Crankshaft"], answer: 0 },
+      { q: "Purpose of spark plug:", options: ["Deliver fuel", "Ignite air-fuel mix", "Cool piston", "Pump air"], answer: 1 },
+      { q: "Thermostat opens at:", options: ["50°C", "60°C", "90°C", "120°C"], answer: 1 },
+      { q: "Function of dozer:", options: ["Drill hole", "Spread material", "Compact soil", "Move earth"], answer: 3 },
+      { q: "Pascal's law is used in:", options: ["Electric system", "Hydraulic system", "Braking system", "Fuel system"], answer: 1 },
+      { q: "Brake lights indicate:", options: ["Car starts", "Engine off", "Brake applied", "Fuel low"], answer: 2 },
+      { q: "Catalytic converter removes:", options: ["Fuel", "Noise", "Pollutants", "Water"], answer: 2 },
+      { q: "A flat tyre is dangerous because:", options: ["Looks bad", "More speed", "Risk of burst", "None"], answer: 2 },
+      { q: "Welding rod coating is called:", options: ["Coat", "Flux", "Slag", "Paste"], answer: 1 },
+      { q: "Oxygen acetylene produces:", options: ["Blue flame", "Neutral flame", "Oxidizing flame", "Red flame"], answer: 2 },
+      { q: "Which engine does not need spark plug?", options: ["Petrol", "Diesel", "Gas", "CNG"], answer: 1 },
+      { q: "IC engine means:", options: ["Internal combustion", "Ignition chamber", "Idle combustion", "Inner coolant"], answer: 0 },
+      { q: "Maintenance checklist is recorded in:", options: ["Notebook", "Invoice", "Job card", "Receipt"], answer: 2 },
+      { q: "Main cause of overheating:", options: ["Coolant leak", "Low fuel", "Weak battery", "Old tyres"], answer: 0 },
+      { q: "Roller is used for:", options: ["Grading", "Digging", "Compacting", "Drilling"], answer: 2 },
+      { q: "Turbocharger uses:", options: ["Fresh air", "Exhaust gases", "Fuel", "Coolant"], answer: 1 },
+      { q: "Primary antifreeze used:", options: ["Ethanol", "Ethylene glycol", "Glycerine", "Methanol"], answer: 1 },
+    ];
+
+    let currentQuestion = 0;
+    let skipped = [];
+    let timer;
+
+    function shuffleArray(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+
+    shuffleArray(questions);
+
+    function showQuestion() {
+      const q = questions[currentQuestion];
+      document.getElementById('question').textContent = `${currentQuestion + 1}. ${q.q}`;
+      const optionsBox = document.getElementById('options');
+      optionsBox.innerHTML = '';
+
+      const optionIndexes = [0, 1, 2, 3];
+      shuffleArray(optionIndexes);
+
+      optionIndexes.forEach(index => {
+        const btn = document.createElement('button');
+        btn.textContent = q.options[index];
+        btn.onclick = () => selectAnswer(index);
+        optionsBox.appendChild(btn);
+      });
+
+      resetTimer();
+    }
+
+    function selectAnswer(selectedIndex) {
+      const buttons = document.querySelectorAll('#options button');
+      const correctIndex = questions[currentQuestion].answer;
+
+      buttons.forEach((btn, idx) => {
+        if (idx === correctIndex) btn.classList.add('correct');
+        if (idx === selectedIndex && idx !== correctIndex) btn.classList.add('wrong');
+        btn.disabled = true;
+      });
+    }
+
+    function skipQuestion() {
+      skipped.push(questions[currentQuestion]);
+      nextQuestion();
+    }
+
+    function nextQuestion() {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        document.getElementById('quiz-container').innerHTML = '<h2>Quiz Completed!</h2>';
+        if (skipped.length > 0) showSkipped();
+      }
+    }
+
+    function showSkipped() {
+      document.getElementById('skipped-list').classList.remove('hidden');
+      const ul = document.getElementById('skipped-questions');
+      skipped.forEach((q, idx) => {
+        const li = document.createElement('li');
+        li.textContent = `${idx + 1}. ${q.q}`;
+        ul.appendChild(li);
+      });
+    }
+
+    function resetTimer() {
+      let time = 60;
+      document.getElementById('time').textContent = time;
+      clearInterval(timer);
+      timer = setInterval(() => {
+        time--;
+        document.getElementById('time').textContent = time;
+        if (time === 0) {
+          clearInterval(timer);
+          skipQuestion();
+        }
+      }, 1000);
+    }
+
+    showQuestion();
+  </script>
+</body>
+
+</html>
