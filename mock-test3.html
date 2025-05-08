@@ -1,0 +1,625 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mock Test – 50 MCQs</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #f8ffae, #43c6ac);
+      margin: 0;
+      padding: 2rem;
+      color: #333;
+    }
+    .quiz-container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .question {
+      margin-bottom: 1.5rem;
+    }
+    .question p {
+      font-weight: bold;
+    }
+    .options button {
+      display: block;
+      margin: 0.5rem 0;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      background: #e3f2fd;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .options button:hover {
+      background: #bbdefb;
+    }
+    .correct {
+      background-color: #c8e6c9 !important;
+    }
+    .wrong {
+      background-color: #ffcdd2 !important;
+    }
+    #score {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Mock Test – 50 MCQs</h1>
+    <div id="quiz"></div>
+    <div id="score"></div>
+  </div>
+
+  <script>
+    let questions = [
+  {
+    "q": "Which equipment is used for eye protection?",
+    "options": [
+      "Helmet",
+      "Safety goggles",
+      "Gloves",
+      "Apron"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Fire extinguishers are used to:",
+    "options": [
+      "Start fire",
+      "Heat rooms",
+      "Cool engines",
+      "Put out fire"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Which is not a personal protective equipment (PPE)?",
+    "options": [
+      "Mask",
+      "Safety shoes",
+      "Fan",
+      "Gloves"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Hard hats are used to protect:",
+    "options": [
+      "Feet",
+      "Hands",
+      "Head",
+      "Back"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Yellow color in safety represents:",
+    "options": [
+      "Danger",
+      "Caution",
+      "Safe",
+      "Emergency"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Hidden lines in drawing are represented by:",
+    "options": [
+      "Solid line",
+      "Dashed line",
+      "Thick line",
+      "Chain line"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Sectional views are used to:",
+    "options": [
+      "Show outer surface",
+      "Show internal details",
+      "Decorate drawing",
+      "Color drawing"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Title block is placed at:",
+    "options": [
+      "Top left",
+      "Top right",
+      "Bottom right",
+      "Bottom left"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Tolerance is:",
+    "options": [
+      "Exact size",
+      "Allowable deviation",
+      "Surface finish",
+      "Thread depth"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Thread pitch is:",
+    "options": [
+      "Height",
+      "Angle",
+      "Distance between threads",
+      "Thickness"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "First law of thermodynamics relates to:",
+    "options": [
+      "Energy conservation",
+      "Entropy",
+      "Pressure",
+      "Enthalpy"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "The unit of heat is:",
+    "options": [
+      "Watt",
+      "Newton",
+      "Joule",
+      "Pascal"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Which device is used to measure temperature?",
+    "options": [
+      "Manometer",
+      "Thermometer",
+      "Barometer",
+      "Voltmeter"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Which process has constant temperature?",
+    "options": [
+      "Adiabatic",
+      "Isothermal",
+      "Isochoric",
+      "Isobaric"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Efficiency of Carnot cycle depends on:",
+    "options": [
+      "Work done",
+      "Speed",
+      "Temperature difference",
+      "Volume"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Continuity equation represents:",
+    "options": [
+      "Momentum",
+      "Mass conservation",
+      "Energy",
+      "Torque"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Pascal's law is used in:",
+    "options": [
+      "Steam system",
+      "Hydraulic systems",
+      "Pneumatic tools",
+      "Thermodynamics"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Venturimeter measures:",
+    "options": [
+      "Pressure",
+      "Speed",
+      "Discharge",
+      "Force"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Reynolds number is used to determine:",
+    "options": [
+      "Flow type",
+      "Velocity",
+      "Volume",
+      "Viscosity"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "The unit of pressure is:",
+    "options": [
+      "kg",
+      "N",
+      "m",
+      "Pascal"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Clutch connects:",
+    "options": [
+      "Engine to flywheel",
+      "Gear to wheel",
+      "Engine to gearbox",
+      "Axle to chassis"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Worm gear is used in:",
+    "options": [
+      "Clutch",
+      "Steering",
+      "Axle",
+      "Brakes"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Ackermann principle is related to:",
+    "options": [
+      "Braking",
+      "Fuel",
+      "Steering",
+      "Suspension"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Power steering reduces:",
+    "options": [
+      "Fuel",
+      "Steering effort",
+      "Speed",
+      "Noise"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Steering gear box is mounted on:",
+    "options": [
+      "Engine",
+      "Frame",
+      "Wheel",
+      "Radiator"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Diesel fuel is injected via:",
+    "options": [
+      "Carburetor",
+      "Injector",
+      "Nozzle",
+      "Pump"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Lubricants reduce:",
+    "options": [
+      "Speed",
+      "Wear",
+      "Heat",
+      "Weight"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Viscosity refers to:",
+    "options": [
+      "Density",
+      "Flow resistance",
+      "Volume",
+      "Tension"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Fuel filter removes:",
+    "options": [
+      "Water",
+      "Dust",
+      "Air",
+      "Carbon"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Flash point of oil means:",
+    "options": [
+      "Evaporation point",
+      "Ignition point",
+      "Lubrication level",
+      "Tensile strength"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Battery in vehicles is:",
+    "options": [
+      "AC source",
+      "DC source",
+      "Capacitor",
+      "Transformer"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Spark plug is used in:",
+    "options": [
+      "Diesel engine",
+      "Steam engine",
+      "Petrol engine",
+      "Hydraulic system"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Alternator converts:",
+    "options": [
+      "Mechanical to electrical",
+      "Thermal to mechanical",
+      "Electrical to mechanical",
+      "Fuel to power"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Fuse prevents:",
+    "options": [
+      "Overheating",
+      "Overloading",
+      "Battery charging",
+      "Engine stop"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Ammeter measures:",
+    "options": [
+      "Voltage",
+      "Resistance",
+      "Current",
+      "Power"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Gearbox is used to:",
+    "options": [
+      "Change speed",
+      "Change fuel",
+      "Store power",
+      "Control exhaust"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Differential is found in:",
+    "options": [
+      "Brake",
+      "Engine",
+      "Transmission",
+      "Radiator"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Propeller shaft connects:",
+    "options": [
+      "Gearbox to differential",
+      "Clutch to engine",
+      "Wheel to hub",
+      "Battery to motor"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Synchromesh gearbox avoids:",
+    "options": [
+      "Noise",
+      "Friction",
+      "Gear clash",
+      "Oil leak"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "CVT means:",
+    "options": [
+      "Constant Valve Timing",
+      "Continuous Variable Transmission",
+      "Controlled Vehicle Traction",
+      "Cylinder Valve Type"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Refrigerant used in car AC:",
+    "options": [
+      "R12",
+      "R134a",
+      "CO2",
+      "NH3"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Compressor in AC is powered by:",
+    "options": [
+      "Engine belt",
+      "Electric motor",
+      "Battery",
+      "Alternator"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Condenser in AC does:",
+    "options": [
+      "Cools air",
+      "Heats air",
+      "Removes heat",
+      "Circulates refrigerant"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Evaporator coil:",
+    "options": [
+      "Rejects heat",
+      "Removes moisture",
+      "Absorbs heat",
+      "Compresses gas"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Expansion valve in AC controls:",
+    "options": [
+      "Refrigerant flow",
+      "Air pressure",
+      "Heat",
+      "Voltage"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Logbook records:",
+    "options": [
+      "Fuel level",
+      "Maintenance data",
+      "Driver name",
+      "Insurance"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Job card is used for:",
+    "options": [
+      "Painting",
+      "Repair details",
+      "Washing",
+      "Tax collection"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Maintenance schedule is for:",
+    "options": [
+      "Safety",
+      "Inspection",
+      "Planning",
+      "All of these"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Which document tracks repair history?",
+    "options": [
+      "Invoice",
+      "Bill",
+      "Logbook",
+      "Checklist"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Who verifies service records?",
+    "options": [
+      "Driver",
+      "Owner",
+      "Mechanic",
+      "Transport Officer"
+    ],
+    "answer": 3
+  }
+];
+    questions = questions.sort(() => Math.random() - 0.5);
+
+    let current = 0;
+    let score = 0;
+    const quizEl = document.getElementById("quiz");
+    const scoreEl = document.getElementById("score");
+
+    function showQuestion(index) {
+      const q = questions[index];
+      quizEl.innerHTML = `
+        <div class="question">
+          <p>Q${index + 1}. ${q.q}</p>
+          <div class="options">
+            ${q.options.map((opt, i) => `<button onclick='checkAnswer(this, ${i})'>${opt}</button>`).join("")}
+            <button onclick='skipQuestion()' style="margin-top:10px; background-color:#ffe082;">Skip</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function checkAnswer(button, selected) {
+      const correct = questions[current].answer;
+      const buttons = button.parentElement.querySelectorAll("button");
+      buttons.forEach((btn, i) => {
+        btn.disabled = true;
+        if (i === correct) btn.classList.add("correct");
+        if (i === selected && i !== correct) btn.classList.add("wrong");
+      });
+      if (selected === correct) score++;
+      setTimeout(() => {
+        current++;
+        if (current < questions.length) {
+          showQuestion(current);
+        } else {
+          quizEl.innerHTML = "";
+          scoreEl.innerHTML = `Your score: ${score} / ${questions.length}`;
+        }
+      }, 1000);
+    }
+
+    function skipQuestion() {
+      current++;
+      if (current < questions.length) {
+        showQuestion(current);
+      } else {
+        quizEl.innerHTML = "";
+        scoreEl.innerHTML = `Your score: ${score} / ${questions.length}`;
+      }
+    }
+
+    showQuestion(current);
+  </script>
+</body>
+</html>
