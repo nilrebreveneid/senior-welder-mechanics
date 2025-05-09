@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mock Test – General Awareness & Public Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #f8ffae, #43c6ac);
+      margin: 0;
+      padding: 2rem;
+      color: #333;
+    }
+
+    .quiz-container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .question {
+      margin-bottom: 1.5rem;
+    }
+
+    .question p {
+      font-weight: bold;
+    }
+
+    .options button {
+      display: block;
+      margin: 0.5rem 0;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      background: #e3f2fd;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .options button:hover {
+      background: #bbdefb;
+    }
+
+    .correct {
+      background-color: #c8e6c9 !important;
+    }
+
+    .wrong {
+      background-color: #ffcdd2 !important;
+    }
+
+    #score {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      font-weight: bold;
+    }
+
+    #skipped-list {
+      margin-top: 2rem;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="quiz-container">
+    <h1>Mock Test – General Awareness & Public Management (50 MCQs)</h1>
+    <div id="quiz"></div>
+    <div id="score"></div>
+    <div id="skipped-list" class="hidden">
+      <h2>Skipped Questions</h2>
+      <ul id="skipped"></ul>
+    </div>
+  </div>
+  <script>
+    const questions = [
+      { q: "नेपालमा मूल्य अभिवृद्धि कर (VAT) कहिले लागू गरिएको हो?", options: ["२०५० साल", "२०५१ साल", "२०५२ साल", "२०४५ साल"], answer: 1 },
+      { q: "सार्वजनिक ढुकुटीमा गम्भीर आर्थिक दुरुपयोग हुँदा के गरिन्छ?", options: ["राज्यले अनुगमन मात्र गर्छ", "पारदर्शिता ऐन उल्लङ्घन गरिन्छ", "राष्ट्रिय सतर्कता केन्द्रमा जानकारी गराइन्छ", "सार्वजनिक लेखा समितिमा पेश गरिन्छ"], answer: 2 },
+      { q: "नेपालमा राष्ट्रिय एकता दिवस कहिले मनाइन्छ?", options: ["असार २०", "असार १४", "माघ १६", "श्रावण १"], answer: 1 },
+      { q: "Visit Nepal-2020 कार्यक्रमको प्रतीक चित्र के थियो?", options: ["बुद्ध", "सगरमाथा", "याक", "लुम्बिनी"], answer: 2 },
+      { q: "SAARC को १८ औं शिखर सम्मेलन कहाँ आयोजना भएको थियो?", options: ["भारत", "नेपाल", "पाकिस्तान", "भूटान"], answer: 1 },
+      { q: "नेपालबाट उत्पादित विद्युत कहिलेदेखि भारतमा निर्यात गरिएको हो?", options: ["२०७८ साल", "२०७८ जेष्ठ", "२०७९ माघ", "२०७७ फागुन"], answer: 1 },
+      { q: "इन्धनमा बढी हावा पु¥याउँदा के हुन्छ?", options: ["इन्धन बढी बग्ने हुन्छ", "इन्धन राम्रो जल्छ", "गाडी बिग्रिन्छ", "धुँवा बढी निस्कन्छ"], answer: 1 },
+      { q: "निजामती सेवामा समावेशी आरक्षण कति प्रतिशत छ?", options: ["४५%", "५५%", "३३%", "५०%"], answer: 1 },
+      { q: "राजपत्र अंकित पदमा नियुक्तिका लागि न्यूनतम उमेर कति हो?", options: ["१७ वर्ष", "१८ वर्ष", "२० वर्ष", "१६ वर्ष"], answer: 1 },
+      { q: "कुन ऐन अनुसार समायोजनबाट फर्किएका कर्मचारीलाई ३३% छुट दिइन्छ?", options: ["राजस्व ऐन", "संविधान संशोधन ऐन", "समायोजन ऐन", "निजामती सेवा ऐन"], answer: 2 },
+      { q: "Civil service मा permanent नियुक्तिका लागि probation कति समयको हुन्छ?", options: ["1 year", "3 years", "2 years", "6 months"], answer: 2 },
+      { q: "नेपाल भेइकल मास एमिसन स्ट्यान्डर्ड, २०६९ कुन स्तर बराबर हो?", options: ["Bharat II", "Euro II", "Euro III", "Euro IV"], answer: 2 },
+      { q: "Accounting अनुसार मोटर गाडीमा अनुमत क्षय प्रतिशत कति हो?", options: ["१५%", "१०%", "२०%", "५%"], answer: 1 },
+      { q: "नेपालको महालेखा परीक्षकको कार्यालय कहाँ छ?", options: ["विराटनगर", "काठमाण्डौ", "पोखरा", "भैरहवा"], answer: 1 },
+      { q: "नेपालको संविधान कहिले घोषणा गरिएको हो?", options: ["३ असोज २०७२", "१५ कार्तिक २०७२", "१ माघ २०७१", "३ कार्तिक २०७२"], answer: 0 },
+      { q: "ग्यास आयातमा नेपाल कुन देशमा भर पर्छ?", options: ["चीन", "भारत", "बंगलादेश", "श्रीलंका"], answer: 1 },
+      { q: "इन्धनको प्रयोग घटाउन के गर्ने?", options: ["बढी गियरमा चलाउने", "सम्हालेर प्रयोग गर्ने", "धेरै प्रयोग गर्ने", "खाली गाडी दौडाउने"], answer: 1 },
+      { q: "कुन इन्धनमा गन्ध हुँदैन?", options: ["सिलिन्डर ग्यास", "एलपी ग्यास", "पेट्रोल", "डिजेल"], answer: 1 },
+      { q: "मल्टिग्रेड थर्मामिटर कहाँ प्रयोग हुन्छ?", options: ["वायुमान्य प्रयोगशाला", "मौसम विभाग", "शिक्षा मन्त्रालय", "अस्पताल"], answer: 1 },
+      { q: "प्राविधिक तालिम पाउने जनशक्तिको प्रतिशत?", options: ["३५%", "४५%", "२५%", "५०%"], answer: 1 },
+      { q: "स्थानीय सरकारको कार्यपालिकाको नाम के हो?", options: ["नगर सभा", "गाउँसभा", "कार्यपालिका", "कार्यपालिका तथा सामान्य प्रशासन मन्त्रालय"], answer: 3 },
+      { q: "स्थायी समिति संयोजक को हो?", options: ["उपाध्यक्ष", "अध्यक्ष", "मुख्य सचिव", "मुख्य कार्यकारी"] , answer: 1 },
+      { q: "सुशासन ऐन २०६४ अनुसार कुन कुन क्षेत्र समेटिएको छ?", options: ["नीति योजना", "प्रशासनिक सुधार", "अनुसन्धान", "पारदर्शिता"] , answer: 3 },
+      { q: "सार्वजनिक पदमा महिला २०% नपुगेमा?", options: ["पुरुष नियुक्ति", "कार्ययोग्य महिला नियुक्ति", "रिक्त राख्ने", "सुरक्षा गार्ड राख्ने"] , answer: 1 },
+      { q: "नेपालको संविधानले स्थानीय तहलाई कति तहको सरकार मानेको छ?", options: ["प्रथम", "मध्य", "तृतीय", "स्वतन्त्र"], answer: 2 },
+      { q: "नेपालमा सुशासनका लागि कुन संस्था सक्रिय छ?", options: ["लोक सेवा आयोग", "सतर्कता केन्द्र", "महालेखा परीक्षक", "मानव अधिकार आयोग"], answer: 1 },
+      { q: "सार्वजनिक सेवा प्रदान गर्ने मुख्य निकाय कुन हो?", options: ["निजामती सेवा", "सैनिक सेवा", "स्वास्थ्य सेवा", "शिक्षा सेवा"], answer: 0 },
+      { q: "कुन संविधानिक निकाय नियुक्तिको सिफारिस गर्दछ?", options: ["महालेखा", "लोक सेवा आयोग", "संसद", "गृह मन्त्रालय"], answer: 1 },
+      { q: "नेपालको वर्तमान संसद कस्तो प्रकृतिको हो?", options: ["द्विसदनीय", "एकसदनीय", "संसदीय", "राष्ट्रपतीय"], answer: 0 },
+      { q: "नेपालमा भ्रष्टाचार अनुसन्धान गर्ने निकाय कुन हो?", options: ["संसद सचिवालय", "सशस्त्र प्रहरी", "अख्तियार दुरुपयोग अनुसन्धान आयोग", "महालेखा परीक्षक"], answer: 2 },
+      { q: "नेपालमा सरकारी दस्तावेज दर्ता गर्ने कार्यलाई के भनिन्छ?", options: ["फाइलिङ्ग", "दर्ता", "प्रेषण", "दस्तावेजीकरण"], answer: 1 },
+      { q: "कार्यालयका विभिन्न अभिलेखहरू सुरक्षित राख्ने कार्यलाई के भनिन्छ?", options: ["फाइलिङ्ग", "दर्ता", "सुरक्षा", "रिकर्ड व्यवस्थापन"], answer: 3 }
+    ];
+
+    let current = 0;
+    let score = 0;
+    let skipped = [];
+
+    const quizEl = document.getElementById("quiz");
+    const scoreEl = document.getElementById("score");
+    const skippedEl = document.getElementById("skipped-list");
+    const skippedList = document.getElementById("skipped");
+
+    function showQuestion(index) {
+      const q = questions[index];
+      const options = q.options.map((opt, i) => `<button onclick="checkAnswer(this, ${i})">${opt}</button>`).join('');
+      quizEl.innerHTML = `
+        <div class="question">
+          <p>Q${index + 1}. ${q.q}</p>
+          <div class="options">${options}</div>
+          <button onclick="skipQuestion()">Skip</button>
+        </div>
+      `;
+    }
+
+    function checkAnswer(button, selected) {
+      const correct = questions[current].answer;
+      const buttons = button.parentElement.querySelectorAll("button");
+      buttons.forEach((btn, i) => {
+        btn.disabled = true;
+        if (i === correct) btn.classList.add("correct");
+        if (i === selected && i !== correct) btn.classList.add("wrong");
+      });
+      if (selected === correct) score++;
+      setTimeout(() => {
+        current++;
+        if (current < questions.length) {
+          showQuestion(current);
+        } else {
+          endQuiz();
+        }
+      }, 800);
+    }
+
+    function skipQuestion() {
+      skipped.push(questions[current]);
+      current++;
+      if (current < questions.length) {
+        showQuestion(current);
+      } else {
+        endQuiz();
+      }
+    }
+
+    function endQuiz() {
+      quizEl.innerHTML = "";
+      scoreEl.innerHTML = `Your score: ${score} / ${questions.length}`;
+      if (skipped.length > 0) {
+        skippedEl.classList.remove("hidden");
+        skippedList.innerHTML = skipped.map((q, i) => `<li>${i + 1}. ${q.q}</li>`).join('');
+      }
+    }
+
+    showQuestion(current);
+  </script>
+</body>
+
+</html>
