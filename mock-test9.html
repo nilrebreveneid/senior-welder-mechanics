@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mock Test – Lok Sewa 2080</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #f8ffae, #43c6ac);
+      margin: 0;
+      padding: 2rem;
+      color: #333;
+    }
+
+    .quiz-container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .question {
+      margin-bottom: 1.5rem;
+    }
+
+    .question p {
+      font-weight: bold;
+    }
+
+    .options button {
+      display: block;
+      margin: 0.5rem 0;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      background: #e3f2fd;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .options button:hover {
+      background: #bbdefb;
+    }
+
+    .correct {
+      background-color: #c8e6c9 !important;
+    }
+
+    .wrong {
+      background-color: #ffcdd2 !important;
+    }
+
+    #score {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      font-weight: bold;
+    }
+
+    #skipped-list {
+      margin-top: 2rem;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="quiz-container">
+    <h1>Mock Test – Lok Sewa 2080</h1>
+    <div id="quiz"></div>
+    <div id="score"></div>
+    <div id="skipped-list" class="hidden">
+      <h2>Skipped Questions</h2>
+      <ul id="skipped"></ul>
+    </div>
+  </div>
+  <script>
+    const questions = [
+      { q: "Which of the following is not part of a shaper?", options: ["Tapper box", "Ram", "Table", "Cross slide"], answer: 0 },
+      { q: "Which of the following gauge is used to test accuracy of holes?", options: ["Ring gauge", "Snap gauge", "Plug gauge", "All of the above"], answer: 3 },
+      { q: "To take measurement of the height of store rack you will use", options: ["Vernier caliper", "Try square", "Bevel protector", "Scale"], answer: 3 },
+      { q: "Which of the following operation can’t be performed in the lathe?", options: ["Chamfering", "Knurling", "Drilling", "None of the above"], answer: 3 },
+      { q: "Lathe spindle has got", options: ["Internal threads", "External threads", "Tapper threads", "No threads"], answer: 0 },
+      { q: "A cylinder is drilled with two through holes of same size from top to bottom face. What is the minimum possible number of hidden lines that will appear in front view of the cylinder?", options: ["1", "2", "4", "None of the above"], answer: 2 },
+      { q: "Orthographic projection is associated with", options: ["Side view projection", "Front view projection", "Plum view projection", "All of the above"], answer: 3 },
+      { q: "Which of the following is kind of resistance welding?", options: ["Metal arc welding", "Spot welding", "Oxy-acetylene welding", "Submerged arc welding"], answer: 1 },
+      { q: "A neutral flame is obtained by supplying", options: ["Equal volume of oxygen and acetylene", "More volume of oxygen than acetylene", "More volume of acetylene and less volume of oxygen", "None of the above"], answer: 0 },
+      { q: "This is a male and female joint", options: ["Riveting of two work pieces", "Arc welding of two work pieces", "Nut and bolt joints of two work pieces", "Gas welding joints of two work pieces"], answer: 2 },
+      { q: "A joint made by fastening two edges of sheet metal together is called …", options: ["Hem", "Seam", "Joint", "None of the above"], answer: 1 },
+      { q: "The main component to drive the track chain of an excavator is", options: ["Idler", "Sprocket", "Heavy duty belt", "Scarifier teeth"], answer: 1 },
+      { q: "If a 100 KVA diesel generator is to be loaded in a truck, which equipment should be used?", options: ["Loader", "Crane", "Excavator", "All of the above"], answer: 1 },
+      { q: "If four cylinder engine has capacity of 2.0 liter, what is swept volume of single cylinder?", options: ["800 cc", "500 cc", "200 cc", "400 cc"], answer: 1 },
+      { q: "Diesel engine has been classified as…", options: ["Reciprocating internal combustion engine", "Rotary internal combustion engine", "Reciprocating external combustion engine", "Rotary external combustion engine"], answer: 0 },
+      { q: "In diesel engine, during suction stroke … is drawn in the cylinder.", options: ["Air and fuel", "Only fuel", "Only air", "None of the above"], answer: 2 },
+      { q: "The connecting rod connects the piston and ….", options: ["Cylinder head", "Camshaft", "Crankshaft", "Cylinder block"], answer: 2 },
+      { q: "The Otto cycle is also known as", options: ["Constant temperature cycle", "Constant pressure cycle", "Constant volume cycle", "None of the above"], answer: 2 },
+      { q: "Heat transfer from cold body to hot body is not possible without external work. This is", options: ["Zeroth law of thermodynamics", "First law of thermodynamics", "Second law of thermodynamics", "None of the above"], answer: 2 },
+      { q: "The thermostat in engine’s cooling system keeps the engine", options: ["Cool", "At desired temperature", "Hot", "None of the above"], answer: 1 },
+      { q: "The main purpose of cooling system of an IC engine is", options: ["To cool the engine when it is hot", "To maintain the temperature required for engine running", "To prolong the changing interval of engine oil", "To heat the engine when it is cold"], answer: 1 },
+      { q: "The main function of brake fluid is", options: ["Lubrication", "Power transmission", "Cooling", "None of the above"], answer: 1 },
+      { q: "Rubber parts of the brake system is better cleaned by using", options: ["Petrol", "Diesel", "Acid", "Fresh brake fluid"], answer: 3 },
+      { q: "The provision made to allow a leaf spring to vary its length is a", options: ["Swinging shackle", "Sliding center bolt", "U bolt mounting", "All of the above"], answer: 0 },
+      { q: "In independent suspension system", options: ["Rise and fall of one wheel has little effect on other", "Rise and fall of one wheel has equal effect on other", "Rise and fall of one wheel has no effect on other", "Effect depends on the road surface"], answer: 0 },
+      { q: "The angle formed by the wheel with the vertical when the top of the wheel slants outward is called", options: ["Positive camber", "Negative camber", "Positive castor", "Negative castor"], answer: 0 },
+      { q: "The function of the steering system is", options: ["To achieve angular motion of the front wheel", "To provide directional stability", "To facilitate recovery after turning", "All of the above"], answer: 3 },
+      { q: "The function of a universal joint is to allow the propeller shaft to", options: ["Change length", "Bend sideways", "Transfer torque at an angle", "All of the above"], answer: 2 },
+      { q: "The basic function of clutch of a vehicle is", options: ["To transmit the torque of engine to transmission", "To transmit speed", "To let the vehicle run at uniform speed", "To facilitate acceleration"], answer: 0 },
+      { q: "The engine crank shaft is automatically engaged with the clutch shaft and disengaged from it in", options: ["Single plate clutch", "Multi plate clutch", "Centrifugal clutch", "None of the above"], answer: 2 },
+      { q: "Basic principle of hydraulic system is that", options: ["Liquid provides workforce", "Pressure in all directions", "Liquid is incompressible", "All of the above"], answer: 3 },
+      { q: "Water is a …. fluid.", options: ["Real", "Ideal", "Newtonian", "Non-newtonian"], answer: 2 },
+      { q: "If starter pinion engages but cannot crank the flywheel?", options: ["Defective over running clutch", "Discharged battery", "Damage flywheel", "Defective armature"], answer: 0 },
+      { q: "Spark plug life of a four stroke engine compared to two stroke is", options: ["Same", "Twice", "Half", "None of the above"], answer: 1 },
+      { q: "A tyre designated 175/65 R14 82 S has aspect ratio", options: ["175", "65", "14", "82"], answer: 1 },
+      { q: "This is not the type of wheel used in automobile", options: ["Wire wheel", "Light alloy cast wheel", "Rim wheel", "Pressed steel disc wheel"], answer: 2 },
+      { q: "As octane number of fuel increases, knocking tendency ….", options: ["Increases", "Decreases", "Remains same", "First decrease then increases"], answer: 1 },
+      { q: "Secondary dry filter of engine is cleaned by", options: ["Outer surface", "Inner surface", "Tapping on tyre", "Not cleaned, changed as required"], answer: 3 },
+      { q: "Battery hydrometer tests?", options: ["Voltage test", "PH test", "Specific gravity test", "High rate discharge test"], answer: 2 },
+      { q: "Typical battery has how many cells?", options: ["12", "6", "3", "4"], answer: 1 },
+      { q: "Heating coil in air conditioning system?", options: ["Evaporator", "Compressor", "Expansion valve", "Condenser"], answer: 3 },
+      { q: "This is not a refrigerant used in AC system", options: ["R 12", "R 22", "RF 10", "R 410 A"], answer: 2 },
+      { q: "Catalytic converter controls emission of", options: ["CO, HC and NOₓ", "CO, HC and CO₂", "CO and NOₓ", "All of the above"], answer: 0 },
+      { q: "Nepal Vehicle Mass Emission Standard 2069 corresponds to", options: ["Euro I", "Euro II", "Euro III", "Euro IV"], answer: 2 },
+      { q: "V belt of radiator fan broken, what maintenance?", options: ["Preventive", "Shutdown", "Corrective", "Timely"], answer: 2 },
+      { q: "With increase in cost of preventive maintenance, breakdown cost will …", options: ["Decrease", "Increase", "No change", "Increase faster"], answer: 0 },
+      { q: "Pricing based on", options: ["Production cost", "Profit margin", "Market price", "All of the above"], answer: 3 },
+      { q: "Book with parts illustrations, numbers etc.", options: ["Service manual", "Parts catalogue", "Log sheet", "Owner’s manual"], answer: 1 },
+      { q: "Machine safeguarding is necessary because", options: ["Looks attractive", "Improves skill", "Minimizes accident", "Balances machine"], answer: 2 },
+      { q: "Activity practicing quick building exit is called", options: ["Fire play", "Fire extinguish", "Fire drill", "Fire plug"], answer: 2 }
+    ];
+
+    let current = 0;
+    let score = 0;
+    let skipped = [];
+
+    const quizEl = document.getElementById("quiz");
+    const scoreEl = document.getElementById("score");
+    const skippedEl = document.getElementById("skipped-list");
+    const skippedList = document.getElementById("skipped");
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    shuffle(questions);
+
+    function showQuestion(index) {
+      const q = questions[index];
+      const shuffledOptions = shuffle([...q.options]);
+      const optionHTML = shuffledOptions
+        .map((opt, i) => `<button onclick="checkAnswer(this, '${opt}', '${q.options[q.answer]}')">${opt}</button>`) 
+        .join('');
+
+      quizEl.innerHTML = `
+        <div class="question">
+          <p>Q${index + 1}. ${q.q}</p>
+          <div class="options">${optionHTML}</div>
+          <button onclick="skipQuestion()">Skip</button>
+        </div>
+      `;
+    }
+
+    function checkAnswer(button, selected, correct) {
+      const buttons = button.parentElement.querySelectorAll("button");
+      buttons.forEach((btn) => {
+        btn.disabled = true;
+        if (btn.textContent === correct) btn.classList.add("correct");
+        else if (btn.textContent === selected) btn.classList.add("wrong");
+      });
+      if (selected === correct) score++;
+
+      setTimeout(() => {
+        current++;
+        if (current < questions.length) {
+          showQuestion(current);
+        } else {
+          endQuiz();
+        }
+      }, 800);
+    }
+
+    function skipQuestion() {
+      skipped.push(questions[current]);
+      current++;
+      if (current < questions.length) {
+        showQuestion(current);
+      } else {
+        endQuiz();
+      }
+    }
+
+    function endQuiz() {
+      quizEl.innerHTML = "";
+      scoreEl.innerHTML = `Your score: ${score} / ${questions.length}`;
+      if (skipped.length > 0) {
+        skippedEl.classList.remove("hidden");
+        skippedList.innerHTML = skipped.map((q, i) => `<li>${i + 1}. ${q.q}</li>`).join('');
+      }
+    }
+
+    showQuestion(current);
+  </script>
+</body>
+
+</html>
