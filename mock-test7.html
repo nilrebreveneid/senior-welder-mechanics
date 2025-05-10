@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ne">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mock Test – 20 Questions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #f8ffae, #43c6ac);
+      margin: 0;
+      padding: 2rem;
+      color: #333;
+    }
+
+    .quiz-container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .question {
+      margin-bottom: 1.5rem;
+    }
+
+    .question p {
+      font-weight: bold;
+    }
+
+    .options button {
+      display: block;
+      margin: 0.5rem 0;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      background: #e3f2fd;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .options button:hover {
+      background: #bbdefb;
+    }
+
+    .correct {
+      background-color: #c8e6c9 !important;
+    }
+
+    .wrong {
+      background-color: #ffcdd2 !important;
+    }
+
+    #score {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      font-weight: bold;
+    }
+
+    #skipped-list {
+      margin-top: 2rem;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="quiz-container">
+    <h1>लोक सेवा आयोग – Mock Test (20 Questions)</h1>
+    <div id="quiz"></div>
+    <div id="score"></div>
+    <div id="skipped-list" class="hidden">
+      <h2>Skipped Questions</h2>
+      <ul id="skipped"></ul>
+    </div>
+  </div>
+  <script>
+    const questions = [
+      { q: "सन् २०२५ को जनसम्मा BRICS को नयाँ सदस्यता प्राप्त गर्ने राष्ट्र कुन हो?", options: ["इन्डोनेसिया", "नेपाल", "पाकिस्तान", "श्रीलंका"], answer: 0 },
+      { q: "दक्षिण एशियाली राष्ट्रहरूको क्षेत्रीय सहयोगको संगठन (SAARC) को संस्थापक कुन देशमा भएको हो?", options: ["नेपाल", "पाकिस्तान", "बङ्गलादेश", "भारत"], answer: 0 },
+      { q: "नेपालले संयुक्त राष्ट्र संघ (UNO) को सदस्यता कहिले प्राप्त गरेको थियो?", options: ["ई.सं. १९५६", "ई.सं. १९५५", "ई.सं. १९४५", "ई.सं. १९५७"], answer: 1 },
+      { q: "नेपालको संविधानको कुन अनुसूचिमा संघ, प्रदेश र स्थानीय तहको अधिकारको सूची उल्लेख गरिएको छ?", options: ["१", "२", "८", "९"], answer: 3 },
+      { q: "नेपालमा हाल मातृ मृत्युदर प्रति एक लाख जीवित जन्ममा कति रहेको छ?", options: ["१८६", "१५१", "१२१", "१२४"], answer: 1 },
+      { q: "जलवायु परिवर्तनसँग सम्बन्धित अन्तर्राष्ट्रिय सम्झौतामध्ये Kyoto Protocol मा उल्लेख गरिने लक्ष्य के हो?", options: ["हरितगृह ग्यास उत्सर्जनमा कमी", "गैसिय उत्सर्जन", "जलवायु चालचलन", "अक्सिजनप्रद आपूर्ति"], answer: 0 },
+      { q: "संयुक्त राष्ट्र संघको जलवायु सम्मेलन कहिले आयोजना गरियो?", options: ["२९ सेप्टेम्बर २०१९", "२८ अक्टोबर २०१८", "३० नोभेम्बर २०२१", "डिसेम्बर २०१९"], answer: 2 },
+      { q: "राष्ट्रिय जनगणना (२०६८/२०८०) को अन्तिम गतिविधिमा सहभागी हुने जनसंख्याको कति प्रतिशत तटस्थ व्यक्तिहरू थिए?", options: ["१२", "१५", "२१", "८"], answer: 2 },
+      { q: "सौर/सौर्य जातिको पूर्तिहालको के नाम छ?", options: ["ग्यास", "मासु", "विद्युत", "धुँवा"], answer: 2 },
+      { q: "नेपालको ग्रामीण क्षेत्रमा महिलासम्बन्धी मानव सम्पत्तिको कार्यकुशलता कति समय देखिएको छ?", options: ["एक घण्टा ४० मिनेट", "दुई घण्टा ५५ मिनेट", "५ घण्टा ४० मिनेट", "मानिसको कुनै हिस्सा"], answer: 1 },
+      { q: "जसले वा महिलासम्बन्धी अध्ययन गरेर पनि कर्मचारीले न्यूनतम कति अवधिसम्म सेवा गर्नुपर्ने छ?", options: ["एक वर्ष", "दुई वर्ष", "तीन वर्ष", "चार वर्ष"], answer: 1 },
+      { q: "नेपालमा स्थानीय सरकारको स्रोत साधनको विकाससँग सम्बन्धित दोश्रो संघीय मन्त्रालय कहिले गठन गरिएको हो?", options: ["आ.व. २०७१/०७२", "आ.व. २०७२/०७३", "आ.व. २०६९/०७०", "आ.व. २०६८/०६९"], answer: 1 },
+      { q: "तल दिइएको समूह I र समूह II बीच जोडी मिलाउनुहोस्", options: ["a-2, b-3, c-1, d-4", "a-4, b-3, c-2, d-1", "a-1, b-2, c-3, d-4", "a-3, b-1, c-4, d-2"], answer: 1 },
+      { q: "नागरिक बडापत्र (Citizen Charter) को सुरुवात कुन देशबाट भएको हो?", options: ["संयुक्त राज्य अमेरिका", "संयुक्त अधिराज्य", "चीन", "फ्रान्स"], answer: 1 },
+      { q: "कुनै नेपाली नागरिकले सार्वजनिक निकायमा सूचना माग गर्दा सूचना अधिकारी समयमै नदिएमा सम्बन्धित सूचना दिन सम्बन्धी जिम्मेवारी कसको हुन्छ?", options: ["७", "१५", "२१", "३५"], answer: 2 },
+      { q: "लोक सेवा आयोग सम्बन्धी व्यवस्थालाई नेपालको संविधानको कुन भागमा राखिएको छ?", options: ["धारा २३", "धारा २६", "धारा २४", "धारा २५"], answer: 1 },
+      { q: "सार्वजनिक सेवा प्रवाह गर्दा तलमध्ये सबैभन्दा ध्यान दिनुपर्ने मुख्य सवाल कुन हो?", options: ["नागरिकको नेतृत्त्वको दस्तावेज धारणा", "सेवाग्राही र सेवा प्रदायकको संख्या", "सेवाको पारदर्शिता, गुणस्तर, समय र लागत", "सेवा दिने निकाय"], answer: 2 },
+      { q: "तलका मध्ये कुन तटस्थताको उद्देश्य पर्दैन?", options: ["अनावश्यक स्वार्थको मिलान गर्नु", "गलतहरूसँग पत्ता लगाउनु", "छाडिएको पत्ता लगाउनु", "हुने नपाउने लेखाजोखा हेरेर पत्ता लगाउनु"], answer: 0 },
+      { q: "तटस्थ टिप्पणी लेख्दा टिप्पणीले लेखन अनन्ततः के गर्नुपर्छ?", options: ["शाखालाई राय आवश्यक परेको भए मार्गदर्शन गर्नु", "टिप्पणी लेख्न नपर्ने गरी लेखिएको प्रयास गर्नु", "माथिल्लो तहसँग मिल्दो निर्णयमा पुग्नु", "टिप्पणीमा नाम नम्बर लेख्नु"], answer: 2 },
+      { q: "नेपालको संविधानको धारा ५३ अनुसार संघ, प्रदेश र स्थानीय तहबीचको समन्वय कसको सिद्धान्तमा आधारित छ?", options: ["साझा अस्तित्व, समन्वय र उद्देश्य", "सार्वजनिक, निजी उद्यम र समन्वय", "सहकार्यिता, सहअस्तित्व र समन्वय", "सार्वजनिक, सहकारी र निजी क्षेत्र"], answer: 0 }
+    ];
+
+    let current = 0;
+    let score = 0;
+    let skipped = [];
+
+    const quizEl = document.getElementById("quiz");
+    const scoreEl = document.getElementById("score");
+    const skippedEl = document.getElementById("skipped-list");
+    const skippedList = document.getElementById("skipped");
+
+    function showQuestion(index) {
+      const q = questions[index];
+      const options = q.options.map((opt, i) => `<button onclick="checkAnswer(this, ${i})">${opt}</button>`).join('');
+      quizEl.innerHTML = `
+        <div class="question">
+          <p>Q${index + 1}. ${q.q}</p>
+          <div class="options">${options}</div>
+          <button onclick="skipQuestion()">Skip</button>
+        </div>
+      `;
+    }
+
+    function checkAnswer(button, selected) {
+      const correct = questions[current].answer;
+      const buttons = button.parentElement.querySelectorAll("button");
+      buttons.forEach((btn, i) => {
+        btn.disabled = true;
+        if (i === correct) btn.classList.add("correct");
+        if (i === selected && i !== correct) btn.classList.add("wrong");
+      });
+      if (selected === correct) score++;
+      setTimeout(() => {
+        current++;
+        if (current < questions.length) {
+          showQuestion(current);
+        } else {
+          endQuiz();
+        }
+      }, 800);
+    }
+
+    function skipQuestion() {
+      skipped.push(questions[current]);
+      current++;
+      if (current < questions.length) {
+        showQuestion(current);
+      } else {
+        endQuiz();
+      }
+    }
+
+    function endQuiz() {
+      quizEl.innerHTML = "";
+      scoreEl.innerHTML = `Your score: ${score} / ${questions.length}`;
+      if (skipped.length > 0) {
+        skippedEl.classList.remove("hidden");
+        skippedList.innerHTML = skipped.map((q, i) => `<li>${i + 1}. ${q.q}</li>`).join('');
+      }
+    }
+
+    showQuestion(current);
+  </script>
+</body>
+
+</html>
