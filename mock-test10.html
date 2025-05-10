@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mock Test – General & Technical</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #f8ffae, #43c6ac);
+      margin: 0;
+      padding: 2rem;
+      color: #333;
+    }
+    .quiz-container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .question {
+      margin-bottom: 1.5rem;
+    }
+    .question p {
+      font-weight: bold;
+    }
+    .options button {
+      display: block;
+      margin: 0.5rem 0;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      background: #e3f2fd;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .options button:hover {
+      background: #bbdefb;
+    }
+    .correct {
+      background-color: #c8e6c9 !important;
+    }
+    .wrong {
+      background-color: #ffcdd2 !important;
+    }
+    #score {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      font-weight: bold;
+    }
+    #skipped-list {
+      margin-top: 2rem;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Mock Test – General & Technical (50 Questions)</h1>
+    <div id="quiz"></div>
+    <div id="score"></div>
+    <div id="skipped-list" class="hidden">
+      <h2>Skipped Questions</h2>
+      <ul id="skipped"></ul>
+    </div>
+  </div>
+  <script>
+    const questions = [
+      { q: "Riboflavin लाई कुन Vitamin लाई जनाइन्छ?", options: ["Vitamin B1", "Vitamin B2", "Vitamin B6", "Vitamin B12"], answer: 1 },
+      { q: "नेपालको संविधानमा “उपभोक्ताको हक” कुन धारामा राखिएको छ?", options: ["२४", "३०", "४४", "५५"], answer: 2 },
+      { q: "UNEP को मुख्यालय कहाँ रहेको छ?", options: ["पेरिस, फ्रान्स", "नेरोबी, केन्या", "रोम, इटाली", "जेनेभा, स्विट्जरल्याण्ड"], answer: 1 },
+      { q: "दक्षिण एशियाली क्षेत्रीय सहयोग संघमा व्यापार प्रवर्द्धन गर्ने संस्था कुन हो?", options: ["ASEAN", "SAARC", "BIMSTEC", "GCC"], answer: 1 },
+      { q: "HICDP कुन देशको सहयोगमा सञ्चालित हुन्छ?", options: ["भारत", "चीन", "फ्रान्स", "संयुक्त राज्य अमेरिका"], answer: 0 },
+      { q: "कार्यालय व्यवस्थापनका विशेषता कुन हो?", options: ["निश्चित लक्ष्य", "कर्मचारी व्यवस्थापन", "व्यवस्थापकीय कार्य", "माथिका सबै"], answer: 2 },
+      { q: "राजपत्र अनंकित द्वितीय श्रेणीमा खुला पदपूर्तिबाट कति % पद?", options: ["१५%", "४०%", "५०%", "१००%"], answer: 1 },
+      { q: "कार्यालय प्रशासन कार्यका मानव संसाधन मध्ये आवश्यक?", options: ["दक्ष मानव संसाधन", "सचिव समिति", "प्रशासनिक निगरानी", "लेखापरीक्षण"], answer: 0 },
+      { q: "प्रतिनिधिसभा उम्मेदवारीको न्यूनतम उमेर?", options: ["२५", "२१", "३५", "४५"], answer: 0 },
+      { q: "सर्वेक्षण कार्यक्रम सम्बन्धी खुलासा कुन देशबाट?", options: ["अमेरिका", "अष्ट्रेलिया", "फ्रान्स", "भारत"], answer: 1 },
+      { q: "Universal Declaration of Human Rights मा कति धारा छन्?", options: ["१५", "२०", "३०", "५०"], answer: 2 },
+      { q: "सूचनाको हक अनुसार कुन सही हो?", options: ["सहायता सूचना माग्ने", "रुची अनुसार अध्ययन", "सुरक्षित दस्तावेज अध्ययन", "अनुसन्धान गर्न जानु"], answer: 2 },
+      { q: "सूचना ऐन अनुसार धर्मनिरपेक्षता आधारित कुन हो?", options: ["सेवा प्राप्ति धर्म स्वतन्त्र", "जातीय पहिचान/नागरिकता", "मान्यता सम्बन्धी", "कार्यविधि पूर्ण गर्न"], answer: 1 },
+      { q: "ERG सिद्धान्तका प्रतिपादक को हुन्?", options: ["Frederick Herzberg", "David McClelland", "McGregor", "Clayton Alderfer"], answer: 3 },
+      { q: "संविधानको धारा ४८ अनुसार नागरिकको नैतिक कर्तव्य कुन हो?", options: ["सार्वजनिक सम्पत्ति सुरक्षा", "राष्ट्रिय विभाजनमा संलग्न नहुनु", "राष्ट्रिय हित र अखण्डताको रक्षा", "बन्दमा सहभागी हुनु"], answer: 2 },
+      { q: "नेपालको हिमाली क्षेत्रको उचाइ?", options: ["३३९२", "८८४८", "९८९८", "९९९९"], answer: 1 },
+      { q: "गणतन्त्र पश्चात जननिर्वाचित सरकार गठन मिति?", options: ["२०६५ बैशाख ११", "२०६५ जेष्ठ ७", "२०६५ असार १४", "२०६५ साउन १६"], answer: 2 },
+      { q: "सातौं योजना (२०४२/४-२०४६/७) को लक्ष्य?", options: ["समृद्ध नेपाल, सुखी नेपाली", "सुखी नेपाली, समृद्ध राष्ट्र", "विकास, सुधारको स्मृति", "सुधार, सामाजिक न्याय र समृद्धि"], answer: 2 },
+      { q: "अनसङ्गठित क्षेत्र संरक्षण क्षेत्र घोषणा मिति?", options: ["२०७०/०१/०१", "२०७०/१०/१५", "२०७१/०१/१५", "२०७१/०१/०५"], answer: 1 },
+      { q: "AI को पूर्ण रूप के हो?", options: ["Artificially Intelligent", "Artificial Intelligence", "Advance Intelligence", "Artificially Intelligence"], answer: 1 },
+      { q: "ABS को मतलब?", options: ["Avoid brake system", "Anti-lock braking system", "Actual brake system", "Automatic brake system"], answer: 1 },
+      { q: "Air bleeder valve कहाँ हुन्छ?", options: ["Master cylinder", "Wheel cylinder", "दुवै", "कुनै पनि स्थान"], answer: 1 },
+      { q: "Leaf spring को एक छेउ fixed भए अर्को कहाँ जोडिन्छ?", options: ["V-bolt", "I-bolt", "Shackle", "Axle shaft"], answer: 2 },
+      { q: "Suspension को भाग नभएको कुन हो?", options: ["Coil spring", "Leaf spring", "Shock absorber", "Connecting rod"], answer: 3 },
+      { q: "Toe-out भन्नाले के बुझिन्छ?", options: ["Caster", "Camber", "Toe-in", "Toe-out"], answer: 3 },
+      { q: "Hard steering को कारण?", options: ["Tight tie rod", "Bent wheel spindle", "Low tyre pressure", "None"], answer: 1 },
+      { q: "Hard shifting of gears को कारण?", options: ["Leakage", "Worn splines", "High speed", "Over loading"], answer: 3 },
+      { q: "Poppet valve भन्नाले के बुझिन्छ?", options: ["Seat valves", "Slide valves", "Pressure reducing valves", "Directional control valves"], answer: 2 },
+      { q: "Overinflated tyre effect?", options: ["Center मा wear", "Edges मा wear", "Equal wear", "None"], answer: 0 },
+      { q: "Multigrade oil कुन हो?", options: ["SAE 30", "SAE 40", "SAE 15W-40", "SAE 80W"], answer: 2 },
+      { q: "New battery initial charging after?", options: ["Acid", "Water", "Oil", "None"], answer: 1 },
+      { q: "Maintenance job card मा कुन हुँदैन?", options: ["Spares", "Lubricants", "Consumables", "Cost"], answer: 3 },
+      { q: "PPE नभएको कुन हो?", options: ["Safety goggles", "Ear protection", "Machine guards", "Safety gloves"], answer: 2 },
+      { q: "Grease कुन प्रकारको lubricant हो?", options: ["Semi-solid", "Solid", "Liquid", "Gas"], answer: 0 },
+      { q: "Human comfort मा नपर्ने कुन हो?", options: ["Air temperature", "Room lighting", "Air speed", "Humidity"], answer: 1 },
+      { q: "Ring gauge प्रयोग कहाँ?", options: ["Shaft diameter", "Hole accuracy", "Clearance", "All of the above"], answer: 3 },
+      { q: "Neutral flame ratio?", options: ["1:1", "1:1.5", "1:2", "2:1"], answer: 0 },
+      { q: "Lathe को live center कुन हो?", options: ["Carriage", "Tail stock", "Head stock", "None"], answer: 2 },
+      { q: "Brazing के बाट हुन्छ?", options: ["Heating", "Arc", "Beating", "All of the above"], answer: 1 },
+      { q: "Same plane welded joint को नाम?", options: ["Lap", "Butt", "Tee", "Edge"], answer: 1 },
+      { q: "Gray cast iron best welding method?", options: ["Arc", "Plug", "MIG", "Oxy-acetylene"], answer: 0 },
+      { q: "Wires बनाउने forming process?", options: ["Forging", "Extrusion", "Drawing", "Rolling"], answer: 1 },
+      { q: "Idler कुनको part हो?", options: ["Wheel loader", "Motor grader", "Tipper", "Track excavator"], answer: 3 },
+      { q: "Loose material spread गर्ने machine?", options: ["Tractor", "Excavator", "Grader", "Roller"], answer: 2 },
+      { q: "Petrol engine मा नहुने part?", options: ["Spark plug", "Fuel injector", "Carburetor", "None"], answer: 1 },
+      { q: "2-stroke engine क्रिया कति crankshaft मा पुरा?", options: ["1", "2", "3", "4"], answer: 1 },
+      { q: "Mechanical fuel pump power source?", options: ["Camshaft", "Crankshaft", "Distributor", "Propeller shaft"], answer: 1 },
+      { q: "Diesel engine मा fuel delivery कुनले vary गर्छ?", options: ["Plunger", "Sleeve", "Rack", "Injection"], answer: 3 },
+      { q: "Radiator cap मा के हुन्छ?", options: ["Pressure valve", "Thermostat", "Blow-off valve", "Pressure & vacuum valve"], answer: 3 },
+      { q: "IC engine cooling system को मुख्य उद्देश्य?", options: ["Cool hot engine", "Warm cold engine", "Maintain temp", "Prolong oil interval"], answer: 2 }
+    ];
+    let current = 0;
+    let score = 0;
+    let skipped = [];
+    const quizEl = document.getElementById("quiz");
+    const scoreEl = document.getElementById("score");
+    const skippedEl = document.getElementById("skipped-list");
+    const skippedList = document.getElementById("skipped");
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+    shuffle(questions);
+    function showQuestion(index) {
+      const q = questions[index];
+      const shuffledOptions = shuffle([...q.options]);
+      const optionHTML = shuffledOptions
+        .map((opt, i) => `<button onclick="checkAnswer(this, '${opt}', '${q.options[q.answer]}')">${opt}</button>`) 
+        .join('');
+      quizEl.innerHTML = `
+        <div class="question">
+          <p>Q${index + 1}. ${q.q}</p>
+          <div class="options">${optionHTML}</div>
+          <button onclick="skipQuestion()">Skip</button>
+        </div>
+      `;
+    }
+    function checkAnswer(button, selected, correct) {
+      const buttons = button.parentElement.querySelectorAll("button");
+      buttons.forEach((btn) => {
+        btn.disabled = true;
+        if (btn.textContent === correct) btn.classList.add("correct");
+        else if (btn.textContent === selected) btn.classList.add("wrong");
+      });
+      if (selected === correct) score++;
+      setTimeout(() => {
+        current++;
+        if (current < questions.length) {
+          showQuestion(current);
+        } else {
+          endQuiz();
+        }
+      }, 800);
+    }
+    function skipQuestion() {
+      skipped.push(questions[current]);
+      current++;
+      if (current < questions.length) {
+        showQuestion(current);
+      } else {
+        endQuiz();
+      }
+    }
+    function endQuiz() {
+      quizEl.innerHTML = "";
+      scoreEl.innerHTML = `Your score: ${score} / ${questions.length}`;
+      if (skipped.length > 0) {
+        skippedEl.classList.remove("hidden");
+        skippedList.innerHTML = skipped.map((q, i) => `<li>${i + 1}. ${q.q}</li>`).join('');
+      }
+    }
+    showQuestion(current);
+  </script>
+</body>
+</html>
