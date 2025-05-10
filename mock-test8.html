@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>लोक सेवा आयोग – Mock Test (40 Questions)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #f8ffae, #43c6ac);
+      margin: 0;
+      padding: 2rem;
+      color: #333;
+    }
+
+    .quiz-container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .question {
+      margin-bottom: 1.5rem;
+    }
+
+    .question p {
+      font-weight: bold;
+    }
+
+    .options button {
+      display: block;
+      margin: 0.5rem 0;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      background: #e3f2fd;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .options button:hover {
+      background: #bbdefb;
+    }
+
+    .correct {
+      background-color: #c8e6c9 !important;
+    }
+
+    .wrong {
+      background-color: #ffcdd2 !important;
+    }
+
+    #score {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      font-weight: bold;
+    }
+
+    #skipped-list {
+      margin-top: 2rem;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>लोक सेवा आयोग – Mock Test (40 Questions)</h1>
+    <div id="quiz"></div>
+    <div id="score"></div>
+    <div id="skipped-list" class="hidden">
+      <h2>Skipped Questions</h2>
+      <ul id="skipped"></ul>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      { q: "नेपालको हालको संविधान कहिले जारी गरिएको हो?", options: ["२०७२ असोज ३", "२०७१ माघ ८", "२०६३ साउन १", "२०६५ फागुन ५"], answer: 0 },
+      { q: "हालको संघीय सरकारमा कति प्रदेशहरू छन्?", options: ["५", "७", "६", "४"], answer: 1 },
+      { q: "नेपालको राष्ट्रपतिको कार्यकाल कति वर्षको हुन्छ?", options: ["३", "५", "७", "६"], answer: 1 },
+      { q: "नेपालको प्रमुख नदी प्रणाली कुन हो?", options: ["गण्डकी", "कोसी", "कर्णाली", "महाकाली"], answer: 0 },
+      { q: "राष्ट्रिय जनगणना २०७८ अनुसार नेपालको कुल जनसंख्या कति छ?", options: ["२.६ करोड", "३.५ करोड", "१.८ करोड", "२.२ करोड"], answer: 0 },
+      { q: "नेपालको पहिलो महिला राष्ट्रपति को हुन्?", options: ["शेर बहादुर देउवा", "विद्या भण्डारी", "सुषील कोइराला", "उषा नेवपाने"], answer: 1 },
+      { q: "BRICS समूहको सदस्य राष्ट्र नभएको देश कुन हो?", options: ["भारत", "ब्राजिल", "जापान", "रुस"], answer: 2 },
+      { q: "माटो संरक्षणको लागि सबैभन्दा उपयुक्त प्रविधि कुन हो?", options: ["ड्रिप इरिगेसन", "टेरेसिङ", "मलप्रयोग", "जल संरक्षण"], answer: 1 },
+      { q: "हालको नेपालका प्रधान न्यायाधीश को हुन्?", options: ["हरिकृष्ण कार्की", "चोलेन्द्र शमशेर", "ओमप्रकाश मिश्र", "दीपक कार्की"], answer: 0 },
+      { q: "नेपालमा साइबर अपराधसम्बन्धी मुद्दा हेर्ने निकाय कुन हो?", options: ["राष्ट्रिय अनुसन्धान विभाग", "साइबर ब्यूरो, नेपाल प्रहरी", "गृह मन्त्रालय", "सूचना मन्त्रालय"], answer: 1 },
+      { q: "Citizen Charter को मुख्य उद्देश्य के हो?", options: ["कर्मचारी प्रशिक्षित गर्ने", "सेवाग्राहीलाई जानकारी दिनु", "सेवा बन्द गर्नु", "कर्मचारीको संख्या बढाउनु"], answer: 1 },
+      { q: "लोक सेवा आयोग कुन संवैधानिक अंग अन्तर्गत पर्छ?", options: ["कार्यपालिका", "व्यवस्थापिका", "न्यायपालिका", "स्वतन्त्र संवैधानिक अंग"], answer: 3 },
+      { q: "सार्वजनिक प्रशासनमा न्यू पब्लिक म्यानेजमेन्ट (NPM) को अवधारणा कहाँबाट आएको हो?", options: ["फ्रान्स", "अमेरिका", "बेलायत", "जर्मनी"], answer: 2 },
+      { q: "Right to Information Act नेपालमा कहिले लागू भयो?", options: ["२०६१", "२०६४", "२०६५", "२०६७"], answer: 1 },
+      { q: "गुणस्तरीय सेवा प्रवाह सुनिश्चित गर्न सबैभन्दा आवश्यक तत्व कुन हो?", options: ["कर्मचारीको संख्या", "सेवा दिने समय", "पारदर्शिता", "कार्यालय स्थान"], answer: 2 },
+      { q: "Accountability भनेको के हो?", options: ["जवाफदेहिता", "गोपनियता", "परिक्षण", "आर्थिक सहायता"], answer: 0 },
+      { q: "सेवा प्रवाहमा सुधार ल्याउन कुन अभ्यास प्रभावकारी मानिन्छ?", options: ["कर्मचारी परिवर्तन", "सूचना प्रवाह पारदर्शिता", "नयाँ कानून", "बजेट वृद्धि"], answer: 1 },
+      { q: "कर्मचारी प्रशासनको आधारभूत तत्त्व कुन हो?", options: ["सेवा अवधि", "पेशागत क्षमता", "बोनस", "सरुवा"], answer: 1 },
+      { q: "E-Governance को उद्देश्य के हो?", options: ["अनलाइन मनोरञ्जन", "सरकारी सेवा अनलाइन उपलब्ध गराउने", "प्रशासन विस्तार", "सरकारी संकलन"], answer: 1 },
+      { q: "नेपालको प्रशासन प्रणाली कुन प्रणालीमा आधारित छ?", options: ["पर्सनल सिस्टम", "ब्रिटिश प्रणाली", "अमेरिकन प्रणाली", "जापानी प्रणाली"], answer: 1 },
+      { q: "अन्तर्राष्ट्रिय श्रम संगठन (ILO) को मुख्यालय कहाँ छ?", options: ["वासिङ्टन DC", "पेरिस", "जेनेभा", "रोम"], answer: 2 },
+      { q: "नेपालले SAARC सम्मेलन पहिलो पटक कहिले आयोजना गर्‍यो?", options: ["१९८५", "२००२", "२०८०", "२००२ मा काठमाडौं"], answer: 3 },
+      { q: "संविधानसभा नेपालको संविधान कति बहुमतबाट पारित भएको हो?", options: ["दुई तिहाइ", "बहुमत", "सर्वसम्मत", "साधारण बहुमत"], answer: 0 },
+      { q: "हालको नेपालका प्रधानमन्त्री को हुन्?", options: ["शेर बहादुर देउवा", "केपी शर्मा ओली", "पुष्पकमल दाहाल ‘प्रचण्ड’", "बाबुराम भट्टराई"], answer: 2 },
+      { q: "विद्युत उत्पादनमा नेपालको मुख्य स्रोत के हो?", options: ["तापीय", "जलविद्युत", "आणविक", "सौर्य"], answer: 1 },
+      { q: "नेपालमा हाल कुल प्रदेश सरकार संख्या कति हो?", options: ["७", "५", "६", "८"], answer: 0 },
+      { q: "‘राष्ट्रिय योजना आयोग’ को अध्यक्ष को हुन्छन्?", options: ["राष्ट्रपत‍ि", "प्रधानमन्त्री", "अर्थमन्त्री", "मन्त्री परिषद"], answer: 1 },
+      { q: "नेपालको कुल भूमि क्षेत्रफल कति छ?", options: ["१,४७,५१६ वर्ग किलोमिटर", "१,५६,७७७ वर्ग किलोमिटर", "१,२३,५४४ वर्ग किलोमिटर", "१,३३,००० वर्ग किलोमिटर"], answer: 0 },
+      { q: "हिमालपारिको जिल्ला भनेर चिनिने जिल्ला कुन हो?", options: ["डोल्पा", "गुल्मी", "धनुषा", "झापा"], answer: 0 },
+      { q: "नेपालको राष्ट्रिय जनगणना हरेक कति वर्षमा हुन्छ?", options: ["१५ वर्ष", "१० वर्ष", "५ वर्ष", "२० वर्ष"], answer: 1 },
+      { q: "सार्वजनिक सेवा भनेको के हो?", options: ["निजी कम्पनीद्वारा प्रदान गरिने सेवा", "राज्यद्वारा नागरिकलाई प्रदान गरिने सेवा", "अन्तर्राष्ट्रिय सेवा", "सेना र प्रहरी मात्र"], answer: 1 },
+      { q: "सूचना अधिकार ऐन अनुसार सार्वजनिक संस्थाले सूचना दिनुपर्ने समय सीमा कति हो?", options: ["१५ दिन", "५ दिन", "७ दिन", "३० दिन"], answer: 2 },
+      { q: "परिणाममुखी बजेट (Output Based Budgeting) को विशेषता के हो?", options: ["खर्च नियन्त्रण", "योजना केन्द्रित", "सेवा परिणाम मूल्यांकन", "कर्मचारी संख्या मूल्यांकन"], answer: 2 },
+      { q: "सेवा प्रवाह सुधारका लागि अपनाइएको प्रविधिको नाम के हो?", options: ["बायोमेट्रिक", "ई-गभर्नेन्स", "फिंगर स्क्यान", "भर्पाइ कार्ड"], answer: 1 },
+      { q: "नागरिक मैत्री सेवा प्रवाहका लागि अनिवार्य तत्व कुन हो?", options: ["लामो समय", "गोप्य प्रक्रिया", "पारदर्शी र जवाफदेहि व्यवस्था", "ढिलो सेवा"], answer: 2 },
+      { q: "कर्मचारी आचरण नियमावली लागू गर्ने निकाय कुन हो?", options: ["मन्त्रिपरिषद", "लोक सेवा आयोग", "संसद", "प्रशासन मन्त्रालय"], answer: 1 },
+      { q: "सार्वजनिक प्रशासनमा ‘Good Governance’ भन्नाले के जनाउँछ?", options: ["प्रभावकारी र पारदर्शी प्रशासन", "खर्चिलो प्रशासन", "गोप्य सेवा", "सरकारी गोप्य नीति"], answer: 0 },
+      { q: "नागरिक सहायता डेस्क स्थापना गर्ने उद्देश्य के हो?", options: ["कर्मचारी व्यवस्थापन", "सर्वसाधारणको गुनासो टिपोट गर्न", "बजेट कटौती", "कर्मचारी सरुवा"], answer: 1 },
+      { q: "सार्वजनिक सेवा सुधार आयोगको स्थापना कहिले भयो?", options: ["२०५४ BS", "२०४६ BS", "२०५८ BS", "२०६५ BS"], answer: 0 },
+      { q: "‘One Stop Service’ भन्ने अवधारणा के का लागि प्रयोग गरिन्छ?", options: ["एकै ठाउँमा सबै सेवा उपलब्ध गराउने", "कार्यालय थप्ने", "सेवाग्राही हटाउने", "कर बढाउने"], answer: 0 }
+    ];
+
+    let current = 0;
+    let score = 0;
+    let skipped = [];
+
+    const quizEl = document.getElementById("quiz");
+    const scoreEl = document.getElementById("score");
+    const skippedEl = document.getElementById("skipped-list");
+    const skippedList = document.getElementById("skipped");
+
+    function showQuestion(index) {
+      const q = questions[index];
+      const options = q.options.map((opt, i) => `<button onclick="checkAnswer(this, ${i})">${opt}</button>`).join('');
+      quizEl.innerHTML = `
+        <div class="question">
+          <p>Q${index + 1}. ${q.q}</p>
+          <div class="options">${options}</div>
+          <button onclick="skipQuestion()">Skip</button>
+        </div>
+      `;
+    }
+
+    function checkAnswer(button, selected) {
+      const correct = questions[current].answer;
+      const buttons = button.parentElement.querySelectorAll("button");
+      buttons.forEach((btn, i) => {
+        btn.disabled = true;
+        if (i === correct) btn.classList.add("correct");
+        if (i === selected && i !== correct) btn.classList.add("wrong");
+      });
+      if (selected === correct) score++;
+      setTimeout(() => {
+        current++;
+        if (current < questions.length) {
+          showQuestion(current);
+        } else {
+          endQuiz();
+        }
+      }, 800);
+    }
+
+    function skipQuestion() {
+      skipped.push(questions[current]);
+      current++;
+      if (current < questions.length) {
+        showQuestion(current);
+      } else {
+        endQuiz();
+      }
+    }
+
+    function endQuiz() {
+      quizEl.innerHTML = "";
+      scoreEl.innerHTML = `Your score: ${score} / ${questions.length}`;
+      if (skipped.length > 0) {
+        skippedEl.classList.remove("hidden");
+        skippedList.innerHTML = skipped.map((q, i) => `<li>${i + 1}. ${q.q}</li>`).join('');
+      }
+    }
+
+    showQuestion(current);
+  </script>
+</body>
+</html>
