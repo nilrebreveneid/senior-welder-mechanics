@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logsewa Safety Practices Mock Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #f8ffae, #43c6ac);
+      margin: 0;
+      padding: 2rem;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    .quiz-container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #1e88e5;
+    }
+
+    .question {
+      margin-bottom: 1.5rem;
+      animation: fadeIn 0.5s;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 1rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .question p {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .options button {
+      display: block;
+      margin: 0.5rem 0;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      background: #e3f2fd;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1rem;
+    }
+
+    .options button:hover {
+      background: #bbdefb;
+      transform: translateX(5px);
+    }
+
+    .correct {
+      background-color: #c8e6c9 !important;
+      animation: pulse 0.5s;
+    }
+
+    .wrong {
+      background-color: #ffcdd2 !important;
+      animation: shake 0.3s;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background: #eee;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      background: #42a5f5;
+      transition: width 0.3s;
+    }
+
+    #timer {
+      text-align: right;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: #d81b60;
+    }
+
+    #score, #results {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      font-weight: bold;
+    }
+
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .results-table th, .results-table td {
+      border: 1px solid #ddd;
+      padding: 0.5rem;
+      text-align: left;
+    }
+
+    .results-table th {
+      background: #f5f5f5;
+    }
+
+    .skip-button {
+      background: #fff3cd;
+      margin-top: 1rem;
+      padding: 0.75rem;
+      width: 100%;
+      border: 1px solid #ffca28;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .skip-button:hover {
+      background: #ffecb3;
+    }
+
+    .next-button {
+      background: #42a5f5;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1rem;
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+
+    .next-button:hover {
+      background: #1e88e5;
+    }
+
+    .next-button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .explanation {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .quiz-container {
+        padding: 1rem;
+      }
+      .options button {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Logsewa Safety Practices Mock Test</h1>
+    <div id="timer">Time: 00:00</div>
+    <div class="progress-bar">
+      <div class="progress" id="progress"></div>
+    </div>
+    <div id="quiz"></div>
+    <div id="score"></div>
+    <div id="results" class="hidden">
+      <h2>Quiz Results</h2>
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Your Answer</th>
+            <th>Correct Answer</th>
+            <th>Status</th>
+            <th>Explanation</th>
+          </tr>
+        </thead>
+        <tbody id="results-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <audio id="correct-sound" src="https://www.soundjay.com/buttons/beep-01a.mp3"></audio>
+  <audio id="wrong-sound" src="https://www.soundjay.com/buttons/beep-02.mp3"></audio>
+
+  <script>
+    const questions = [
+      // 1.1 Importance of Safety (6 MCQs)
+      { q: "Why is workplace safety critical in industrial settings?", 
+        options: ["To increase production speed", "To reduce workplace injuries and illnesses", "To decrease worker training requirements", "To eliminate the need for maintenance"], 
+        answer: 1, 
+        explanation: "Workplace safety is vital to prevent injuries and illnesses, as supported by statistics from the Bureau of Labor Statistics (BLS) reporting over two million work-related injuries in 2021." },
+      { q: "What is a key benefit of implementing safety practices in a mechanical workshop?", 
+        options: ["Higher equipment costs", "Improved worker morale and retention", "Increased workplace hazards", "Reduced need for supervision"], 
+        answer: 1, 
+        explanation: "Safety practices enhance worker morale by showing employer commitment to health, reducing turnover." },
+      { q: "According to industrial safety principles, what is a direct outcome of effective safety measures?", 
+        options: ["Increased absenteeism", "Lower healthcare costs", "Higher risk of accidents", "Reduced regulatory compliance"], 
+        answer: 1, 
+        explanation: "Effective safety measures reduce workplace injuries, leading to lower medical and compensation costs." },
+      { q: "What is a primary reason for prioritizing safety in mechanical operations?", 
+        options: ["To comply with aesthetic standards", "To protect workers from mechanical hazards", "To increase machine production rates", "To simplify machine design"], 
+        answer: 1, 
+        explanation: "Safety practices aim to protect workers from hazards like moving parts or chemical exposure." },
+      { q: "How does safety training impact a mechanical workplace?", 
+        options: ["It increases operational costs without benefits", "It ensures workers are competent to use equipment safely", "It eliminates the need for personal protective equipment", "It reduces the need for machine maintenance"], 
+        answer: 1, 
+        explanation: "Adequate training ensures workers have the skills and knowledge to operate machinery safely." },
+      { q: "What is a major consequence of neglecting safety practices in a mechanical environment?", 
+        options: ["Increased worker productivity", "Higher risk of occupational injuries and fatalities", "Reduced need for safety audits", "Simplified equipment maintenance"], 
+        answer: 1, 
+        explanation: "Neglecting safety increases risks, as evidenced by a 5% rise in preventable work deaths in 2022." },
+
+      // 1.2.1 Personal Safety (5 MCQs)
+      { q: "What is the primary purpose of personal protective equipment (PPE) in a mechanical workshop?", 
+        options: ["To enhance worker appearance", "To minimize exposure to workplace hazards", "To increase machine efficiency", "To reduce training requirements"], 
+        answer: 1, 
+        explanation: "PPE, such as gloves and safety glasses, protects against chemical, physical, and mechanical hazards." },
+      { q: "Which PPE is essential when working with loud machinery?", 
+        options: ["Safety shoes", "Earplugs or muffs", "Hard hats", "Respirators"], 
+        answer: 1, 
+        explanation: "Earplugs or muffs protect against noise-induced hearing loss, a common hazard in mechanical settings." },
+      { q: "What should be ensured when using safety goggles in a mechanical environment?", 
+        options: ["They are brightly colored", "They fit comfortably and are free of scratches", "They are made of cloth material", "They are worn only during maintenance"], 
+        answer: 1, 
+        explanation: "Properly fitting, clear safety goggles ensure effective eye protection." },
+      { q: "What is a key precaution for personal safety when operating machinery?", 
+        options: ["Wearing loose clothing for comfort", "Avoiding loose clothing or jewelry", "Using machines without guards", "Operating machines without training"], 
+        answer: 1, 
+        explanation: "Loose clothing or jewelry can get caught in moving parts, posing entanglement risks." },
+      { q: "Which of the following is a correct practice for using respirators in a mechanical workshop?", 
+        options: ["Using any respirator regardless of fit", "Selecting a respirator appropriate for the hazard and ensuring proper fit", "Sharing respirators among workers", "Cleaning respirators only once a month"], 
+        answer: 1, 
+        explanation: "Respirators must match the hazard (e.g., dust or fumes) and fit properly to be effective." },
+
+      // 1.2.2 Machine Safety (6 MCQs)
+      { q: "What is the purpose of machine guarding as per OSHA standards?", 
+        options: ["To improve machine aesthetics", "To prevent injuries from moving parts", "To increase machine speed", "To reduce maintenance frequency"], 
+        answer: 1, 
+        explanation: "Machine guarding (29 CFR 1910.212) protects workers from hazards like rotating parts or flying debris." },
+      { q: "Which device ensures a machine cannot start during maintenance?", 
+        options: ["Emergency stop button", "Trapped key interlock", "Light curtain", "Two-hand control"], 
+        answer: 1, 
+        explanation: "Trapped key interlocks isolate energy sources, ensuring safety during maintenance." },
+      { q: "What is a common hazard associated with unguarded machinery?", 
+        options: ["Reduced noise levels", "Entanglement or amputation", "Improved worker productivity", "Lower energy consumption"], 
+        answer: 1, 
+        explanation: "Unguarded moving parts can cause entanglement or amputation injuries." },
+      { q: "How should emergency stop controls be designed for machine safety?", 
+        options: ["Placed out of reach to avoid misuse", "Designed to avoid accidental operation", "Used only during maintenance", "Made of fragile materials"], 
+        answer: 1, 
+        explanation: "Emergency stops (e.g., mushroom-head buttons) should be easily accessible but designed to prevent accidental activation." },
+      { q: "What is a key requirement for machines designed for a fixed location?", 
+        options: ["They must be lightweight", "They must be securely anchored", "They must have no guards", "They must be portable"], 
+        answer: 1, 
+        explanation: "Fixed machines must be anchored to prevent movement and ensure safety." },
+      { q: "Which safety measure reduces the risk of impact hazards from machine parts?", 
+        options: ["Increasing machine speed", "Using proper guards and barriers", "Reducing operator training", "Ignoring maintenance schedules"], 
+        answer: 1, 
+        explanation: "Guards and barriers prevent workers from being struck by moving or ejected parts." },
+
+      // 1.2.3 Tools Safety (5 MCQs)
+      { q: "What is a key safety practice when using a bench grinder?", 
+        options: ["Using the side of the grinding wheel", "Ensuring the tool rest is no more than 1/8 inch from the wheel", "Operating without a tongue guard", "Holding small items by hand"], 
+        answer: 1, 
+        explanation: "The tool rest must be close to the wheel to prevent workpieces from being caught." },
+      { q: "How should defective grinding wheels be handled?", 
+        options: ["Used until they break", "Taken out of service and reported", "Repaired by the operator", "Stored without inspection"], 
+        answer: 1, 
+        explanation: "Defective wheels pose risks and must be removed and reported to supervisors." },
+      { q: "What safety device should be used when cutting with a table saw?", 
+        options: ["A hood guard that adjusts to material thickness", "A loose-fitting cover", "A manual push stick only", "No guard for better visibility"], 
+        answer: 1, 
+        explanation: "The hood guard protects against flying splinters and adjusts automatically." },
+      { q: "Why should small items be held with pliers during grinding?", 
+        options: ["To improve grinding speed", "To keep hands away from the wheel", "To reduce noise levels", "To enhance tool durability"], 
+        answer: 1, 
+        explanation: "Pliers keep hands safely away from the grinding wheel, reducing injury risk." },
+      { q: "What is prohibited when using alloy steel chains with tools?", 
+        options: ["Using chains with rated capacity", "Using makeshift fasteners like bolts", "Annealing chains regularly", "Inspecting chains before use"], 
+        answer: 1, 
+        explanation: "Makeshift fasteners are unsafe and prohibited for chain attachments." },
+
+      // 1.2.4 Workplace Safety (6 MCQs)
+      { q: "What is a key component of workplace safety in a mechanical environment?", 
+        options: ["Ignoring minor risks", "Conducting thorough hazard assessments", "Reducing worker training", "Using non-compliant equipment"], 
+        answer: 1, 
+        explanation: "Hazard assessments identify risks to implement appropriate controls." },
+      { q: "What type of hazard is caused by poorly designed workstations?", 
+        options: ["Chemical hazard", "Ergonomic hazard", "Biological hazard", "Electrical hazard"], 
+        answer: 1, 
+        explanation: "Poor workstation design can lead to musculoskeletal disorders like carpal tunnel syndrome." },
+      { q: "How can workplace safety be enhanced using technology?", 
+        options: ["By removing all safety devices", "By using inspection platforms like SafetyCulture", "By increasing worker exposure to hazards", "By reducing ventilation systems"], 
+        answer: 1, 
+        explanation: "Platforms like SafetyCulture help conduct safety inspections and raise hazard alerts." },
+      { q: "What is a common cause of workplace injuries according to the National Safety Council?", 
+        options: ["Excessive training", "Exposure to harmful environments", "Overuse of PPE", "Simplified machine designs"], 
+        answer: 1, 
+        explanation: "Exposure to harmful environments accounts for 36% of workplace injuries." },
+      { q: "What should be done to control exposure to harmful dust in a workplace?", 
+        options: ["Ignore ventilation systems", "Use local exhaust ventilation and respirators", "Increase dust production", "Avoid worker training"], 
+        answer: 1, 
+        explanation: "Ventilation and respirators reduce exposure to hazardous dust and fumes." },
+      { q: "What is a key administrative control for workplace safety?", 
+        options: ["Scheduling high-exposure tasks with fewer workers present", "Removing all safety signs", "Ignoring ergonomic assessments", "Reducing machine maintenance"], 
+        answer: 1, 
+        explanation: "Administrative controls like scheduling reduce worker exposure to hazards." },
+
+      // 1.3 Knowledge of Industrial Safety & Hygiene (5 MCQs)
+      { q: "What is the primary goal of industrial hygiene in a mechanical workplace?", 
+        options: ["To increase production rates", "To anticipate, evaluate, and control workplace hazards", "To reduce equipment maintenance", "To eliminate worker training"], 
+        answer: 1, 
+        explanation: "Industrial hygiene focuses on identifying and mitigating workplace hazards." },
+      { q: "Which organization sets standards for industrial hygiene in the U.S.?", 
+        options: ["American National Standards Institute (ANSI)", "Occupational Safety and Health Administration (OSHA)", "National Safety Council (NSC)", "American Industrial Hygiene Association (AIHA)"], 
+        answer: 1, 
+        explanation: "OSHA enforces standards for workplace safety and hygiene." },
+      { q: "What is a key step in an industrial hygiene program?", 
+        options: ["Ignoring minor hazards", "Conducting workplace hazard identification", "Reducing PPE usage", "Avoiding worker feedback"], 
+        answer: 1, 
+        explanation: "Hazard identification is the first step in a robust industrial hygiene program." },
+      { q: "Which type of hazard does industrial hygiene address?", 
+        options: ["Only chemical hazards", "Chemical, physical, biological, and ergonomic hazards", "Only ergonomic hazards", "Only electrical hazards"], 
+        answer: 1, 
+        explanation: "Industrial hygiene covers a broad range of hazards affecting worker health." },
+      { q: "How can industrial hygienists reduce repetitive stress injuries (RSIs)?", 
+        options: ["By increasing repetitive tasks", "By implementing ergonomic controls and training", "By removing ventilation systems", "By ignoring worker feedback"], 
+        answer: 1, 
+        explanation: "Ergonomic controls and training help prevent RSIs in high-risk industries." },
+
+      // 1.4 Safety Tools & Devices (6 MCQs)
+      { q: "What is the function of a light curtain in a mechanical workshop?", 
+        options: ["To improve lighting conditions", "To detect worker presence and stop machinery", "To increase machine speed", "To reduce maintenance needs"], 
+        answer: 1, 
+        explanation: "Light curtains use photoelectric beams to stop machines when a worker is detected." },
+      { q: "Which safety device is used to isolate energy sources during maintenance?", 
+        options: ["Emergency stop button", "Lockout-tagout system", "Two-hand control", "Safety mat"], 
+        answer: 1, 
+        explanation: "Lockout-tagout systems prevent accidental machine start-ups during maintenance." },
+      { q: "What is a characteristic of trapped key interlocks?", 
+        options: ["They require no maintenance", "They control access through key exchanges", "They are used only for lighting", "They increase hazard exposure"], 
+        answer: 1, 
+        explanation: "Trapped key interlocks ensure safe access to hazardous machines via key sequencing." },
+      { q: "What type of safety device provides instant visual feedback in a workshop?", 
+        options: ["Respirator", "Indicator lights", "Hard hat", "Safety gloves"], 
+        answer: 1, 
+        explanation: "Indicator lights (e.g., red for active hazards) provide real-time safety status." },
+      { q: "What is a key requirement for safety guards on machinery?", 
+        options: ["They should be easily removable by operators", "They must prevent access to moving parts", "They should be made of fragile materials", "They should increase machine noise"], 
+        answer: 1, 
+        explanation: "Guards must enclose dangerous parts to protect workers." },
+      { q: "Which safety tool is mandated for high-risk mechanical tasks?", 
+        options: ["Personal protective equipment (PPE)", "Decorative signs", "Unsecured ladders", "Non-compliant fasteners"], 
+        answer: 1, 
+        explanation: "PPE is mandated for high-risk tasks to minimize hazard exposure." }
+    ];
+
+    let currentPage = 0;
+    let score = 0;
+    let skipped = [];
+    let userAnswers = Array(questions.length).fill(null);
+    let timerSeconds = 0;
+    let timerInterval;
+    const QUESTIONS_PER_PAGE = 5;
+    const ANSWER_DELAY = 1500; // 1.5 seconds delay
+
+    const quizEl = document.getElementById("quiz");
+    const scoreEl = document.getElementById("score");
+    const resultsEl = document.getElementById("results");
+    const resultsBody = document.getElementById("results-body");
+    const progressEl = document.getElementById("progress");
+    const timerEl = document.getElementById("timer");
+    const correctSound = document.getElementById("correct-sound");
+    const wrongSound = document.getElementById("wrong-sound");
+
+    // Load progress from localStorage
+    function loadProgress() {
+      const saved = localStorage.getItem("quizProgressSafety");
+      if (saved) {
+        const { currentPage: savedPage, score: savedScore, skipped: savedSkipped, answers: savedAnswers, time: savedTime } = JSON.parse(saved);
+        currentPage = savedPage;
+        score = savedScore;
+        skipped = savedSkipped;
+        userAnswers = savedAnswers || Array(questions.length).fill(null);
+        timerSeconds = savedTime || 0;
+      }
+    }
+
+    // Save progress to localStorage
+    function saveProgress() {
+      localStorage.setItem("quizProgressSafety", JSON.stringify({
+        currentPage,
+        score,
+        skipped,
+        answers: userAnswers,
+        time: timerSeconds
+      }));
+    }
+
+    // Shuffle array
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Shuffle questions only once at initialization
+    const shuffledQuestions = shuffle([...questions]);
+
+    // Start timer
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        const minutes = Math.floor(timerSeconds / 60);
+        const seconds = timerSeconds % 60;
+        timerEl.textContent = `Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }, 1000);
+    }
+
+    // Update progress bar
+    function updateProgress() {
+      const percentage = ((currentPage * QUESTIONS_PER_PAGE) / questions.length) * 100;
+      progressEl.style.width = `${percentage}%`;
+    }
+
+    // Show questions for the current page
+    function showQuestions(page) {
+      const startIndex = page * QUESTIONS_PER_PAGE;
+      const endIndex = Math.min(startIndex + QUESTIONS_PER_PAGE, questions.length);
+      let html = '';
+      for (let i = startIndex; i < endIndex; i++) {
+        const q = shuffledQuestions[i];
+        const shuffledOptions = shuffle([...q.options].map((opt, j) => ({ text: opt, index: j })));
+        const options = shuffledOptions
+          .map(opt => `<button onclick="checkAnswer(this, ${i}, ${opt.index}, '${opt.text.replace(/'/g, "\\'")}')">${opt.text}</button>`)
+          .join('');
+        html += `
+          <div class="question" data-index="${i}">
+            <p>Q${i + 1}. ${q.q}</p>
+            <div class="options">${options}</div>
+            <button class="skip-button" onclick="skipQuestion(${i})">Skip</button>
+          </div>
+        `;
+      }
+      if (endIndex < questions.length) {
+        html += `<button class="next-button" onclick="nextPage()" disabled>Next</button>`;
+      }
+      quizEl.innerHTML = html;
+      updateProgress();
+      saveProgress();
+      checkNextButton();
+    }
+
+    // Check answer
+    function checkAnswer(button, questionIndex, selected, selectedText) {
+      const q = shuffledQuestions[questionIndex];
+      const correct = q.answer;
+      const buttons = button.parentElement.querySelectorAll("button");
+      buttons.forEach((btn) => {
+        btn.disabled = true;
+        if (q.options.indexOf(btn.innerText) === correct) btn.classList.add("correct");
+        if (btn === button && selected !== correct) btn.classList.add("wrong");
+      });
+
+      userAnswers[questionIndex] = selectedText;
+      if (selected === correct) {
+        score++;
+        correctSound.play().catch(() => console.log("Audio playback failed"));
+      } else {
+        wrongSound.play().catch(() => console.log("Audio playback failed"));
+      }
+
+      saveProgress();
+      checkNextButton();
+    }
+
+    // Skip question
+    function skipQuestion(questionIndex) {
+      if (!skipped.includes(shuffledQuestions[questionIndex])) {
+        skipped.push(shuffledQuestions[questionIndex]);
+        userAnswers[questionIndex] = "Skipped";
+      }
+      const buttons = document.querySelector(`.question[data-index="${questionIndex}"] .options`).querySelectorAll("button");
+      buttons.forEach(btn => btn.disabled = true);
+      saveProgress();
+      checkNextButton();
+    }
+
+    // Check if all questions on the page are answered or skipped
+    function checkNextButton() {
+      const startIndex = currentPage * QUESTIONS_PER_PAGE;
+      const endIndex = Math.min(startIndex + QUESTIONS_PER_PAGE, questions.length);
+      let allAnswered = true;
+      for (let i = startIndex; i < endIndex; i++) {
+        if (userAnswers[i] === null) {
+          allAnswered = false;
+          break;
+        }
+      }
+      const nextButton = document.querySelector(".next-button");
+      if (nextButton) {
+        nextButton.disabled = !allAnswered;
+      }
+    }
+
+    // Move to next page
+    function nextPage() {
+      currentPage++;
+      if (currentPage * QUESTIONS_PER_PAGE < questions.length) {
+        showQuestions(currentPage);
+      } else {
+        endQuiz();
+      }
+    }
+
+    // End quiz and show results
+    function endQuiz() {
+      clearInterval(timerInterval);
+      quizEl.innerHTML = "";
+      scoreEl.innerHTML = `Your score: ${score} / ${questions.length} (${((score / questions.length) * 100).toFixed(2)}%)`;
+      resultsEl.classList.remove("hidden");
+
+      resultsBody.innerHTML = shuffledQuestions.map((q, i) => {
+        const userAnswer = userAnswers[i] === null ? "Not attempted" :
+                         userAnswers[i] === "Skipped" ? "Skipped" :
+                         userAnswers[i];
+        const correctAnswer = q.options[q.answer];
+        const status = userAnswers[i] === q.options[q.answer] ? "Correct" :
+                      userAnswers[i] === "Skipped" ? "Skipped" :
+                      userAnswers[i] === null ? "Not attempted" : "Wrong";
+        return `
+          <tr>
+            <td>${i + 1}. ${q.q}</td>
+            <td>${userAnswer}</td>
+            <td>${correctAnswer}</td>
+            <td class="${status.toLowerCase()}">${status}</td>
+            <td class="explanation">${q.explanation}</td>
+          </tr>
+        `;
+      }).join('');
+
+      // Clear localStorage
+      localStorage.removeItem("quizProgressSafety");
+    }
+
+    // Initialize
+    loadProgress();
+    startTimer();
+    showQuestions(currentPage);
+  </script>
+</body>
+</html>
