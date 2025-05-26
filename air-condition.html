@@ -1,121 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AC </title>
+    <title>Air Conditioning MCQ Quiz</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f5f7fa;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        h1 {
-            text-align: center;
-            color: #333;
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #e0e7ff, #c3dafe);
+            min-height: 100vh;
+            padding: 2rem;
+            line-height: 1.6;
         }
 
         .quiz-container {
             max-width: 900px;
-            margin: auto;
-            background: #fff;
-            padding: 20px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e3a8a;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .progress-bar {
+            background: #e5e7eb;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .progress {
+            background: #3b82f6;
+            height: 100%;
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8fafc;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .timer {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e3a8a;
         }
 
         .question {
-            margin-bottom: 20px;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            transition: transform 0.2s ease;
+        }
+
+        .question:hover {
+            transform: translateY(-2px);
         }
 
         .question p {
-            font-weight: bold;
-            color: #444;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 1rem;
         }
 
         .options button {
             display: block;
-            margin: 6px 0;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            cursor: pointer;
-            text-align: left;
             width: 100%;
-            transition: background-color 0.3s;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            color: #374151;
         }
 
-        .options button:hover {
-            background-color: #e0e0e0;
+        .options button:hover:not(:disabled) {
+            background: #f3f4f6;
+            border-color: #3b82f6;
+            transform: translateX(4px);
         }
 
         .options button.correct {
-            background-color: #c8f7c5;
+            background: #bbf7d0;
+            border-color: #22c55e;
+            color: #166534;
         }
 
         .options button.wrong {
-            background-color: #f7c5c5;
+            background: #fecaca;
+            border-color: #ef4444;
+            color: #991b1b;
+        }
+
+        .options button:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #eff6ff;
+            border-radius: 8px;
+            color: #1e3a8a;
+            font-size: 0.95rem;
+        }
+
+        .score-container {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
         }
 
         .score {
-            font-size: 1.2em;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 30px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+
+        .results-btn {
+            display: none;
+            margin: 1rem auto;
+            padding: 0.75rem 2rem;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .results-btn:hover {
+            background: #2563eb;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            .quiz-container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .question p {
+                font-size: 1rem;
+            }
+
+            .options button {
+                font-size: 0.9rem;
+                padding: 0.8rem;
+            }
         }
     </style>
 </head>
-
 <body>
-    <h1>AIR CONDITION mcq</h1>
-    <div class="quiz-container" id="quiz"></div>
-    <div class="score" id="score"></div>
+    <h1>Air Conditioning MCQ Quiz</h1>
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <div class="timer" id="timer">Time: 00:00</div>
+            <div class="score" id="current-score">Score: 0/40</div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <div id="quiz"></div>
+        <div class="score-container">
+            <div class="score" id="score"></div>
+            <button class="results-btn" id="results-btn">View Results</button>
+        </div>
+    </div>
 
     <script>
-
         const questions = [
-            { q: "Air conditioning is a system for controlling:", options: ["Temperature", "All of the above"], answer: 1 },
-            { q: "The moisture in refrigerant is removed by:", options: ["Expansion valve", "Evaporator"], answer: 1 },
-            { q: "Freon group of refrigerants are:", options: ["Non-toxic but inflammable", "Non-toxic and non-inflammable"], answer: 1 },
-            { q: "During a refrigeration cycle, heat is rejected by the refrigerant in the:", options: ["Evaporator", "Condenser"], answer: 1 },
-            { q: "One ton of refrigeration is equal to the refrigeration effect corresponding to melting 1000 kg of ice in:", options: ["1 hour", "24 hours"], answer: 1 },
-            { q: "Which of the following refrigerants has the lowest freezing point?", options: ["Freon-12", "Freon-22"], answer: 1 },
-            { q: "Which type of air conditioning is suitable in Kathmandu in the month of Shrawan and Bhadra?", options: ["Cooling", "Cooling and dehumidification"], answer: 1 },
-            { q: "Which of the following is CFC type refrigerant?", options: ["R404", "R22"], answer: 1 },
-            { q: "This is not the type of refrigerant used in the air conditioning system:", options: ["R12", "R410A"], answer: 1 },
-            { q: "Which of the following components is used as a heating coil in air conditioning system?", options: ["Evaporator", "Compressor"], answer: 1 },
-            { q: "एअर कण्डिसनिङ्गमा के-के कुरालाई नियन्त्रण गरिन्छ?", options: ["माथिका सबै", "Human comfort"], answer: 1 },
-            { q: "In which of the following condition, human sweats more?", options: ["Relative humidity 0%", "Relative humidity 50%"], answer: 1 },
-            { q: "Which of the following component is used as cooling coil in air conditioning system?", options: ["Evaporator", "Condenser"], answer: 1 },
-            { q: "Evaporator is the component of the following system", options: ["Fuel system of engine", "Air conditioning system"], answer: 1 },
-            { q: "The most commonly used commercial refrigerant is:", options: ["Sulphur dioxide", "Carbon dioxide"], answer: 1 },
-            { q: "Air conditioning is a simultaneous control of:", options: ["Bacteria and dust", "Temperature and humidity"], answer: 1 },
-            { q: "The difference between vapor compression and vapor absorption refrigeration cycle is that:", options: ["Absorption cycle requires more work input", "Absorption cycle requires less work input"], answer: 1 },
-            { q: "For large air conditioning application more than 1 TR, which type of compressor is preferably used?", options: ["Reciprocating", "Centrifugal"], answer: 1 },
-            { q: "How much is 1 ton of refrigeration in SI unit?", options: ["120 KJ/Min", "210 KJ/Min"], answer: 1 },
-            { q: "Which is the component in the air conditioning system of grader?", options: ["Refrigerant", "All of the above"], answer: 1 },
-            { q: "एअर कन्डिसनिङ्ग ले के उपयुक्त गर्दछ?", options: ["हावा, चाप र चुम्बक", "हावा, चाप र तापमान"], answer: 1 },
-            { q: "सुविधा जनक अवस्था (Comfort Conditions) कुन हो?", options: ["25°C DBT र 100% RH", "25°C DBT र 40% RH"], answer: 1 },
-            { q: "Accumulators should have volume to store at least ________ of refrigerant charge.", options: ["25%", "50%"], answer: 1 },
-            { q: "Where does the lowest temperature occur in a vapor compression cycle?", options: ["Condenser", "Evaporator"], answer: 1 },
-            { q: "A thermostatic expansion valve in the refrigeration system:", options: ["Is suitable only for constant load system", "Ensures the evaporator is completely filled with refrigerant"], answer: 1 },
-            { q: "The following type of expansion device is utilized in flooded evaporator:", options: ["Capillary tube", "Float valve"], answer: 1 },
-            { q: "In air cooling system, …… is used for increasing surface area to enhance engine cooling.", options: ["Condenser", "Fins"], answer: 1 },
-            { q: "एयर कन्डिसनिङ्ग के-के कुरामा निर्भर गर्छ?", options: ["तापमान", "मानिसको सेवा"], answer: 1 },
-            { q: "एयर कन्डिशनले के कुस वस्तुबाट काम गर्छ?", options: ["एयर", "रेफ्रिजरन्ट"], answer: 1 },
-            { q: "ए.सी. सिस्टमको मुख्य काम के हो?", options: ["हावालाई सफा बनाउने", "A र B दुवै"], answer: 1 },
-            { q: "What is the main function of a condenser in a refrigeration system?", options: ["To absorb heat from the surroundings", "To reject heat from the refrigerant"], answer: 1 },
-            { q: "Which of the following refrigerants has the highest ozone depletion potential (ODP)?", options: ["R12", "R134a"], answer: 0 },
-            { q: "Which component controls the flow of refrigerant into the evaporator?", options: ["Compressor", "Expansion valve"], answer: 1 },
-            { q: "What is the effect of high humidity on human comfort in air conditioning?", options: ["Increases discomfort", "Improves comfort"], answer: 0 },
-            { q: "The pressure in the suction line of a refrigeration system is:", options: ["Low pressure", "High pressure"], answer: 0 },
-            { q: "रेडिएटरको तापक्रम कहिले नाप्नुपर्छ?", options: ["इन्जिन तातो हुँदा", "इन्जिन चिसो हुँदा"], answer: 1 },
-            { q: "Freon group of refrigerants are:", options: ["Inflammable", "Non-inflammable and toxic"], answer: 1 },
-            { q: "The pressure at the outlet of a refrigerant compressor is called:", options: ["Suction pressure", "Discharge pressure"], answer: 1 },
-            { q: "रेफ्रिजेरेसन तथा AC system मा प्रयोग हुने component कुन हो?", options: ["Combustion chamber", "Compressor"], answer: 1 }
+            { q: "Air conditioning is a system for controlling:", options: ["Temperature", "All of the above"], answer: 1, explanation: "Air conditioning controls temperature, humidity, air quality, and circulation for comfort." },
+            { q: "The moisture in refrigerant is removed by:", options: ["Expansion valve", "Drier"], answer: 1, explanation: "The drier (or filter-drier) removes moisture from the refrigerant to prevent corrosion and freezing in the system." },
+            { q: "Freon group of refrigerants are:", options: ["Non-toxic but inflammable", "Non-toxic and non-inflammable"], answer: 1, explanation: "Freon refrigerants, like R22, are non-toxic and non-inflammable, making them safe for use in air conditioning." },
+            { q: "During a refrigeration cycle, heat is rejected by the refrigerant in the:", options: ["Evaporator", "Condenser"], answer: 1, explanation: "The condenser rejects heat from the refrigerant to the surroundings, allowing it to condense into a liquid." },
+            { q: "One ton of refrigeration is equal to the refrigeration effect corresponding to melting 1000 kg of ice in:", options: ["1 hour", "24 hours"], answer: 1, explanation: "One ton of refrigeration is defined as the cooling effect to melt 1000 kg of ice in 24 hours, equivalent to 3.517 kW." },
+            { q: "Which of the following refrigerants has the lowest freezing point?", options: ["Freon-12", "Freon-22"], answer: 1, explanation: "Freon-22 has a lower freezing point (-160°C) than Freon-12 (-157.7°C), making it suitable for low-temperature applications." },
+            { q: "Which type of air conditioning is suitable in Kathmandu in the month of Shrawan and Bhadra?", options: ["Cooling", "Cooling and dehumidification"], answer: 1, explanation: "Shrawan and Bhadra are humid months in Kathmandu, so cooling with dehumidification is ideal for comfort." },
+            { q: "Which of the following is CFC type refrigerant?", options: ["R404", "R22"], answer: 1, explanation: "R22 is a chlorofluorocarbon (CFC) type refrigerant, while R404 is an HFC blend." },
+            { q: "This is not the type of refrigerant used in the air conditioning system:", options: ["R12", "R410A"], answer: 0, explanation: "R12 is a CFC refrigerant, now phased out due to environmental concerns, while R410A is commonly used." },
+            { q: "Which of the following components is used as a heating coil in air conditioning system?", options: ["Evaporator", "Condenser"], answer: 0, explanation: "The evaporator absorbs heat, acting as a cooling coil, not a heating coil." },
+            { q: "एअर कण्डिसनिङ्गमा के-के कुरालाई नियन्त्रण गरिन्छ?", options: ["माथिका सबै", "Human comfort"], answer: 0, explanation: "एअर कण्डिसनिङ्गले तापमान, आर्द्रता, हावाको गुणस्तर र प्रवाहलाई नियन्त्रण गर्छ।" },
+            { q: "In which of the following condition, human sweats more?", options: ["Relative humidity 0%", "Relative humidity 50%"], answer: 1, explanation: "Higher relative humidity (50%) prevents sweat evaporation, increasing discomfort." },
+            { q: "Which of the following component is used as cooling coil in air conditioning system?", options: ["Evaporator", "Condenser"], answer: 0, explanation: "The evaporator acts as the cooling coil, absorbing heat from the indoor air." },
+            { q: "Evaporator is the component of the following system", options: ["Fuel system of engine", "Air conditioning system"], answer: 1, explanation: "The evaporator is a key component in air conditioning, absorbing heat to cool the air." },
+            { q: "The most commonly used commercial refrigerant is:", options: ["Sulphur dioxide", "R410A"], answer: 1, explanation: "R410A is widely used in modern air conditioning systems due to its efficiency and lower environmental impact." },
+            { q: "Air conditioning is a simultaneous control of:", options: ["Bacteria and dust", "Temperature and humidity"], answer: 1, explanation: "Air conditioning controls temperature, humidity, and air quality for comfort." },
+            { q: "The difference between vapor compression and vapor absorption refrigeration cycle is that:", options: ["Absorption cycle requires more work input", "Absorption cycle requires less work input"], answer: 1, explanation: "Vapor absorption cycles use heat energy, requiring less mechanical work compared to compression cycles." },
+            { q: "For large air conditioning application more than 1 TR, which type of compressor is preferably used?", options: ["Reciprocating", "Centrifugal"], answer: 1, explanation: "Centrifugal compressors are preferred for large systems (>1 TR) due to their efficiency and capacity." },
+            { q: "How much is 1 ton of refrigeration in SI unit?", options: ["120 KJ/Min", "210 KJ/Min"], answer: 1, explanation: "1 ton of refrigeration equals 210 kJ/min (3.517 kW) in SI units." },
+            { q: "Which is the component in the air conditioning system of grader?", options: ["Refrigerant", "All of the above"], answer: 1, explanation: "All components, including refrigerant, are part of the air conditioning system in a grader." },
+            { q: "एअर कन्डिसनिङ्ग ले के उपयुक्त गर्दछ?", options: ["हावा, चाप र चुम्बक", "हावा, चाप र तापमान"], answer: 1, explanation: "एअर कन्डिसनिङ्गले हावा, चाप र तापमानलाई नियन्त्रण गर्छ।" },
+            { q: "सुविधा जनक अवस्था (Comfort Conditions) कुन हो?", options: ["25°C DBT र 100% RH", "25°C DBT र 40% RH"], answer: 1, explanation: "25°C DBT र 40% RH सुविधाजनक अवस्था हो किनभने कम आर्द्रताले आरामदायी अनुभव हुन्छ।" },
+            { q: "Accumulators should have volume to store at least ________ of refrigerant charge.", options: ["25%", "50%"], answer: 1, explanation: "Accumulators store at least 50% of the refrigerant charge to prevent liquid slugging in the compressor." },
+            { q: "Where does the lowest temperature occur in a vapor compression cycle?", options: ["Condenser", "Evaporator"], answer: 1, explanation: "The lowest temperature occurs in the evaporator, where the refrigerant absorbs heat." },
+            { q: "A thermostatic expansion valve in the refrigeration system:", options: ["Is suitable only for constant load system", "Ensures the evaporator is completely filled with refrigerant"], answer: 1, explanation: "The thermostatic expansion valve regulates refrigerant flow to ensure the evaporator is filled efficiently." },
+            { q: "The following type of expansion device is utilized in flooded evaporator:", options: ["Capillary tube", "Float valve"], answer: 1, explanation: "Float valves are used in flooded evaporators to maintain a constant liquid level." },
+            { q: "In air cooling system, …… is used for increasing surface area to enhance engine cooling.", options: ["Condenser", "Fins"], answer: 1, explanation: "Fins increase the surface area for better heat dissipation in cooling systems." },
+            { q: "एयर कन्डिसनिङ्ग के-के कुरामा निर्भर गर्छ?", options: ["तापमान", "मानिसको सेवा"], answer: 0, explanation: "एयर कन्डिसनिङ्ग तापमान, आर्द्रता र हावाको गुणस्तरमा निर्भर गर्छ।" },
+            { q: "एयर कन्डिशनले के कुस वस्तुबाट काम गर्छ?", options: ["एयर", "रेफ्रिजरन्ट"], answer: 1, explanation: "एयर कन्डिशनले रेफ्रिजरन्टबाट काम गर्छ, जसले तापलाई अवशोषित र निष्कासन गर्छ।" },
+            { q: "ए.सी. सिस्टमको मुख्य काम के हो?", options: ["हावालाई सफा बनाउने", "A र B दुवै"], answer: 1, explanation: "ए.सी. सिस्टमले हावालाई सफा र तापमान नियन्त्रण गर्छ।" },
+            { q: "What is the main function of a condenser in a refrigeration system?", options: ["To absorb heat from the surroundings", "To reject heat from the refrigerant"], answer: 1, explanation: "The condenser rejects heat from the refrigerant to the surroundings, allowing it to condense." },
+            { q: "Which of the following refrigerants has the highest ozone depletion potential (ODP)?", options: ["R12", "R134a"], answer: 0, explanation: "R12 (a CFC) has a higher ODP than R134a (an HFC), which is ozone-friendly." },
+            { q: "Which component controls the flow of refrigerant into the evaporator?", options: ["Compressor", "Expansion valve"], answer: 1, explanation: "The expansion valve regulates the flow of refrigerant into the evaporator for efficient cooling." },
+            { q: "What is the effect of high humidity on human comfort in air conditioning?", options: ["Increases discomfort", "Improves comfort"], answer: 0, explanation: "High humidity reduces sweat evaporation, increasing discomfort." },
+            { q: "The pressure in the suction line of a refrigeration system is:", options: ["Low pressure", "High pressure"], answer: 0, explanation: "The suction line carries low-pressure refrigerant vapor to the compressor." },
+            { q: "रेडिएटरको तापक्रम कहिले नाप्नुपर्छ?", options: ["इन्जिन तातो हुँदा", "इन्जिन चिसो हुँदा"], answer: 0, explanation: "रेडिएटरको तापक्रम इन्जिन तातो हुँदा नाप्नुपर्छ किनभने त्यसले वास्तविक अवस्था देखाउँछ।" },
+            { q: "Freon group of refrigerants are:", options: ["Inflammable", "Non-inflammable and non-toxic"], answer: 1, explanation: "Freon refrigerants are generally non-inflammable and non-toxic, suitable for air conditioning." },
+            { q: "The pressure at the outlet of a refrigerant compressor is called:", options: ["Suction pressure", "Discharge pressure"], answer: 1, explanation: "The outlet of the compressor has high-pressure refrigerant, known as discharge pressure." },
+            { q: "रेफ्रिजेरेसन तथा AC system मा प्रयोग हुने component कुन हो?", options: ["Combustion chamber", "Compressor"], answer: 1, explanation: "कम्प्रेसर रेफ्रिजेरेसन र AC सिस्टमको मुख्य कम्पोनेन्ट हो।" }
         ];
 
         function shuffle(array) {
@@ -128,7 +259,41 @@
 
         const quizContainer = document.getElementById('quiz');
         const scoreContainer = document.getElementById('score');
+        const currentScore = document.getElementById('current-score');
+        const progressBar = document.getElementById('progress');
+        const timerDisplay = document.getElementById('timer');
+        const resultsBtn = document.getElementById('results-btn');
         let score = 0;
+        let answeredQuestions = 0;
+        let timeElapsed = 0;
+        let timerInterval;
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeElapsed++;
+                const minutes = Math.floor(timeElapsed / 60).toString().padStart(2, '0');
+                const seconds = (timeElapsed % 60).toString().padStart(2, '0');
+                timerDisplay.textContent = `Time: ${minutes}:${seconds}`;
+            }, 1000);
+        }
+
+        function updateProgress() {
+            const progressPercentage = (answeredQuestions / questions.length) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+        }
+
+        function showResults() {
+            quizContainer.style.display = 'none';
+            scoreContainer.textContent = `Final Score: ${score} out of ${questions.length} (${((score / questions.length) * 100).toFixed(2)}%)`;
+            resultsBtn.style.display = 'block';
+            resultsBtn.onclick = () => {
+                quizContainer.style.display = 'block';
+                scoreContainer.textContent = '';
+                resultsBtn.style.display = 'none';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            clearInterval(timerInterval);
+        }
 
         questions.forEach((q, i) => {
             const div = document.createElement('div');
@@ -138,6 +303,10 @@
             const optsDiv = document.createElement('div');
             optsDiv.classList.add('options');
 
+            const explanationDiv = document.createElement('div');
+            explanationDiv.classList.add('explanation');
+            explanationDiv.textContent = q.explanation;
+
             const shuffled = shuffle(q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.answer })));
 
             shuffled.forEach(({ text, isCorrect }) => {
@@ -145,9 +314,14 @@
                 btn.textContent = text;
                 btn.onclick = () => {
                     if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+                    answeredQuestions++;
+                    updateProgress();
+                    currentScore.textContent = `Score: ${score}/${questions.length}`;
+
                     if (isCorrect) {
                         btn.classList.add('correct');
                         score++;
+                        currentScore.textContent = `Score: ${score}/${questions.length}`;
                     } else {
                         btn.classList.add('wrong');
                         optsDiv.querySelectorAll('button').forEach(b => {
@@ -156,17 +330,23 @@
                             }
                         });
                     }
-                    if (i === questions.length - 1) {
-                        scoreContainer.textContent = `✅ Your Score: ${score} out of ${questions.length}`;
+
+                    optsDiv.querySelectorAll('button').forEach(b => b.disabled = true);
+                    explanationDiv.style.display = 'block';
+
+                    if (answeredQuestions === questions.length) {
+                        showResults();
                     }
                 };
                 optsDiv.appendChild(btn);
             });
 
             div.appendChild(optsDiv);
+            div.appendChild(explanationDiv);
             quizContainer.appendChild(div);
         });
+
+        startTimer();
     </script>
 </body>
-
 </html>
