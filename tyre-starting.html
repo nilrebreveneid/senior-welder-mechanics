@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Logsewa tyre System Mock Test</title>
+    <title>Logsewa Tyre, Wheel, and Starting System Mock Test</title>
     <style>
         * {
             margin: 0;
@@ -300,7 +300,7 @@
 </head>
 <body>
     <div class="quiz-container">
-        <h1>Logsewa tyre System Mock Test</h1>
+        <h1>Logsewa Tyre, Wheel, and Starting System Mock Test</h1>
         <div class="quiz-header">
             <div class="timer" id="timer">Time: 00:00</div>
             <div class="score" id="current-score">Score: 0/20</div>
@@ -335,125 +335,128 @@
 
     <script>
         const questions = [
+            // Starting System Questions (10)
             {
-                q: "What is the primary function of a vehicle’s suspension system?",
-                options: ["To increase engine power", "To absorb road shocks and vibrations"],
+                q: "Which components are part of a vehicle’s starting system?",
+                options: ["Battery, starter, ignition switch", "Battery, alternator"],
+                answer: 0,
+                explanation: "The starting system includes the battery, starter motor, and ignition switch to crank the engine."
+            },
+            {
+                q: "What does a tachometer measure in a vehicle?",
+                options: ["Vehicle speed", "Engine RPM"],
                 answer: 1,
-                explanation: "The suspension system isolates the vehicle from road shocks, ensuring comfort and stability."
+                explanation: "A tachometer measures the engine’s rotational speed in revolutions per minute (RPM)."
             },
             {
-                q: "Which component primarily supports the vehicle’s weight in a suspension system?",
-                options: ["Shock absorber", "Spring"],
+                q: "Which component is NOT part of a vehicle’s starting system?",
+                options: ["Ignition switch", "Timing belt"],
                 answer: 1,
-                explanation: "Springs (e.g., leaf, coil) bear the vehicle’s weight and maintain ride height."
+                explanation: "The timing belt is part of the engine’s timing system, not the starting system."
             },
             {
-                q: "What is the main role of a shock absorber in a suspension system?",
-                options: ["To support vehicle weight", "To dampen spring oscillations"],
+                q: "गाडी स्टार्ट गर्ने प्रणालीमा कुन कम्पोनेन्ट प्रयोग हुन्छ?",
+                options: ["अल्टरनेटर", "स्टार्टर मोटर"],
                 answer: 1,
-                explanation: "Shock absorbers control spring movement, preventing excessive bouncing."
+                explanation: "The starter motor cranks the engine to initiate combustion."
             },
             {
-                q: "Which type of spring is commonly used in heavy-duty vehicles like trucks?",
-                options: ["Coil spring", "Leaf spring"],
+                q: "In a starting system, contact breaker points are closed by:",
+                options: ["Cam", "Spring tension"],
                 answer: 1,
-                explanation: "Leaf springs are robust and ideal for heavy loads in trucks."
+                explanation: "Spring tension closes the contact breaker points after the cam opens them."
             },
             {
-                q: "What improves when unsprung mass is minimized in a suspension system?",
-                options: ["Ride comfort and handling", "Engine efficiency"],
-                answer: 0,
-                explanation: "Lower unsprung mass (e.g., wheels) enhances ride comfort and handling."
-            },
-            {
-                q: "What is a common issue in a vehicle’s suspension system?",
-                options: ["Worn shock absorbers", "Clutch slippage"],
-                answer: 0,
-                explanation: "Worn shock absorbers cause poor handling and uneven tire wear."
-            },
-            {
-                q: "Which component is NOT part of a suspension system?",
-                options: ["Control arm", "Alternator"],
+                q: "Which motor type has high starting torque in a vehicle’s starting system?",
+                options: ["AC motor", "DC series motor"],
                 answer: 1,
-                explanation: "The alternator is part of the electrical system, not the suspension."
+                explanation: "DC series motors provide high starting torque, ideal for starter motors."
             },
             {
-                q: "Why are leaf springs used in some suspension systems?",
-                options: ["For high load capacity", "For low maintenance"],
+                q: "Why is starting a cold engine often difficult?",
+                options: ["Increased oil viscosity", "Low fuel pressure"],
                 answer: 0,
-                explanation: "Leaf springs are used for their ability to support heavy loads."
+                explanation: "Cold engines have thicker oil, increasing resistance and making starting harder."
             },
             {
-                q: "सस्पेन्सन प्रणालीको मुख्य काम के हो?",
-                options: ["गाडीको झटका कम गर्ने", "इन्जिनको शक्ति बढाउने"],
-                answer: 0,
-                explanation: "The suspension system reduces road shocks for a smoother ride."
-            },
-            {
-                q: "Which suspension type is common in passenger cars?",
-                options: ["MacPherson strut", "Solid axle"],
-                answer: 0,
-                explanation: "MacPherson struts are compact and widely used in passenger cars."
-            },
-            {
-                q: "What is the function of a control arm in a suspension system?",
-                options: ["To connect wheel assembly to chassis", "To regulate brake pressure"],
-                answer: 0,
-                explanation: "Control arms link the wheel assembly to the chassis for controlled movement."
-            },
-            {
-                q: "Which component helps maintain tire contact during cornering?",
-                options: ["Stabilizer bar", "Clutch disc"],
-                answer: 0,
-                explanation: "Stabilizer bars reduce body roll, improving tire contact."
-            },
-            {
-                q: "What indicates a failing shock absorber?",
-                options: ["Excessive bouncing after bumps", "Low fuel economy"],
-                answer: 0,
-                explanation: "Worn shock absorbers cause excessive bouncing and poor handling."
-            },
-            {
-                q: "Which suspension is suited for vehicles needing high ground clearance?",
-                options: ["Independent suspension", "Solid axle suspension"],
+                q: "What is the role of the ignition switch in the starting system?",
+                options: ["To generate power", "To activate the starter circuit"],
                 answer: 1,
-                explanation: "Solid axle suspensions provide durability and high ground clearance."
+                explanation: "The ignition switch completes the circuit to engage the starter motor."
             },
             {
-                q: "What is the role of a torsion bar in a suspension system?",
-                options: ["To absorb shocks", "To act as a spring"],
+                q: "What component supplies electrical power to the starter motor?",
+                options: ["Alternator", "Battery"],
                 answer: 1,
-                explanation: "Torsion bars twist to provide spring action, supporting vehicle weight."
+                explanation: "The battery provides the electrical energy needed to power the starter motor."
             },
             {
-                q: "Which maintenance task prevents suspension wear?",
-                options: ["Wheel alignment", "Oil change"],
+                q: "What indicates a weak battery in the starting system?",
+                options: ["Slow cranking speed", "Overheating engine"],
                 answer: 0,
-                explanation: "Wheel alignment reduces stress on suspension components."
+                explanation: "A weak battery causes slow or weak cranking, indicating insufficient power."
             },
+
+            // Tyre and Wheel Questions (10)
             {
-                q: "What is the advantage of an independent suspension system?",
-                options: ["Better ride quality", "Higher load capacity"],
-                answer: 0,
-                explanation: "Independent suspension improves ride quality by allowing each wheel to move separately."
-            },
-            {
-                q: "Which component reduces body roll during turns?",
-                options: ["Leaf spring", "Anti-roll bar"],
+                q: "What is the primary purpose of tyres on a vehicle?",
+                options: ["To enhance engine power", "To provide grip and absorb shocks"],
                 answer: 1,
-                explanation: "Anti-roll bars connect opposite wheels to minimize body roll."
+                explanation: "Tyres provide traction, support the vehicle’s weight, and absorb minor road shocks."
             },
             {
-                q: "What causes a vehicle to pull to one side due to suspension issues?",
-                options: ["Worn bushings", "Low battery voltage"],
-                answer: 0,
-                explanation: "Worn bushings cause misalignment, leading to pulling."
-            },
-            {
-                q: "Which suspension type is best for heavy load-carrying vehicles?",
-                options: ["Air suspension", "Leaf spring suspension"],
+                q: "A tyre is marked as 175/65 R14 82 S. What does 65 represent?",
+                options: ["Rim diameter", "Aspect ratio"],
                 answer: 1,
-                explanation: "Leaf spring suspensions are robust for heavy-duty loads."
+                explanation: "The number 65 is the aspect ratio, indicating sidewall height as 65% of the tyre’s width."
+            },
+            {
+                q: "Which wheel type is incompatible with tubeless tyres?",
+                options: ["Alloy wheel", "Wire wheel"],
+                answer: 1,
+                explanation: "Wire wheels cannot maintain an airtight seal required for tubeless tyres."
+            },
+            {
+                q: "In a truck tyre marked 10.00x20-14 ply, what does 20 indicate?",
+                options: ["Tyre width in cm", "Rim diameter in inches"],
+                answer: 1,
+                explanation: "The number 20 denotes the rim diameter in inches."
+            },
+            {
+                q: "What is the purpose of tyre rotation on a vehicle?",
+                options: ["To prevent ply separation", "To equalize wear"],
+                answer: 1,
+                explanation: "Tyre rotation ensures even wear across all tyres, extending their lifespan."
+            },
+            {
+                q: "गाडीको टायरको दाब मापन गर्न कुन उपकरण प्रयोग गरिन्छ?",
+                options: ["टायर प्रेसर गेज", "स्पीडोमिटर"],
+                answer: 0,
+                explanation: "A tyre pressure gauge measures the air pressure inside the tyre."
+            },
+            {
+                q: "गाडीको टायर चिप्लिन नदिन के गर्नुपर्छ?",
+                options: ["टायरमा ब्रेक लगाउनु", "टायरको अवस्था राम्रो राख्नु"],
+                answer: 1,
+                explanation: "Maintaining proper tyre tread and pressure prevents slipping."
+            },
+            {
+                q: "What does the ‘R’ in a tyre designation like 205/55 R16 indicate?",
+                options: ["Radial construction", "Rim width"],
+                answer: 0,
+                explanation: "The ‘R’ indicates the tyre has a radial construction."
+            },
+            {
+                q: "What is a common cause of uneven tyre wear?",
+                options: ["Misaligned wheels", "Low battery voltage"],
+                answer: 0,
+                explanation: "Wheel misalignment causes uneven tyre wear, reducing tyre life."
+            },
+            {
+                q: "Which maintenance task ensures optimal tyre performance?",
+                options: ["Checking tyre pressure regularly", "Changing engine oil"],
+                answer: 0,
+                explanation: "Regular tyre pressure checks maintain grip, fuel efficiency, and tyre longevity."
             }
         ];
 
@@ -478,7 +481,7 @@
 
         // Load progress from localStorage
         function loadProgress() {
-            const saved = localStorage.getItem("quizProgressSuspension");
+            const saved = localStorage.getItem("quizProgressTyreWheelStarting");
             if (saved) {
                 const { currentPage: savedPage, score: savedScore, skipped: savedSkipped, answers: savedAnswers, time: savedTime } = JSON.parse(saved);
                 currentPage = savedPage;
@@ -492,7 +495,7 @@
 
         // Save progress to localStorage
         function saveProgress() {
-            localStorage.setItem("quizProgressSuspension", JSON.stringify({
+            localStorage.setItem("quizProgressTyreWheelStarting", JSON.stringify({
                 currentPage,
                 score,
                 skipped,
@@ -734,7 +737,7 @@
                 `;
             }).join('');
 
-            localStorage.removeItem('quizProgressSuspension');
+            localStorage.removeItem('quizProgressTyreWheelStarting');
         }
 
         // Restart quiz
@@ -746,7 +749,7 @@
             timerSeconds = 0;
             resultsEl.classList.add('hidden');
             scoreEl.textContent = '';
-            localStorage.removeItem('quizProgressSuspension');
+            localStorage.removeItem('quizProgressTyreWheelStarting');
             startTimer();
             showQuestions(currentPage);
             updateCurrentScore();
