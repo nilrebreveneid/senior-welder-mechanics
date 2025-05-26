@@ -1,113 +1,572 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welding MCQ Quiz</title>
+    <title>Logsewa Welding MCQ Quiz</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f5f7fa;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        h1 {
-            text-align: center;
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #e0e7ff, #c3dafe);
+            margin: 0;
+            padding: 2rem;
             color: #333;
+            min-height: 100vh;
         }
 
         .quiz-container {
             max-width: 900px;
             margin: auto;
             background: #fff;
-            padding: 20px;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #1e3a8a;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            text-align: center;
+            color: #1e3a8a;
+            margin: 1rem 0;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f8fafc;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .timer {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #d81b60;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress {
+            height: 100%;
+            background: #3b82f6;
+            transition: width 0.3s ease;
         }
 
         .question {
-            margin-bottom: 20px;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            animation: fadeIn 0.5s;
+            transition: transform 0.2s ease;
+        }
+
+        .question:hover {
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .question p {
-            font-weight: bold;
-            color: #444;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 1rem;
         }
 
         .options button {
             display: block;
-            margin: 6px 0;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            cursor: pointer;
-            text-align: left;
             width: 100%;
-            transition: background-color 0.3s;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            color: #374151;
         }
 
-        .options button:hover {
-            background-color: #e0e0e0;
+        .options button:hover:not(:disabled) {
+            background: #f3f4f6;
+            border-color: #3b82f6;
+            transform: translateX(4px);
         }
 
         .options button.correct {
-            background-color: #c8f7c5;
+            background: #bbf7d0;
+            border-color: #22c55e;
+            color: #166534;
+            animation: pulse 0.5s;
         }
 
         .options button.wrong {
-            background-color: #f7c5c5;
+            background: #fecaca;
+            border-color: #ef4444;
+            color: #991b1b;
+            animation: shake 0.3s;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .options button:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #eff6ff;
+            border-radius: 8px;
+            color: #1e3a8a;
+            font-size: 0.95rem;
+        }
+
+        .skip-button {
+            background: #fff3cd;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            width: 100%;
+            border: 1px solid #ffca28;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .skip-button:hover {
+            background: #ffecb3;
+        }
+
+        .next-button {
+            background: #3b82f6;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 1rem;
+            display: block;
+            width: 100%;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+
+        .next-button:hover:not(:disabled) {
+            background: #2563eb;
+        }
+
+        .next-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .score-container {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
         }
 
         .score {
-            font-size: 1.2em;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .results-table th, .results-table td {
+            border: 1px solid #e5e7eb;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .results-table th {
+            background: #f8fafc;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .results-table .correct {
+            color: #166534;
             font-weight: bold;
+        }
+
+        .results-table .wrong {
+            color: #991b1b;
+            font-weight: bold;
+        }
+
+        .results-table .skipped, .results-table .not-attempted {
+            color: #d97706;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .restart-button {
+            background: #22c55e;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 1rem auto;
+            display: block;
+            width: 100%;
             text-align: center;
-            margin-top: 30px;
+            transition: background 0.3s ease;
+        }
+
+        .restart-button:hover {
+            background: #16a34a;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            .quiz-container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .question p {
+                font-size: 1rem;
+            }
+
+            .options button, .skip-button, .next-button, .restart-button {
+                font-size: 0.9rem;
+                padding: 0.8rem;
+            }
+
+            .results-table th, .results-table td {
+                padding: 0.5rem;
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
-
 <body>
-    <h1>Welding MCQ Quiz</h1>
-    <div class="quiz-container" id="quiz"></div>
-    <div class="score" id="score"></div>
+    <div class="quiz-container">
+        <h1>Logsewa Welding MCQ Quiz</h1>
+        <div class="quiz-header">
+            <div class="timer" id="timer">Time: 00:00</div>
+            <div class="score" id="current-score">Score: 0/30</div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <div id="quiz"></div>
+        <div class="score-container">
+            <div class="score" id="score"></div>
+            <div id="results" class="hidden">
+                <h2>Quiz Results</h2>
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>Your Answer</th>
+                            <th>Correct Answer</th>
+                            <th>Status</th>
+                            <th>Explanation</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-body"></tbody>
+                </table>
+                <button class="restart-button" onclick="restartQuiz()">Restart Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="correct-sound" src="https://www.soundjay.com/buttons/beep-01a.mp3"></audio>
+    <audio id="wrong-sound" src="https://www.soundjay.com/buttons/beep-02.mp3"></audio>
 
     <script>
         const questions = [
-            { q: "Brazing is the joining of metals:", options: ["With a non-ferrous filler", "By melting the base metal"], answer: 0 },
-            { q: "Which combination of gas is used in gas welding?", options: ["Oxygen and acetylene", "Oxygen and hydrogen"], answer: 0 },
-            { q: "Spot welding is the process of:", options: ["Electric resistance welding", "Gas welding"], answer: 0 },
-            { q: "Which metal can be welded by electric arc welding?", options: ["Medium carbon steel", "Aluminium"], answer: 0 },
-            { q: "In the oxy-acetylene welding process, when supply of oxygen becomes excess, the flame is:", options: ["Oxidizing flame", "Neutral flame"], answer: 0 },
-            { q: "The material used for coating the electrode is called:", options: ["Flux", "Slag"], answer: 0 },
-            { q: "Filler material used in soldering is:", options: ["An alloy of tin and lead", "An alloy of zinc and copper"], answer: 0 },
-            { q: "For welding plate of thickness more than 15 mm, its edge:", options: ["Should have double V or U groove on both side", "Should have double V or U groove on one side"], answer: 0 },
-            { q: "A neutral flame is obtained by supplying:", options: ["Equal volume of oxygen and acetylene", "More volume of oxygen than acetylene"], answer: 0 },
-            { q: "This is a male and female joint:", options: ["Nuts and bolt joints of two work pieces", "Riveting of two work pieces"], answer: 0 },
-            { q: "A joint made by fastening two edges of sheet metal together is called:", options: ["Seam", "Joint"], answer: 0 },
-            { q: "Which of the following is a kind of resistance welding?", options: ["Spot welding", "Arc welding"], answer: 0 },
-            { q: "Which of the following is an example of fusion welding?", options: ["Arc welding", "Resistance welding"], answer: 0 },
-            { q: "Welding defect पत्ता लगाउन NDT मा कुन कुन test पर्छ ?", options: ["All of the above", "Magnetic particle test"], answer: 0 },
-            { q: "Welding electrode “धातुको तातो ध्यान दिनु पर्ने कारण के हो ?", options: ["सुरक्षा र तातो केन्द्रमा राख्ने", "धातुमा फुर्सद राख्ने"], answer: 0 },
-            { q: "Metallic sheet लाई काट्ने सामान्य विधि कुन हो ?", options: ["Oxyacetylene welding", "Chiseling"], answer: 0 },
-            { q: "A cold chisel is made up of:", options: ["Mild steel", "High carbon steel"], answer: 0 },
-            { q: "The chemical used in generating acetylene for gas welding is:", options: ["Calcium carbide", "Calcium carbonate"], answer: 0 },
-            { q: "Welding defect मध्ये कुन हो?", options: ["Crack", "Undercut"], answer: 0 },
-            { q: "Butt joint भनेको के हो?", options: ["दुई टुक्रा सिधा राखी जोड्ने", "एकअर्काको माथि राखी जोड्ने"], answer: 0 },
-            { q: "Welding Testing कुन हो?", options: ["All of the above", "Ultrasonic test"], answer: 0 },
-            { q: "Grey cast iron welding कुन विधिबाट गरिन्छ?", options: ["MIG welding", "Arc welding"], answer: 0 },
-            { q: "In arc welding, the electric arc is produced between the work and the electrode by:", options: ["All of the above", "Voltage"], answer: 0 },
-            { q: "The process in which two similar metals are joined without melting is:", options: ["Brazing", "Adhesive joining"], answer: 0 },
-            { q: "Electron beam welding can be carried out in:", options: ["Vacuum", "Open air"], answer: 0 },
-            { q: "In arc welding, the temperature of heat produced by the electric arc is of the order of:", options: ["6000°C to 7000°C", "4000°C to 5000°C"], answer: 0 },
-            { q: "Arc stability is better with:", options: ["AC welding", "DC welding"], answer: 0 },
-            { q: "पातलो फलाम काट्न प्रयोग गरिने ग्याँस वेल्डिङ्ग प्रक्रिया कुन हो?", options: ["TIG वेल्डिङ्ग", "ग्यास वेल्डिङ्ग"], answer: 0 },
-            { q: "In arc welding with DC current, greater heat is generated at", options: ["positive pole of arc", "negative pole of arc"], answer: 0 },
-            { q: "The process of cutting a flat sheet to the desired shape is known as:", options: ["Blanking", "Trimming"], answer: 0 }
+            {
+                q: "What is brazing in metal joining?",
+                options: ["Melting the base metal", "Using a non-ferrous filler metal"],
+                answer: 1,
+                explanation: "Brazing joins metals using a non-ferrous filler metal with a melting point above 450°C but below the base metal’s melting point."
+            },
+            {
+                q: "Which gas combination is used in gas welding?",
+                options: ["Oxygen and acetylene", "Oxygen and hydrogen"],
+                answer: 0,
+                explanation: "Oxygen and acetylene produce a high-temperature flame suitable for gas welding."
+            },
+            {
+                q: "What is spot welding?",
+                options: ["Electric resistance welding", "Gas welding"],
+                answer: 0,
+                explanation: "Spot welding is a resistance welding process that joins metal sheets by applying electric current at specific points."
+            },
+            {
+                q: "Which metal can be welded using electric arc welding?",
+                options: ["Medium carbon steel", "Wood"],
+                answer: 0,
+                explanation: "Medium carbon steel can be arc welded with proper techniques, unlike non-metals like wood."
+            },
+            {
+                q: "What happens in oxy-acetylene welding when oxygen supply is excessive?",
+                options: ["Oxidizing flame", "Neutral flame"],
+                answer: 0,
+                explanation: "Excess oxygen creates an oxidizing flame, which can oxidize the weld metal."
+            },
+            {
+                q: "What material is used to coat a welding electrode?",
+                options: ["Flux", "Slag"],
+                answer: 0,
+                explanation: "Flux coats the electrode to shield the weld pool from atmospheric contamination."
+            },
+            {
+                q: "What is the filler material used in soldering?",
+                options: ["Tin-lead alloy", "Zinc-copper alloy"],
+                answer: 0,
+                explanation: "Soldering uses a tin-lead alloy with a low melting point to join metals."
+            },
+            {
+                q: "What edge preparation is required for welding plates thicker than 15 mm?",
+                options: ["Double V or U groove on both sides", "Single V groove on one side"],
+                answer: 0,
+                explanation: "Double V or U grooves ensure proper penetration for thick plates."
+            },
+            {
+                q: "How is a neutral flame obtained in oxy-acetylene welding?",
+                options: ["Equal volumes of oxygen and acetylene", "More oxygen than acetylene"],
+                answer: 0,
+                explanation: "A neutral flame, ideal for welding, results from equal volumes of oxygen and acetylene."
+            },
+            {
+                q: "Which is an example of a male and female joint in metalwork?",
+                options: ["Nuts and bolts", "Butt weld"],
+                answer: 0,
+                explanation: "Nuts and bolts form a male-female joint, unlike a butt weld, which is a welded joint."
+            },
+            {
+                q: "What is a joint made by fastening two edges of sheet metal together called?",
+                options: ["Seam", "Lap joint"],
+                answer: 0,
+                explanation: "A seam is a joint where sheet metal edges are fastened together, often by welding or folding."
+            },
+            {
+                q: "Which process is a type of resistance welding?",
+                options: ["Spot welding", "Arc welding"],
+                answer: 0,
+                explanation: "Spot welding is a resistance welding process, unlike arc welding, which is fusion welding."
+            },
+            {
+                q: "Which is an example of fusion welding?",
+                options: ["Arc welding", "Resistance welding"],
+                answer: 0,
+                explanation: "Arc welding melts the base metal and filler, making it a fusion welding process."
+            },
+            {
+                q: "Welding defect पत्ता लगाउन NDT मा कुन test समावेश हुन्छ?",
+                options: ["Magnetic particle test", "Visual inspection only"],
+                answer: 0,
+                explanation: "Magnetic particle testing is an NDT method to detect surface and near-surface weld defects."
+            },
+            {
+                q: "Welding electrode को तातोमा ध्यान दिनु पर्ने कारण के हो?",
+                options: ["सुरक्षा र गुणस्तर कायम राख्न", "धातुमा फुर्सद राख्न"],
+                answer: 0,
+                explanation: "Managing electrode heat ensures welder safety and maintains weld quality."
+            },
+            {
+                q: "Metallic sheet काट्ने सामान्य विधि कुन हो?",
+                options: ["Plasma cutting", "Chiseling"],
+                answer: 0,
+                explanation: "Plasma cutting is a common, precise method for cutting metallic sheets."
+            },
+            {
+                q: "A cold chisel is typically made of:",
+                options: ["High carbon steel", "Mild steel"],
+                answer: 0,
+                explanation: "High carbon steel is used for cold chisels due to its hardness and durability."
+            },
+            {
+                q: "What chemical is used to generate acetylene for gas welding?",
+                options: ["Calcium carbide", "Calcium carbonate"],
+                answer: 0,
+                explanation: "Calcium carbide reacts with water to produce acetylene gas for welding."
+            },
+            {
+                q: "Which is a common welding defect?",
+                options: ["Crack", "Perfect weld"],
+                answer: 0,
+                explanation: "Cracks are a common weld imperfection, compromising structural integrity."
+            },
+            {
+                q: "Butt joint भनेको के हो?",
+                options: ["दुई टुक्रा सिधा राखी जोड्ने", "एकअर्काको माथि राखी जोड्ने"],
+                answer: 0,
+                explanation: "A butt joint aligns two metal pieces edge-to-edge for welding."
+            },
+            {
+                q: "Which is a welding testing method?",
+                options: ["Ultrasonic test", "Visual inspection only"],
+                answer: 0,
+                explanation: "Ultrasonic testing is a non-destructive method to detect internal weld defects."
+            },
+            {
+                q: "Which welding process is suitable for grey cast iron?",
+                options: ["TIG welding", "Arc welding"],
+                answer: 0,
+                explanation: "TIG welding provides precise control, reducing cracking in grey cast iron."
+            },
+            {
+                q: "In arc welding, how is the electric arc produced?",
+                options: ["By voltage difference", "By mechanical friction"],
+                answer: 0,
+                explanation: "The arc is created by a voltage difference between the electrode and workpiece."
+            },
+            {
+                q: "Which process joins metals without melting the base material?",
+                options: ["Brazing", "Arc welding"],
+                answer: 0,
+                explanation: "Brazing uses a filler metal to join metals without melting the base material."
+            },
+            {
+                q: "Where is electron beam welding typically performed?",
+                options: ["Vacuum", "Open air"],
+                answer: 0,
+                explanation: "Electron beam welding requires a vacuum to prevent beam scattering."
+            },
+            {
+                q: "What is the temperature range of an electric arc in arc welding?",
+                options: ["6000°C to 7000°C", "4000°C to 5000°C"],
+                answer: 0,
+                explanation: "The electric arc reaches temperatures of 6000°C to 7000°C."
+            },
+            {
+                q: "Which provides better arc stability in welding?",
+                options: ["DC welding", "AC welding"],
+                answer: 0,
+                explanation: "DC welding offers a more stable arc due to consistent current flow."
+            },
+            {
+                q: "पातलो फलाम काट्न प्रयोग गरिने ग्याँस वेल्डिङ प्रक्रिया कुन हो?",
+                options: ["प्लाज्मा कटिङ", "ग्यास वेल्डिङ"],
+                answer: 0,
+                explanation: "Plasma cutting is precise and effective for cutting thin iron sheets."
+            },
+            {
+                q: "In arc welding with DC current, where is greater heat generated?",
+                options: ["Positive pole (anode)", "Negative pole (cathode)"],
+                answer: 0,
+                explanation: "In DC welding, the positive pole (anode) generates more heat due to electron flow."
+            },
+            {
+                q: "What is the process of cutting a flat sheet to a desired shape called?",
+                options: ["Blanking", "Trimming"],
+                answer: 0,
+                explanation: "Blanking is the process of cutting a flat sheet into a specific shape."
+            }
         ];
 
+        let currentPage = 0;
+        let score = 0;
+        let skipped = [];
+        let userAnswers = Array(questions.length).fill(null);
+        let timerSeconds = 0;
+        let timerInterval;
+        const QUESTIONS_PER_PAGE = 5;
+        const ANSWER_DELAY = 1000;
+
+        const quizEl = document.getElementById("quiz");
+        const scoreEl = document.getElementById("score");
+        const resultsEl = document.getElementById("results");
+        const resultsBody = document.getElementById("results-body");
+        const progressEl = document.getElementById("progress");
+        const timerEl = document.getElementById("timer");
+        const currentScoreEl = document.getElementById("current-score");
+        const correctSound = document.getElementById("correct-sound");
+        const wrongSound = document.getElementById("wrong-sound");
+
+        // Load progress from localStorage
+        function loadProgress() {
+            const saved = localStorage.getItem("quizProgressWelding");
+            if (saved) {
+                const { currentPage: savedPage, score: savedScore, skipped: savedSkipped, answers: savedAnswers, time: savedTime } = JSON.parse(saved);
+                currentPage = savedPage;
+                score = savedScore;
+                skipped = savedSkipped;
+                userAnswers = savedAnswers || Array(questions.length).fill(null);
+                timerSeconds = savedTime || 0;
+                updateCurrentScore();
+            }
+        }
+
+        // Save progress to localStorage
+        function saveProgress() {
+            localStorage.setItem("quizProgressWelding", JSON.stringify({
+                currentPage,
+                score,
+                skipped,
+                answers: userAnswers,
+                time: timerSeconds
+            }));
+        }
+
+        // Update current score display
+        function updateCurrentScore() {
+            currentScoreEl.textContent = `Score: ${score}/${questions.length}`;
+        }
+
+        // Shuffle array
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -116,47 +575,247 @@
             return array;
         }
 
-        const quizContainer = document.getElementById('quiz');
-        const scoreContainer = document.getElementById('score');
-        let score = 0;
+        // Start timer
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timerSeconds++;
+                const minutes = Math.floor(timerSeconds / 60);
+                const seconds = timerSeconds % 60;
+                timerEl.textContent = `Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                saveProgress();
+            }, 1000);
+        }
 
-        questions.forEach((q, i) => {
-            const div = document.createElement('div');
-            div.classList.add('question');
-            div.innerHTML = `<p>${i + 1}. ${q.q}</p>`;
+        // Update progress bar
+        function updateProgress() {
+            const answeredCount = userAnswers.filter(answer => answer !== null).length;
+            const percentage = (answeredCount / questions.length) * 100;
+            progressEl.style.width = `${percentage}%`;
+        }
 
-            const optsDiv = document.createElement('div');
-            optsDiv.classList.add('options');
+        // Show questions for the current page
+        function showQuestions(page) {
+            quizEl.innerHTML = '';
+            const startIndex = page * QUESTIONS_PER_PAGE;
+            const endIndex = Math.min(startIndex + QUESTIONS_PER_PAGE, questions.length);
 
-            const shuffled = shuffle(q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.answer })));
+            for (let i = startIndex; i < endIndex; i++) {
+                const q = questions[i];
+                const shuffledOptions = shuffle([...q.options].map((opt, j) => ({ text: opt, index: j })));
+                const optionsHtml = shuffledOptions
+                    .map(opt => `<button onclick="checkAnswer(this, ${i}, ${opt.index}, '${opt.text.replace(/'/g, "\\'")}')">${opt.text}</button>`)
+                    .join('');
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question');
+                questionDiv.dataset.index = i;
+                questionDiv.innerHTML = `
+                    <p>Q${i + 1}. ${q.q}</p>
+                    <div class="options">${optionsHtml}</div>
+                    <button class="skip-button" onclick="skipQuestion(${i})">Skip</button>
+                    <div class="explanation">${q.explanation}</div>
+                `;
+                quizEl.appendChild(questionDiv);
+            }
 
-            shuffled.forEach(({ text, isCorrect }) => {
-                const btn = document.createElement('button');
-                btn.textContent = text;
-                btn.onclick = () => {
-                    if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
-                    if (isCorrect) {
-                        btn.classList.add('correct');
-                        score++;
-                    } else {
-                        btn.classList.add('wrong');
-                        optsDiv.querySelectorAll('button').forEach(b => {
-                            if (b.textContent === shuffled.find(o => o.isCorrect).text) {
-                                b.classList.add('correct');
-                            }
-                        });
-                    }
-                    if (i === questions.length - 1) {
-                        scoreContainer.textContent = `✅ Your Score: ${score} out of ${questions.length}`;
-                    }
-                };
-                optsDiv.appendChild(btn);
+            if (endIndex < questions.length || skipped.length > 0) {
+                const nextButton = document.createElement('button');
+                nextButton.classList.add('next-button');
+                nextButton.textContent = endIndex < questions.length ? 'Next' : 'Review Skipped Questions';
+                nextButton.onclick = nextPage;
+                nextButton.disabled = !areAllQuestionsAnsweredOnPage(startIndex, endIndex);
+                quizEl.appendChild(nextButton);
+            } else {
+                const submitButton = document.createElement('button');
+                submitButton.classList.add('next-button');
+                submitButton.textContent = 'Submit Quiz';
+                submitButton.onclick = endQuiz;
+                submitButton.disabled = !areAllQuestionsAnsweredOnPage(startIndex, endIndex);
+                quizEl.appendChild(submitButton);
+            }
+
+            updateProgress();
+            saveProgress();
+            restoreAnswers(startIndex, endIndex);
+        }
+
+        // Restore previous answers for the current page
+        function restoreAnswers(startIndex, endIndex) {
+            for (let i = startIndex; i < endIndex; i++) {
+                if (userAnswers[i] !== null && userAnswers[i] !== 'Skipped') {
+                    const questionDiv = document.querySelector(`.question[data-index="${i}"]`);
+                    const buttons = questionDiv.querySelectorAll('.options button');
+                    const q = questions[i];
+                    buttons.forEach(btn => {
+                        btn.disabled = true;
+                        if (btn.textContent === q.options[q.answer]) {
+                            btn.classList.add('correct');
+                        }
+                        if (btn.textContent === userAnswers[i] && userAnswers[i] !== q.options[q.answer]) {
+                            btn.classList.add('wrong');
+                        }
+                    });
+                    questionDiv.querySelector('.explanation').style.display = 'block';
+                    questionDiv.querySelector('.skip-button').disabled = true;
+                } else if (userAnswers[i] === 'Skipped') {
+                    const questionDiv = document.querySelector(`.question[data-index="${i}"]`);
+                    questionDiv.querySelectorAll('.options button').forEach(btn => btn.disabled = true);
+                    questionDiv.querySelector('.skip-button').disabled = true;
+                    questionDiv.querySelector('.explanation').style.display = 'block';
+                }
+            }
+        }
+
+        // Check if all questions on the current page are answered or skipped
+        function areAllQuestionsAnsweredOnPage(startIndex, endIndex) {
+            for (let i = startIndex; i < endIndex; i++) {
+                if (userAnswers[i] === null) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Check answer
+        function checkAnswer(button, questionIndex, selected, selectedText) {
+            const q = questions[questionIndex];
+            const correct = q.answer;
+            const buttons = button.parentElement.querySelectorAll("button");
+            const questionDiv = button.closest('.question');
+            const explanationDiv = questionDiv.querySelector('.explanation');
+
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                if (q.options.indexOf(btn.textContent) === correct) {
+                    btn.classList.add('correct');
+                }
+                if (btn === button && selected !== correct) {
+                    btn.classList.add('wrong');
+                }
             });
 
-            div.appendChild(optsDiv);
-            quizContainer.appendChild(div);
-        });
+            questionDiv.querySelector('.skip-button').disabled = true;
+            explanationDiv.style.display = 'block';
+
+            userAnswers[questionIndex] = selectedText;
+            if (selected === correct) {
+                score++;
+                correctSound.play().catch(() => console.log("Audio playback failed"));
+            } else {
+                wrongSound.play().catch(() => console.log("Audio playback failed"));
+            }
+
+            updateCurrentScore();
+            saveProgress();
+            const nextButton = quizEl.querySelector('.next-button');
+            if (nextButton) {
+                nextButton.disabled = !areAllQuestionsAnsweredOnPage(
+                    currentPage * QUESTIONS_PER_PAGE,
+                    Math.min((currentPage + 1) * QUESTIONS_PER_PAGE, questions.length)
+                );
+            }
+
+            setTimeout(() => {
+                if (areAllQuestionsAnsweredOnPage(
+                    currentPage * QUESTIONS_PER_PAGE,
+                    Math.min((currentPage + 1) * QUESTIONS_PER_PAGE, questions.length)
+                )) {
+                    nextPage();
+                }
+            }, ANSWER_DELAY);
+        }
+
+        // Skip question
+        function skipQuestion(questionIndex) {
+            if (!skipped.includes(questions[questionIndex])) {
+                skipped.push(questions[questionIndex]);
+                userAnswers[questionIndex] = 'Skipped';
+                const questionDiv = document.querySelector(`.question[data-index="${questionIndex}"]`);
+                questionDiv.querySelectorAll('.options button').forEach(btn => btn.disabled = true);
+                questionDiv.querySelector('.skip-button').disabled = true;
+                questionDiv.querySelector('.explanation').style.display = 'block';
+                saveProgress();
+                const nextButton = quizEl.querySelector('.next-button');
+                if (nextButton) {
+                    nextButton.disabled = !areAllQuestionsAnsweredOnPage(
+                        currentPage * QUESTIONS_PER_PAGE,
+                        Math.min((currentPage + 1) * QUESTIONS_PER_PAGE, questions.length)
+                    );
+                }
+            }
+        }
+
+        // Move to next page
+        function nextPage() {
+            if (skipped.length > 0 && currentPage * QUESTIONS_PER_PAGE >= questions.length) {
+                showSkippedQuestions();
+            } else {
+                currentPage++;
+                if (currentPage * QUESTIONS_PER_PAGE < questions.length) {
+                    showQuestions(currentPage);
+                } else if (skipped.length === 0) {
+                    endQuiz();
+                } else {
+                    showSkippedQuestions();
+                }
+            }
+        }
+
+        // Show skipped questions
+        function showSkippedQuestions() {
+            questions.splice(0, questions.length, ...skipped);
+            skipped = [];
+            currentPage = 0;
+            showQuestions(currentPage);
+        }
+
+        // End quiz and show results
+        function endQuiz() {
+            clearInterval(timerInterval);
+            quizEl.innerHTML = '';
+            scoreEl.textContent = `Final Score: ${score} out of ${questions.length} (${((score / questions.length) * 100).toFixed(2)}%)`;
+            resultsEl.classList.remove('hidden');
+
+            resultsBody.innerHTML = questions.map((q, i) => {
+                const userAnswer = userAnswers[i] === null ? 'Not attempted' :
+                                  userAnswers[i] === 'Skipped' ? 'Skipped' :
+                                  userAnswers[i];
+                const correctAnswer = q.options[q.answer];
+                const status = userAnswers[i] === q.options[q.answer] ? 'Correct' :
+                              userAnswers[i] === 'Skipped' ? 'Skipped' :
+                              userAnswers[i] === null ? 'Not attempted' : 'Wrong';
+                return `
+                    <tr>
+                        <td>${i + 1}. ${q.q}</td>
+                        <td>${userAnswer}</td>
+                        <td>${correctAnswer}</td>
+                        <td class="${status.toLowerCase().replace(' ', '-')}">${status}</td>
+                        <td class="explanation">${q.explanation}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            localStorage.removeItem('quizProgressWelding');
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            currentPage = 0;
+            score = 0;
+            skipped = [];
+            userAnswers = Array(questions.length).fill(null);
+            timerSeconds = 0;
+            resultsEl.classList.add('hidden');
+            scoreEl.textContent = '';
+            localStorage.removeItem('quizProgressWelding');
+            startTimer();
+            showQuestions(currentPage);
+            updateCurrentScore();
+        }
+
+        // Initialize
+        loadProgress();
+        startTimer();
+        showQuestions(currentPage);
     </script>
 </body>
-
 </html>
