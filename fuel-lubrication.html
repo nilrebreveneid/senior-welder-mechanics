@@ -1,133 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fuel, Lubricants and Filters</title>
+    <title>Fuel, Lubricants, and Filters MCQ Quiz</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f5f7fa;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        h1 {
-            text-align: center;
-            color: #333;
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #e0e7ff, #c3dafe);
+            min-height: 100vh;
+            padding: 2rem;
+            line-height: 1.6;
         }
 
         .quiz-container {
             max-width: 900px;
-            margin: auto;
-            background: #fff;
-            padding: 20px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e3a8a;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .progress-bar {
+            background: #e5e7eb;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .progress {
+            background: #3b82f6;
+            height: 100%;
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8fafc;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .timer {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e3a8a;
         }
 
         .question {
-            margin-bottom: 20px;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            transition: transform 0.2s ease;
+        }
+
+        .question:hover {
+            transform: translateY(-2px);
         }
 
         .question p {
-            font-weight: bold;
-            color: #444;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 1rem;
         }
 
         .options button {
             display: block;
-            margin: 6px 0;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            cursor: pointer;
-            text-align: left;
             width: 100%;
-            transition: background-color 0.3s;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            color: #374151;
         }
 
-        .options button:hover {
-            background-color: #e0e0e0;
+        .options button:hover:not(:disabled) {
+            background: #f3f4f6;
+            border-color: #3b82f6;
+            transform: translateX(4px);
         }
 
         .options button.correct {
-            background-color: #c8f7c5;
+            background: #bbf7d0;
+            border-color: #22c55e;
+            color: #166534;
         }
 
         .options button.wrong {
-            background-color: #f7c5c5;
+            background: #fecaca;
+            border-color: #ef4444;
+            color: #991b1b;
+        }
+
+        .options button:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #eff6ff;
+            border-radius: 8px;
+            color: #1e3a8a;
+            font-size: 0.95rem;
+        }
+
+        .score-container {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
         }
 
         .score {
-            font-size: 1.2em;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 30px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+
+        .results-btn {
+            display: none;
+            margin: 1rem auto;
+            padding: 0.75rem 2rem;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .results-btn:hover {
+            background: #2563eb;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            .quiz-container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .question p {
+                font-size: 1rem;
+            }
+
+            .options button {
+                font-size: 0.9rem;
+                padding: 0.8rem;
+            }
         }
     </style>
 </head>
-
 <body>
-    <h1>Fuel, Lubricants and Filters</h1>
-    <div class="quiz-container" id="quiz"></div>
-    <div class="score" id="score"></div>
+    <h1>Fuel, Lubricants, and Filters MCQ Quiz</h1>
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <div class="timer" id="timer">Time: 00:00</div>
+            <div class="score" id="current-score">Score: 0/49</div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <div id="quiz"></div>
+        <div class="score-container">
+            <div class="score" id="score"></div>
+            <button class="results-btn" id="results-btn">View Results</button>
+        </div>
+    </div>
 
     <script>
         const questions = [
-
-            { q: "In diesel engine, the fuel is ignited by:", options: ["Ignition coil", "Spark generated by injected fuel"], answer: 1 },
-            { q: "Due to weight transfer, the ratio of braking effect at the front and the rear wheel should be:", options: ["50% at rear and 50% at front", "60% at rear and 40% at front"], answer: 1 },
-            { q: "Engine मा fuel atomize गर्ने भाग कुन हो?", options: ["Engine manifold", "A pump"], answer: 1 },
-            { q: "Engine को inlet valve को आकार outlet valve सँग तुलना गर्दा:", options: ["Small", "More"], answer: 1 },
-            { q: "FIP (Fuel Injection Pump) मा सामान्यतया कति सिलिण्डर हुन्छ ?", options: ["3", "6"], answer: 1 },
-            { q: "Engine बन्द भएपछि पेट्रोल आपूर्ति रोक्न कुन उपाय अपनाइन्छ ?", options: ["भल्भ खोल्ने", "पम्प रोक्ने"], answer: 1 },
-            { q: "Engine मा इन्धनको मिश्रण सन्तुलनमा राख्ने काम गर्ने यन्त्र कुन हो ?", options: ["सिलिण्डर", "कार्बोरेटर"], answer: 1 },
-            { q: "Engine को Filter ले के काम गर्छ ?", options: ["फिल्टर", "धुलो कण हटाउने"], answer: 1 },
-            { q: "Cylinder, piston rings, valves, crank shaft, governors etc were first developed in connection with:", options: ["Steam Engine", "Petrol Engine"], answer: 1 },
-            { q: "A spark plug is required in:", options: ["Motor cycle", "Two stroke petrol engine"], answer: 1 },
-            { q: "Which of the following is the correct group of components in petrol engine?", options: ["Fuel pump and piston only", "Inlet valve, exhaust valve, piston, spark plug etc."], answer: 1 },
-            { q: "“Gasohol” is the mixture of:", options: ["CNG gas and alcohol", "Petrol and alcohol"], answer: 1 },
-            { q: "वाहानहरुमा ईन्धनको रुपमा प्रयोग हुने बायो डिजेल कुन हो?", options: ["पेट्रोल", "Bio-diesel"], answer: 1 },
-            { q: "फ्युल फिल्टर कहिले सफा गर्नुपर्छ?", options: ["प्रत्येक महिना", "प्रत्येक ५००० कि.मी. पछि"], answer: 1 },
-            { q: "कार्बोरेटर कुन प्रणालीमा प्रयोग गरिन्छ?", options: ["डीजल इन्जिन", "पेट्रोल इन्जिन"], answer: 1 },
-            { q: "गाडीमा आवश्यक कस्तो इन्धन हुन्छ?", options: ["पेट्रोल मात्र", "गाडीको प्रकार अनुसार"], answer: 1 },
-            { q: "Choose the multigrade engine oil:", options: ["SAE 15W-40", "SAE 10W"], answer: 1 },
-            { q: "Lubricants and filters should be changed in the equipment…", options: ["Once in 6 months", "Both (B) or (C)"], answer: 1 },
-            { q: "Engine lubrication system मा प्रयोग हुने तत्व कुन हो?", options: ["Air filter", "Engine oil"], answer: 1 },
-            { q: "गाडीको सर्भिस गर्दा सबैभन्दा पहिले के चेक गर्नु पर्छ?", options: ["गियर बक्स", "तेलको स्तर"], answer: 1 },
-            { q: "Symbol कुन संकेत गर्छ?", options: ["तिव्र घात", "अगाडि खतरनाक घुमाउरो बाटो छ"], answer: 1 },
-            { q: "कुन अवस्थामा मोटर स्टार्ट हुँदैन?", options: ["मोटर चिसो हुँदा", "पेट्रोल ट्याङ्की खाली भएमा"], answer: 1 },
-            { q: "ड्राइ टाइप प्राइमरी एयर फिल्टर कुन अवस्थामा काम गर्छ ?", options: ["फिल्टरको धुलो बढाउँछ", "फिल्टरको धुलो हटाउँछ"], answer: 1 },
-            { q: "धुलोबाट इन्जिनलाई बचाउनका लागि के लगाइन्छ?", options: ["इन्धन फिल्टर", "एयर फिल्टर"], answer: 1 },
-            { q: "मोटर सवारीसाधनमा प्रयोग हुने तेलको श्रेणी कुन Grade मा पर्दछ ?", options: ["Heavy grade", "Multi grade"], answer: 1 },
-            { q: "Main function of lubricants is:", options: ["To transfer heat of the system", "To lessen friction between two surfaces"], answer: 1 },
-            { q: "तलमध्ये कुन Multi-grade oil जनाउँछ?", options: ["API SF", "SAE 20W-50"], answer: 1 },
-            { q: "What is the symptom for the need of engine overhauling?", options: ["Excessive pressure rise", "Decreased power and oil consumption by the engine"], answer: 1 },
-            { q: "पदार्थलाई चिस्याउन पानीमा के मिसाउने गरिन्छ?", options: ["Surf", "Antifreeze"], answer: 1 },
-            { q: "Engine oil को अत्यधिक खपतको सम्भावित कारण कुन हुनसक्छ ?", options: ["Weak battery", "Excessive worn-out of ring and piston"], answer: 1 },
-            { q: "SAE multigrade oil मा कुन तेल पर्दछ ?", options: ["SAE 50", "SAE 20W-50"], answer: 1 },
-            { q: "Which indicate multigrade oil?", options: ["SAE 40", "SAE 4W-40"], answer: 1 },
-            { q: "Which one is the system for oil classification?", options: ["SAE only", "All of the above"], answer: 1 },
-            { q: "Coolant is not generally used on a shaper because:", options: ["Tool is made of heat-resisting material", "Negligible heat is generated"], answer: 1 },
-            { q: "Which is more viscous lube oil?", options: ["SAE 30", "SAE 80"], answer: 1 },
-            { q: "The temperature at which oil ceases to flow is called:", options: ["Cloud point", "Pour point"], answer: 1 },
-            { q: "Unit of viscosity is expressed as:", options: ["Meter² per sec", "Newton-sec per meter²"], answer: 1 },
-            { q: "Vegetable oil is used for lubrication of:", options: ["Gears", "Cutting tools"], answer: 1 },
-            { q: "The specific gravity of diesel is about:", options: ["0.65", "0.85"], answer: 1 },
-            { q: "Tool life is affected by machine:", options: ["Cutting speed only", "All of the above"], answer: 1 },
-            { q: "इञ्जिनको चिसो पदार्थ (coolant) राख्न प्रयोग हुने भाग कुन हो ?", options: ["रेडिएटर हुने पाइप", "रेडिएटर"], answer: 1 },
-            { q: "हेभी ड्युटी सवारीमा कुन प्रकारको ब्रेक प्रयोग गरिन्छ ?", options: ["हाइड्रोलिक ब्रेक", "मेकानिकल ब्रेक"], answer: 1 },
-            { q: "Which part filters dirt from fuel before it enters the engine?", options: ["Air filter", "Fuel filter"], answer: 1 },
-            { q: "Why is antifreeze added to engine coolant?", options: ["To increase boiling point", "To prevent freezing in cold temperatures"], answer: 1 },
-            { q: "Which of the following fuels has the highest calorific value?", options: ["Petrol", "Diesel"], answer: 0 },
-            { q: "Which device maintains fuel-air ratio in petrol engines?", options: ["Fuel injector", "Carburetor"], answer: 1 },
-            { q: "Which grade of oil is suitable for both hot and cold temperatures?", options: ["Single grade oil", "Multi-grade oil"], answer: 1 },
-            { q: "Purpose of oil filter in an engine is to:", options: ["Cool the engine", "Remove impurities from oil"], answer: 1 },
-            { q: "What happens if engine oil level is too low?", options: ["Better mileage", "Increased engine wear"], answer: 1 },
-            { q: "Which is used to lubricate small delicate parts like sewing machines?", options: ["Heavy gear oil", "Light mineral oil"], answer: 1 }
+            { q: "In diesel engine, the fuel is ignited by:", options: ["Ignition coil", "Compression heat"], answer: 1, explanation: "Diesel engines ignite fuel through the heat generated by high compression, not an ignition coil." },
+            { q: "Due to weight transfer, the ratio of braking effect at the front and the rear wheel should be:", options: ["50% at rear and 50% at front", "70% at front and 30% at rear"], answer: 1, explanation: "During braking, weight shifts forward, so about 70% of braking effect is on the front wheels." },
+            { q: "Engine मा fuel atomize गर्ने भाग कुन हो?", options: ["Engine manifold", "Fuel injector"], answer: 1, explanation: "फ्युल इन्जेक्टरले इन्धनलाई एटमाइज (सानो कणमा परिणत) गर्छ।" },
+            { q: "Engine को inlet valve को आकार outlet valve सँग तुलना गर्दा:", options: ["Small", "Larger"], answer: 1, explanation: "Inlet valves are larger to allow more air-fuel mixture into the cylinder for efficient combustion." },
+            { q: "FIP (Fuel Injection Pump) मा सामान्यतया कति सिलिण्डर हुन्छ ?", options: ["3", "Equal to engine cylinders"], answer: 1, explanation: "FIP delivers fuel to each engine cylinder, so its number of plungers matches the engine’s cylinders." },
+            { q: "Engine बन्द भएपछि पेट्रोल आपूर्ति रोक्न कुन उपाय अपनाइन्छ ?", options: ["भल्भ खोल्ने", "पम्प रोक्ने"], answer: 1, explanation: "पेट्रोल पम्प रोकेर इन्धन आपूर्ति बन्द गरिन्छ।" },
+            { q: "Engine मा इन्धनको मिश्रण सन्तुलनमा राख्ने काम गर्ने यन्त्र कुन हो ?", options: ["सिलिण्डर", "कार्बोरेटर"], answer: 1, explanation: "कार्बोरेटरले पेट्रोल इन्जिनमा हावा र इन्धनको मिश्रण सन्तुलनमा राख्छ।" },
+            { q: "Engine को Filter ले के काम गर्छ ?", options: ["फिल्टर", "धुलो कण हटाउने"], answer: 1, explanation: "इन्जिनको फिल्टरले धुलो र फोहोर हटाएर इन्जिनलाई सुरक्षित राख्छ।" },
+            { q: "Cylinder, piston rings, valves, crank shaft, governors etc were first developed in connection with:", options: ["Steam Engine", "Petrol Engine"], answer: 0, explanation: "These components were first developed for steam engines before being adapted for internal combustion engines." },
+            { q: "A spark plug is required in:", options: ["Motor cycle", "Two stroke petrol engine"], answer: 1, explanation: "Two-stroke petrol engines require spark plugs to ignite the fuel-air mixture." },
+            { q: "Which of the following is the correct group of components in petrol engine?", options: ["Fuel pump and piston only", "Inlet valve, exhaust valve, piston, spark plug"], answer: 1, explanation: "Petrol engines include inlet/exhaust valves, pistons, and spark plugs for combustion." },
+            { q: "“Gasohol” is the mixture of:", options: ["CNG gas and alcohol", "Petrol and alcohol"], answer: 1, explanation: "Gasohol is a blend of petrol and ethanol (alcohol) used as an alternative fuel." },
+            { q: "वाहानहरुमा ईन्धनको रुपमा प्रयोग हुने बायो डिजेल कुन हो?", options: ["पेट्रोल", "Bio-diesel"], answer: 1, explanation: "बायो-डिजेल एक पर्यावरणमैत्री इन्धन हो, जुन वनस्पतिजन्य तेलबाट बनाइन्छ।" },
+            { q: "फ्युल फिल्टर कहिले सफा गर्नुपर्छ?", options: ["प्रत्येक महिना", "निर्माताको सिफारिस अनुसार"], answer: 1, explanation: "फ्युल फिल्टर निर्माताको सिफारिस (सामान्यतः 10,000-20,000 किमी) अनुसार सफा गर्नुपर्छ।" },
+            { q: "कार्बोरेटर कुन प्रणालीमा प्रयोग गरिन्छ?", options: ["डीजल इन्जिन", "पेट्रोल इन्जिन"], answer: 1, explanation: "कार्बोरेटर पेट्रोल इन्जिनमा हावा र इन्धनको मिश्रण तयार गर्न प्रयोग गरिन्छ।" },
+            { q: "गाडीमा आवश्यक कस्तो इन्धन हुन्छ?", options: ["पेट्रोल मात्र", "गाडीको प्रकार अनुसार"], answer: 1, explanation: "गाडीको इन्जिन प्रकार (पेट्रोल, डिजेल, CNG) अनुसार इन्धन प्रयोग हुन्छ।" },
+            { q: "Choose the multigrade engine oil:", options: ["SAE 15W-40", "SAE 10W"], answer: 0, explanation: "SAE 15W-40 is a multigrade oil suitable for a wide temperature range." },
+            { q: "Lubricants and filters should be changed in the equipment…", options: ["Once in 6 months", "As per manufacturer’s recommendation"], answer: 1, explanation: "Lubricants and filters should be changed according to the manufacturer’s service schedule." },
+            { q: "Engine lubrication system मा प्रयोग हुने तत्व कुन हो?", options: ["Air filter", "Engine oil"], answer: 1, explanation: "इन्जिन आयलले लुब्रिकेशन सिस्टममा घर्षण कम गर्छ।" },
+            { q: "गाडीको सर्भिस गर्दा सबैभन्दा पहिले के चेक गर्नु पर्छ?", options: ["गियर बक्स", "तेलको स्तर"], answer: 1, explanation: "सर्भिस गर्दा इन्जिन आयलको स्तर पहिले जाँच गर्नुपर्छ।" },
+            { q: "Symbol कुन संकेत गर्छ?", options: ["तिव्र घात", "खतरनाक घुमाउरो बाटो"], answer: 1, explanation: "यो प्रतीकले खतरनाक घुमाउरो बाटोको संकेत गर्छ।" },
+            { q: "कुन अवस्थामा मोटर स्टार्ट हुँदैन?", options: ["मोटर चिसो हुँदा", "पेट्रोल ट्याङ्की खाली भएमा"], answer: 1, explanation: "पेट्रोल ट्याङ्की खाली हुँदा मोटर स्टार्ट हुँदैन।" },
+            { q: "ड्राइ टाइप प्राइमरी एयर फिल्टर कुन अवस्थामा काम गर्छ ?", options: ["फिल्टरको धुलो बढाउँछ", "फिल्टरको धुलो हटाउँछ"], answer: 1, explanation: "ड्राइ टाइप एयर फिल्टरले हावाबाट धुलो हटाउँछ।" },
+            { q: "धुलोबाट इन्जिनलाई बचाउनका लागि के लगाइन्छ?", options: ["इन्धन फिल्टर", "एयर फिल्टर"], answer: 1, explanation: "एयर फिल्टरले इन्जिनमा प्रवेश गर्ने हावाबाट धुलो हटाउँछ।" },
+            { q: "मोटर सवारीसाधनमा प्रयोग हुने तेलको श्रेणी कुन Grade मा पर्दछ ?", options: ["Heavy grade", "Multi grade"], answer: 1, explanation: "मोटर सवारीमा मल्टिग्रेड तेल प्रयोग हुन्छ, जुन विभिन्न तापक्रममा प्रभावकारी हुन्छ।" },
+            { q: "Main function of lubricants is:", options: ["To transfer heat of the system", "To lessen friction between two surfaces"], answer: 1, explanation: "Lubricants reduce friction between moving parts, minimizing wear and heat." },
+            { q: "तलमध्ये कुन Multi-grade oil जनाउँछ?", options: ["API SF", "SAE 20W-50"], answer: 1, explanation: "SAE 20W-50 is a multigrade oil, effective across a range of temperatures." },
+            { q: "What is the symptom for the need of engine overhauling?", options: ["Excessive pressure rise", "Decreased power and high oil consumption"], answer: 1, explanation: "Decreased power and high oil consumption indicate worn components, necessitating an overhaul." },
+            { q: "पदार्थलाई चिस्याउन पानीमा के मिसाउने गरिन्छ?", options: ["Surf", "Antifreeze"], answer: 1, explanation: "एण्टिफ्रिजले पानीको जम्ने बिन्दु घटाउँछ र इन्जिनलाई चिसो राख्छ।" },
+            { q: "Engine oil को अत्यधिक खपतको सम्भावित कारण कुन हुनसक्छ ?", options: ["Weak battery", "Worn-out piston rings"], answer: 1, explanation: "Worn piston rings allow oil to leak into the combustion chamber, increasing consumption." },
+            { q: "SAE multigrade oil मा कुन तेल पर्दछ ?", options: ["SAE 50", "SAE 20W-50"], answer: 1, explanation: "SAE 20W-50 is a multigrade oil, suitable for varying temperatures." },
+            { q: "Which indicate multigrade oil?", options: ["SAE 40", "SAE 10W-40"], answer: 1, explanation: "SAE 10W-40 is a multigrade oil, indicated by the 'W' and dual viscosity ratings." },
+            { q: "Which one is the system for oil classification?", options: ["SAE only", "SAE and API"], answer: 1, explanation: "SAE classifies oil viscosity, while API defines performance standards." },
+            { q: "Coolant is not generally used on a shaper because:", options: ["Tool is made of heat-resisting material", "Negligible heat is generated"], answer: 1, explanation: "Shapers generate minimal heat, so coolant is typically unnecessary." },
+            { q: "Which is more viscous lube oil?", options: ["SAE 30", "SAE 80"], answer: 1, explanation: "SAE 80 is more viscous than SAE 30, indicating thicker oil." },
+            { q: "The temperature at which oil ceases to flow is called:", options: ["Cloud point", "Pour point"], answer: 1, explanation: "The pour point is the temperature at which oil stops flowing, indicating its low-temperature performance." },
+            { q: "Unit of viscosity is expressed as:", options: ["Meter² per sec", "Newton-sec per meter²"], answer: 1, explanation: "Viscosity is measured in Newton-seconds per meter² (Pa·s) in the SI system." },
+            { q: "Vegetable oil is used for lubrication of:", options: ["Gears", "Cutting tools"], answer: 1, explanation: "Vegetable oils are often used as cutting fluids for lubrication in machining." },
+            { q: "The specific gravity of diesel is about:", options: ["0.65", "0.85"], answer: 1, explanation: "Diesel fuel has a specific gravity of about 0.85, denser than petrol." },
+            { q: "Tool life is affected by machine:", options: ["Cutting speed only", "Cutting speed, feed, and depth"], answer: 1, explanation: "Tool life depends on cutting speed, feed rate, and depth of cut, among other factors." },
+            { q: "इञ्जिनको चिसो पदार्थ (coolant) राख्न प्रयोग हुने भाग कुन हो ?", options: ["रेडिएटर हुने पाइप", "रेडिएटर"], answer: 1, explanation: "रेडिएटरले कूल्याण्ट राख्छ र इन्जिनको ताप निकाल्छ।" },
+            { q: "हेभी ड्युटी सवारीमा कुन प्रकारको ब्रेक प्रयोग गरिन्छ ?", options: ["हाइड्रोलिक ब्रेक", "एयर ब्रेक"], answer: 1, explanation: "हेभी ड्युटी सवारीमा एयर ब्रेक प्रयोग हुन्छ, जुन प्रभावकारी र सुरक्षित हुन्छ।" },
+            { q: "Which part filters dirt from fuel before it enters the engine?", options: ["Air filter", "Fuel filter"], answer: 1, explanation: "The fuel filter removes dirt and impurities from fuel before it reaches the engine." },
+            { q: "Why is antifreeze added to engine coolant?", options: ["To increase boiling point", "To prevent freezing in cold temperatures"], answer: 1, explanation: "Antifreeze lowers the freezing point and raises the boiling point of coolant for temperature protection." },
+            { q: "Which of the following fuels has the highest calorific value?", options: ["Petrol", "Diesel"], answer: 0, explanation: "Petrol has a slightly higher calorific value (approx. 44 MJ/kg) than diesel (approx. 42 MJ/kg)." },
+            { q: "Which device maintains fuel-air ratio in petrol engines?", options: ["Fuel injector", "Carburetor"], answer: 1, explanation: "The carburetor mixes air and fuel in the correct ratio for petrol engines." },
+            { q: "Which grade of oil is suitable for both hot and cold temperatures?", options: ["Single grade oil", "Multi-grade oil"], answer: 1, explanation: "Multi-grade oil performs well across a wide temperature range due to its dual viscosity ratings." },
+            { q: "Purpose of oil filter in an engine is to:", options: ["Cool the engine", "Remove impurities from oil"], answer: 1, explanation: "The oil filter removes contaminants from engine oil to protect moving parts." },
+            { q: "What happens if engine oil level is too low?", options: ["Better mileage", "Increased engine wear"], answer: 1, explanation: "Low oil levels cause increased friction, leading to engine wear and potential damage." },
+            { q: "Which is used to lubricate small delicate parts like sewing machines?", options: ["Heavy gear oil", "Light mineral oil"], answer: 1, explanation: "Light mineral oil is used for delicate mechanisms like sewing machines due to its low viscosity." }
         ];
+
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -138,7 +270,41 @@
 
         const quizContainer = document.getElementById('quiz');
         const scoreContainer = document.getElementById('score');
+        const currentScore = document.getElementById('current-score');
+        const progressBar = document.getElementById('progress');
+        const timerDisplay = document.getElementById('timer');
+        const resultsBtn = document.getElementById('results-btn');
         let score = 0;
+        let answeredQuestions = 0;
+        let timeElapsed = 0;
+        let timerInterval;
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeElapsed++;
+                const minutes = Math.floor(timeElapsed / 60).toString().padStart(2, '0');
+                const seconds = (timeElapsed % 60).toString().padStart(2, '0');
+                timerDisplay.textContent = `Time: ${minutes}:${seconds}`;
+            }, 1000);
+        }
+
+        function updateProgress() {
+            const progressPercentage = (answeredQuestions / questions.length) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+        }
+
+        function showResults() {
+            quizContainer.style.display = 'none';
+            scoreContainer.textContent = `Final Score: ${score} out of ${questions.length} (${((score / questions.length) * 100).toFixed(2)}%)`;
+            resultsBtn.style.display = 'block';
+            resultsBtn.onclick = () => {
+                quizContainer.style.display = 'block';
+                scoreContainer.textContent = '';
+                resultsBtn.style.display = 'none';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            clearInterval(timerInterval);
+        }
 
         questions.forEach((q, i) => {
             const div = document.createElement('div');
@@ -148,6 +314,10 @@
             const optsDiv = document.createElement('div');
             optsDiv.classList.add('options');
 
+            const explanationDiv = document.createElement('div');
+            explanationDiv.classList.add('explanation');
+            explanationDiv.textContent = q.explanation;
+
             const shuffled = shuffle(q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.answer })));
 
             shuffled.forEach(({ text, isCorrect }) => {
@@ -155,9 +325,14 @@
                 btn.textContent = text;
                 btn.onclick = () => {
                     if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+                    answeredQuestions++;
+                    updateProgress();
+                    currentScore.textContent = `Score: ${score}/${questions.length}`;
+
                     if (isCorrect) {
                         btn.classList.add('correct');
                         score++;
+                        currentScore.textContent = `Score: ${score}/${questions.length}`;
                     } else {
                         btn.classList.add('wrong');
                         optsDiv.querySelectorAll('button').forEach(b => {
@@ -166,17 +341,23 @@
                             }
                         });
                     }
-                    if (i === questions.length - 1) {
-                        scoreContainer.textContent = `✅ Your Score: ${score} out of ${questions.length}`;
+
+                    optsDiv.querySelectorAll('button').forEach(b => b.disabled = true);
+                    explanationDiv.style.display = 'block';
+
+                    if (answeredQuestions === questions.length) {
+                        showResults();
                     }
                 };
                 optsDiv.appendChild(btn);
             });
 
             div.appendChild(optsDiv);
+            div.appendChild(explanationDiv);
             quizContainer.appendChild(div);
         });
+
+        startTimer();
     </script>
 </body>
-
 </html>
