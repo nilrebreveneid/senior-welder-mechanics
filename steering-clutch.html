@@ -1,118 +1,572 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>steering-clutch </title>
+    <title>Logsewa Steering and Clutch Mock Test</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f5f7fa;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        h1 {
-            text-align: center;
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #e0e7ff, #c3dafe);
+            margin: 0;
+            padding: 2rem;
             color: #333;
+            min-height: 100vh;
         }
 
         .quiz-container {
             max-width: 900px;
             margin: auto;
             background: #fff;
-            padding: 20px;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #1e3a8a;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            text-align: center;
+            color: #1e3a8a;
+            margin: 1rem 0;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f8fafc;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .timer {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #d81b60;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress {
+            height: 100%;
+            background: #3b82f6;
+            transition: width 0.3s ease;
         }
 
         .question {
-            margin-bottom: 20px;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            animation: fadeIn 0.5s;
+            transition: transform 0.2s ease;
+        }
+
+        .question:hover {
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .question p {
-            font-weight: bold;
-            color: #444;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 1rem;
         }
 
         .options button {
             display: block;
-            margin: 6px 0;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            cursor: pointer;
-            text-align: left;
             width: 100%;
-            transition: background-color 0.3s;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            color: #374151;
         }
 
-        .options button:hover {
-            background-color: #e0e0e0;
+        .options button:hover:not(:disabled) {
+            background: #f3f4f6;
+            border-color: #3b82f6;
+            transform: translateX(4px);
         }
 
         .options button.correct {
-            background-color: #c8f7c5;
+            background: #bbf7d0;
+            border-color: #22c55e;
+            color: #166534;
+            animation: pulse 0.5s;
         }
 
         .options button.wrong {
-            background-color: #f7c5c5;
+            background: #fecaca;
+            border-color: #ef4444;
+            color: #991b1b;
+            animation: shake 0.3s;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .options button:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #eff6ff;
+            border-radius: 8px;
+            color: #1e3a8a;
+            font-size: 0.95rem;
+        }
+
+        .skip-button {
+            background: #fff3cd;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            width: 100%;
+            border: 1px solid #ffca28;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .skip-button:hover {
+            background: #ffecb3;
+        }
+
+        .next-button {
+            background: #3b82f6;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 1rem;
+            display: block;
+            width: 100%;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+
+        .next-button:hover:not(:disabled) {
+            background: #2563eb;
+        }
+
+        .next-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .score-container {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
         }
 
         .score {
-            font-size: 1.2em;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .results-table th, .results-table td {
+            border: 1px solid #e5e7eb;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .results-table th {
+            background: #f8fafc;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .results-table .correct {
+            color: #166534;
             font-weight: bold;
+        }
+
+        .results-table .wrong {
+            color: #991b1b;
+            font-weight: bold;
+        }
+
+        .results-table .skipped, .results-table .not-attempted {
+            color: #d97706;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .restart-button {
+            background: #22c55e;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 1rem auto;
+            display: block;
+            width: 100%;
             text-align: center;
-            margin-top: 30px;
+            transition: background 0.3s ease;
+        }
+
+        .restart-button:hover {
+            background: #16a34a;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            .quiz-container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .question p {
+                font-size: 1rem;
+            }
+
+            .options button, .skip-button, .next-button, .restart-button {
+                font-size: 0.9rem;
+                padding: 0.8rem;
+            }
+
+            .results-table th, .results-table td {
+                padding: 0.5rem;
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
-
 <body>
-    <h1>steering-clutch mcq</h1>
-    <div class="quiz-container" id="quiz"></div>
-    <div class="score" id="score"></div>
+    <div class="quiz-container">
+        <h1>Logsewa Steering and Clutch Mock Test</h1>
+        <div class="quiz-header">
+            <div class="timer" id="timer">Time: 00:00</div>
+            <div class="score" id="current-score">Score: 0/30</div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <div id="quiz"></div>
+        <div class="score-container">
+            <div class="score" id="score"></div>
+            <div id="results" class="hidden">
+                <h2>Quiz Results</h2>
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>Your Answer</th>
+                            <th>Correct Answer</th>
+                            <th>Status</th>
+                            <th>Explanation</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-body"></tbody>
+                </table>
+                <button class="restart-button" onclick="restartQuiz()">Restart Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="correct-sound" src="https://www.soundjay.com/buttons/beep-01a.mp3"></audio>
+    <audio id="wrong-sound" src="https://www.soundjay.com/buttons/beep-02.mp3"></audio>
 
     <script>
-
         const questions = [
-
-            { q: "Which of the following is the gear used in steering system?", options: ["Worm and wheel steering gear", "Rack and pinion steering gear"], answer: 1 },
-            { q: "The first thing to check for stiff steering wheel of a vehicle with hydraulic power system is:", options: ["To check the condition of hydraulic hoses", "To check the hydraulic level in the reservoir"], answer: 1 },
-            { q: "The propeller shaft is tubular instead of solid because:", options: ["Solid shaft is weaker", "Its sag is smaller"], answer: 1 },
-            { q: "The function of the steering system is:", options: ["To achieve angular motion of the front wheel", "All of the above"], answer: 1 },
-            { q: "The function of a universal joint is to allow the propeller shaft to:", options: ["Bend sideways", "Transfer torque at an angle"], answer: 1 },
-            { q: "The basic function of a clutch is:", options: ["To transmit the torque of engine to transmission", "To let the vehicle run at uniform speed"], answer: 0 },
-            { q: "The engine crankshaft is automatically engaged with the clutch shaft and disengaged by:", options: ["Single plate clutch", "Cone clutch"], answer: 0 },
-            { q: "Steering gear मा gear sector वा toothed roller को mesh कुनसँग हुन्छ?", options: ["Roller bearing", "Worm"], answer: 1 },
-            { q: "Clutch ले प्राय: कति टोक़ ट्रान्समिट गर्छ?", options: ["80 percent of the maximum engine torque", "150 percent of the maximum engine torque"], answer: 1 },
-            { q: "कुन पार्ट स्टेरिङ सिस्टममा समावेश हुन्छ?", options: ["टायर (Tyre)", "गियर (Gear)"], answer: 1 },
-            { q: "स्टेरिङ सिस्टमको मुख्य काम के हो?", options: ["गाडी रोक्ने", "गाडी घुमाउने"], answer: 1 },
-            { q: "The component that is responsible for converting the rotation of the steering wheel into motion is:", options: ["Steering shaft", "Steering gearbox"], answer: 1 },
-            { q: "The excessive play in steering wheel causes ……", options: ["Easy to turn the vehicles in turning", "Difficult to control vehicle"], answer: 1 },
-            { q: "Which is the cause of over-steering of an automobile?", options: ["Low tyre pressure", "Loose steering linkage components"], answer: 1 },
-            { q: "Which is not a type of gear?", options: ["Visible plate clutch", "Synchronising type"], answer: 1 },
-            { q: "Automobile steering system मा निम्न मध्ये कुन पाइनिन्छ ?", options: ["Toe-in", "Caster"], answer: 1 },
-            { q: "The component that converts steering wheel rotation into lateral motion is the:", options: ["Steering shaft", "Steering gearbox"], answer: 1 },
-            { q: "The excessive play in steering wheel causes …", options: ["Easy to turn steering wheel", "Difficult to control vehicle"], answer: 1 },
-            { q: "गाडीको स्टेरिङ्ग प्रणालीमा प्रयोग हुने टायर्ड एन्ड (tierod end) को कार्य के हुन्छ?", options: ["काम गर्दा स्टेरिङ्ग तोल्तो बनाउने", "काम गर्दा स्टेरिङ्ग बलियो बनाउने"], answer: 1 },
-            { q: "गाडीको स्टेरिङ्ग ह्यान्डलमा कुन-कुन भाग हुन्छ?", options: ["ब्रेक, हब", "स्पोक, हब, रिम"], answer: 1 },
-            { q: "Flywheel helps in:", options: ["Facilitate start of machine", "Smooth out power impulses"], answer: 1 },
-            { q: "Clutch in a vehicle system helps to:", options: ["Transmit power from engine to transmission", "Reduce engine temperature"], answer: 0 },
-            { q: "In a simple planetary gear set of automatic transmission, the output member to increase torque is always:", options: ["The ring gear", "The sun gear"], answer: 1 },
-            { q: "In order to enable gear change unit of an automatic transmission, a ___ is used.", options: ["Synchronizer", "Hydraulic multi plate clutch"], answer: 1 },
-            { q: "In a single dry plate clutch, torsional vibrations are absorbed by:", options: ["Cushion spring", "Coil springs known as torsional spring"], answer: 1 },
-            { q: "Which component connects the clutch pedal to the clutch mechanism?", options: ["Clutch disc", "Clutch cable or linkage"], answer: 1 },
-            { q: "What is the primary purpose of the steering damper?", options: ["To improve acceleration", "To reduce steering vibrations"], answer: 1 },
-            { q: "Which gear provides maximum torque multiplication in a manual transmission?", options: ["4th gear", "1st gear"], answer: 1 },
-            { q: "Which part allows angular movement of front wheels for smooth turning?", options: ["Differential", "Kingpin"], answer: 1 },
-            { q: "In front-wheel drive vehicles, the transmission system is placed:", options: ["At the rear of the vehicle", "Alongside the engine"], answer: 1 }
-
-
-
+            {
+                q: "Which gear type is commonly used in a vehicle’s steering system?",
+                options: ["Bevel gear", "Rack and pinion"],
+                answer: 1,
+                explanation: "Rack and pinion is widely used in steering systems for its simplicity and precise control."
+            },
+            {
+                q: "What should be checked first for a stiff steering wheel in a hydraulic power steering system?",
+                options: ["Hydraulic hoses condition", "Hydraulic fluid level"],
+                answer: 1,
+                explanation: "Low hydraulic fluid level is the most common cause of stiff steering and should be checked first."
+            },
+            {
+                q: "Why is a propeller shaft typically tubular instead of solid?",
+                options: ["To reduce strength", "To minimize weight and sag"],
+                answer: 1,
+                explanation: "A tubular shaft is lighter and resists sagging better than a solid shaft of the same strength."
+            },
+            {
+                q: "What is the primary function of a vehicle’s steering system?",
+                options: ["To control engine speed", "To achieve angular motion of the wheels"],
+                answer: 1,
+                explanation: "The steering system directs the vehicle by turning the wheels at the desired angle."
+            },
+            {
+                q: "What is the function of a universal joint in a propeller shaft?",
+                options: ["To increase shaft length", "To transfer torque at an angle"],
+                answer: 1,
+                explanation: "Universal joints allow torque transmission between misaligned shafts, such as in a drivetrain."
+            },
+            {
+                q: "What is the basic function of a clutch in a vehicle?",
+                options: ["To transmit engine torque to the transmission", "To maintain constant vehicle speed"],
+                answer: 0,
+                explanation: "The clutch connects the engine to the transmission, allowing power transfer and gear changes."
+            },
+            {
+                q: "Which clutch type is commonly used in passenger vehicles?",
+                options: ["Single-plate clutch", "Cone clutch"],
+                answer: 0,
+                explanation: "Single-plate clutches are simple and widely used in manual transmission passenger vehicles."
+            },
+            {
+                q: "Steering gear मा gear sector वा toothed roller को mesh कुनसँग हुन्छ?",
+                options: ["Ball bearing", "Worm gear"],
+                answer: 1,
+                explanation: "In worm and roller steering, the toothed roller meshes with a worm gear for precise control."
+            },
+            {
+                q: "Clutch ले सामान्यतः कति टोक़ ट्रान्समिट गर्छ?",
+                options: ["80% of maximum engine torque", "Up to 120% of maximum engine torque"],
+                answer: 1,
+                explanation: "Clutches are designed to transmit up to 120% of engine torque to handle peak loads."
+            },
+            {
+                q: "कुन पार्ट स्टेरिङ सिस्टममा समावेश हुन्छ?",
+                options: ["Brake caliper", "Steering gear"],
+                answer: 1,
+                explanation: "The steering gear is a critical component of the steering system, unlike brake calipers."
+            },
+            {
+                q: "स्टेरिङ सिस्टमको मुख्य काम के हो?",
+                options: ["गाडी रोक्ने", "गाडीको दिशा नियन्त्रण गर्ने"],
+                answer: 1,
+                explanation: "The steering system controls the vehicle’s direction by turning the wheels."
+            },
+            {
+                q: "Which component converts steering wheel rotation into lateral motion?",
+                options: ["Steering shaft", "Steering gearbox"],
+                answer: 1,
+                explanation: "The steering gearbox (e.g., rack and pinion) converts rotational input into lateral wheel movement."
+            },
+            {
+                q: "What does excessive play in the steering wheel cause?",
+                options: ["Easier turning", "Difficulty controlling the vehicle"],
+                answer: 1,
+                explanation: "Excessive play reduces steering precision, making vehicle control difficult."
+            },
+            {
+                q: "What can cause over-steering in an automobile?",
+                options: ["High tire pressure", "Worn rear suspension components"],
+                answer: 1,
+                explanation: "Worn rear suspension components can cause over-steering by destabilizing the rear end."
+            },
+            {
+                q: "Which is NOT a type of clutch?",
+                options: ["Diaphragm clutch", "Synchronizing clutch"],
+                answer: 1,
+                explanation: "Synchronizing refers to transmission components, not a clutch type."
+            },
+            {
+                q: "Which alignment parameter is part of the steering system?",
+                options: ["Wheelbase", "Caster"],
+                answer: 1,
+                explanation: "Caster is a steering alignment angle affecting stability and returnability."
+            },
+            {
+                q: "What is the function of the tie-rod end in a steering system?",
+                options: ["To absorb road shocks", "To connect steering linkage to wheels"],
+                answer: 1,
+                explanation: "Tie-rod ends link the steering gearbox to the wheels for directional control."
+            },
+            {
+                q: "Which parts are typically found in a steering wheel assembly?",
+                options: ["Brake pedal and hub", "Spoke, hub, and rim"],
+                answer: 1,
+                explanation: "The steering wheel consists of spokes, a hub, and a rim for driver input."
+            },
+            {
+                q: "What is the role of the flywheel in a clutch system?",
+                options: ["To start the engine", "To smooth out power impulses"],
+                answer: 1,
+                explanation: "The flywheel stores energy and smooths engine power delivery to the clutch."
+            },
+            {
+                q: "What is the primary function of the clutch in a vehicle?",
+                options: ["To transfer power from engine to transmission", "To cool the engine"],
+                answer: 0,
+                explanation: "The clutch enables power transfer from the engine to the transmission."
+            },
+            {
+                q: "In a planetary gear set of an automatic transmission, which component increases torque?",
+                options: ["Planet carrier", "Sun gear"],
+                answer: 0,
+                explanation: "The planet carrier is typically the output member for torque multiplication."
+            },
+            {
+                q: "What enables gear changes in an automatic transmission?",
+                options: ["Synchronizer", "Hydraulic multi-plate clutch"],
+                answer: 1,
+                explanation: "Hydraulic multi-plate clutches engage and disengage gears in automatic transmissions."
+            },
+            {
+                q: "In a single dry plate clutch, how are torsional vibrations absorbed?",
+                options: ["By the pressure plate", "By coil springs in the clutch disc"],
+                answer: 1,
+                explanation: "Coil springs in the clutch disc absorb torsional vibrations for smooth engagement."
+            },
+            {
+                q: "Which component connects the clutch pedal to the clutch mechanism?",
+                options: ["Clutch disc", "Clutch cable or linkage"],
+                answer: 1,
+                explanation: "The clutch cable or linkage transmits pedal movement to the clutch mechanism."
+            },
+            {
+                q: "What is the primary purpose of a steering damper?",
+                options: ["To enhance acceleration", "To reduce steering vibrations"],
+                answer: 1,
+                explanation: "A steering damper minimizes vibrations and stabilizes steering, especially at high speeds."
+            },
+            {
+                q: "Which gear in a manual transmission provides maximum torque multiplication?",
+                options: ["4th gear", "1st gear"],
+                answer: 1,
+                explanation: "1st gear provides the highest torque multiplication for starting and heavy loads."
+            },
+            {
+                q: "Which part allows angular movement of front wheels for smooth turning?",
+                options: ["Differential", "Kingpin"],
+                answer: 1,
+                explanation: "The kingpin allows the front wheels to pivot for steering."
+            },
+            {
+                q: "In front-wheel drive vehicles, where is the transmission system typically placed?",
+                options: ["At the rear", "Alongside the engine"],
+                answer: 1,
+                explanation: "In front-wheel drive vehicles, the transmission is integrated with the engine at the front."
+            },
+            {
+                q: "What is a common symptom of a worn clutch?",
+                options: ["Clutch slippage", "Improved fuel efficiency"],
+                answer: 0,
+                explanation: "A worn clutch causes slippage, reducing power transfer and efficiency."
+            },
+            {
+                q: "What maintenance task helps prevent steering system wear?",
+                options: ["Checking tire pressure", "Regular wheel alignment"],
+                answer: 1,
+                explanation: "Regular wheel alignment reduces stress on steering components and ensures proper handling."
+            }
         ];
 
+        let currentPage = 0;
+        let score = 0;
+        let skipped = [];
+        let userAnswers = Array(questions.length).fill(null);
+        let timerSeconds = 0;
+        let timerInterval;
+        const QUESTIONS_PER_PAGE = 5;
+        const ANSWER_DELAY = 1000;
+
+        const quizEl = document.getElementById("quiz");
+        const scoreEl = document.getElementById("score");
+        const resultsEl = document.getElementById("results");
+        const resultsBody = document.getElementById("results-body");
+        const progressEl = document.getElementById("progress");
+        const timerEl = document.getElementById("timer");
+        const currentScoreEl = document.getElementById("current-score");
+        const correctSound = document.getElementById("correct-sound");
+        const wrongSound = document.getElementById("wrong-sound");
+
+        // Load progress from localStorage
+        function loadProgress() {
+            const saved = localStorage.getItem("quizProgressSteeringClutch");
+            if (saved) {
+                const { currentPage: savedPage, score: savedScore, skipped: savedSkipped, answers: savedAnswers, time: savedTime } = JSON.parse(saved);
+                currentPage = savedPage;
+                score = savedScore;
+                skipped = savedSkipped;
+                userAnswers = savedAnswers || Array(questions.length).fill(null);
+                timerSeconds = savedTime || 0;
+                updateCurrentScore();
+            }
+        }
+
+        // Save progress to localStorage
+        function saveProgress() {
+            localStorage.setItem("quizProgressSteeringClutch", JSON.stringify({
+                currentPage,
+                score,
+                skipped,
+                answers: userAnswers,
+                time: timerSeconds
+            }));
+        }
+
+        // Update current score display
+        function updateCurrentScore() {
+            currentScoreEl.textContent = `Score: ${score}/${questions.length}`;
+        }
+
+        // Shuffle array
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -121,47 +575,247 @@
             return array;
         }
 
-        const quizContainer = document.getElementById('quiz');
-        const scoreContainer = document.getElementById('score');
-        let score = 0;
+        // Start timer
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timerSeconds++;
+                const minutes = Math.floor(timerSeconds / 60);
+                const seconds = timerSeconds % 60;
+                timerEl.textContent = `Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                saveProgress();
+            }, 1000);
+        }
 
-        questions.forEach((q, i) => {
-            const div = document.createElement('div');
-            div.classList.add('question');
-            div.innerHTML = `<p>${i + 1}. ${q.q}</p>`;
+        // Update progress bar
+        function updateProgress() {
+            const answeredCount = userAnswers.filter(answer => answer !== null).length;
+            const percentage = (answeredCount / questions.length) * 100;
+            progressEl.style.width = `${percentage}%`;
+        }
 
-            const optsDiv = document.createElement('div');
-            optsDiv.classList.add('options');
+        // Show questions for the current page
+        function showQuestions(page) {
+            quizEl.innerHTML = '';
+            const startIndex = page * QUESTIONS_PER_PAGE;
+            const endIndex = Math.min(startIndex + QUESTIONS_PER_PAGE, questions.length);
 
-            const shuffled = shuffle(q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.answer })));
+            for (let i = startIndex; i < endIndex; i++) {
+                const q = questions[i];
+                const shuffledOptions = shuffle([...q.options].map((opt, j) => ({ text: opt, index: j })));
+                const optionsHtml = shuffledOptions
+                    .map(opt => `<button onclick="checkAnswer(this, ${i}, ${opt.index}, '${opt.text.replace(/'/g, "\\'")}')">${opt.text}</button>`)
+                    .join('');
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question');
+                questionDiv.dataset.index = i;
+                questionDiv.innerHTML = `
+                    <p>Q${i + 1}. ${q.q}</p>
+                    <div class="options">${optionsHtml}</div>
+                    <button class="skip-button" onclick="skipQuestion(${i})">Skip</button>
+                    <div class="explanation">${q.explanation}</div>
+                `;
+                quizEl.appendChild(questionDiv);
+            }
 
-            shuffled.forEach(({ text, isCorrect }) => {
-                const btn = document.createElement('button');
-                btn.textContent = text;
-                btn.onclick = () => {
-                    if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
-                    if (isCorrect) {
-                        btn.classList.add('correct');
-                        score++;
-                    } else {
-                        btn.classList.add('wrong');
-                        optsDiv.querySelectorAll('button').forEach(b => {
-                            if (b.textContent === shuffled.find(o => o.isCorrect).text) {
-                                b.classList.add('correct');
-                            }
-                        });
-                    }
-                    if (i === questions.length - 1) {
-                        scoreContainer.textContent = `✅ Your Score: ${score} out of ${questions.length}`;
-                    }
-                };
-                optsDiv.appendChild(btn);
+            if (endIndex < questions.length || skipped.length > 0) {
+                const nextButton = document.createElement('button');
+                nextButton.classList.add('next-button');
+                nextButton.textContent = endIndex < questions.length ? 'Next' : 'Review Skipped Questions';
+                nextButton.onclick = nextPage;
+                nextButton.disabled = !areAllQuestionsAnsweredOnPage(startIndex, endIndex);
+                quizEl.appendChild(nextButton);
+            } else {
+                const submitButton = document.createElement('button');
+                submitButton.classList.add('next-button');
+                submitButton.textContent = 'Submit Quiz';
+                submitButton.onclick = endQuiz;
+                submitButton.disabled = !areAllQuestionsAnsweredOnPage(startIndex, endIndex);
+                quizEl.appendChild(submitButton);
+            }
+
+            updateProgress();
+            saveProgress();
+            restoreAnswers(startIndex, endIndex);
+        }
+
+        // Restore previous answers for the current page
+        function restoreAnswers(startIndex, endIndex) {
+            for (let i = startIndex; i < endIndex; i++) {
+                if (userAnswers[i] !== null && userAnswers[i] !== 'Skipped') {
+                    const questionDiv = document.querySelector(`.question[data-index="${i}"]`);
+                    const buttons = questionDiv.querySelectorAll('.options button');
+                    const q = questions[i];
+                    buttons.forEach(btn => {
+                        btn.disabled = true;
+                        if (btn.textContent === q.options[q.answer]) {
+                            btn.classList.add('correct');
+                        }
+                        if (btn.textContent === userAnswers[i] && userAnswers[i] !== q.options[q.answer]) {
+                            btn.classList.add('wrong');
+                        }
+                    });
+                    questionDiv.querySelector('.explanation').style.display = 'block';
+                    questionDiv.querySelector('.skip-button').disabled = true;
+                } else if (userAnswers[i] === 'Skipped') {
+                    const questionDiv = document.querySelector(`.question[data-index="${i}"]`);
+                    questionDiv.querySelectorAll('.options button').forEach(btn => btn.disabled = true);
+                    questionDiv.querySelector('.skip-button').disabled = true;
+                    questionDiv.querySelector('.explanation').style.display = 'block';
+                }
+            }
+        }
+
+        // Check if all questions on the current page are answered or skipped
+        function areAllQuestionsAnsweredOnPage(startIndex, endIndex) {
+            for (let i = startIndex; i < endIndex; i++) {
+                if (userAnswers[i] === null) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Check answer
+        function checkAnswer(button, questionIndex, selected, selectedText) {
+            const q = questions[questionIndex];
+            const correct = q.answer;
+            const buttons = button.parentElement.querySelectorAll("button");
+            const questionDiv = button.closest('.question');
+            const explanationDiv = questionDiv.querySelector('.explanation');
+
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                if (q.options.indexOf(btn.textContent) === correct) {
+                    btn.classList.add('correct');
+                }
+                if (btn === button && selected !== correct) {
+                    btn.classList.add('wrong');
+                }
             });
 
-            div.appendChild(optsDiv);
-            quizContainer.appendChild(div);
-        });
+            questionDiv.querySelector('.skip-button').disabled = true;
+            explanationDiv.style.display = 'block';
+
+            userAnswers[questionIndex] = selectedText;
+            if (selected === correct) {
+                score++;
+                correctSound.play().catch(() => console.log("Audio playback failed"));
+            } else {
+                wrongSound.play().catch(() => console.log("Audio playback failed"));
+            }
+
+            updateCurrentScore();
+            saveProgress();
+            const nextButton = quizEl.querySelector('.next-button');
+            if (nextButton) {
+                nextButton.disabled = !areAllQuestionsAnsweredOnPage(
+                    currentPage * QUESTIONS_PER_PAGE,
+                    Math.min((currentPage + 1) * QUESTIONS_PER_PAGE, questions.length)
+                );
+            }
+
+            setTimeout(() => {
+                if (areAllQuestionsAnsweredOnPage(
+                    currentPage * QUESTIONS_PER_PAGE,
+                    Math.min((currentPage + 1) * QUESTIONS_PER_PAGE, questions.length)
+                )) {
+                    nextPage();
+                }
+            }, ANSWER_DELAY);
+        }
+
+        // Skip question
+        function skipQuestion(questionIndex) {
+            if (!skipped.includes(questions[questionIndex])) {
+                skipped.push(questions[questionIndex]);
+                userAnswers[questionIndex] = 'Skipped';
+                const questionDiv = document.querySelector(`.question[data-index="${questionIndex}"]`);
+                questionDiv.querySelectorAll('.options button').forEach(btn => btn.disabled = true);
+                questionDiv.querySelector('.skip-button').disabled = true;
+                questionDiv.querySelector('.explanation').style.display = 'block';
+                saveProgress();
+                const nextButton = quizEl.querySelector('.next-button');
+                if (nextButton) {
+                    nextButton.disabled = !areAllQuestionsAnsweredOnPage(
+                        currentPage * QUESTIONS_PER_PAGE,
+                        Math.min((currentPage + 1) * QUESTIONS_PER_PAGE, questions.length)
+                    );
+                }
+            }
+        }
+
+        // Move to next page
+        function nextPage() {
+            if (skipped.length > 0 && currentPage * QUESTIONS_PER_PAGE >= questions.length) {
+                showSkippedQuestions();
+            } else {
+                currentPage++;
+                if (currentPage * QUESTIONS_PER_PAGE < questions.length) {
+                    showQuestions(currentPage);
+                } else if (skipped.length === 0) {
+                    endQuiz();
+                } else {
+                    showSkippedQuestions();
+                }
+            }
+        }
+
+        // Show skipped questions
+        function showSkippedQuestions() {
+            questions.splice(0, questions.length, ...skipped);
+            skipped = [];
+            currentPage = 0;
+            showQuestions(currentPage);
+        }
+
+        // End quiz and show results
+        function endQuiz() {
+            clearInterval(timerInterval);
+            quizEl.innerHTML = '';
+            scoreEl.textContent = `Final Score: ${score} out of ${questions.length} (${((score / questions.length) * 100).toFixed(2)}%)`;
+            resultsEl.classList.remove('hidden');
+
+            resultsBody.innerHTML = questions.map((q, i) => {
+                const userAnswer = userAnswers[i] === null ? 'Not attempted' :
+                                  userAnswers[i] === 'Skipped' ? 'Skipped' :
+                                  userAnswers[i];
+                const correctAnswer = q.options[q.answer];
+                const status = userAnswers[i] === q.options[q.answer] ? 'Correct' :
+                              userAnswers[i] === 'Skipped' ? 'Skipped' :
+                              userAnswers[i] === null ? 'Not attempted' : 'Wrong';
+                return `
+                    <tr>
+                        <td>${i + 1}. ${q.q}</td>
+                        <td>${userAnswer}</td>
+                        <td>${correctAnswer}</td>
+                        <td class="${status.toLowerCase().replace(' ', '-')}">${status}</td>
+                        <td class="explanation">${q.explanation}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            localStorage.removeItem('quizProgressSteeringClutch');
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            currentPage = 0;
+            score = 0;
+            skipped = [];
+            userAnswers = Array(questions.length).fill(null);
+            timerSeconds = 0;
+            resultsEl.classList.add('hidden');
+            scoreEl.textContent = '';
+            localStorage.removeItem('quizProgressSteeringClutch');
+            startTimer();
+            showQuestions(currentPage);
+            updateCurrentScore();
+        }
+
+        // Initialize
+        loadProgress();
+        startTimer();
+        showQuestions(currentPage);
     </script>
 </body>
-
 </html>
