@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logsewa Production Line Maintenance Mock Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #f8ffae, #43c6ac);
+      margin: 0;
+      padding: 2rem;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    .quiz-container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #1e88e5;
+    }
+
+    .question {
+      margin-bottom: 1.5rem;
+      animation: fadeIn 0.5s;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 1rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .question p {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .options button {
+      display: block;
+      margin: 0.5rem 0;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      background: #e3f2fd;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1rem;
+    }
+
+    .options button:hover {
+      background: #bbdefb;
+      transform: translateX(5px);
+    }
+
+    .correct {
+      background-color: #c8e6c9 !important;
+      animation: pulse 0.5s;
+    }
+
+    .wrong {
+      background-color: #ffcdd2 !important;
+      animation: shake 0.3s;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background: #eee;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      background: #42a5f5;
+      transition: width 0.3s;
+    }
+
+    #timer {
+      text-align: right;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: #d81b60;
+    }
+
+    #score, #results {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      font-weight: bold;
+    }
+
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .results-table th, .results-table td {
+      border: 1px solid #ddd;
+      padding: 0.5rem;
+      text-align: left;
+    }
+
+    .results-table th {
+      background: #f5f5f5;
+    }
+
+    .skip-button {
+      background: #fff3cd;
+      margin-top: 1rem;
+      padding: 0.75rem;
+      width: 100%;
+      border: 1px solid #ffca28;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .skip-button:hover {
+      background: #ffecb3;
+    }
+
+    .next-button {
+      background: #42a5f5;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1rem;
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+
+    .next-button:hover {
+      background: #1e88e5;
+    }
+
+    .next-button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .explanation {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .quiz-container {
+        padding: 1rem;
+      }
+      .options button {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Logsewa Production Line Maintenance Mock Test</h1>
+    <div id="timer">Time: 00:00</div>
+    <div class="progress-bar">
+      <div class="progress" id="progress"></div>
+    </div>
+    <div id="quiz"></div>
+    <div id="score"></div>
+    <div id="results" class="hidden">
+      <h2>Quiz Results</h2>
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Your Answer</th>
+            <th>Correct Answer</th>
+            <th>Status</th>
+            <th>Explanation</th>
+          </tr>
+        </thead>
+        <tbody id="results-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <audio id="correct-sound" src="https://www.soundjay.com/buttons/beep-01a.mp3"></audio>
+  <audio id="wrong-sound" src="https://www.soundjay.com/buttons/beep-02.mp3"></audio>
+
+  <script>
+    const questions = [
+      // 9.1 Conveyor Belts, Pulleys (10 MCQs)
+      { q: "What is the primary function of a conveyor belt in a production line?", 
+        options: ["To cool the machinery", "To transport materials between workstations", "To regulate motor speed", "To compress air"], 
+        answer: 1, 
+        explanation: "Conveyor belts move materials or products efficiently across different stages of a production line." },
+      { q: "What should be checked during the maintenance of a conveyor belt?", 
+        options: ["Fuel tank level", "Belt tension and alignment", "Compressor pressure", "Refrigerant level"], 
+        answer: 1, 
+        explanation: "Proper tension and alignment prevent belt slippage and wear, ensuring smooth operation." },
+      { q: "What is a common cause of conveyor belt slippage?", 
+        options: ["Excessive belt tension", "Insufficient tension or worn pulleys", "High motor voltage", "Low refrigerant pressure"], 
+        answer: 1, 
+        explanation: "Low tension or worn pulleys reduce grip, causing the belt to slip during operation." },
+      { q: "What is the role of the drive pulley in a conveyor system?", 
+        options: ["To cool the belt", "To transmit power to move the belt", "To filter debris", "To regulate air pressure"], 
+        answer: 1, 
+        explanation: "The drive pulley, connected to the motor, provides the force to move the conveyor belt." },
+      { q: "What maintenance task prevents wear on conveyor pulleys?", 
+        options: ["Regular lubrication of pulley bearings", "Increasing belt speed", "Reducing motor voltage", "Painting the pulleys"], 
+        answer: 0, 
+        explanation: "Lubrication reduces friction in pulley bearings, preventing wear and extending their lifespan." },
+      { q: "What should be inspected in the conveyor belt surface?", 
+        options: ["Refrigerant level", "Signs of cuts, tears, or wear", "Motor winding insulation", "Compressor oil level"], 
+        answer: 1, 
+        explanation: "Surface damage on the belt can lead to failure, so regular inspection is necessary." },
+      { q: "What is a sign of misalignment in a conveyor belt system?", 
+        options: ["Increased motor speed", "Belt drifting to one side or uneven wear", "Higher refrigerant pressure", "Reduced pulley noise"], 
+        answer: 1, 
+        explanation: "Misalignment causes the belt to drift or wear unevenly, requiring adjustment." },
+      { q: "What component in a conveyor system supports the belt and reduces friction?", 
+        options: ["Idler pulley", "Drive pulley", "Motor shaft", "Compressor valve"], 
+        answer: 0, 
+        explanation: "Idler pulleys support the belt’s return path and reduce friction during operation." },
+      { q: "What maintenance action ensures proper conveyor belt tracking?", 
+        options: ["Adjusting the tension and aligning pulleys", "Increasing motor voltage", "Reducing belt load", "Painting the conveyor frame"], 
+        answer: 0, 
+        explanation: "Proper tension and pulley alignment keep the belt tracking correctly, preventing drift." },
+      { q: "What is the purpose of a take-up pulley in a conveyor system?", 
+        options: ["To cool the motor", "To adjust belt tension", "To filter debris", "To regulate air flow"], 
+        answer: 1, 
+        explanation: "The take-up pulley maintains proper belt tension by compensating for stretching or wear." },
+
+      // 9.2 A/C Motors/Parts and Accessories (10 MCQs)
+      { q: "What is the primary function of an A/C motor in a production line?", 
+        options: ["To compress refrigerant", "To drive machinery like conveyors or pumps", "To regulate electrical circuits", "To cool the assembly line"], 
+        answer: 1, 
+        explanation: "A/C motors convert electrical energy into mechanical energy to power production line equipment." },
+      { q: "What should be checked during the maintenance of an A/C motor?", 
+        options: ["Refrigerant pressure", "Bearing condition and winding insulation", "Conveyor belt tension", "Compressor oil level"], 
+        answer: 1, 
+        explanation: "Worn bearings cause noise or failure, and degraded insulation can lead to electrical faults." },
+      { q: "What is a common symptom of overheating in an A/C motor?", 
+        options: ["Increased conveyor speed", "Burnt smell or excessive heat from the motor", "Reduced pulley wear", "Higher refrigerant flow"], 
+        answer: 1, 
+        explanation: "Overheating, often due to poor ventilation or overload, can produce a burnt smell or excessive heat." },
+      { q: "What is the role of the capacitor in an A/C motor?", 
+        options: ["To cool the motor", "To provide starting torque or improve efficiency", "To filter electrical noise", "To regulate air pressure"], 
+        answer: 1, 
+        explanation: "Capacitors assist in starting single-phase A/C motors or improve power factor in some motors." },
+      { q: "What maintenance task prevents A/C motor bearing failure?", 
+        options: ["Regular lubrication and cleaning", "Increasing motor speed", "Reducing voltage supply", "Painting the motor housing"], 
+        answer: 0, 
+        explanation: "Lubrication reduces friction, and cleaning prevents dust buildup that can cause bearing failure." },
+      { q: "What should be inspected in the motor cooling fan of an A/C motor?", 
+        options: ["Conveyor belt tension", "Blade condition and airflow obstruction", "Refrigerant level", "Compressor pressure"], 
+        answer: 1, 
+        explanation: "A damaged fan or blocked airflow can cause the motor to overheat, requiring inspection." },
+      { q: "What is a sign of electrical imbalance in an A/C motor?", 
+        options: ["Increased conveyor speed", "Uneven vibrations or humming noise", "Reduced pulley wear", "Higher refrigerant pressure"], 
+        answer: 1, 
+        explanation: "Electrical imbalance, such as unequal phase voltages, causes vibrations or humming in the motor." },
+      { q: "What component in an A/C motor protects it from overloading?", 
+        options: ["Thermal overload relay", "Capacitor", "Cooling fan", "Motor shaft"], 
+        answer: 0, 
+        explanation: "A thermal overload relay cuts power if the motor overheats due to excessive current." },
+      { q: "What maintenance action ensures proper A/C motor performance?", 
+        options: ["Checking electrical connections for tightness", "Increasing motor voltage", "Reducing conveyor load", "Painting the motor casing"], 
+        answer: 0, 
+        explanation: "Loose connections can cause voltage drops or arcing, affecting motor performance." },
+      { q: "What is the purpose of the rotor in an A/C motor?", 
+        options: ["To cool the motor", "To rotate and produce mechanical output", "To filter electrical noise", "To regulate air flow"], 
+        answer: 1, 
+        explanation: "The rotor, interacting with the stator’s magnetic field, rotates to drive mechanical components." },
+
+      // 9.3 Electric Circuit (10 MCQs)
+      { q: "What is the primary function of an electric circuit in a production line?", 
+        options: ["To compress air", "To supply and control power to machinery", "To cool the assembly line", "To transport materials"], 
+        answer: 1, 
+        explanation: "Electric circuits distribute power and control signals to operate production line equipment." },
+      { q: "What should be checked during the maintenance of an electric circuit?", 
+        options: ["Conveyor belt tension", "Wiring for loose connections or insulation damage", "Refrigerant level", "Compressor oil level"], 
+        answer: 1, 
+        explanation: "Loose connections or damaged insulation can cause electrical faults or short circuits." },
+      { q: "What is a common symptom of a short circuit in a production line?", 
+        options: ["Increased motor speed", "Blown fuses or tripped breakers", "Reduced conveyor noise", "Higher refrigerant flow"], 
+        answer: 1, 
+        explanation: "A short circuit causes excessive current, leading to blown fuses or tripped breakers." },
+      { q: "What is the role of a circuit breaker in an electric circuit?", 
+        options: ["To cool the circuit", "To protect against overcurrent by interrupting the circuit", "To filter electrical noise", "To regulate air pressure"], 
+        answer: 1, 
+        explanation: "Circuit breakers trip to prevent damage from overcurrent or short circuits." },
+      { q: "What maintenance task prevents electrical faults in a circuit?", 
+        options: ["Regular testing of circuit continuity and insulation", "Increasing motor speed", "Reducing voltage supply", "Painting the circuit panel"], 
+        answer: 0, 
+        explanation: "Testing ensures there are no breaks or insulation failures that could cause faults." },
+      { q: "What should be inspected in the control panel of a production line circuit?", 
+        options: ["Conveyor belt surface", "Dust accumulation and terminal tightness", "Refrigerant pressure", "Compressor oil level"], 
+        answer: 1, 
+        explanation: "Dust can cause overheating, and loose terminals can lead to arcing or power loss." },
+      { q: "What is a sign of a ground fault in an electric circuit?", 
+        options: ["Increased conveyor speed", "Tripping of the ground fault circuit interrupter (GFCI)", "Reduced motor noise", "Higher refrigerant pressure"], 
+        answer: 1, 
+        explanation: "A ground fault causes current leakage, triggering the GFCI to trip for safety." },
+      { q: "What component in an electric circuit limits current flow?", 
+        options: ["Resistor", "Capacitor", "Relay", "Transformer"], 
+        answer: 0, 
+        explanation: "A resistor opposes current flow, limiting it to protect components or control circuits." },
+      { q: "What maintenance action ensures proper electric circuit performance?", 
+        options: ["Checking for proper earthing and grounding", "Increasing motor voltage", "Reducing conveyor load", "Painting the circuit wiring"], 
+        answer: 0, 
+        explanation: "Proper earthing prevents electrical shocks and ensures circuit stability." },
+      { q: "What is the purpose of a relay in an electric circuit?", 
+        options: ["To cool the circuit", "To control high-power devices with a low-power signal", "To filter electrical noise", "To regulate air flow"], 
+        answer: 1, 
+        explanation: "Relays act as switches, allowing a small control signal to operate larger machinery." },
+
+      // 9.4 Pumps and Compressors (10 MCQs)
+      { q: "What is the primary function of a pump in a production line?", 
+        options: ["To compress air", "To move fluids like water or oil", "To cool the assembly line", "To regulate motor speed"], 
+        answer: 1, 
+        explanation: "Pumps transfer liquids to support processes like cooling or lubrication in a production line." },
+      { q: "What should be checked during the maintenance of a compressor in a production line?", 
+        options: ["Conveyor belt tension", "Oil level and air filter condition", "Refrigerant level", "Motor winding insulation"], 
+        answer: 1, 
+        explanation: "Proper oil levels lubricate the compressor, and a clean air filter prevents contamination." },
+      { q: "What is a common symptom of cavitation in a pump?", 
+        options: ["Increased motor speed", "Noise, vibration, or reduced flow", "Higher refrigerant pressure", "Reduced conveyor noise"], 
+        answer: 1, 
+        explanation: "Cavitation occurs when vapor bubbles collapse, causing noise, vibration, and reduced pump efficiency." },
+      { q: "What is the role of the impeller in a centrifugal pump?", 
+        options: ["To cool the pump", "To accelerate fluid and create flow", "To filter debris", "To regulate air pressure"], 
+        answer: 1, 
+        explanation: "The impeller rotates to impart kinetic energy to the fluid, creating flow in the pump." },
+      { q: "What maintenance task prevents compressor overheating?", 
+        options: ["Regular cleaning of cooling fins and air filters", "Increasing motor speed", "Reducing air pressure", "Painting the compressor"], 
+        answer: 0, 
+        explanation: "Clean cooling fins and filters ensure proper airflow, preventing the compressor from overheating." },
+      { q: "What should be inspected in the seals of a pump?", 
+        options: ["Conveyor belt surface", "Signs of leaks or wear", "Motor winding insulation", "Refrigerant pressure"], 
+        answer: 1, 
+        explanation: "Worn or damaged seals cause fluid leaks, reducing pump efficiency and requiring inspection." },
+      { q: "What is a sign of a failing compressor piston?", 
+        options: ["Increased conveyor speed", "Reduced air pressure or unusual noise", "Higher motor voltage", "Reduced pulley wear"], 
+        answer: 1, 
+        explanation: "A failing piston cannot compress air effectively, leading to low pressure and noise." },
+      { q: "What component in a compressor regulates air pressure?", 
+        options: ["Pressure switch", "Piston", "Air filter", "Cooling fan"], 
+        answer: 0, 
+        explanation: "The pressure switch turns the compressor on or off to maintain the desired air pressure." },
+      { q: "What maintenance action ensures proper pump performance?", 
+        options: ["Checking for proper alignment and vibration", "Increasing motor voltage", "Reducing fluid flow", "Painting the pump casing"], 
+        answer: 0, 
+        explanation: "Misalignment or excessive vibration can cause pump failure, so regular checks are essential." },
+      { q: "What is the purpose of a check valve in a pump system?", 
+        options: ["To cool the pump", "To prevent backflow of fluid", "To filter debris", "To regulate air flow"], 
+        answer: 1, 
+        explanation: "A check valve ensures fluid flows in one direction, preventing backflow that could damage the pump." },
+
+      // 9.5 Refrigeration and Air-Conditioning (10 MCQs)
+      { q: "What is the primary function of a refrigeration system in a production line?", 
+        options: ["To compress air", "To cool materials or maintain a controlled environment", "To transport materials", "To regulate motor speed"], 
+        answer: 1, 
+        explanation: "Refrigeration systems maintain low temperatures for processes or storage in production lines." },
+      { q: "What should be checked during the maintenance of an air-conditioning system?", 
+        options: ["Conveyor belt tension", "Refrigerant level and condenser coil cleanliness", "Compressor oil level", "Motor winding insulation"], 
+        answer: 1, 
+        explanation: "Low refrigerant or dirty coils reduce cooling efficiency, requiring regular checks." },
+      { q: "What is a common symptom of low refrigerant in an air-conditioning system?", 
+        options: ["Increased cooling capacity", "Poor cooling or ice buildup on evaporator coils", "Reduced motor noise", "Higher conveyor speed"], 
+        answer: 1, 
+        explanation: "Low refrigerant reduces cooling capacity, causing poor performance or ice formation." },
+      { q: "What is the role of the compressor in a refrigeration system?", 
+        options: ["To cool the refrigerant", "To compress refrigerant gas and increase its pressure", "To filter debris", "To regulate air pressure"], 
+        answer: 1, 
+        explanation: "The compressor raises the refrigerant’s pressure, enabling heat rejection in the condenser." },
+      { q: "What maintenance task prevents air-conditioning system inefficiency?", 
+        options: ["Regular cleaning of air filters and coils", "Increasing motor speed", "Reducing refrigerant pressure", "Painting the condenser"], 
+        answer: 0, 
+        explanation: "Dirty filters and coils restrict airflow and heat transfer, reducing system efficiency." },
+      { q: "What should be inspected in the evaporator coil of a refrigeration system?", 
+        options: ["Conveyor belt surface", "Signs of frost buildup or leaks", "Motor winding insulation", "Compressor oil level"], 
+        answer: 1, 
+        explanation: "Frost buildup or leaks in the evaporator coil reduce cooling capacity and require inspection." },
+      { q: "What is a sign of a failing condenser fan in an air-conditioning system?", 
+        options: ["Increased conveyor speed", "Overheating of the condenser or poor cooling", "Reduced motor voltage", "Higher refrigerant flow"], 
+        answer: 1, 
+        explanation: "A failing condenser fan cannot remove heat effectively, causing overheating and poor cooling." },
+      { q: "What component in a refrigeration system reduces refrigerant pressure?", 
+        options: ["Expansion valve", "Compressor", "Condenser", "Evaporator"], 
+        answer: 0, 
+        explanation: "The expansion valve lowers the refrigerant’s pressure, allowing it to expand and cool in the evaporator." },
+      { q: "What maintenance action ensures proper refrigeration system performance?", 
+        options: ["Checking for refrigerant leaks and proper pressure", "Increasing motor voltage", "Reducing conveyor load", "Painting the evaporator"], 
+        answer: 0, 
+        explanation: "Leaks or improper pressure reduce cooling efficiency, so regular checks are essential." },
+      { q: "What is the purpose of the thermostat in an air-conditioning system?", 
+        options: ["To cool the refrigerant", "To control the temperature by cycling the system", "To filter electrical noise", "To regulate air flow"], 
+        answer: 1, 
+        explanation: "The thermostat turns the system on or off to maintain the desired temperature." }
+    ];
+
+    let currentPage = 0;
+    let score = 0;
+    let skipped = [];
+    let userAnswers = Array(questions.length).fill(null);
+    let timerSeconds = 0;
+    let timerInterval;
+    const QUESTIONS_PER_PAGE = 5;
+    const ANSWER_DELAY = 1500; // 1.5 seconds delay
+
+    const quizEl = document.getElementById("quiz");
+    const scoreEl = document.getElementById("score");
+    const resultsEl = document.getElementById("results");
+    const resultsBody = document.getElementById("results-body");
+    const progressEl = document.getElementById("progress");
+    const timerEl = document.getElementById("timer");
+    const correctSound = document.getElementById("correct-sound");
+    const wrongSound = document.getElementById("wrong-sound");
+
+    // Load progress from localStorage
+    function loadProgress() {
+      const saved = localStorage.getItem("quizProgressProductionLine");
+      if (saved) {
+        const { currentPage: savedPage, score: savedScore, skipped: savedSkipped, answers: savedAnswers, time: savedTime } = JSON.parse(saved);
+        currentPage = savedPage;
+        score = savedScore;
+        skipped = savedSkipped;
+        userAnswers = savedAnswers || Array(questions.length).fill(null);
+        timerSeconds = savedTime || 0;
+      }
+    }
+
+    // Save progress to localStorage
+    function saveProgress() {
+      localStorage.setItem("quizProgressProductionLine", JSON.stringify({
+        currentPage,
+        score,
+        skipped,
+        answers: userAnswers,
+        time: timerSeconds
+      }));
+    }
+
+    // Shuffle array
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Shuffle questions only once at initialization
+    const shuffledQuestions = shuffle([...questions]);
+
+    // Start timer
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        const minutes = Math.floor(timerSeconds / 60);
+        const seconds = timerSeconds % 60;
+        timerEl.textContent = `Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }, 1000);
+    }
+
+    // Update progress bar
+    function updateProgress() {
+      const percentage = ((currentPage * QUESTIONS_PER_PAGE) / questions.length) * 100;
+      progressEl.style.width = `${percentage}%`;
+    }
+
+    // Show questions for the current page
+    function showQuestions(page) {
+      const startIndex = page * QUESTIONS_PER_PAGE;
+      const endIndex = Math.min(startIndex + QUESTIONS_PER_PAGE, questions.length);
+      let html = '';
+      for (let i = startIndex; i < endIndex; i++) {
+        const q = shuffledQuestions[i];
+        const shuffledOptions = shuffle([...q.options].map((opt, j) => ({ text: opt, index: j })));
+        const options = shuffledOptions
+          .map(opt => `<button onclick="checkAnswer(this, ${i}, ${opt.index}, '${opt.text.replace(/'/g, "\\'")}')">${opt.text}</button>`)
+          .join('');
+        html += `
+          <div class="question" data-index="${i}">
+            <p>Q${i + 1}. ${q.q}</p>
+            <div class="options">${options}</div>
+            <button class="skip-button" onclick="skipQuestion(${i})">Skip</button>
+          </div>
+        `;
+      }
+      if (endIndex < questions.length) {
+        html += `<button class="next-button" onclick="nextPage()" disabled>Next</button>`;
+      }
+      quizEl.innerHTML = html;
+      updateProgress();
+      saveProgress();
+      checkNextButton();
+    }
+
+    // Check answer
+    function checkAnswer(button, questionIndex, selected, selectedText) {
+      const q = shuffledQuestions[questionIndex];
+      const correct = q.answer;
+      const buttons = button.parentElement.querySelectorAll("button");
+      buttons.forEach((btn) => {
+        btn.disabled = true;
+        if (q.options.indexOf(btn.innerText) === correct) btn.classList.add("correct");
+        if (btn === button && selected !== correct) btn.classList.add("wrong");
+      });
+
+      userAnswers[questionIndex] = selectedText;
+      if (selected === correct) {
+        score++;
+        correctSound.play().catch(() => console.log("Audio playback failed"));
+      } else {
+        wrongSound.play().catch(() => console.log("Audio playback failed"));
+      }
+
+      saveProgress();
+      checkNextButton();
+    }
+
+    // Skip question
+    function skipQuestion(questionIndex) {
+      if (!skipped.includes(shuffledQuestions[questionIndex])) {
+        skipped.push(shuffledQuestions[questionIndex]);
+        userAnswers[questionIndex] = "Skipped";
+      }
+      const buttons = document.querySelector(`.question[data-index="${questionIndex}"] .options`).querySelectorAll("button");
+      buttons.forEach(btn => btn.disabled = true);
+      saveProgress();
+      checkNextButton();
+    }
+
+    // Check if all questions on the page are answered or skipped
+    function checkNextButton() {
+      const startIndex = currentPage * QUESTIONS_PER_PAGE;
+      const endIndex = Math.min(startIndex + QUESTIONS_PER_PAGE, questions.length);
+      let allAnswered = true;
+      for (let i = startIndex; i < endIndex; i++) {
+        if (userAnswers[i] === null) {
+          allAnswered = false;
+          break;
+        }
+      }
+      const nextButton = document.querySelector(".next-button");
+      if (nextButton) {
+        nextButton.disabled = !allAnswered;
+      }
+    }
+
+    // Move to next page
+    function nextPage() {
+      currentPage++;
+      if (currentPage * QUESTIONS_PER_PAGE < questions.length) {
+        showQuestions(currentPage);
+      } else {
+        endQuiz();
+      }
+    }
+
+    // End quiz and show results
+    function endQuiz() {
+      clearInterval(timerInterval);
+      quizEl.innerHTML = "";
+      scoreEl.innerHTML = `Your score: ${score} / ${questions.length} (${((score / questions.length) * 100).toFixed(2)}%)`;
+      resultsEl.classList.remove("hidden");
+
+      resultsBody.innerHTML = shuffledQuestions.map((q, i) => {
+        const userAnswer = userAnswers[i] === null ? "Not attempted" :
+                         userAnswers[i] === "Skipped" ? "Skipped" :
+                         userAnswers[i];
+        const correctAnswer = q.options[q.answer];
+        const status = userAnswers[i] === q.options[q.answer] ? "Correct" :
+                      userAnswers[i] === "Skipped" ? "Skipped" :
+                      userAnswers[i] === null ? "Not attempted" : "Wrong";
+        return `
+          <tr>
+            <td>${i + 1}. ${q.q}</td>
+            <td>${userAnswer}</td>
+            <td>${correctAnswer}</td>
+            <td class="${status.toLowerCase()}">${status}</td>
+            <td class="explanation">${q.explanation}</td>
+          </tr>
+        `;
+      }).join('');
+
+      // Clear localStorage
+      localStorage.removeItem("quizProgressProductionLine");
+    }
+
+    // Initialize
+    loadProgress();
+    startTimer();
+    showQuestions(currentPage);
+  </script>
+</body>
+</html>
