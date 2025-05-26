@@ -1,136 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Workshop Practice Quiz</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f5f7fa;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        .quiz-container {
-            max-width: 900px;
-            margin: auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .question {
-            margin-bottom: 20px;
-        }
-
-        .question p {
-            font-weight: bold;
-            color: #444;
-        }
-
-        .options button {
-            display: block;
-            margin: 6px 0;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            cursor: pointer;
-            text-align: left;
-            width: 100%;
-            transition: background-color 0.3s;
-        }
-
-        .options button:hover {
-            background-color: #e0e0e0;
-        }
-
-        .options button.correct {
-            background-color: #c8f7c5;
-        }
-
-        .options button.wrong {
-            background-color: #f7c5c5;
-        }
-
-        .score {
-            font-size: 1.2em;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 30px;
-        }
-    </style>
-</head>
-
-<body>
-    <h1>Workshop Practice Quiz</h1>
-    <div class="quiz-container" id="quiz"></div>
-    <div class="score" id="score"></div>
-
-    <script>
-        const questions = [
-            
-  // 1.1 Basic Knowledge of Measuring Instruments
-  { q: "Tool used to measure valve tappet clearance:", options: ["Vernier caliper", "Feeler gauge"], answer: 1 },
-  { q: "End play of gears and oil pump may be checked by using:", options: ["Vernier caliper and feeler gauge", "Straight edge and feeler gauge"], answer: 1 },
-  { q: "A feeler gauge is used to measure:", options: ["Space (gap) between two surfaces", "Thickness of a plate"], answer: 0 },
-  { q: "The accuracy of micrometer, caliper, and dial indicator can be checked by:", options: ["Slip gauge", "Feeler gauge"], answer: 0 },
-  { q: "What is the accuracy of metric outside micrometer?", options: ["0.001 mm", "0.02 mm"], answer: 0 },
-  { q: "Which of the following gauge is used to measure diameter of shaft?", options: ["Ring gauge", "Snap gauge"], answer: 0 },
-  { q: "The instrument used to measure external and internal diameter of shafts is:", options: ["Inside micrometer", "Outside micrometer"], answer: 0 },
-  { q: "फिलर गेज कुन कार्यका लागि प्रयोग गरिन्छ?", options: ["क्लियरेन्स मापन", "ग्याप मापन"], answer: 0 },
-  { q: "The feeler gauge is used to check", options: ["clearance between two mating surface", "external diameter"], answer: 0 },
-  { q: "Diameter नाप्ने tool कुन हो?", options: ["Vernier calliper", "Micrometer"], answer: 0 },
-  { q: "To take measurement of the height of store rack, you will use:", options: ["Try square", "Vernier caliper"], answer: 0 },
-  { q: "Which of the following gauges is used to test accuracy of holes?", options: ["Plug gauge", "Ring gauge"], answer: 0 },
-
-  // 1.2 Basic Knowledge of Metric, FPS, and SI Unit
-  { q: "Unit “Pound” is the unit to measure:", options: ["Time", "Weight"], answer: 1 },
-  { q: "FPS प्रणाली अनुसार लामखुट्टेगाडि … भनिन्छ", options: ["इन्च", "यार्ड"], answer: 0 },
-  { q: "Which of the following is not one of the fundamental quantities in physics?", options: ["Volume", "Length"], answer: 0 },
-  { q: "_____ is the Non-SI unit accepted for use with the SI units.", options: ["Henry", "Gray"], answer: 0 },
-
-  // 1.3 Basic Knowledge of Hand Tools and Their Applications
-  { q: "गाडीको कुन टुल हुन्छ?", options: ["टप्स", "स्प्यानर"], answer: 1 },
-  { q: "The size of 10mm digital spanner is represented by:", options: ["M10", "M*10"], answer: 0 },
-  { q: "तस्बिरमा देखिएको उपकरण कुन किसिमको उपकरण हो?", options: ["टायर हब", "रिङ्ग स्प्यानर (Ring Spanner)"], answer: 1 },
-  { q: "स्क्रु फल्ने बेलामा प्रयोग गरिने औजार कुन हो?", options: ["स्क्रु ड्राइभर", "फिलर गेज"], answer: 0 },
-
-  // 1.4 Basic Knowledge of Lathe, Milling, Shaper, Grinding, and Drilling Machine
-  { q: "Facing is an operation of:", options: ["Beveling the extreme end of a workpiece", "Machining ends of workpiece to produce flat surface"], answer: 1 },
-  { q: "The facing is an operation of:", options: ["Beveling the extreme end", "Reducing the diameter of a workpiece"], answer: 1 },
-  { q: "A …… is used for holding and rotating the workpiece in a lathe:", options: ["Centers", "Mandrel"], answer: 0 },
-  { q: "Lathe मेशिन प्रयोग गरिन्छ:", options: ["घुमाउने कार्यका लागि", "Milling कार्यका लागि"], answer: 0 },
-  { q: "Which of the following is not part of a shaper?", options: ["Taper box", "Table"], answer: 0 },
-  { q: "Which of the following operations can’t be performed on the lathe?", options: ["Drilling", "Chamfering"], answer: 0 },
-  { q: "Lathe spindle has:", options: ["External threads", "Internal threads"], answer: 0 },
-  { q: "The turning process is done by:", options: ["Lathe machine", "Drilling machine"], answer: 0 },
-  { q: "Multiple teeth cutter is used in:", options: ["Milling machine", "Planer"], answer: 0 },
-  { q: "If the workpiece is stationary, the tool reciprocates and cuts in one direction only. Such operation is called:", options: ["Shaping", "Slotting"], answer: 0 },
-  { q: "Drilling machines are employed for producing:", options: ["Circular holes", "Hexagonal holes"], answer: 0 },
-  { q: "Grinding is a ___________ operation.", options: ["Surface finishing", "Facing"], answer: 0 },
-  { q: "A twist drill is specified by:", options: ["A number specifying hole size", "An alphabet specifying hole size"], answer: 0 },
-
-  // 1.5 Basic Knowledge of Arc Welding and Oxy-Acetylene Welding
-  { q: "Arc welding मा कुन प्रकारको Electrode Coating Material हो?", options: ["Flux", "Slag"], answer: 0 },
-  { q: "Excavator को हाइड्रोलिक खोच खनेर गर्ने कार्यमा कुन प्रकारको वेल्डिङ प्रयोग गरिन्छ?", options: ["Gas Welding", "Arc Welding"], answer: 1 },
-  { q: "कुन उपकरण Welding tools मा पर्दैन?", options: ["Electrode", "Radiator"], answer: 1 },
-  { q: "TIG Welding मा कुन ग्यास प्रयोग हुन्छ?", options: ["Argon and Helium", "CO₂ and H₂"], answer: 0 },
-  { q: "निम्नमध्ये कुन वेल्डिंग उपकरण इलेक्ट्रोड हटाउन प्रयोग गरिन्छ?", options: ["चिपिङ हथौडा", "ग्यास वेल्डर"], answer: 0 },
-  { q: "In arc welding with DC current, greater heat is generated at", options: ["Positive pole of arc", "Negative pole of arc"], answer: 0 },
-  { q: "तलमध्ये कुन वेल्डिंग टूल हो?", options: ["Electrode", "Radiator"], answer: 0 },
-
-  // 1.6 Basic Knowledge of Power Transmission in Workshop
-  { q: "Starter motor runs the flywheel of an engine using:", options: ["Chain drive", "Gear drive"], answer: 1 }
-];
-        //     { q: "What is the magnitude of taper of keys?", options: ["1:10", "1:500"], answer: 0 },
+<!-- //     { q: "What is the magnitude of taper of keys?", options: ["1:10", "1:500"], answer: 0 },
         //     { q: "The short dashed medium line is used for:", options: ["Centre line", "Hidden outlines and edges"], answer: 1 },
         //     { q: "A job costing system accumulates the following information:", options: ["Direct labour and overhead", "Direct material and overhead"], answer: 1 },
         //     { q: "Individual stock ledger card shall be updated:", options: ["Every month", "Every time part is issued or received"], answer: 1 },
@@ -210,7 +78,655 @@
         //     { q: "Multiple teeth cutter is used in:", options: ["Milling machine", "Planer"], answer: 0 },
         //     { q: "If the workpiece is stationary, the tool reciprocates and cuts in one direction only. Such operation is called:", options: ["Shaping", "Slotting"], answer: 0 },
         //     { q: "Drilling machines are employed for producing:", options: ["Circular holes", "Hexagonal holes"], answer: 0 }
-        // ];
+        // ]; -->
+
+
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Logsewa Workshop Practice Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #e0e7ff, #c3dafe);
+            margin: 0;
+            padding: 2rem;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .quiz-container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #1e3a8a;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            text-align: center;
+            color: #1e3a8a;
+            margin: 1rem 0;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+
+        .timer {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #d81b60;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress {
+            height: 100%;
+            background: #3b82f6;
+            transition: width 0.3s ease;
+        }
+
+        .question {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            animation: fadeIn 0.5s;
+            transition: transform 0.2s ease;
+        }
+
+        .question:hover {
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .question p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+        }
+
+        .options button {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            color: #374151;
+        }
+
+        .options button:hover:not(:disabled) {
+            background: #f3f4f6;
+            border-color: #3b82f6;
+            transform: translateX(4px);
+        }
+
+        .options button.correct {
+            background: #bbf7d0;
+            border-color: #22c55e;
+            color: #166534;
+            animation: pulse 0.5s;
+        }
+
+        .options button.wrong {
+            background: #fecaca;
+            border-color: #ef4444;
+            color: #991b1b;
+            animation: shake 0.3s;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .options button:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #eff6ff;
+            border-radius: 8px;
+            color: #1e3a8a;
+            font-size: 0.95rem;
+        }
+
+        .skip-button {
+            background: #fff3cd;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            width: 100%;
+            border: 1px solid #ffca28;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .skip-button:hover {
+            background: #ffecb3;
+        }
+
+        .next-button {
+            background: #3b82f6;
+            color: #fff;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 1rem;
+            display: block;
+            width: 100%;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+
+        .next-button:hover:not(:disabled) {
+            background: #2563eb;
+        }
+
+        .next-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .score-container {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+        }
+
+        .score {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .results-table th, .results-table td {
+            border: 1px solid #e5e7eb;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .results-table th {
+            background: #f8fafc;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .results-table .correct {
+            color: #166534;
+            font-weight: bold;
+        }
+
+        .results-table .wrong {
+            color: #991b1b;
+            font-weight: bold;
+        }
+
+        .results-table .skipped, .results-table .not-attempted {
+            color: #d97706;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .restart-button {
+            background: #22c55e;
+            color: #fff;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 1rem auto;
+            display: block;
+            width: 100%;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+
+        .restart-button:hover {
+            background: #16a34a;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            .quiz-container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .question p {
+                font-size: 1rem;
+            }
+
+            .options button, .skip-button, .next-button, .restart-button {
+                font-size: 0.9rem;
+                padding: 0.8rem;
+            }
+
+            .results-table th, .results-table td {
+                padding: 0.5rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Logsewa Workshop Practice Quiz</h1>
+        <div class="quiz-header">
+            <div class="timer" id="timer">Time: 00:00</div>
+            <div class="score" id="current-score">Score: 0/40</div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <div id="quiz"></div>
+        <div class="score-container">
+            <div class="score" id="score"></div>
+            <div id="results" class="hidden">
+                <h2>Quiz Results</h2>
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>Your Answer</th>
+                            <th>Correct Answer</th>
+                            <th>Status</th>
+                            <th>Explanation</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-body"></tbody>
+                </table>
+                <button class="restart-button" onclick="restartQuiz()">Restart Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="correct-sound" src="https://www.soundjay.com/buttons/beep-01a.mp3"></audio>
+    <audio id="wrong-sound" src="https://www.soundjay.com/buttons/beep-02.mp3"></audio>
+
+    <script>
+        const questions = [
+            // 1.1 Basic Knowledge of Measuring Instruments
+            {
+                q: "Which tool is used to measure valve tappet clearance?",
+                options: ["Vernier caliper", "Feeler gauge"],
+                answer: 1,
+                explanation: "A feeler gauge measures small gaps, such as valve tappet clearance, with high precision."
+            },
+            {
+                q: "How is end play of gears and oil pump typically checked?",
+                options: ["Vernier caliper and feeler gauge", "Straight edge and feeler gauge"],
+                answer: 1,
+                explanation: "A straight edge and feeler gauge are used to measure end play by checking gaps."
+            },
+            {
+                q: "What is a feeler gauge used to measure?",
+                options: ["Gap between two surfaces", "Thickness of a plate"],
+                answer: 0,
+                explanation: "Feeler gauges measure small clearances or gaps between two surfaces."
+            },
+            {
+                q: "Which tool checks the accuracy of micrometers, calipers, and dial indicators?",
+                options: ["Slip gauge", "Feeler gauge"],
+                answer: 0,
+                explanation: "Slip gauges provide precise reference measurements to calibrate instruments."
+            },
+            {
+                q: "What is the accuracy of a metric outside micrometer?",
+                options: ["0.001 mm", "0.02 mm"],
+                answer: 0,
+                explanation: "Metric outside micrometers typically have an accuracy of 0.001 mm."
+            },
+            {
+                q: "Which gauge is used to measure the diameter of a shaft?",
+                options: ["Ring gauge", "Snap gauge"],
+                answer: 0,
+                explanation: "Ring gauges are used to check the external diameter of shafts."
+            },
+            {
+                q: "Which instrument measures both external and internal diameters of shafts?",
+                options: ["Outside micrometer", "Vernier caliper"],
+                answer: 1,
+                explanation: "Vernier calipers can measure both internal and external diameters."
+            },
+            {
+                q: "फिलर गेज कुन कार्यका लागि प्रयोग गरिन्छ?",
+                options: ["क्लियरेन्स मापन", "व्यास मापन"],
+                answer: 0,
+                explanation: "Feeler gauges measure clearances between mating surfaces."
+            },
+            {
+                q: "What does a feeler gauge check?",
+                options: ["Clearance between two mating surfaces", "External diameter"],
+                answer: 0,
+                explanation: "Feeler gauges are used to measure gaps between surfaces."
+            },
+            {
+                q: "Diameter नाप्ने उपकरण कुन हो?",
+                options: ["Vernier caliper", "Feeler gauge"],
+                answer: 0,
+                explanation: "Vernier calipers are versatile for measuring diameters."
+            },
+            {
+                q: "Which tool is used to measure the height of a store rack?",
+                options: ["Vernier caliper", "Try square"],
+                answer: 0,
+                explanation: "Vernier calipers can measure heights accurately."
+            },
+            {
+                q: "Which gauge is used to test the accuracy of holes?",
+                options: ["Plug gauge", "Ring gauge"],
+                answer: 0,
+                explanation: "Plug gauges check the accuracy of internal hole diameters."
+            },
+
+            // 1.2 Basic Knowledge of Metric, FPS, and SI Unit
+            {
+                q: "What does the unit 'Pound' measure?",
+                options: ["Time", "Weight"],
+                answer: 1,
+                explanation: "Pound is a unit of weight in the FPS system."
+            },
+            {
+                q: "FPS प्रणालीमा लामखुट्टे गाडीको मापनलाई के भनिन्छ?",
+                options: ["इन्च", "यार्ड"],
+                answer: 0,
+                explanation: "In the FPS system, small lengths like a mosquito net are measured in inches."
+            },
+            {
+                q: "Which is not a fundamental quantity in physics?",
+                options: ["Volume", "Length"],
+                answer: 0,
+                explanation: "Volume is a derived quantity, while length is fundamental."
+            },
+            {
+                q: "Which is a non-SI unit accepted for use with SI units?",
+                options: ["Liter", "Gray"],
+                answer: 0,
+                explanation: "Liter is a non-SI unit accepted for volume measurement with SI units."
+            },
+
+            // 1.3 Basic Knowledge of Hand Tools and Their Applications
+            {
+                q: "गाडीको लागि कुन टूल प्रयोग गरिन्छ?",
+                options: ["टप्स", "स्प्यानर"],
+                answer: 1,
+                explanation: "Spanners are used to tighten or loosen nuts and bolts in vehicles."
+            },
+            {
+                q: "The size of a 10mm digital spanner is represented as:",
+                options: ["M10", "M*10"],
+                answer: 0,
+                explanation: "M10 denotes a metric spanner size of 10 mm."
+            },
+            {
+                q: "तस्बिरमा देखिएको उपकरण कुन हो?",
+                options: ["टायर हब", "रिङ स्प्यानर"],
+                answer: 1,
+                explanation: "A ring spanner is a hand tool for turning nuts and bolts."
+            },
+            {
+                q: "स्क्रू फाल्ने बेलामा कुन औजार प्रयोग गरिन्छ?",
+                options: ["स्क्रू ड्राइभर", "फिलर गेज"],
+                answer: 0,
+                explanation: "A screwdriver is used to drive or remove screws."
+            },
+
+            // 1.4 Basic Knowledge of Lathe, Milling, Shaper, Grinding, and Drilling Machine
+            {
+                q: "What is facing in machining?",
+                options: ["Beveling the workpiece end", "Producing a flat surface on workpiece ends"],
+                answer: 1,
+                explanation: "Facing creates a flat surface on the ends of a workpiece."
+            },
+            {
+                q: "What does the facing operation achieve?",
+                options: ["Beveling the end", "Flat surface on workpiece ends"],
+                answer: 1,
+                explanation: "Facing machines the ends of a workpiece to produce a flat surface."
+            },
+            {
+                q: "What is used to hold and rotate the workpiece in a lathe?",
+                options: ["Centers", "Mandrel"],
+                answer: 0,
+                explanation: "Centers hold and rotate the workpiece in a lathe."
+            },
+            {
+                q: "Lathe मेशिन कुन कार्यका लागि प्रयोग गरिन्छ?",
+                options: ["घुमाउने कार्य", "मिलिंग कार्य"],
+                answer: 0,
+                explanation: "Lathes are used for turning operations to shape rotating workpieces."
+            },
+            {
+                q: "Which is not a part of a shaper machine?",
+                options: ["Taper box", "Table"],
+                answer: 0,
+                explanation: "A taper box is not a standard component of a shaper."
+            },
+            {
+                q: "Which operation cannot be performed on a lathe?",
+                options: ["Drilling", "Milling"],
+                answer: 1,
+                explanation: "Milling requires a milling machine, not a lathe."
+            },
+            {
+                q: "What type of threads does a lathe spindle have?",
+                options: ["External threads", "Internal threads"],
+                answer: 0,
+                explanation: "Lathe spindles typically have external threads for mounting chucks."
+            },
+            {
+                q: "Which machine is used for the turning process?",
+                options: ["Lathe machine", "Drilling machine"],
+                answer: 0,
+                explanation: "Turning is performed on a lathe to shape cylindrical workpieces."
+            },
+            {
+                q: "Which machine uses a multiple teeth cutter?",
+                options: ["Milling machine", "Planer"],
+                answer: 0,
+                explanation: "Milling machines use multi-tooth cutters for material removal."
+            },
+            {
+                q: "What is the operation called when the workpiece is stationary and the tool reciprocates?",
+                options: ["Shaping", "Slotting"],
+                answer: 0,
+                explanation: "Shaping involves a reciprocating tool cutting a stationary workpiece."
+            },
+            {
+                q: "What does a drilling machine produce?",
+                options: ["Circular holes", "Hexagonal holes"],
+                answer: 0,
+                explanation: "Drilling machines create circular holes in workpieces."
+            },
+            {
+                q: "What type of operation is grinding?",
+                options: ["Surface finishing", "Facing"],
+                answer: 0,
+                explanation: "Grinding is a surface finishing operation for precision and smoothness."
+            },
+            {
+                q: "How is a twist drill specified?",
+                options: ["By a number indicating hole size", "By an alphabet indicating hole size"],
+                answer: 0,
+                explanation: "Twist drills are specified by numbers or sizes indicating the hole diameter."
+            },
+
+            // 1.5 Basic Knowledge of Arc Welding and Oxy-Acetylene Welding
+            {
+                q: "What is the electrode coating material in arc welding?",
+                options: ["Flux", "Slag"],
+                answer: 0,
+                explanation: "Flux coats the electrode to protect the weld pool from contamination."
+            },
+            {
+                q: "Which welding is used for hydraulic excavator arm fabrication?",
+                options: ["Gas welding", "Arc welding"],
+                answer: 1,
+                explanation: "Arc welding is robust for heavy-duty applications like excavator arms."
+            },
+            {
+                q: "Which is not a welding tool?",
+                options: ["Electrode", "Radiator"],
+                answer: 1,
+                explanation: "Radiators are not used in welding; electrodes are essential."
+            },
+            {
+                q: "Which gas is used in TIG welding?",
+                options: ["Argon and helium", "CO₂ and H₂"],
+                answer: 0,
+                explanation: "Argon and helium are inert gases used as shielding in TIG welding."
+            },
+            {
+                q: "Which tool is used to remove slag in welding?",
+                options: ["Chipping hammer", "Gas welder"],
+                answer: 0,
+                explanation: "A chipping hammer removes slag from welds."
+            },
+            {
+                q: "In arc welding with DC current, where is greater heat generated?",
+                options: ["Positive pole (anode)", "Negative pole (cathode)"],
+                answer: 0,
+                explanation: "The positive pole generates more heat in DC arc welding."
+            },
+            {
+                q: "Which is a welding tool?",
+                options: ["Electrode", "Radiator"],
+                answer: 0,
+                explanation: "Electrodes are used in arc welding, unlike radiators."
+            },
+
+            // 1.6 Basic Knowledge of Power Transmission in Workshop
+            {
+                q: "How does a starter motor run the flywheel of an engine?",
+                options: ["Chain drive", "Gear drive"],
+                answer: 1,
+                explanation: "A gear drive connects the starter motor to the flywheel for engine cranking."
+            }
+        ];
+
+        let currentPage = 0;
+        let score = 0;
+        let skipped = [];
+        let userAnswers = Array(questions.length).fill(null);
+        let timerSeconds = 0;
+        let timerInterval;
+        const QUESTIONS_PER_PAGE = 5;
+        const ANSWER_DELAY = 1000;
+
+        const quizEl = document.getElementById("quiz");
+        const scoreEl = document.getElementById("score");
+        const resultsEl = document.getElementById("results");
+        const resultsBody = document.getElementById("results-body");
+        const progressEl = document.getElementById("progress");
+        const timerEl = document.getElementById("timer");
+        const currentScoreEl = document.getElementById("current-score");
+        const correctSound = document.getElementById("correct-sound");
+        const wrongSound = document.getElementById("wrong-sound");
+
+        // Load progress from localStorage
+        function loadProgress() {
+            const saved = localStorage.getItem("quizProgressWorkshop");
+            if (saved) {
+                const { currentPage: savedPage, score: savedScore, skipped: savedSkipped, answers: savedAnswers, time: savedTime } = JSON.parse(saved);
+                currentPage = savedPage;
+                score = savedScore;
+                skipped = savedSkipped;
+                userAnswers = savedAnswers || Array(questions.length).fill(null);
+                timerSeconds = savedTime || 0;
+                updateCurrentScore();
+            }
+        }
+
+        // Save progress to localStorage
+        function saveProgress() {
+            localStorage.setItem("quizProgressWorkshop", JSON.stringify({
+                currentPage,
+                score,
+                skipped,
+                answers: userAnswers,
+                time: timerSeconds
+            }));
+        }
+
+        // Update current score display
+        function updateCurrentScore() {
+            currentScoreEl.textContent = `Score: ${score}/${questions.length}`;
+        }
+
+        // Shuffle array
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -219,47 +735,247 @@
             return array;
         }
 
-        const quizContainer = document.getElementById('quiz');
-        const scoreContainer = document.getElementById('score');
-        let score = 0;
+        // Start timer
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timerSeconds++;
+                const minutes = Math.floor(timerSeconds / 60);
+                const seconds = timerSeconds % 60;
+                timerEl.textContent = `Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                saveProgress();
+            }, 1000);
+        }
 
-        questions.forEach((q, i) => {
-            const div = document.createElement('div');
-            div.classList.add('question');
-            div.innerHTML = `<p>${i + 1}. ${q.q}</p>`;
+        // Update progress bar
+        function updateProgress() {
+            const answeredCount = userAnswers.filter(answer => answer !== null).length;
+            const percentage = (answeredCount / questions.length) * 100;
+            progressEl.style.width = `${percentage}%`;
+        }
 
-            const optsDiv = document.createElement('div');
-            optsDiv.classList.add('options');
+        // Show questions for the current page
+        function showQuestions(page) {
+            quizEl.innerHTML = '';
+            const startIndex = page * QUESTIONS_PER_PAGE;
+            const endIndex = Math.min(startIndex + QUESTIONS_PER_PAGE, questions.length);
 
-            const shuffled = shuffle(q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.answer })));
+            for (let i = startIndex; i < endIndex; i++) {
+                const q = questions[i];
+                const shuffledOptions = shuffle([...q.options].map((opt, j) => ({ text: opt, index: j })));
+                const optionsHtml = shuffledOptions
+                    .map(opt => `<button onclick="checkAnswer(this, ${i}, ${opt.index}, '${opt.text.replace(/'/g, "\\'")}')">${opt.text}</button>`)
+                    .join('');
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question');
+                questionDiv.dataset.index = i;
+                questionDiv.innerHTML = `
+                    <p>Q${i + 1}. ${q.q}</p>
+                    <div class="options">${optionsHtml}</div>
+                    <button class="skip-button" onclick="skipQuestion(${i})">Skip</button>
+                    <div class="explanation">${q.explanation}</div>
+                `;
+                quizEl.appendChild(questionDiv);
+            }
 
-            shuffled.forEach(({ text, isCorrect }) => {
-                const btn = document.createElement('button');
-                btn.textContent = text;
-                btn.onclick = () => {
-                    if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
-                    if (isCorrect) {
-                        btn.classList.add('correct');
-                        score++;
-                    } else {
-                        btn.classList.add('wrong');
-                        optsDiv.querySelectorAll('button').forEach(b => {
-                            if (b.textContent === shuffled.find(o => o.isCorrect).text) {
-                                b.classList.add('correct');
-                            }
-                        });
-                    }
-                    if (i === questions.length - 1) {
-                        scoreContainer.textContent = `✅ Your Score: ${score} out of ${questions.length}`;
-                    }
-                };
-                optsDiv.appendChild(btn);
+            if (endIndex < questions.length || skipped.length > 0) {
+                const nextButton = document.createElement('button');
+                nextButton.classList.add('next-button');
+                nextButton.textContent = endIndex < questions.length ? 'Next' : 'Review Skipped Questions';
+                nextButton.onclick = nextPage;
+                nextButton.disabled = !areAllQuestionsAnsweredOnPage(startIndex, endIndex);
+                quizEl.appendChild(nextButton);
+            } else {
+                const submitButton = document.createElement('button');
+                submitButton.classList.add('next-button');
+                submitButton.textContent = 'Submit Quiz';
+                submitButton.onclick = endQuiz;
+                submitButton.disabled = !areAllQuestionsAnsweredOnPage(startIndex, endIndex);
+                quizEl.appendChild(submitButton);
+            }
+
+            updateProgress();
+            saveProgress();
+            restoreAnswers(startIndex, endIndex);
+        }
+
+        // Restore previous answers for the current page
+        function restoreAnswers(startIndex, endIndex) {
+            for (let i = startIndex; i < endIndex; i++) {
+                if (userAnswers[i] !== null && userAnswers[i] !== 'Skipped') {
+                    const questionDiv = document.querySelector(`.question[data-index="${i}"]`);
+                    const buttons = questionDiv.querySelectorAll('.options button');
+                    const q = questions[i];
+                    buttons.forEach(btn => {
+                        btn.disabled = true;
+                        if (btn.textContent === q.options[q.answer]) {
+                            btn.classList.add('correct');
+                        }
+                        if (btn.textContent === userAnswers[i] && userAnswers[i] !== q.options[q.answer]) {
+                            btn.classList.add('wrong');
+                        }
+                    });
+                    questionDiv.querySelector('.explanation').style.display = 'block';
+                    questionDiv.querySelector('.skip-button').disabled = true;
+                } else if (userAnswers[i] === 'Skipped') {
+                    const questionDiv = document.querySelector(`.question[data-index="${i}"]`);
+                    questionDiv.querySelectorAll('.options button').forEach(btn => btn.disabled = true);
+                    questionDiv.querySelector('.skip-button').disabled = true;
+                    questionDiv.querySelector('.explanation').style.display = 'block';
+                }
+            }
+        }
+
+        // Check if all questions on the current page are answered or skipped
+        function areAllQuestionsAnsweredOnPage(startIndex, endIndex) {
+            for (let i = startIndex; i < endIndex; i++) {
+                if (userAnswers[i] === null) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Check answer
+        function checkAnswer(button, questionIndex, selected, selectedText) {
+            const q = questions[questionIndex];
+            const correct = q.answer;
+            const buttons = button.parentElement.querySelectorAll("button");
+            const questionDiv = button.closest('.question');
+            const explanationDiv = questionDiv.querySelector('.explanation');
+
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                if (q.options.indexOf(btn.textContent) === correct) {
+                    btn.classList.add('correct');
+                }
+                if (btn === button && selected !== correct) {
+                    btn.classList.add('wrong');
+                }
             });
 
-            div.appendChild(optsDiv);
-            quizContainer.appendChild(div);
-        });
+            questionDiv.querySelector('.skip-button').disabled = true;
+            explanationDiv.style.display = 'block';
+
+            userAnswers[questionIndex] = selectedText;
+            if (selected === correct) {
+                score++;
+                correctSound.play().catch(() => console.log("Audio playback failed"));
+            } else {
+                wrongSound.play().catch(() => console.log("Audio playback failed"));
+            }
+
+            updateCurrentScore();
+            saveProgress();
+            const nextButton = quizEl.querySelector('.next-button');
+            if (nextButton) {
+                nextButton.disabled = !areAllQuestionsAnsweredOnPage(
+                    currentPage * QUESTIONS_PER_PAGE,
+                    Math.min((currentPage + 1) * QUESTIONS_PER_PAGE, questions.length)
+                );
+            }
+
+            setTimeout(() => {
+                if (areAllQuestionsAnsweredOnPage(
+                    currentPage * QUESTIONS_PER_PAGE,
+                    Math.min((currentPage + 1) * QUESTIONS_PER_PAGE, questions.length)
+                )) {
+                    nextPage();
+                }
+            }, ANSWER_DELAY);
+        }
+
+        // Skip question
+        function skipQuestion(questionIndex) {
+            if (!skipped.includes(questions[questionIndex])) {
+                skipped.push(questions[questionIndex]);
+                userAnswers[questionIndex] = 'Skipped';
+                const questionDiv = document.querySelector(`.question[data-index="${questionIndex}"]`);
+                questionDiv.querySelectorAll('.options button').forEach(btn => btn.disabled = true);
+                questionDiv.querySelector('.skip-button').disabled = true;
+                questionDiv.querySelector('.explanation').style.display = 'block';
+                saveProgress();
+                const nextButton = quizEl.querySelector('.next-button');
+                if (nextButton) {
+                    nextButton.disabled = !areAllQuestionsAnsweredOnPage(
+                        currentPage * QUESTIONS_PER_PAGE,
+                        Math.min((currentPage + 1) * QUESTIONS_PER_PAGE, questions.length)
+                    );
+                }
+            }
+        }
+
+        // Move to next page
+        function nextPage() {
+            if (skipped.length > 0 && currentPage * QUESTIONS_PER_PAGE >= questions.length) {
+                showSkippedQuestions();
+            } else {
+                currentPage++;
+                if (currentPage * QUESTIONS_PER_PAGE < questions.length) {
+                    showQuestions(currentPage);
+                } else if (skipped.length === 0) {
+                    endQuiz();
+                } else {
+                    showSkippedQuestions();
+                }
+            }
+        }
+
+        // Show skipped questions
+        function showSkippedQuestions() {
+            questions.splice(0, questions.length, ...skipped);
+            skipped = [];
+            currentPage = 0;
+            showQuestions(currentPage);
+        }
+
+        // End quiz and show results
+        function endQuiz() {
+            clearInterval(timerInterval);
+            quizEl.innerHTML = '';
+            scoreEl.textContent = `Final Score: ${score} out of ${questions.length} (${((score / questions.length) * 100).toFixed(2)}%)`;
+            resultsEl.classList.remove('hidden');
+
+            resultsBody.innerHTML = questions.map((q, i) => {
+                const userAnswer = userAnswers[i] === null ? 'Not attempted' :
+                                  userAnswers[i] === 'Skipped' ? 'Skipped' :
+                                  userAnswers[i];
+                const correctAnswer = q.options[q.answer];
+                const status = userAnswers[i] === q.options[q.answer] ? 'Correct' :
+                              userAnswers[i] === 'Skipped' ? 'Skipped' :
+                              userAnswers[i] === null ? 'Not attempted' : 'Wrong';
+                return `
+                    <tr>
+                        <td>${i + 1}. ${q.q}</td>
+                        <td>${userAnswer}</td>
+                        <td>${correctAnswer}</td>
+                        <td class="${status.toLowerCase().replace(' ', '-')}">${status}</td>
+                        <td class="explanation">${q.explanation}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            localStorage.removeItem('quizProgressWorkshop');
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            currentPage = 0;
+            score = 0;
+            skipped = [];
+            userAnswers = Array(questions.length).fill(null);
+            timerSeconds = 0;
+            resultsEl.classList.add('hidden');
+            scoreEl.textContent = '';
+            localStorage.removeItem('quizProgressWorkshop');
+            startTimer();
+            showQuestions(currentPage);
+            updateCurrentScore();
+        }
+
+        // Initialize
+        loadProgress();
+        startTimer();
+        showQuestions(currentPage);
     </script>
 </body>
-
 </html>
