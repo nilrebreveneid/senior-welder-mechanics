@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logsewa Basic Drawing Mock Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #f8ffae, #43c6ac);
+      marginaglio: 0;
+      padding: 2rem;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    .quiz-container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #1e88e5;
+    }
+
+    .question {
+      margin-bottom: 1.5rem;
+      animation: fadeIn 0.5s;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 1rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .question p {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .options button {
+      display: block;
+      margin: 0.5rem 0;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      background: #e3f2fd;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1rem;
+    }
+
+    .options button:hover {
+      background: #bbdefb;
+      transform: translateX(5px);
+    }
+
+    .correct {
+      background-color: #c8e6c9 !important;
+      animation: pulse 0.5s;
+    }
+
+    .wrong {
+      background-color: #ffcdd2 !important;
+      animation: shake 0.3s;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background: #eee;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      background: #42a5f5;
+      transition: width 0.3s;
+    }
+
+    #timer {
+      text-align: right;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: #d81b60;
+    }
+
+    #score, #results {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      font-weight: bold;
+    }
+
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .results-table th, .results-table td {
+      border: 1px solid #ddd;
+      padding: 0.5rem;
+      text-align: left;
+    }
+
+    .results-table th {
+      background: #f5f5f5;
+    }
+
+    .skip-button {
+      background: #fff3cd;
+      margin-top: 1rem;
+      padding: 0.75rem;
+      width: 100%;
+      border: 1px solid #ffca28;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .skip-button:hover {
+      background: #ffecb3;
+    }
+
+    .next-button {
+      background: #42a5f5;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1rem;
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+
+    .next-button:hover {
+      background: #1e88e5;
+    }
+
+    .next-button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .explanation {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .quiz-container {
+        padding: 1rem;
+      }
+      .options button {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Logsewa Basic Drawing Mock Test</h1>
+    <div id="timer">Time: 00:00</div>
+    <div class="progress-bar">
+      <div class="progress" id="progress"></div>
+    </div>
+    <div id="quiz"></div>
+    <div id="score"></div>
+    <div id="results" class="hidden">
+      <h2>Quiz Results</h2>
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Your Answer</th>
+            <th>Correct Answer</th>
+            <th>Status</th>
+            <th>Explanation</th>
+          </tr>
+        </thead>
+        <tbody id="results-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <audio id="correct-sound" src="https://www.soundjay.com/buttons/beep-01a.mp3"></audio>
+  <audio id="wrong-sound" src="https://www.soundjay.com/buttons/beep-02.mp3"></audio>
+
+  <script>
+    const questions = [
+      // 4.1 Scale & Dimensions (8 MCQs)
+      { q: "What does a scale of 1:2 on a drawing indicate?", 
+        options: ["The drawing is twice the size of the actual object", "The drawing is half the size of the actual object", "The drawing is the same size as the actual object", "The drawing is two times larger than the object"], 
+        answer: 1, 
+        explanation: "A scale of 1:2 means that 1 unit on the drawing represents 2 units on the actual object, so the drawing is reduced to half the size." },
+      { q: "Which type of scale is commonly used for large machine parts?", 
+        options: ["Full scale (1:1)", "Enlarged scale (2:1)", "Reduced scale (1:5)", "Isometric scale"], 
+        answer: 2, 
+        explanation: "Large machine parts are often drawn using a reduced scale (e.g., 1:5) to fit on standard drawing sheets while maintaining clarity." },
+      { q: "What is the primary purpose of dimensioning in a technical drawing?", 
+        options: ["To enhance the drawing’s appearance", "To provide exact measurements for manufacturing", "To indicate the type of material used", "To show the drawing scale"], 
+        answer: 1, 
+        explanation: "Dimensioning provides precise measurements to ensure the part can be accurately manufactured." },
+      { q: "Which dimensioning method avoids overlapping of dimension lines?", 
+        options: ["Aligned dimensioning", "Unidirectional dimensioning", "Chain dimensioning", "Baseline dimensioning"], 
+        answer: 3, 
+        explanation: "Baseline dimensioning uses a common reference line, reducing clutter and avoiding overlapping of dimension lines." },
+      { q: "What does the symbol Ø indicate in a technical drawing?", 
+        options: ["Length of the object", "Diameter of a circular feature", "Radius of a circular feature", "Depth of a hole"], 
+        answer: 1, 
+        explanation: "The Ø symbol denotes the diameter of a circular feature, such as a hole or shaft." },
+      { q: "When dimensioning a small part, which scale is most appropriate?", 
+        options: ["Reduced scale (1:10)", "Full scale (1:1)", "Enlarged scale (5:1)", "Proportional scale (1:3)"], 
+        answer: 2, 
+        explanation: "Small parts are often drawn using an enlarged scale to show details clearly." },
+      { q: "What is the correct way to dimension an arc in a drawing?", 
+        options: ["Indicate the arc length", "Specify the radius with an ‘R’ symbol", "Use the chord length", "Show the diameter of the arc"], 
+        answer: 1, 
+        explanation: "Arcs are dimensioned by their radius, denoted with an ‘R’ (e.g., R20 for a radius of 20 mm)." },
+      { q: "Which of the following is a rule for dimensioning in technical drawings?", 
+        options: ["Place dimensions inside the object outline", "Avoid placing dimensions outside the view unless necessary", "Use multiple units in the same drawing", "Omit units for clarity"], 
+        answer: 1, 
+        explanation: "Dimensions should be placed outside the object outline for clarity, but within the view unless space constraints require otherwise." },
+
+      // 4.2 Symbols, Views (8 MCQs)
+      { q: "What does the symbol ⏊ indicate in a technical drawing?", 
+        options: ["Perpendicularity tolerance", "Surface finish", "Weld joint", "Centerline"], 
+        answer: 0, 
+        explanation: "The ⏊ symbol is a geometric dimensioning and tolerancing (GD&T) symbol indicating perpendicularity tolerance." },
+      { q: "In an orthographic projection, how many principal views are typically shown?", 
+        options: ["Two", "Three", "Four", "Six"], 
+        answer: 1, 
+        explanation: "Orthographic projections typically show three principal views: front, top, and side, to fully describe an object." },
+      { q: "What type of line is used to represent the edge of a hidden feature?", 
+        options: ["Solid line", "Dashed line", "Centerline", "Phantom line"], 
+        answer: 1, 
+        explanation: "Hidden edges, not directly visible in the view, are represented by dashed lines in technical drawings." },
+      { q: "Which symbol indicates a fillet weld in a drawing?", 
+        options: ["A triangle below the reference line", "A circle at the junction of the reference line", "A square with a cross", "A wavy line"], 
+        answer: 0, 
+        explanation: "A fillet weld is indicated by a triangle symbol below the reference line in welding symbols." },
+      { q: "What is the purpose of a sectional view in a drawing?", 
+        options: ["To show the external shape of the object", "To reveal internal features of the object", "To indicate the material type", "To show the assembly sequence"], 
+        answer: 1, 
+        explanation: "Sectional views cut through the object to show internal features that are not visible in standard views." },
+      { q: "What does a centerline symbol (CL) represent in a drawing?", 
+        options: ["The axis of symmetry of a cylindrical feature", "The outline of the object", "A hidden edge", "A cutting plane"], 
+        answer: 0, 
+        explanation: "The centerline (CL) indicates the axis of symmetry for cylindrical features like holes or shafts." },
+      { q: "In an isometric view, a circle appears as:", 
+        options: ["A circle", "An ellipse", "A parabola", "A straight line"], 
+        answer: 1, 
+        explanation: "In isometric projection, circles are distorted and appear as ellipses due to the 30-degree angle of the axes." },
+      { q: "What does the symbol ↧ indicate in a technical drawing?", 
+        options: ["Depth of a hole", "Diameter of a hole", "Surface roughness", "Thread specification"], 
+        answer: 0, 
+        explanation: "The ↧ symbol is used to specify the depth of a feature, such as a drilled hole." },
+
+      // 4.3 Parts and Assembly Drawing of Joint (8 MCQs)
+      { q: "What is the primary purpose of an assembly drawing?", 
+        options: ["To show the detailed dimensions of each part", "To illustrate how parts fit together", "To specify the material of each part", "To provide a list of tools required"], 
+        answer: 1, 
+        explanation: "Assembly drawings show the arrangement and relationship of parts in the final assembly." },
+      { q: "Which type of drawing provides detailed dimensions for manufacturing a single component?", 
+        options: ["Assembly drawing", "Exploded view drawing", "Part drawing", "Schematic drawing"], 
+        answer: 2, 
+        explanation: "Part drawings provide detailed dimensions and tolerances for manufacturing individual components." },
+      { q: "What is typically included in an assembly drawing of a joint?", 
+        options: ["Only the final assembled view", "A bill of materials (BOM) and part labels", "The manufacturing process steps", "The cost of each component"], 
+        answer: 1, 
+        explanation: "Assembly drawings include a BOM and part labels to identify components and their arrangement." },
+      { q: "In an assembly drawing, what does an exploded view show?", 
+        options: ["The final assembled position of parts", "The parts separated along their assembly path", "The internal features of each part", "The tools required for assembly"], 
+        answer: 1, 
+        explanation: "An exploded view shows parts separated in the order they are assembled, aiding in understanding the assembly process." },
+      { q: "What is a key feature of a part drawing for a joint component?", 
+        options: ["It shows only the assembled view", "It includes tolerances and surface finish details", "It omits dimensions for clarity", "It focuses on the assembly sequence"], 
+        answer: 1, 
+        explanation: "Part drawings include tolerances and surface finish details to ensure the component meets manufacturing standards." },
+      { q: "Why are sectional views often used in assembly drawings of joints?", 
+        options: ["To show the external appearance", "To reveal how internal parts of the joint interact", "To indicate the material type", "To simplify the drawing process"], 
+        answer: 1, 
+        explanation: "Sectional views in assembly drawings show how internal features of the joint, like threads or keys, fit together." },
+      { q: "What does the leader line in an assembly drawing typically point to?", 
+        options: ["The title block", "A specific part or feature for annotation", "The scale of the drawing", "The drawing border"], 
+        answer: 1, 
+        explanation: "Leader lines point to specific parts or features, often with a note or part number for identification." },
+      { q: "What is the benefit of using a balloon numbering system in an assembly drawing?", 
+        options: ["It indicates the drawing scale", "It links parts to the bill of materials (BOM)", "It shows the assembly sequence", "It specifies the material type"], 
+        answer: 1, 
+        explanation: "Balloon numbering assigns numbers to parts in the drawing, linking them to the BOM for easy identification." },
+
+      // 4.3.1 Permanent Joint (Rivet and Welding) (8 MCQs)
+      { q: "What is a key advantage of a riveted joint over a welded joint?", 
+        options: ["It is easier to disassemble", "It provides a stronger bond", "It is suitable for high-temperature environments", "It requires less skill to create"], 
+        answer: 0, 
+        explanation: "Riveted joints can be disassembled by drilling out the rivets, unlike welded joints which are permanent and harder to separate." },
+      { q: "What type of rivet is commonly used for structural applications?", 
+        options: ["Snap head rivet", "Flat head rivet", "Countersunk rivet", "Pop rivet"], 
+        answer: 0, 
+        explanation: "Snap head rivets are strong and widely used in structural applications like bridges and buildings." },
+      { q: "What does the arrow in a welding symbol indicate?", 
+        options: ["The type of weld", "The location of the weld on the joint", "The welding process", "The material of the weld"], 
+        answer: 1, 
+        explanation: "The arrow in a welding symbol points to the location where the weld is to be applied on the joint." },
+      { q: "Which type of welded joint is used to join two plates at a right angle?", 
+        options: ["Butt joint", "Lap joint", "Fillet joint", "Edge joint"], 
+        answer: 2, 
+        explanation: "A fillet joint is used to join two surfaces at a right angle, typically with a triangular weld cross-section." },
+      { q: "In a riveted joint drawing, what does the pitch of rivets refer to?", 
+        options: ["The diameter of the rivet", "The distance between the centers of adjacent rivets", "The thickness of the plates", "The length of the rivet"], 
+        answer: 1, 
+        explanation: "Pitch is the center-to-center distance between rivets, critical for joint strength and design." },
+      { q: "What is a limitation of a welded joint compared to a riveted joint?", 
+        options: ["It is more expensive to create", "It cannot be used for thin plates", "It is more prone to distortion due to heat", "It requires less skilled labor"], 
+        answer: 2, 
+        explanation: "Welding generates heat, which can cause distortion in the plates, a challenge not faced in riveting." },
+      { q: "What does a circle at the junction of the reference line in a welding symbol indicate?", 
+        options: ["Weld all around the joint", "Field weld", "Spot weld", "Fillet weld"], 
+        answer: 0, 
+        explanation: "A circle at the junction of the reference line indicates that the weld should be applied all around the joint." },
+      { q: "In a riveted joint assembly drawing, what is the purpose of showing a sectional view?", 
+        options: ["To show the external appearance of the rivet", "To illustrate the rivet’s position and deformation inside the plates", "To indicate the material of the rivet", "To show the welding process"], 
+        answer: 1, 
+        explanation: "A sectional view shows how the rivet deforms to secure the plates, ensuring proper joint design." },
+
+      // 4.3.2 Temporary Joint (Nut Bolt, Key, and Spline Joint) (8 MCQs)
+      { q: "What is the primary function of a nut and bolt in a temporary joint?", 
+        options: ["To provide a permanent connection", "To allow easy disassembly and reassembly", "To transmit torque", "To reduce vibration"], 
+        answer: 1, 
+        explanation: "Nut and bolt joints are temporary, designed for easy disassembly and reassembly without damaging the components." },
+      { q: "What type of key is used to transmit torque between a shaft and a hub?", 
+        options: ["Woodruff key", "Cotter key", "Taper key", "Gib-head key"], 
+        answer: 0, 
+        explanation: "A Woodruff key, with its semicircular shape, is commonly used to transmit torque between a shaft and a hub." },
+      { q: "What does a spline joint primarily do in mechanical assemblies?", 
+        options: ["Allows axial movement while transmitting torque", "Provides a permanent connection", "Reduces the need for lubrication", "Increases the weight of the assembly"], 
+        answer: 0, 
+        explanation: "Spline joints have interlocking teeth that allow axial movement between the shaft and hub while transmitting torque effectively." },
+      { q: "In a nut and bolt joint drawing, what does the thread specification M10 indicate?", 
+        options: ["The length of the bolt", "The diameter of the bolt thread (10 mm)", "The pitch of the thread", "The material of the bolt"], 
+        answer: 1, 
+        explanation: "M10 indicates a metric thread with a nominal diameter of 10 mm." },
+      { q: "What is a key advantage of using a spline joint over a key joint?", 
+        options: ["It is easier to manufacture", "It can transmit higher torque with better alignment", "It requires no maintenance", "It is cheaper to produce"], 
+        answer: 1, 
+        explanation: "Spline joints have multiple teeth, providing better torque transmission and alignment compared to a single key." },
+      { q: "What is the purpose of a washer in a nut and bolt joint?", 
+        options: ["To increase the length of the bolt", "To distribute load and prevent damage to the surface", "To transmit torque", "To reduce the need for a nut"], 
+        answer: 1, 
+        explanation: "Washers distribute the load of the bolt, reducing stress on the surface and preventing damage." },
+      { q: "In a key joint drawing, what does the sectional view of a key typically show?", 
+        options: ["The external shape of the key", "The fit between the key, shaft, and hub", "The material of the key", "The assembly sequence"], 
+        answer: 1, 
+        explanation: "A sectional view shows how the key fits into the keyway of the shaft and hub, ensuring proper torque transmission." },
+      { q: "What type of nut is used to prevent loosening due to vibration in a temporary joint?", 
+        options: ["Hexagonal nut", "Wing nut", "Lock nut", "Cap nut"], 
+        answer: 2, 
+        explanation: "A lock nut, often used with a second nut or a locking mechanism, prevents loosening due to vibration." }
+    ];
+
+    let currentPage = 0;
+    let score = 0;
+    let skipped = [];
+    let userAnswers = Array(questions.length).fill(null);
+    let timerSeconds = 0;
+    let timerInterval;
+    const QUESTIONS_PER_PAGE = 5;
+    const ANSWER_DELAY = 1500; // 1.5 seconds delay
+
+    const quizEl = document.getElementById("quiz");
+    const scoreEl = document.getElementById("score");
+    const resultsEl = document.getElementById("results");
+    const resultsBody = document.getElementById("results-body");
+    const progressEl = document.getElementById("progress");
+    const timerEl = document.getElementById("timer");
+    const correctSound = document.getElementById("correct-sound");
+    const wrongSound = document.getElementById("wrong-sound");
+
+    // Load progress from localStorage
+    function loadProgress() {
+      const saved = localStorage.getItem("quizProgressDrawing");
+      if (saved) {
+        const { currentPage: savedPage, score: savedScore, skipped: savedSkipped, answers: savedAnswers, time: savedTime } = JSON.parse(saved);
+        currentPage = savedPage;
+        score = savedScore;
+        skipped = savedSkipped;
+        userAnswers = savedAnswers || Array(questions.length).fill(null);
+        timerSeconds = savedTime || 0;
+      }
+    }
+
+    // Save progress to localStorage
+    function saveProgress() {
+      localStorage.setItem("quizProgressDrawing", JSON.stringify({
+        currentPage,
+        score,
+        skipped,
+        answers: userAnswers,
+        time: timerSeconds
+      }));
+    }
+
+    // Shuffle array
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Shuffle questions only once at initialization
+    const shuffledQuestions = shuffle([...questions]);
+
+    // Start timer
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        const minutes = Math.floor(timerSeconds / 60);
+        const seconds = timerSeconds % 60;
+        timerEl.textContent = `Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }, 1000);
+    }
+
+    // Update progress bar
+    function updateProgress() {
+      const percentage = ((currentPage * QUESTIONS_PER_PAGE) / questions.length) * 100;
+      progressEl.style.width = `${percentage}%`;
+    }
+
+    // Show questions for the current page
+    function showQuestions(page) {
+      const startIndex = page * QUESTIONS_PER_PAGE;
+      const endIndex = Math.min(startIndex + QUESTIONS_PER_PAGE, questions.length);
+      let html = '';
+      for (let i = startIndex; i < endIndex; i++) {
+        const q = shuffledQuestions[i];
+        const shuffledOptions = shuffle([...q.options].map((opt, j) => ({ text: opt, index: j })));
+        const options = shuffledOptions
+          .map(opt => `<button onclick="checkAnswer(this, ${i}, ${opt.index}, '${opt.text.replace(/'/g, "\\'")}')">${opt.text}</button>`)
+          .join('');
+        html += `
+          <div class="question" data-index="${i}">
+            <p>Q${i + 1}. ${q.q}</p>
+            <div class="options">${options}</div>
+            <button class="skip-button" onclick="skipQuestion(${i})">Skip</button>
+          </div>
+        `;
+      }
+      if (endIndex < questions.length) {
+        html += `<button class="next-button" onclick="nextPage()" disabled>Next</button>`;
+      }
+      quizEl.innerHTML = html;
+      updateProgress();
+      saveProgress();
+      checkNextButton();
+    }
+
+    // Check answer
+    function checkAnswer(button, questionIndex, selected, selectedText) {
+      const q = shuffledQuestions[questionIndex];
+      const correct = q.answer;
+      const buttons = button.parentElement.querySelectorAll("button");
+      buttons.forEach((btn) => {
+        btn.disabled = true;
+        if (q.options.indexOf(btn.innerText) === correct) btn.classList.add("correct");
+        if (btn === button && selected !== correct) btn.classList.add("wrong");
+      });
+
+      userAnswers[questionIndex] = selectedText;
+      if (selected === correct) {
+        score++;
+        correctSound.play().catch(() => console.log("Audio playback failed"));
+      } else {
+        wrongSound.play().catch(() => console.log("Audio playback failed"));
+      }
+
+      saveProgress();
+      checkNextButton();
+    }
+
+    // Skip question
+    function skipQuestion(questionIndex) {
+      if (!skipped.includes(shuffledQuestions[questionIndex])) {
+        skipped.push(shuffledQuestions[questionIndex]);
+        userAnswers[questionIndex] = "Skipped";
+      }
+      const buttons = document.querySelector(`.question[data-index="${questionIndex}"] .options`).querySelectorAll("button");
+      buttons.forEach(btn => btn.disabled = true);
+      saveProgress();
+      checkNextButton();
+    }
+
+    // Check if all questions on the page are answered or skipped
+    function checkNextButton() {
+      const startIndex = currentPage * QUESTIONS_PER_PAGE;
+      const endIndex = Math.min(startIndex + QUESTIONS_PER_PAGE, questions.length);
+      let allAnswered = true;
+      for (let i = startIndex; i < endIndex; i++) {
+        if (userAnswers[i] === null) {
+          allAnswered = false;
+          break;
+        }
+      }
+      const nextButton = document.querySelector(".next-button");
+      if (nextButton) {
+        nextButton.disabled = !allAnswered;
+      }
+    }
+
+    // Move to next page
+    function nextPage() {
+      currentPage++;
+      if (currentPage * QUESTIONS_PER_PAGE < questions.length) {
+        showQuestions(currentPage);
+      } else {
+        endQuiz();
+      }
+    }
+
+    // End quiz and show results
+    function endQuiz() {
+      clearInterval(timerInterval);
+      quizEl.innerHTML = "";
+      scoreEl.innerHTML = `Your score: ${score} / ${questions.length} (${((score / questions.length) * 100).toFixed(2)}%)`;
+      resultsEl.classList.remove("hidden");
+
+      resultsBody.innerHTML = shuffledQuestions.map((q, i) => {
+        const userAnswer = userAnswers[i] === null ? "Not attempted" :
+                         userAnswers[i] === "Skipped" ? "Skipped" :
+                         userAnswers[i];
+        const correctAnswer = q.options[q.answer];
+        const status = userAnswers[i] === q.options[q.answer] ? "Correct" :
+                      userAnswers[i] === "Skipped" ? "Skipped" :
+                      userAnswers[i] === null ? "Not attempted" : "Wrong";
+        return `
+          <tr>
+            <td>${i + 1}. ${q.q}</td>
+            <td>${userAnswer}</td>
+            <td>${correctAnswer}</td>
+            <td class="${status.toLowerCase()}">${status}</td>
+            <td class="explanation">${q.explanation}</td>
+          </tr>
+        `;
+      }).join('');
+
+      // Clear localStorage
+      localStorage.removeItem("quizProgressDrawing");
+    }
+
+    // Initialize
+    loadProgress();
+    startTimer();
+    showQuestions(currentPage);
+  </script>
+</body>
+</html>
