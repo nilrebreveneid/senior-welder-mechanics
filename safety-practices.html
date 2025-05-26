@@ -1,157 +1,635 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>steering-clutch </title>
+    <title>Logsewa Steering and Clutch Mock Test</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f5f7fa;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        h1 {
-            text-align: center;
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #e0e7ff, #c3dafe);
+            margin: 0;
+            padding: 2rem;
             color: #333;
+            min-height: 100vh;
         }
 
         .quiz-container {
             max-width: 900px;
             margin: auto;
             background: #fff;
-            padding: 20px;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #1e3a8a;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            text-align: center;
+            color: #1e3a8a;
+            margin: 1rem 0;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f8fafc;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .timer {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #d81b60;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress {
+            height: 100%;
+            background: #3b82f6;
+            transition: width 0.3s ease;
         }
 
         .question {
-            margin-bottom: 20px;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            animation: fadeIn 0.5s;
+            transition: transform 0.2s ease;
+        }
+
+        .question:hover {
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .question p {
-            font-weight: bold;
-            color: #444;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 1rem;
         }
 
         .options button {
             display: block;
-            margin: 6px 0;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            cursor: pointer;
-            text-align: left;
             width: 100%;
-            transition: background-color 0.3s;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            color: #374151;
         }
 
-        .options button:hover {
-            background-color: #e0e0e0;
+        .options button:hover:not(:disabled) {
+            background: #f3f4f6;
+            border-color: #3b82f6;
+            transform: translateX(4px);
         }
 
         .options button.correct {
-            background-color: #c8f7c5;
+            background: #bbf7d0;
+            border-color: #22c55e;
+            color: #166534;
+            animation: pulse 0.5s;
         }
 
         .options button.wrong {
-            background-color: #f7c5c5;
+            background: #fecaca;
+            border-color: #ef4444;
+            color: #991b1b;
+            animation: shake 0.3s;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .options button:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #eff6ff;
+            border-radius: 8px;
+            color: #1e3a8a;
+            font-size: 0.95rem;
+        }
+
+        .skip-button {
+            background: #fff3cd;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            width: 100%;
+            border: 1px solid #ffca28;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .skip-button:hover {
+            background: #ffecb3;
+        }
+
+        .next-button {
+            background: #3b82f6;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 1rem;
+            display: block;
+            width: 100%;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+
+        .next-button:hover:not(:disabled) {
+            background: #2563eb;
+        }
+
+        .next-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .score-container {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
         }
 
         .score {
-            font-size: 1.2em;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .results-table th, .results-table td {
+            border: 1px solid #e5e7eb;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .results-table th {
+            background: #f8fafc;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .results-table .correct {
+            color: #166534;
             font-weight: bold;
+        }
+
+        .results-table .wrong {
+            color: #991b1b;
+            font-weight: bold;
+        }
+
+        .results-table .skipped, .results-table .not-attempted {
+            color: #d97706;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .restart-button {
+            background: #22c55e;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 1rem auto;
+            display: block;
+            width: 100%;
             text-align: center;
-            margin-top: 30px;
+            transition: background 0.3s ease;
+        }
+
+        .restart-button:hover {
+            background: #16a34a;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            .quiz-container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .question p {
+                font-size: 1rem;
+            }
+
+            .options button, .skip-button, .next-button, .restart-button {
+                font-size: 0.9rem;
+                padding: 0.8rem;
+            }
+
+            .results-table th, .results-table td {
+                padding: 0.5rem;
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
-
 <body>
-    <h1>safety practise and mock test</h1>
-    <div class="quiz-container" id="quiz"></div>
-    <div class="score" id="score"></div>
+    <div class="quiz-container">
+        <h1>Logsewa Steering and Clutch Mock Test</h1>
+        <div class="quiz-header">
+            <div class="timer" id="timer">Time: 00:00</div>
+            <div class="score" id="current-score">Score: 0/40</div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <div id="quiz"></div>
+        <div class="score-container">
+            <div class="score" id="score"></div>
+            <div id="results" class="hidden">
+                <h2>Quiz Results</h2>
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>Your Answer</th>
+                            <th>Correct Answer</th>
+                            <th>Status</th>
+                            <th>Explanation</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-body"></tbody>
+                </table>
+                <button class="restart-button" onclick="restartQuiz()">Restart Quiz</button>
+            </div>
+        </div>
+    </div>
 
-    <script> 
+    <audio id="correct-sound" src="https://www.soundjay.com/buttons/beep-01a.mp3"></audio>
+    <audio id="wrong-sound" src="https://www.soundjay.com/buttons/beep-02.mp3"></audio>
 
-const questions = [
-  { q: "Muffler (साइलेन्सर) को मुख्य काम के हो ?", options: ["इञ्जिनबाट निस्कने तातो हावा निकाल्ने", "इञ्जिनबाट निस्कने ध्वनी नियन्त्रित गरि बाहिर निकाल्ने"], answer: 1 },
-  { q: "Function of cutting fluids is to", options: ["Increase friction between tool and the workpiece", "Decrease friction between tool and the workpiece"], answer: 1 },
-  { q: "The feeler gauge is used to check", options: ["Internal diameter", "Clearance between two mating surface"], answer: 1 },
-  { q: "Which of the following statements is false?", options: ["Cutting fluid should be non-corrosive", "Cutting fluid should be acidic in nature"], answer: 1 },
-  { q: "Function of cutting fluid is:", options: ["Flushing chips away from cutting zone", "All of the above"], answer: 1 },
-  { q: "Which of the following is not a cutting fluid?", options: ["Straight oil", "Gasoline"], answer: 1 },
-  { q: "Detonation is said to take place in an automotive engine when:", options: ["Temperature is very high", "The pressure rise is instantaneous"], answer: 1 },
-  { q: "The purpose of a crosshead in a steam engine is to:", options: ["Translate linear motion into angular motion", "Facilitate piston to reciprocate"], answer: 1 },
-  { q: "The total cost is the sum of:", options: ["Variable cost", "Accounting cost"], answer: 1 },
-  { q: "Assets of a company include:", options: ["Machinery", "All of the above"], answer: 1 },
-  { q: "A cost that has already been made and cannot be recovered is called:", options: ["Fixed cost", "Sunk cost"], answer: 1 },
-  { q: "Which of the following is not a fundamental quantity?", options: ["Time", "Weight"], answer: 1 },
-  { q: "Non-SI unit used with SI is:", options: ["Dalton", "Steradian"], answer: 1 },
-  { q: "Factors to determine serviceability of bearing are:", options: ["Discoloration, cracked/damaged races, shields/seals", "Any of the above"], answer: 1 },
-  { q: "A job costing system accumulates the following information:", options: ["Direct labour and overhead", "Direct material and overhead"], answer: 1 },
-  { q: "Individual stock ledger card shall be updated:", options: ["Every month", "Every time part is issued or received"], answer: 1 },
-  { q: "Unit “Pound” is the unit to measure:", options: ["Time", "Weight"], answer: 1 },
-  { q: "Stress concentration factor for a machine component is dependent:", options: ["Only on the material of the component", "Only on the geometry of the component"], answer: 1 },
-  { q: "In which projections angles are different between the three principal axes and three scale ratios are required?", options: ["Dimetric", "Trimetric"], answer: 1 },
-  { q: "Production drawings show:", options: ["How to design the product", "How to manufacture the product"], answer: 1 },
-  { q: "Which one of the following is not a characteristic of management?", options: ["Goal oriented", "Single man activity"], answer: 1 },
-  { q: "Operation management is applicable:", options: ["Mostly to service sector", "To manufacturing and service sector"], answer: 1 },
-  { q: "Routing:", options: ["Determines the programme for the operations", "Prescribes the sequence of operations to be followed"], answer: 1 },
-  { q: "Plant layout is the most effective physical arrangement to achieve:", options: ["4 Ms (Man power, Materials, Machines and Methods)", "4 Ms (Man power, Materials, Manufacture and Machines)"], answer: 1 },
-  { q: "Programme Evaluation and Review Technique (PERT) would be useful in:", options: ["Financial management", "Production schedule"], answer: 1 },
-  { q: "Critical path method (CPM):", options: ["Helps in ascertaining time schedules", "All of the above"], answer: 1 },
-  { q: "The most important function of inventory control is:", options: ["To run the stores effectively", "All of the above"], answer: 1 },
-  { q: "Forecasting implies:", options: ["Preparation of specifications", "Estimation of future work"], answer: 1 },
-  { q: "Discarded material substances having some value is:", options: ["Waste", "Scrap"], answer: 1 },
-  { q: "The product cost includes:", options: ["Production overhead", "All of the above"], answer: 1 },
-  { q: "According to Civil Service Act, 2049, pension after retirement is calculated by:", options: ["No. of years of service × latest salary / 40", "No. of years of service × latest salary / 50"], answer: 1 },
-  { q: "Which of the following class is not in non-gazetted civil service?", options: ["Second", "Special"], answer: 1 },
-  { q: "के.उ.प. सेवाका निजामती कर्मचारीले विदाको बेलामा विश्वविद्यालयीय शैक्षिक कार्यक्रम पूरा गर्न को प्रमाणपत्र पेश गर्दा कुन सुविधा प्राप्त गर्ने व्यवस्था छ?", options: ["बिदा नसमेटिएको कार्यकालको तलब सुविधा", "बिदा नसमेटिएको सम्पूर्ण कार्यकालको तलब सुविधा"], answer: 1 },
-  { q: "The current Constitution of Nepal was announced on:", options: ["3rd Bhadra 2072 B.S.", "3rd Aswin 2072 B.S."], answer: 1 },
-  { q: "Which of the following is used as permanent fastening?", options: ["Cotter", "Rivet"], answer: 1 },
-  { q: "Handle of soldering iron rod is made up of plastic because plastic is a:", options: ["Good conductor of heat", "Good insulator of heat"], answer: 1 },
-  { q: "Magnetism is a property of:", options: ["Plastic", "Iron"], answer: 1 },
-  { q: "If friction and mechanical advantage are given, then:", options: ["Velocity ratio = friction / mechanical advantage", "Mechanical advantage = friction × velocity ratio"], answer: 1 },
-  { q: "Which power plant is free from environmental problems?", options: ["Thermal power plant", "Geothermal power plant"], answer: 1 },
-  { q: "In a steam power plant, which components are used?", options: ["Condenser", "All of the above"], answer: 1 },
-  { q: "Coal used in power plant is also known as:", options: ["Charcoal", "Steam coal"], answer: 1 },
-  { q: "In a steam power plant, the … is used as prime mover:", options: ["I.C. engine only", "Turbine only"], answer: 1 },
-  { q: "नहरको के ऊचाईबाट पानी झारेर बत्ती उत्पादन गरिन्छ?", options: ["टरबाइनको रोटर", "टरबाइनका पङ्खाहरु"], answer: 1 },
-  { q: "If one of the belts has broken in a multiple V-belt drive system, it requires:", options: ["Replacement of broken belt only", "Replacement of the broken belt and the belts on either side of it"], answer: 1 },
-  { q: "1 HP is known as:", options: ["Horse Power = 467 Watt", "Horse Power = 746 Watt"], answer: 1 },
-  { q: "V-belt drives are generally used in:", options: ["Tube well pump", "Power transmission"], answer: 1 },
-  { q: "An impulse turbine is:", options: ["Not exposed to mud", "Most suited for high head installation"], answer: 1 },
-  { q: "A relatively low-speed turbine that receives water from a pipe line is:", options: ["Propeller type turbine", "Francis turbine"], answer: 1 },
-  { q: "Pelton wheels are used for a minimum head of:", options: ["180 mm or above", "400 mm or above"], answer: 1 },
-  { q: "Higher specific speed turbine (300-1000) is:", options: ["Francis", "Kaplan"], answer: 1 },
-  { q: "Speed in aeronautics is given in:", options: ["Km/hr", "Knot"], answer: 1 },
-  { q: "DC Motors are used for:", options: ["Light loads", "Smooth operation"], answer: 1 },
-  { q: "ग्यास वेल्डिङ्गमा कति प्रकारका फ्लेम हुन्छन्?", options: ["२ प्रकार", "३ प्रकार"], answer: 1 },
-  { q: "नेपाल सवारी साधन उत्सर्जन मापदण्ड २०६९ अनुसार, यात्रु कारको लागि कार्बन मोनोअक्साइड (CO) को सीमा हो:", options: ["०.१५%", "०.१%"], answer: 1 },
-  { q: "Maximum energy loss in boiler occurs due to:", options: ["Incomplete combustion", "Unburnt carbon in ash"], answer: 1 },
-  { q: "The type of boiler that can be maintained while in use:", options: ["Vertical fire tube type", "Horizontal fire tube type"], answer: 1 },
-  { q: "Increase in temperature of I.C. engine increases its efficiency will:", options: ["Remain same", "Increase"], answer: 1 },
-  { q: "The force required on a plunger (given A = 15cm² and P = 1 ton) is:", options: ["100kg", "1000kg"], answer: 1 },
-  { q: "The mechanical power developed by the D.C. motor is maximum when back e.m.f. is equal to:", options: ["Applied voltage", "Half the applied voltage"], answer: 1 },
-  { q: "A D.C. generator consists of:", options: ["An armature", "All of the above"], answer: 1 },
-  { q: "Which of the following is a permanent joint?", options: ["Spline joints", "Keys joints"], answer: 1 },
-  { q: "The mechanical power developed by the d.c. motor is maximum when back e.m.f. is equal to", options: ["Applied voltage", "Twice the applied voltage"], answer: 1 },
-  { q: "A d.c. generator consists of", options: ["An armature", "All of the above"], answer: 1 },
-  { q: "गाडीको स्पीड बढी हुँदा गाडीको हेडलाइटमा प्राप्त हुने प्रकाशको असरलाई के भनिन्छ ?", options: ["हेडलाइट इन्टेन्सिटी", "हेडलाइट बीम डाइवरेशन"], answer: 1 },
-  { q: "मेट्रिक सिस्टम (metric system) का लम्बाइ इकाइ के हो ?", options: ["फिट", "मिटर"], answer: 1 },
-  { q: "Vernier caliper को प्रयोगबाट के मापन गर्न सकिन्छ ?", options: ["उचाइ", "भित्री र बाहिरी दुबै मापन"], answer: 1 },
-  { q: "तल दिइएको मध्ये कुन भाग shaper machine सँग सम्बन्धित छैन ?", options: ["Tool post", "Tailstock"], answer: 1 },
-  { q: "Metal is cut in its ___ during filing.", options: ["Return stroke", "Forward stroke"], answer: 1 },
-  { q: "HSS भनेको संक्षेपमा के को पुरा रूप हो ?", options: ["Heavy strength Steel", "High Speed Steel"], answer: 1 },
-  { q: "Which type of mirror is used in headlight of a motorcycle?", options: ["Convex mirror", "Concave mirror"], answer: 1 }
-];
+    <script>
+        const questions = [
+            // Steering and Clutch Systems (20 MCQs)
+            {
+                q: "What is the primary function of a vehicle’s steering system?",
+                options: ["To control engine power", "To direct the vehicle’s path"],
+                answer: 1,
+                explanation: "The steering system allows the driver to control the vehicle’s direction by turning the wheels."
+            },
+            {
+                q: "Which component connects the steering wheel to the steering gearbox?",
+                options: ["Tie rod", "Steering shaft"],
+                answer: 1,
+                explanation: "The steering shaft transmits the driver’s input from the steering wheel to the gearbox."
+            },
+            {
+                q: "What type of steering system is commonly used in modern vehicles?",
+                options: ["Manual steering", "Power-assisted steering"],
+                answer: 1,
+                explanation: "Power-assisted steering (hydraulic or electric) reduces driver effort and is standard in modern vehicles."
+            },
+            {
+                q: "What is the purpose of the clutch in a manual transmission vehicle?",
+                options: ["To regulate engine speed", "To engage and disengage engine power"],
+                answer: 1,
+                explanation: "The clutch connects or disconnects the engine from the transmission, allowing gear changes."
+            },
+            {
+                q: "Which type of clutch is commonly used in passenger vehicles?",
+                options: ["Multi-plate clutch", "Single-plate clutch"],
+                answer: 1,
+                explanation: "Single-plate clutches are simple and widely used in passenger vehicles for manual transmissions."
+            },
+            {
+                q: "What causes clutch slippage in a vehicle?",
+                options: ["Worn clutch disc", "Excessive engine oil"],
+                answer: 0,
+                explanation: "A worn clutch disc fails to grip properly, causing slippage and power loss."
+            },
+            {
+                q: "What is the function of the rack and pinion in a steering system?",
+                options: ["To amplify engine torque", "To convert rotational motion to linear motion"],
+                answer: 1,
+                explanation: "The rack and pinion converts the steering wheel’s rotation into linear motion to turn the wheels."
+            },
+            {
+                q: "What is the role of the pressure plate in a clutch assembly?",
+                options: ["To absorb engine vibrations", "To press the clutch disc against the flywheel"],
+                answer: 1,
+                explanation: "The pressure plate ensures the clutch disc engages with the flywheel to transmit power."
+            },
+            {
+                q: "Which fluid is typically used in hydraulic power steering systems?",
+                options: ["Brake fluid", "Power steering fluid"],
+                answer: 1,
+                explanation: "Power steering fluid is specifically formulated for hydraulic steering systems."
+            },
+            {
+                q: "What indicates a faulty steering system?",
+                options: ["Excessive steering wheel play", "Engine overheating"],
+                answer: 0,
+                explanation: "Excessive play in the steering wheel suggests issues like worn tie rods or gearbox problems."
+            },
+            {
+                q: "What is the purpose of the throw-out bearing in a clutch system?",
+                options: ["To reduce engine noise", "To disengage the clutch"],
+                answer: 1,
+                explanation: "The throw-out bearing presses against the pressure plate to disengage the clutch."
+            },
+            {
+                q: "Which steering system component adjusts wheel alignment?",
+                options: ["Pitman arm", "Tie rod"],
+                answer: 1,
+                explanation: "Tie rods connect the steering mechanism to the wheels and are adjusted for proper alignment."
+            },
+            {
+                q: "What is a common symptom of a worn clutch?",
+                options: ["Difficulty shifting gears", "Increased fuel efficiency"],
+                answer: 0,
+                explanation: "A worn clutch causes difficulty in shifting gears due to poor engagement."
+            },
+            {
+                q: "What type of steering gear is used in heavy vehicles?",
+                options: ["Rack and pinion", "Worm and roller"],
+                answer: 1,
+                explanation: "Worm and roller steering is robust and suitable for heavy vehicles."
+            },
+            {
+                q: "What is the function of the clutch pedal in a manual vehicle?",
+                options: ["To control vehicle speed", "To disengage the clutch"],
+                answer: 1,
+                explanation: "The clutch pedal disengages the clutch, allowing gear changes without engine stall."
+            },
+            {
+                q: "What is the main advantage of electric power steering over hydraulic?",
+                options: ["Lower cost", "Improved fuel efficiency"],
+                answer: 1,
+                explanation: "Electric power steering eliminates the hydraulic pump, improving fuel efficiency."
+            },
+            {
+                q: "What component in a clutch system absorbs shock during engagement?",
+                options: ["Clutch springs", "Flywheel"],
+                answer: 0,
+                explanation: "Clutch springs in the disc absorb shock to ensure smooth power transfer."
+            },
+            {
+                q: "What causes steering wheel vibration?",
+                options: ["Unbalanced wheels", "Low engine oil"],
+                answer: 0,
+                explanation: "Unbalanced wheels cause vibrations felt through the steering wheel."
+            },
+            {
+                q: "What is the purpose of the clutch release fork?",
+                options: ["To align the gearbox", "To move the throw-out bearing"],
+                answer: 1,
+                explanation: "The release fork moves the throw-out bearing to disengage the clutch."
+            },
+            {
+                q: "Which maintenance task prevents steering system wear?",
+                options: ["Regular wheel alignment", "Engine oil change"],
+                answer: 0,
+                explanation: "Regular wheel alignment ensures even tire wear and reduces steering component stress."
+            },
 
-      
+            // Related Automotive Systems and Safety (20 MCQs)
+            {
+                q: "Muffler (साइलेन्सर) को मुख्य काम के हो?",
+                options: ["इञ्जिनको ताप कम गर्ने", "इञ्जिनको ध्वनि नियन्त्रण गर्ने"],
+                answer: 1,
+                explanation: "The muffler reduces engine exhaust noise to acceptable levels."
+            },
+            {
+                q: "The feeler gauge is used to check:",
+                options: ["Internal diameter", "Clearance between mating surfaces"],
+                answer: 1,
+                explanation: "Feeler gauges measure small gaps, such as valve clearances, between mating surfaces."
+            },
+            {
+                q: "What is the function of cutting fluids in machining?",
+                options: ["Increase friction", "Reduce friction and cool the workpiece"],
+                answer: 1,
+                explanation: "Cutting fluids lubricate and cool the tool and workpiece, reducing friction and heat."
+            },
+            {
+                q: "Which is NOT a cutting fluid?",
+                options: ["Soluble oil", "Gasoline"],
+                answer: 1,
+                explanation: "Gasoline is not a cutting fluid; soluble oils are used for cooling and lubrication."
+            },
+            {
+                q: "Which component in a steam engine facilitates piston reciprocation?",
+                options: ["Crankshaft", "Crosshead"],
+                answer: 1,
+                explanation: "The crosshead guides the piston’s linear motion, connecting it to the connecting rod."
+            },
+            {
+                q: "Which of the following is a permanent fastening?",
+                options: ["Cotter pin", "Rivet"],
+                answer: 1,
+                explanation: "Rivets create permanent joints, unlike cotter pins, which are removable."
+            },
+            {
+                q: "Why is the handle of a soldering iron made of plastic?",
+                options: ["To conduct heat", "To insulate heat"],
+                answer: 1,
+                explanation: "Plastic is a heat insulator, preventing burns during soldering."
+            },
+            {
+                q: "Which material exhibits magnetism?",
+                options: ["Plastic", "Iron"],
+                answer: 1,
+                explanation: "Iron is ferromagnetic and exhibits magnetism, unlike plastic."
+            },
+            {
+                q: "Which power plant is free from environmental problems?",
+                options: ["Thermal power plant", "Geothermal power plant"],
+                answer: 1,
+                explanation: "Geothermal plants have minimal environmental impact compared to thermal plants."
+            },
+            {
+                q: "In a steam power plant, what is used as the prime mover?",
+                options: ["I.C. engine", "Turbine"],
+                answer: 1,
+                explanation: "Turbines convert steam energy into mechanical work in steam power plants."
+            },
+            {
+                q: "If one V-belt in a multiple V-belt drive system breaks, what is required?",
+                options: ["Replace only the broken belt", "Replace all belts"],
+                answer: 1,
+                explanation: "All belts should be replaced to ensure uniform tension and performance."
+            },
+            {
+                q: "1 horsepower (HP) is equivalent to:",
+                options: ["467 watts", "746 watts"],
+                answer: 1,
+                explanation: "1 HP equals 746 watts, a standard unit of power."
+            },
+            {
+                q: "V-belt drives are generally used for:",
+                options: ["Low-speed applications", "Power transmission"],
+                answer: 1,
+                explanation: "V-belts efficiently transmit power in automotive and industrial applications."
+            },
+            {
+                q: "Which turbine is suited for high-head installations?",
+                options: ["Kaplan turbine", "Pelton wheel"],
+                answer: 1,
+                explanation: "Pelton wheels are designed for high-head, low-flow conditions."
+            },
+            {
+                q: "What is the unit of speed in aeronautics?",
+                options: ["Km/hr", "Knot"],
+                answer: 1,
+                explanation: "Knots (nautical miles per hour) are used to measure speed in aeronautics."
+            },
+            {
+                q: "What is the metric system unit for length?",
+                options: ["Foot", "Meter"],
+                answer: 1,
+                explanation: "The meter is the SI unit for length in the metric system."
+            },
+            {
+                q: "What can a vernier caliper measure?",
+                options: ["Height only", "Internal and external dimensions"],
+                answer: 1,
+                explanation: "Vernier calipers measure both internal and external dimensions with precision."
+            },
+            {
+                q: "Which part is NOT related to a shaper machine?",
+                options: ["Tool post", "Tailstock"],
+                answer: 1,
+                explanation: "Tailstock is part of a lathe, not a shaper machine."
+            },
+            {
+                q: "During filing, metal is cut on the:",
+                options: ["Return stroke", "Forward stroke"],
+                answer: 1,
+                explanation: "Filing removes material during the forward stroke, not the return stroke."
+            },
+            {
+                q: "Which type of mirror is used in a motorcycle headlight?",
+                options: ["Convex mirror", "Concave mirror"],
+                answer: 1,
+                explanation: "Concave mirrors focus light to produce a strong beam in headlights."
+            }
+        ];
+
+        let currentPage = 0;
+        let score = 0;
+        let skipped = [];
+        let userAnswers = Array(questions.length).fill(null);
+        let timerSeconds = 0;
+        let timerInterval;
+        const QUESTIONS_PER_PAGE = 5;
+        const ANSWER_DELAY = 1000;
+
+        const quizEl = document.getElementById("quiz");
+        const scoreEl = document.getElementById("score");
+        const resultsEl = document.getElementById("results");
+        const resultsBody = document.getElementById("results-body");
+        const progressEl = document.getElementById("progress");
+        const timerEl = document.getElementById("timer");
+        const currentScoreEl = document.getElementById("current-score");
+        const correctSound = document.getElementById("correct-sound");
+        const wrongSound = document.getElementById("wrong-sound");
+
+        // Load progress from localStorage
+        function loadProgress() {
+            const saved = localStorage.getItem("quizProgressSteeringClutch");
+            if (saved) {
+                const { currentPage: savedPage, score: savedScore, skipped: savedSkipped, answers: savedAnswers, time: savedTime } = JSON.parse(saved);
+                currentPage = savedPage;
+                score = savedScore;
+                skipped = savedSkipped;
+                userAnswers = savedAnswers || Array(questions.length).fill(null);
+                timerSeconds = savedTime || 0;
+                updateCurrentScore();
+            }
+        }
+
+        // Save progress to localStorage
+        function saveProgress() {
+            localStorage.setItem("quizProgressSteeringClutch", JSON.stringify({
+                currentPage,
+                score,
+                skipped,
+                answers: userAnswers,
+                time: timerSeconds
+            }));
+        }
+
+        // Update current score display
+        function updateCurrentScore() {
+            currentScoreEl.textContent = `Score: ${score}/${questions.length}`;
+        }
+
+        // Shuffle array
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -160,47 +638,247 @@ const questions = [
             return array;
         }
 
-        const quizContainer = document.getElementById('quiz');
-        const scoreContainer = document.getElementById('score');
-        let score = 0;
+        // Start timer
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timerSeconds++;
+                const minutes = Math.floor(timerSeconds / 60);
+                const seconds = timerSeconds % 60;
+                timerEl.textContent = `Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                saveProgress();
+            }, 1000);
+        }
 
-        questions.forEach((q, i) => {
-            const div = document.createElement('div');
-            div.classList.add('question');
-            div.innerHTML = `<p>${i + 1}. ${q.q}</p>`;
+        // Update progress bar
+        function updateProgress() {
+            const answeredCount = userAnswers.filter(answer => answer !== null).length;
+            const percentage = (answeredCount / questions.length) * 100;
+            progressEl.style.width = `${percentage}%`;
+        }
 
-            const optsDiv = document.createElement('div');
-            optsDiv.classList.add('options');
+        // Show questions for the current page
+        function showQuestions(page) {
+            quizEl.innerHTML = '';
+            const startIndex = page * QUESTIONS_PER_PAGE;
+            const endIndex = Math.min(startIndex + QUESTIONS_PER_PAGE, questions.length);
 
-            const shuffled = shuffle(q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.answer })));
+            for (let i = startIndex; i < endIndex; i++) {
+                const q = questions[i];
+                const shuffledOptions = shuffle([...q.options].map((opt, j) => ({ text: opt, index: j })));
+                const optionsHtml = shuffledOptions
+                    .map(opt => `<button onclick="checkAnswer(this, ${i}, ${opt.index}, '${opt.text.replace(/'/g, "\\'")}')">${opt.text}</button>`)
+                    .join('');
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question');
+                questionDiv.dataset.index = i;
+                questionDiv.innerHTML = `
+                    <p>Q${i + 1}. ${q.q}</p>
+                    <div class="options">${optionsHtml}</div>
+                    <button class="skip-button" onclick="skipQuestion(${i})">Skip</button>
+                    <div class="explanation">${q.explanation}</div>
+                `;
+                quizEl.appendChild(questionDiv);
+            }
 
-            shuffled.forEach(({ text, isCorrect }) => {
-                const btn = document.createElement('button');
-                btn.textContent = text;
-                btn.onclick = () => {
-                    if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
-                    if (isCorrect) {
-                        btn.classList.add('correct');
-                        score++;
-                    } else {
-                        btn.classList.add('wrong');
-                        optsDiv.querySelectorAll('button').forEach(b => {
-                            if (b.textContent === shuffled.find(o => o.isCorrect).text) {
-                                b.classList.add('correct');
-                            }
-                        });
-                    }
-                    if (i === questions.length - 1) {
-                        scoreContainer.textContent = `✅ Your Score: ${score} out of ${questions.length}`;
-                    }
-                };
-                optsDiv.appendChild(btn);
+            if (endIndex < questions.length || skipped.length > 0) {
+                const nextButton = document.createElement('button');
+                nextButton.classList.add('next-button');
+                nextButton.textContent = endIndex < questions.length ? 'Next' : 'Review Skipped Questions';
+                nextButton.onclick = nextPage;
+                nextButton.disabled = !areAllQuestionsAnsweredOnPage(startIndex, endIndex);
+                quizEl.appendChild(nextButton);
+            } else {
+                const submitButton = document.createElement('button');
+                submitButton.classList.add('next-button');
+                submitButton.textContent = 'Submit Quiz';
+                submitButton.onclick = endQuiz;
+                submitButton.disabled = !areAllQuestionsAnsweredOnPage(startIndex, endIndex);
+                quizEl.appendChild(submitButton);
+            }
+
+            updateProgress();
+            saveProgress();
+            restoreAnswers(startIndex, endIndex);
+        }
+
+        // Restore previous answers for the current page
+        function restoreAnswers(startIndex, endIndex) {
+            for (let i = startIndex; i < endIndex; i++) {
+                if (userAnswers[i] !== null && userAnswers[i] !== 'Skipped') {
+                    const questionDiv = document.querySelector(`.question[data-index="${i}"]`);
+                    const buttons = questionDiv.querySelectorAll('.options button');
+                    const q = questions[i];
+                    buttons.forEach(btn => {
+                        btn.disabled = true;
+                        if (btn.textContent === q.options[q.answer]) {
+                            btn.classList.add('correct');
+                        }
+                        if (btn.textContent === userAnswers[i] && userAnswers[i] !== q.options[q.answer]) {
+                            btn.classList.add('wrong');
+                        }
+                    });
+                    questionDiv.querySelector('.explanation').style.display = 'block';
+                    questionDiv.querySelector('.skip-button').disabled = true;
+                } else if (userAnswers[i] === 'Skipped') {
+                    const questionDiv = document.querySelector(`.question[data-index="${i}"]`);
+                    questionDiv.querySelectorAll('.options button').forEach(btn => btn.disabled = true);
+                    questionDiv.querySelector('.skip-button').disabled = true;
+                    questionDiv.querySelector('.explanation').style.display = 'block';
+                }
+            }
+        }
+
+        // Check if all questions on the current page are answered or skipped
+        function areAllQuestionsAnsweredOnPage(startIndex, endIndex) {
+            for (let i = startIndex; i < endIndex; i++) {
+                if (userAnswers[i] === null) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Check answer
+        function checkAnswer(button, questionIndex, selected, selectedText) {
+            const q = questions[questionIndex];
+            const correct = q.answer;
+            const buttons = button.parentElement.querySelectorAll("button");
+            const questionDiv = button.closest('.question');
+            const explanationDiv = questionDiv.querySelector('.explanation');
+
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                if (q.options.indexOf(btn.textContent) === correct) {
+                    btn.classList.add('correct');
+                }
+                if (btn === button && selected !== correct) {
+                    btn.classList.add('wrong');
+                }
             });
 
-            div.appendChild(optsDiv);
-            quizContainer.appendChild(div);
-        });
+            questionDiv.querySelector('.skip-button').disabled = true;
+            explanationDiv.style.display = 'block';
+
+            userAnswers[questionIndex] = selectedText;
+            if (selected === correct) {
+                score++;
+                correctSound.play().catch(() => console.log("Audio playback failed"));
+            } else {
+                wrongSound.play().catch(() => console.log("Audio playback failed"));
+            }
+
+            updateCurrentScore();
+            saveProgress();
+            const nextButton = quizEl.querySelector('.next-button');
+            if (nextButton) {
+                nextButton.disabled = !areAllQuestionsAnsweredOnPage(
+                    currentPage * QUESTIONS_PER_PAGE,
+                    Math.min((currentPage + 1) * QUESTIONS_PER_PAGE, questions.length)
+                );
+            }
+
+            setTimeout(() => {
+                if (areAllQuestionsAnsweredOnPage(
+                    currentPage * QUESTIONS_PER_PAGE,
+                    Math.min((currentPage + 1) * QUESTIONS_PER_PAGE, questions.length)
+                )) {
+                    nextPage();
+                }
+            }, ANSWER_DELAY);
+        }
+
+        // Skip question
+        function skipQuestion(questionIndex) {
+            if (!skipped.includes(questions[questionIndex])) {
+                skipped.push(questions[questionIndex]);
+                userAnswers[questionIndex] = 'Skipped';
+                const questionDiv = document.querySelector(`.question[data-index="${questionIndex}"]`);
+                questionDiv.querySelectorAll('.options button').forEach(btn => btn.disabled = true);
+                questionDiv.querySelector('.skip-button').disabled = true;
+                questionDiv.querySelector('.explanation').style.display = 'block';
+                saveProgress();
+                const nextButton = quizEl.querySelector('.next-button');
+                if (nextButton) {
+                    nextButton.disabled = !areAllQuestionsAnsweredOnPage(
+                        currentPage * QUESTIONS_PER_PAGE,
+                        Math.min((currentPage + 1) * QUESTIONS_PER_PAGE, questions.length)
+                    );
+                }
+            }
+        }
+
+        // Move to next page
+        function nextPage() {
+            if (skipped.length > 0 && currentPage * QUESTIONS_PER_PAGE >= questions.length) {
+                showSkippedQuestions();
+            } else {
+                currentPage++;
+                if (currentPage * QUESTIONS_PER_PAGE < questions.length) {
+                    showQuestions(currentPage);
+                } else if (skipped.length === 0) {
+                    endQuiz();
+                } else {
+                    showSkippedQuestions();
+                }
+            }
+        }
+
+        // Show skipped questions
+        function showSkippedQuestions() {
+            questions.splice(0, questions.length, ...skipped);
+            skipped = [];
+            currentPage = 0;
+            showQuestions(currentPage);
+        }
+
+        // End quiz and show results
+        function endQuiz() {
+            clearInterval(timerInterval);
+            quizEl.innerHTML = '';
+            scoreEl.textContent = `Final Score: ${score} out of ${questions.length} (${((score / questions.length) * 100).toFixed(2)}%)`;
+            resultsEl.classList.remove('hidden');
+
+            resultsBody.innerHTML = questions.map((q, i) => {
+                const userAnswer = userAnswers[i] === null ? 'Not attempted' :
+                                  userAnswers[i] === 'Skipped' ? 'Skipped' :
+                                  userAnswers[i];
+                const correctAnswer = q.options[q.answer];
+                const status = userAnswers[i] === q.options[q.answer] ? 'Correct' :
+                              userAnswers[i] === 'Skipped' ? 'Skipped' :
+                              userAnswers[i] === null ? 'Not attempted' : 'Wrong';
+                return `
+                    <tr>
+                        <td>${i + 1}. ${q.q}</td>
+                        <td>${userAnswer}</td>
+                        <td>${correctAnswer}</td>
+                        <td class="${status.toLowerCase().replace(' ', '-')}">${status}</td>
+                        <td class="explanation">${q.explanation}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            localStorage.removeItem('quizProgressSteeringClutch');
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            currentPage = 0;
+            score = 0;
+            skipped = [];
+            userAnswers = Array(questions.length).fill(null);
+            timerSeconds = 0;
+            resultsEl.classList.add('hidden');
+            scoreEl.textContent = '';
+            localStorage.removeItem('quizProgressSteeringClutch');
+            startTimer();
+            showQuestions(currentPage);
+            updateCurrentScore();
+        }
+
+        // Initialize
+        loadProgress();
+        startTimer();
+        showQuestions(currentPage);
     </script>
 </body>
-
 </html>
