@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Test: Workshop Practices</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #e0e7ff 0%, #dbeafe 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 1rem;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        h1 {
+            color: #1e40af;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.25rem;
+            font-weight: 700;
+        }
+        .section {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 1rem;
+        }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 1rem;
+            background: #f1f5f9;
+            border-radius: 0.5rem;
+            transition: background 0.3s ease;
+        }
+        .section-header:hover {
+            background: #e2e8f0;
+        }
+        .section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1e40af;
+        }
+        .section-content {
+            display: none;
+            padding: 1rem;
+        }
+        .section-content.active {
+            display: block;
+        }
+        .sub-section h3 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 1rem;
+        }
+        .question {
+            background: #f9fafb;
+            padding: 1.25rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease;
+        }
+        .question:hover {
+            transform: translateY(-2px);
+        }
+        .question p {
+            font-weight: 500;
+            color: #1f2937;
+            margin-bottom: 0.75rem;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            margin: 0.25rem 0;
+            transition: background 0.3s ease;
+        }
+        .option:hover {
+            background: #f3f4f6;
+        }
+        .option input {
+            margin-right: 0.5rem;
+            accent-color: #1e40af;
+            cursor: pointer;
+        }
+        .option label {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 0.5rem;
+            cursor: pointer;
+            color: #374151;
+        }
+        .option-text {
+            flex-grow: 1;
+        }
+        .feedback {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            display: none;
+        }
+        .feedback.correct {
+            background: #d1fae5;
+            color: #047857;
+            display: block;
+        }
+        .feedback.incorrect {
+            background: #fee2e2;
+            color: #b91c1c;
+            display: block;
+        }
+        .progress-bar {
+            width: 100%;
+            background: #e5e7eb;
+            height: 0.5rem;
+            border-radius: 0.25rem;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background: #1e40af;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        @media (max-width: 640px) {
+            .container {
+                padding: 1rem;
+            }
+            h1 {
+                font-size: 1.75rem;
+            }
+            .section-header h2 {
+                font-size: 1.25rem;
+            }
+            .sub-section h3 {
+                font-size: 1.1rem;
+            }
+            .question {
+                padding: 1rem;
+            }
+            .option label {
+                padding: 0.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mock Test: Workshop Practices (मैकेनिकल वर्कशॉप सामान्य ज्ञान)</h1>
+        <div class="progress-bar">
+            <div id="progress" class="progress"></div>
+        </div>
+        <div id="quiz"></div>
+    </div>
+
+    <script>
+        const quizData = [
+            // Section 2.1: Basic Knowledge of Measuring Systems and Calculation
+            {
+                section: "2.1 Basic Knowledge of Measuring Systems and Calculation",
+                subsections: [
+                    {
+                        subsection: "2.1.1 Metric, FPS, SI Unit",
+                        questions: [
+                            { question: "What is the SI unit of electric current?", options: ["Volt", "Ampere", "Ohm", "Watt"], answer: 1, explanation: "The SI unit of electric current is Ampere (A). Volt (voltage), Ohm (resistance), and Watt (power) are derived units." },
+                            { question: "In the FPS system, what unit is used to measure length?", options: ["Meter", "Foot", "Centimeter", "Inch"], answer: 1, explanation: "FPS (Foot-Pound-Second) system uses the foot as the unit of length. Meter and centimeter are metric units, and inch is a smaller FPS unit." },
+                            { question: "Which of the following is an SI base unit?", options: ["Newton", "Joule", "Candela", "Watt"], answer: 2, explanation: "Candela is the SI base unit for luminous intensity. Newton, Joule, and Watt are derived units." },
+                            { question: "The SI unit of temperature is:", options: ["Celsius", "Fahrenheit", "Kelvin", "Rankine"], answer: 2, explanation: "Kelvin (K) is the SI unit of temperature. Celsius and Fahrenheit are not SI units, and Rankine is used in the FPS system." }
+                        ]
+                    },
+                    {
+                        subsection: "2.1.2 Conversion of Unit",
+                        questions: [
+                            { question: "How many meters are in 3 kilometers?", options: ["300 m", "3000 m", "30 m", "0.3 m"], answer: 1, explanation: "1 km = 1000 m, so 3 km = 3 × 1000 = 3000 m." },
+                            { question: "Convert 2 pounds to kilograms (1 pound = 0.453592 kg).", options: ["0.907 kg", "1.814 kg", "0.227 kg", "4.536 kg"], answer: 0, explanation: "2 pounds = 2 × 0.453592 = 0.907184 kg, which rounds to 0.907 kg." },
+                            { question: "How many centimeters are in 5 inches (1 inch = 2.54 cm)?", options: ["12.7 cm", "1.27 cm", "127 cm", "0.127 cm"], answer: 0, explanation: "5 inches = 5 × 2.54 = 12.7 cm." },
+                            { question: "Convert 1 hour to seconds.", options: ["360 seconds", "3600 seconds", "60 seconds", "600 seconds"], answer: 1, explanation: "1 hour = 60 minutes, 1 minute = 60 seconds. So, 1 hour = 60 × 60 = 3600 seconds." }
+                        ]
+                    },
+                    {
+                        subsection: "2.1.3 Fundamental & Derived Unit",
+                        questions: [
+                            { question: "Which of the following is a fundamental unit in the SI system?", options: ["Area", "Volume", "Time", "Speed"], answer: 2, explanation: "Time (seconds) is a fundamental SI unit. Area, volume, and speed are derived units." },
+                            { question: "The SI unit of force, Newton, is a:", options: ["Fundamental unit", "Derived unit", "Base unit", "Primary unit"], answer: 1, explanation: "Newton (N) is a derived unit, defined as kg·m/s², from mass (kg), length (m), and time (s)." },
+                            { question: "Which of the following is a derived unit?", options: ["Mole", "Pressure", "Meter", "Second"], answer: 1, explanation: "Pressure (Pascal, N/m²) is a derived unit. Mole, meter, and second are fundamental units." },
+                            { question: "The unit of energy, Joule, is equivalent to:", options: ["kg·m²/s²", "kg·m/s", "kg·m²/s", "kg/s²"], answer: 0, explanation: "Joule (energy) = force × distance. Force = kg·m/s², so Joule = (kg·m/s²) × m = kg·m²/s²." }
+                        ]
+                    },
+                    {
+                        subsection: "2.1.4 Area, Perimeter, Weight, Density",
+                        questions: [
+                            { question: "What is the area of a rectangle with a length of 6 cm and a width of 4 cm?", options: ["24 cm²", "20 cm²", "10 cm²", "28 cm²"], answer: 0, explanation: "Area of a rectangle = length × width = 6 cm × 4 cm = 24 cm²." },
+                            { question: "What is the perimeter of a circle with a radius of 7 cm? (Use π ≈ 3.14)", options: ["43.96 cm", "21.98 cm", "153.86 cm", "14 cm"], answer: 0, explanation: "Perimeter (circumference) of a circle = 2πr = 2 × 3.14 × 7 = 43.96 cm." },
+                            { question: "A material has a mass of 800 g and a volume of 400 cm³. What is its density?", options: ["2 g/cm³", "0.5 g/cm³", "4 g/cm³", "1 g/cm³"], answer: 0, explanation: "Density = Mass/Volume = 800 g / 400 cm³ = 2 g/cm³." },
+                            { question: "What is the weight of an object with a mass of 5 kg on Earth (g = 9.8 m/s²)?", options: ["49 N", "4.9 N", "0.49 N", "490 N"], answer: 0, explanation: "Weight = Mass × g = 5 kg × 9.8 m/s² = 49 N." }
+                        ]
+                    }
+                ]
+            },
+            // Section 2.2: Basic Knowledge of Different Types of Measuring Tools and Equipment
+            {
+                section: "2.2 Basic Knowledge of Different Types of Measuring Tools and Equipment",
+                subsections: [
+                    {
+                        subsection: "2.2.1 Try Square, Bevel Protractor",
+                        questions: [
+                            { question: "What is the primary function of a try square?", options: ["Measure angles", "Check 90-degree angles", "Measure length", "Mark curves"], answer: 1, explanation: "A try square checks or marks right angles (90 degrees) on a workpiece." },
+                            { question: "A bevel protractor can measure angles in the range of:", options: ["0° to 90°", "0° to 180°", "0° to 360°", "90° to 180°"], answer: 1, explanation: "A bevel protractor measures angles from 0° to 180° with high precision." },
+                            { question: "Which part of a try square ensures the 90-degree angle?", options: ["Blade", "Stock", "Handle", "Scale"], answer: 1, explanation: "The stock of a try square forms a right angle with the blade, ensuring a 90-degree measurement." },
+                            { question: "A bevel protractor is most commonly used in:", options: ["Carpentry", "Machining", "Plumbing", "Electrical work"], answer: 1, explanation: "Bevel protractors are widely used in machining to measure and set precise angles." }
+                        ]
+                    },
+                    {
+                        subsection: "2.2.2 Vernier Caliper, Micrometer, Gauges, Filler Gauges",
+                        questions: [
+                            { question: "What is the least count of a vernier caliper with 1 MSD = 1 mm and 50 divisions on the vernier scale?", options: ["0.02 mm", "0.1 mm", "0.05 mm", "0.01 mm"], answer: 0, explanation: "Least count = 1 MSD / Number of vernier divisions = 1 mm / 50 = 0.02 mm." },
+                            { question: "A micrometer is best suited for measuring:", options: ["Internal diameters", "External dimensions with high precision", "Depth of holes", "Angles"], answer: 1, explanation: "A micrometer is used to measure external dimensions (e.g., thickness, diameter) with high accuracy." },
+                            { question: "Filler gauges are typically used to measure:", options: ["The thickness of a sheet", "The diameter of a wire", "Small gaps or clearances", "The depth of a groove"], answer: 2, explanation: "Filler (feeler) gauges measure small gaps or clearances, such as between machine parts." },
+                            { question: "What is the least count of a micrometer with a pitch of 0.5 mm and 50 divisions on the thimble?", options: ["0.01 mm", "0.05 mm", "0.1 mm", "0.001 mm"], answer: 0, explanation: "Least count = Pitch / Number of divisions = 0.5 mm / 50 = 0.01 mm." },
+                            { question: "Which part of a vernier caliper is used to measure the depth of a hole?", options: ["Main scale", "Vernier scale", "Depth gauge", "Jaws"], answer: 2, explanation: "The depth gauge (a thin rod at the end of the vernier caliper) measures the depth of holes or recesses." }
+                        ]
+                    }
+                ]
+            },
+            // Section 2.3: Basic Knowledge of Hand Tools & Special Tools in Mechanical Workshop
+            {
+                section: "2.3 Basic Knowledge of Hand Tools & Special Tools in Mechanical Workshop",
+                subsections: [
+                    {
+                        subsection: "2.3.1 Files, Saws, Chisels, Hammers, Marking Tools, Wrenches, Screwdrivers",
+                        questions: [
+                            { question: "Which file is used for rough material removal?", options: ["Smooth file", "Bastard file", "Dead smooth file", "Second-cut file"], answer: 1, explanation: "A bastard file has coarse teeth and is used for rough material removal, while smooth and dead smooth files are for finishing." },
+                            { question: "What is the primary function of a hacksaw?", options: ["To cut wood", "To cut metal", "To shape wood", "To mark lines"], answer: 1, explanation: "A hacksaw has a fine-toothed blade designed to cut metals or other hard materials." },
+                            { question: "A ball-peen hammer is typically used for:", options: ["Driving nails", "Shaping metal", "Breaking concrete", "Marking surfaces"], answer: 1, explanation: "A ball-peen hammer has a rounded end used for shaping metal, such as in riveting or peening." },
+                            { question: "Which tool is used to mark lines on a metal surface before cutting?", options: ["Scriber", "Chisel", "File", "Screwdriver"], answer: 0, explanation: "A scriber is a sharp, pointed tool used to mark precise lines on metal surfaces for cutting or machining." },
+                            { question: "A cold chisel is primarily used to:", options: ["Cut hot metal", "Cut cold metal", "Drill holes", "Measure thickness"], answer: 1, explanation: "A cold chisel cuts or shapes cold (unheated) metal, typically with a hammer, by shearing the material." }
+                        ]
+                    },
+                    {
+                        subsection: "2.3.2 Torque Wrench, Dial Wrench",
+                        questions: [
+                            { question: "What is the main purpose of a torque wrench?", options: ["To measure bolt length", "To apply a specific torque to a fastener", "To cut threads", "To measure bolt diameter"], answer: 1, explanation: "A torque wrench applies a precise torque to a fastener, ensuring proper tightening." },
+                            { question: "A dial wrench is typically used to:", options: ["Measure torque", "Apply torque with a visual dial reading", "Tighten bolts without torque control", "Measure angles"], answer: 1, explanation: "A dial wrench has a dial gauge that displays the applied torque for precise tightening." },
+                            { question: "Which of the following is a feature of a torque wrench?", options: ["Adjustable torque setting", "Fixed torque setting", "No torque control", "Measures length"], answer: 0, explanation: "Most torque wrenches have an adjustable torque setting to apply a specific torque value." },
+                            { question: "Using a torque wrench helps to:", options: ["Increase the speed of tightening", "Prevent over-tightening of bolts", "Measure the depth of a bolt", "Cut threads on a bolt"], answer: 1, explanation: "A torque wrench ensures bolts are tightened to the correct torque, preventing over-tightening." }
+                        ]
+                    }
+                ]
+            },
+            // Section 2.4: Basic Machine Tools
+            {
+                section: "2.4 Basic Machine Tools",
+                subsections: [
+                    {
+                        subsection: "2.4.1 Lathe, Milling, Shaper, Grinding, Drilling",
+                        questions: [
+                            { question: "What is the primary function of a lathe machine?", options: ["To create flat surfaces", "To produce cylindrical objects", "To grind surfaces", "To drill holes"], answer: 1, explanation: "A lathe rotates the workpiece against a cutting tool to produce cylindrical shapes, like shafts or rods." },
+                            { question: "A milling machine is best suited for:", options: ["Creating cylindrical parts", "Producing flat surfaces and slots", "Drilling precise holes", "Grinding surfaces"], answer: 1, explanation: "A milling machine uses a rotating cutter to create flat surfaces, slots, and grooves." },
+                            { question: "What is the main function of a shaper machine?", options: ["To produce cylindrical surfaces", "To create flat or contoured surfaces", "To drill holes", "To grind surfaces"], answer: 1, explanation: "A shaper machine uses a single-point cutting tool to create flat or contoured surfaces." },
+                            { question: "A grinding machine is primarily used to:", options: ["Remove large amounts of material", "Achieve high surface finish and precision", "Drill holes", "Shape cylindrical objects"], answer: 1, explanation: "Grinding machines use abrasive wheels to achieve a high surface finish and precision." },
+                            { question: "Which machine is best for creating precise holes in a workpiece?", options: ["Lathe", "Milling", "Drilling", "Shaper"], answer: 2, explanation: "A drilling machine (drill press) creates precise holes using a rotating drill bit." }
+                        ]
+                    },
+                    {
+                        subsection: "2.4.2 Cutting Tools, Nature, Selection and Sharpening",
+                        questions: [
+                            { question: "Which material is commonly used for cutting tools in a lathe?", options: ["Aluminum", "High-speed steel (HSS)", "Copper", "Plastic"], answer: 1, explanation: "HSS is widely used for cutting tools due to its hardness and heat resistance." },
+                            { question: "The process of sharpening a cutting tool involves:", options: ["Increasing the tool’s length", "Restoring the cutting edge", "Reducing the tool’s hardness", "Changing the tool’s material"], answer: 1, explanation: "Sharpening involves grinding the edge to restore its sharpness for effective cutting." },
+                            { question: "When selecting a cutting tool, which factor is most important?", options: ["Tool color", "Workpiece material", "Tool weight", "Tool length"], answer: 1, explanation: "The cutting tool must be compatible with the workpiece material for effective cutting." },
+                            { question: "What is the primary reason for using carbide cutting tools?", options: ["Low cost", "High hardness and heat resistance", "Easy to sharpen", "Lightweight"], answer: 1, explanation: "Carbide tools are used for their high hardness and ability to withstand high temperatures." }
+                        ]
+                    },
+                    {
+                        subsection: "2.4.3 Operation Procedure, Shape Generation",
+                        questions: [
+                            { question: "In a lathe, the shape of the workpiece is generated by:", options: ["Rotating the tool", "Rotating the workpiece", "Moving the tool in a circle", "Keeping the workpiece stationary"], answer: 1, explanation: "In a lathe, the workpiece rotates while the cutting tool moves along its surface." },
+                            { question: "What type of shape can a shaper machine produce?", options: ["Cylindrical", "Flat or contoured", "Spherical", "Threaded"], answer: 1, explanation: "A shaper machine produces flat or contoured surfaces by moving the workpiece linearly." },
+                            { question: "In milling, shape generation is achieved by:", options: ["Rotating the workpiece", "Moving the workpiece against a rotating cutter", "Keeping the cutter stationary", "Rotating the table"], answer: 1, explanation: "In milling, the rotating cutter removes material as the workpiece moves against it." },
+                            { question: "What is the primary purpose of a drilling operation?", options: ["To create flat surfaces", "To produce holes", "To shape contours", "To grind surfaces"], answer: 1, explanation: "Drilling creates round holes in a workpiece using a rotating drill bit." }
+                        ]
+                    },
+                    {
+                        subsection: "2.4.4 Cutting Speed, Feed, Depth of Cut",
+                        questions: [
+                            { question: "What does the term 'cutting speed' refer to in machining?", options: ["The speed of the workpiece movement", "The speed of the cutting tool relative to the workpiece", "The depth of material removed", "The feed rate of the tool"], answer: 1, explanation: "Cutting speed is the speed at which the cutting tool moves relative to the workpiece (m/min or ft/min)." },
+                            { question: "The feed rate in machining refers to:", options: ["The depth of cut per pass", "The distance the tool advances per revolution", "The speed of the spindle", "The total material removed"], answer: 1, explanation: "Feed rate is the distance the cutting tool advances per revolution of the tool or workpiece." },
+                            { question: "What happens if the depth of cut is too large in a machining operation?", options: ["Improved surface finish", "Increased tool wear and possible breakage", "Reduced cutting time", "No effect on the operation"], answer: 1, explanation: "A large depth of cut increases the load on the tool, leading to wear or breakage." },
+                            { question: "Cutting speed in a lathe operation depends on:", options: ["The workpiece material and tool material", "The weight of the workpiece", "The length of the tool", "The color of the workpiece"], answer: 0, explanation: "Cutting speed depends on the workpiece material (e.g., harder materials require slower speeds) and tool material." }
+                        ]
+                    },
+                    {
+                        subsection: "2.4.5 Job Material Knowledge",
+                        questions: [
+                            { question: "Which material requires a slower cutting speed on a lathe?", options: ["Aluminum", "Mild steel", "Stainless steel", "Brass"], answer: 2, explanation: "Stainless steel is harder and requires a slower cutting speed to avoid tool wear." },
+                            { question: "Why is coolant used when machining certain materials?", options: ["To increase cutting speed", "To reduce heat and friction", "To increase tool hardness", "To change the material properties"], answer: 1, explanation: "Coolant reduces heat and friction, preventing tool wear and improving surface finish." },
+                            { question: "Which material is easiest to machine?", options: ["Titanium", "Aluminum", "Hardened steel", "Cast iron"], answer: 1, explanation: "Aluminum is soft and has good machinability, making it easier to machine." },
+                            { question: "When machining cast iron, what is a common challenge?", options: ["Excessive tool wear due to abrasiveness", "Low heat generation", "High ductility", "Poor surface finish"], answer: 0, explanation: "Cast iron contains abrasive particles that cause rapid tool wear." }
+                        ]
+                    }
+                ]
+            },
+            // Section 2.5: Material Joining
+            {
+                section: "2.5 Material Joining",
+                subsections: [
+                    {
+                        subsection: "2.5.1 Welding",
+                        questions: [
+                            { question: "What is the primary source of heat in arc welding?", options: ["Gas flame", "Electric arc", "Friction", "Chemical reaction"], answer: 1, explanation: "Arc welding uses an electric arc to generate heat to melt and join metals." },
+                            { question: "Which of the following is a consumable electrode in arc welding?", options: ["Tungsten electrode", "Carbon electrode", "Coated metal electrode", "Graphite electrode"], answer: 2, explanation: "A coated metal electrode melts to form the weld bead and provide filler material in arc welding." },
+                            { question: "What is the purpose of the flux coating on an arc welding electrode?", options: ["To increase electrode length", "To protect the weld pool from atmospheric gases", "To reduce the welding current", "To cool the weld"], answer: 1, explanation: "Flux produces shielding gas and slag to protect the weld pool from oxygen and nitrogen." },
+                            { question: "What equipment is essential for arc welding?", options: ["Gas cylinder", "Power supply", "Grinding wheel", "Lathe machine"], answer: 1, explanation: "A power supply (AC or DC) creates the electric arc in arc welding." }
+                        ]
+                    },
+                    {
+                        subsection: "2.5.2 Arc Welding – Principle, Tools, Equipment, Welding Procedure",
+                        questions: [
+                            { question: "What is the principle of arc welding?", options: ["Melting metals using a gas flame", "Joining metals using an electric arc", "Bonding metals with adhesive", "Heating metals with friction"], answer: 1, explanation: "Arc welding uses an electric arc to melt the base metals and electrode to form a joint." },
+                            { question: "Which tool is used to hold the electrode in arc welding?", options: ["Electrode holder", "Pliers", "Wrench", "Hammer"], answer: 0, explanation: "An electrode holder clamps the welding electrode and conducts current to it." },
+                            { question: "What is the first step in the arc welding procedure?", options: ["Cleaning the workpiece", "Striking the arc", "Applying flux", "Cooling the weld"], answer: 0, explanation: "Cleaning removes dirt, oil, or rust to ensure a strong weld." },
+                            { question: "What safety equipment is essential during arc welding?", options: ["Welding helmet and gloves", "Safety shoes", "Earplugs", "Dust mask"], answer: 0, explanation: "A helmet protects the eyes from bright arc light, and gloves protect from heat and sparks." }
+                        ]
+                    },
+                    {
+                        subsection: "2.5.3 Oxy-Acetylene Welding – Principle, Tools, Equipment, Welding Procedure",
+                        questions: [
+                            { question: "What gases are used in oxy-acetylene welding?", options: ["Oxygen and nitrogen", "Oxygen and acetylene", "Hydrogen and oxygen", "Acetylene and argon"], answer: 1, explanation: "Oxy-acetylene welding uses oxygen and acetylene to produce a high-temperature flame." },
+                            { question: "What is the maximum flame temperature in oxy-acetylene welding?", options: ["3000°C", "6000°C", "1500°C", "4500°C"], answer: 0, explanation: "The oxy-acetylene flame reaches up to 3000°C, sufficient to melt most metals." },
+                            { question: "Which tool is used to mix oxygen and acetylene in oxy-acetylene welding?", options: ["Welding torch", "Electrode holder", "Filler rod", "Gas regulator"], answer: 0, explanation: "The welding torch mixes oxygen and acetylene and directs the flame to the workpiece." },
+                            { question: "What is the purpose of a filler rod in oxy-acetylene welding?", options: ["To ignite the flame", "To add material to the weld joint", "To clean the workpiece", "To regulate gas flow"], answer: 1, explanation: "A filler rod is melted into the weld pool to form a strong joint." }
+                        ]
+                    },
+                    {
+                        subsection: "2.5.4 Soldering & Brazing – Principle, Tools, Equipment, Brazing Procedure",
+                        questions: [
+                            { question: "What is the main difference between soldering and brazing?", options: ["Soldering uses a higher temperature", "Brazing uses a higher temperature", "Soldering uses a gas flame", "Brazing uses an electric arc"], answer: 1, explanation: "Brazing occurs above 450°C, while soldering occurs below 450°C." },
+                            { question: "What is the primary filler material used in soldering?", options: ["Brass", "Solder (lead-tin alloy)", "Copper", "Aluminum"], answer: 1, explanation: "Solder, typically a lead-tin alloy, is used as the filler material in soldering." },
+                            { question: "Which tool is commonly used for soldering?", options: ["Welding torch", "Soldering iron", "Electrode holder", "Gas cylinder"], answer: 1, explanation: "A soldering iron heats the solder to melt it and join metals." },
+                            { question: "In brazing, the filler metal is typically:", options: ["Solder", "Brass or bronze", "Lead", "Tin"], answer: 1, explanation: "Brazing uses a filler metal like brass or bronze, which melts at a higher temperature than solder." },
+                            { question: "What is a key step in the brazing procedure?", options: ["Applying flux to clean the joint", "Using an electric arc", "Cooling the joint with water", "Drilling a hole in the joint"], answer: 0, explanation: "Flux cleans the joint, prevents oxidation, and improves filler metal flow in brazing." }
+                        ]
+                    },
+                    {
+                        subsection: "2.5.5 General Fitting – Male and Female Joints by Marking, Sawing, Chiseling, Cutting, Joining",
+                        questions: [
+                            { question: "What is a male and female joint in fitting?", options: ["A joint with a gas flame", "A joint where one part fits into another", "A joint with a threaded connection", "A joint using solder"], answer: 1, explanation: "A male and female joint refers to one part (male) fitting into another (female), like a tenon and mortise." },
+                            { question: "Which tool is used for marking in general fitting?", options: ["Chisel", "Scriber", "Saw", "Hammer"], answer: 1, explanation: "A scriber marks precise lines on the workpiece for cutting or fitting." },
+                            { question: "What is the purpose of chiseling in general fitting?", options: ["To remove excess material", "To mark lines", "To join two parts", "To measure dimensions"], answer: 0, explanation: "Chiseling removes excess material to shape the male or female part for a proper fit." },
+                            { question: "In general fitting, sawing is used to:", options: ["Mark the workpiece", "Cut the workpiece to size", "Join two parts", "Smooth the surface"], answer: 1, explanation: "Sawing cuts the workpiece to the required size or shape for fitting." }
+                        ]
+                    }
+                ]
+            },
+            // Section 2.6: Sheet Metal and Plumbing
+            {
+                section: "2.6 Sheet Metal and Plumbing",
+                subsections: [
+                    {
+                        subsection: "2.6.1 Marking, Cutting, Folding, Bending, Joining & Soldering of Sheet Metal",
+                        questions: [
+                            { question: "What tool is used for marking sheet metal?", options: ["Scriber", "Hammer", "Pliers", "Soldering iron"], answer: 0, explanation: "A scriber marks lines on sheet metal for cutting or bending." },
+                            { question: "Which process is used to bend sheet metal?", options: ["Soldering", "Folding", "Chiseling", "Sawing"], answer: 1, explanation: "Folding (or bending) deforms sheet metal to create angles or shapes." },
+                            { question: "What is the purpose of soldering in sheet metal work?", options: ["To mark lines", "To join sheet metal parts", "To cut sheet metal", "To bend sheet metal"], answer: 1, explanation: "Soldering joins sheet metal parts by melting a filler metal into the joint." },
+                            { question: "Which tool is used to cut sheet metal?", options: ["Tin snips", "Screwdriver", "Wrench", "File"], answer: 0, explanation: "Tin snips (or aviation snips) are specialized scissors used to cut sheet metal." },
+                            { question: "What is a common method to join sheet metal without soldering?", options: ["Riveting", "Chiseling", "Grinding", "Marking"], answer: 0, explanation: "Riveting uses metal rivets to mechanically join sheet metal parts." }
+                        ]
+                    },
+                    {
+                        subsection: "2.6.2 Marking, Cutting, Bending, Threading, Joining and Sealing of Pipes",
+                        questions: [
+                            { question: "What tool is used to mark pipes before cutting?", options: ["Pipe wrench", "Marker or chalk", "Hacksaw", "Threading die"], answer: 1, explanation: "A marker or chalk marks pipes for accurate cutting or threading." },
+                            { question: "Which tool is used to cut pipes in plumbing?", options: ["Pipe cutter", "Tin snips", "Soldering iron", "File"], answer: 0, explanation: "A pipe cutter cuts pipes cleanly and accurately in plumbing." },
+                            { question: "What is the purpose of threading in pipe joining?", options: ["To bend the pipe", "To create threads for screw joints", "To seal the pipe", "To mark the pipe"], answer: 1, explanation: "Threading creates threads on pipe ends for joining with threaded fittings." },
+                            { question: "What material is commonly used to seal pipe joints?", options: ["Solder", "Teflon tape", "Rivets", "Flux"], answer: 1, explanation: "Teflon tape (plumber’s tape) ensures a leak-proof seal on threaded pipe joints." },
+                            { question: "What is a common method to bend pipes in plumbing?", options: ["Using a pipe bender", "Using a hammer", "Using a soldering iron", "Using a file"], answer: 0, explanation: "A pipe bender bends pipes without kinking, ensuring smooth fluid flow." }
+                        ]
+                    }
+                ]
+            },
+            // Section 2.7: Basic Knowledge of Lifting Devices Used in Mechanical Workshop Including Their Operation
+            {
+                section: "2.7 Basic Knowledge of Lifting Devices Used in Mechanical Workshop Including Their Operation",
+                subsections: [
+                    {
+                        subsection: "2.7.1 Chain Hoist",
+                        questions: [
+                            { question: "What is the primary function of a chain hoist?", options: ["To cut materials", "To lift heavy loads vertically", "To measure weight", "To transport materials horizontally"], answer: 1, explanation: "A chain hoist lifts heavy loads vertically using a chain and pulley system." },
+                            { question: "What type of power is commonly used to operate a chain hoist?", options: ["Hydraulic", "Manual or electric", "Pneumatic", "Steam"], answer: 1, explanation: "Chain hoists are typically operated manually (hand chain) or electrically for heavier loads." },
+                            { question: "What is a key safety feature of a chain hoist?", options: ["Load brake", "Speed control", "Temperature sensor", "Pressure gauge"], answer: 0, explanation: "A load brake holds the load in place, preventing slipping or falling." },
+                            { question: "What is the main advantage of a chain hoist over a wire rope hoist?", options: ["Higher speed", "Greater durability in harsh environments", "Lower cost", "Lighter weight"], answer: 1, explanation: "Chain hoists are more durable and resistant to abrasion and corrosion than wire rope hoists." }
+                        ]
+                    },
+                    {
+                        subsection: "2.7.2 Jacks",
+                        questions: [
+                            { question: "What is the primary use of a hydraulic jack?", options: ["To measure load weight", "To lift heavy objects like vehicles", "To transport materials", "To cut materials"], answer: 1, explanation: "A hydraulic jack uses hydraulic fluid to lift heavy loads, commonly for vehicles or machinery." },
+                            { question: "What principle does a hydraulic jack operate on?", options: ["Archimedes’ principle", "Pascal’s principle", "Newton’s third law", "Bernoulli’s principle"], answer: 1, explanation: "Pascal’s principle states that pressure in a confined fluid is transmitted equally, enabling hydraulic jacks to lift heavy loads." },
+                            { question: "What is a common application of a screw jack?", options: ["Lifting vehicles", "Leveling heavy machinery", "Cutting pipes", "Measuring weight"], answer: 1, explanation: "Screw jacks are used to level or stabilize heavy machinery due to their precise adjustment capability." },
+                            { question: "What is a key safety precaution when using a jack?", options: ["Use on a soft surface", "Ensure the load is stable and supported", "Lift beyond the jack’s capacity", "Use without a stand"], answer: 1, explanation: "The load must be stable, and additional support (like jack stands) prevents accidents." }
+                        ]
+                    },
+                    {
+                        subsection: "2.7.3 Gantry Crane/Other Cranes",
+                        questions: [
+                            { question: "What is the main function of a gantry crane?", options: ["To lift and move heavy loads horizontally and vertically", "To measure load weight", "To cut materials", "To level machinery"], answer: 0, explanation: "A gantry crane lifts and moves heavy loads across a workshop or yard." },
+                            { question: "What is a key feature of a gantry crane?", options: ["Fixed position", "Supported by legs on wheels or rails", "Operates underwater", "Uses a hydraulic system only"], answer: 1, explanation: "Gantry cranes are supported by legs that run on wheels or rails for mobility." },
+                            { question: "What type of crane is best for outdoor use in a shipyard?", options: ["Overhead crane", "Gantry crane", "Tower crane", "Jib crane"], answer: 1, explanation: "Gantry cranes are ideal for outdoor use in shipyards due to their mobility and load-handling capacity." },
+                            { question: "What safety device is commonly used in cranes to prevent overloading?", options: ["Load limiter", "Speed governor", "Pressure gauge", "Temperature sensor"], answer: 0, explanation: "A load limiter prevents the crane from lifting beyond its capacity, ensuring safety." }
+                        ]
+                    },
+                    {
+                        subsection: "2.7.4 Forklift",
+                        questions: [
+                            { question: "What is the primary function of a forklift?", options: ["To lift and transport materials over short distances", "To cut materials", "To measure load weight", "To level machinery"], answer: 0, explanation: "A forklift lifts, moves, and transports materials (e.g., pallets) within a workshop or warehouse." },
+                            { question: "What powers most forklifts in a workshop?", options: ["Steam", "Electric battery or internal combustion engine", "Hydraulic fluid", "Manual operation"], answer: 1, explanation: "Forklifts are typically powered by electric batteries (indoor) or internal combustion engines (outdoor)." },
+                            { question: "What is a key safety feature of a forklift?", options: ["Speed limiter", "Overhead guard", "Temperature sensor", "Cutting blade"], answer: 1, explanation: "An overhead guard protects the operator from falling objects." },
+                            { question: "What should be checked before operating a forklift?", options: ["The color of the forklift", "The load capacity and stability", "The temperature of the engine", "The length of the forks"], answer: 1, explanation: "Ensuring the load is within capacity and balanced prevents tipping or accidents." }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz');
+        const progressBar = document.getElementById('progress');
+        let userAnswers = new Array(139).fill(null);
+        let answeredQuestions = 0;
+        let questionIndex = 0;
+
+        function updateProgress() {
+            const progressPercentage = (answeredQuestions / 139) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+        }
+
+        function generateQuiz() {
+            quizContainer.innerHTML = '';
+            questionIndex = 0;
+            answeredQuestions = 0;
+            userAnswers.fill(null);
+            updateProgress();
+
+            quizData.forEach((sectionData, sectionIndex) => {
+                const sectionDiv = document.createElement('div');
+                sectionDiv.className = 'section';
+
+                const sectionHeader = document.createElement('div');
+                sectionHeader.className = 'section-header';
+                const sectionTitle = document.createElement('h2');
+                sectionTitle.textContent = sectionData.section;
+                const toggleIcon = document.createElement('span');
+                toggleIcon.textContent = '▼';
+                toggleIcon.className = 'text-blue-600';
+                sectionHeader.appendChild(sectionTitle);
+                sectionHeader.appendChild(toggleIcon);
+                sectionDiv.appendChild(sectionHeader);
+
+                const sectionContent = document.createElement('div');
+                sectionContent.className = 'section-content';
+
+                sectionData.subsections.forEach((subsectionData, subsectionIndex) => {
+                    const subsectionDiv = document.createElement('div');
+                    subsectionDiv.className = 'sub-section';
+                    const subsectionTitle = document.createElement('h3');
+                    subsectionTitle.textContent = subsectionData.subsection;
+                    subsectionDiv.appendChild(subsectionTitle);
+
+                    subsectionData.questions.forEach((questionData, qIndex) => {
+                        const questionDiv = document.createElement('div');
+                        questionDiv.className = 'question';
+                        const questionText = document.createElement('p');
+                        questionText.textContent = `Q${questionIndex + 1}. ${questionData.question}`;
+                        questionDiv.appendChild(questionText);
+
+                        const optionsDiv = document.createElement('div');
+                        questionData.options.forEach((option, optionIndex) => {
+                            const optionDiv = document.createElement('div');
+                            optionDiv.className = 'option';
+
+                            const input = document.createElement('input');
+                            input.type = 'radio';
+                            input.name = `question${questionIndex}`;
+                            input.id = `q${questionIndex}_option${optionIndex}`;
+                            input.value = optionIndex;
+                            input.className = 'cursor-pointer';
+
+                            const label = document.createElement('label');
+                            label.htmlFor = `q${questionIndex}_option${optionIndex}`;
+                            label.className = 'option-label';
+
+                            const optionText = document.createElement('span');
+                            optionText.className = 'option-text';
+                            optionText.textContent = option;
+
+                            label.appendChild(input);
+                            label.appendChild(optionText);
+                            optionDiv.appendChild(label);
+
+                            input.addEventListener('change', (e) => {
+                                const selectedOption = parseInt(e.target.value);
+                                userAnswers[questionIndex] = selectedOption;
+                                if (userAnswers[questionIndex] !== null && userAnswers[questionIndex] !== undefined) {
+                                    answeredQuestions++;
+                                    updateProgress();
+                                }
+
+                                const feedbackDiv = questionDiv.querySelector('.feedback');
+                                feedbackDiv.style.display = 'block';
+                                if (selectedOption === questionData.answer) {
+                                    feedbackDiv.className = 'feedback correct';
+                                    feedbackDiv.textContent = `Correct! ${questionData.explanation}`;
+                                    optionDiv.style.background = '#d1fae5';
+                                } else {
+                                    feedbackDiv.className = 'feedback incorrect';
+                                    feedbackDiv.textContent = `Incorrect. Correct Answer: ${questionData.options[questionData.answer]}. ${questionData.explanation}`;
+                                    optionDiv.style.background = '#fee2e2';
+                                }
+
+                                const allOptions = questionDiv.querySelectorAll('.option');
+                                allOptions.forEach(opt => {
+                                    const optInput = opt.querySelector('input');
+                                    if (optInput !== e.target) {
+                                        optInput.disabled = true;
+                                        opt.style.opacity = '0.6';
+                                    }
+                                });
+                            });
+
+                            optionsDiv.appendChild(optionDiv);
+                        });
+
+                        const feedbackDiv = document.createElement('div');
+                        feedbackDiv.className = 'feedback';
+                        questionDiv.appendChild(optionsDiv);
+                        questionDiv.appendChild(feedbackDiv);
+
+                        subsectionDiv.appendChild(questionDiv);
+                        questionIndex++;
+                    });
+
+                    sectionContent.appendChild(subsectionDiv);
+                });
+
+                sectionDiv.appendChild(sectionContent);
+                sectionHeader.addEventListener('click', () => {
+                    const isActive = sectionContent.classList.contains('active');
+                    sectionContent.classList.toggle('active');
+                    toggleIcon.textContent = isActive ? '▼' : '▲';
+                });
+
+                quizContainer.appendChild(sectionDiv);
+            });
+        }
+
+        generateQuiz();
+    </script>
+</body>
+</html>
