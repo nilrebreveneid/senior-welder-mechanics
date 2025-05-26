@@ -58,7 +58,7 @@
 
 
 <script>
-    // const thermoQuestions = [
+    
     //     { q: "The unit of temperature is based on:", options: ["Boiling point of mercury", "Triple point of water"], answer: 1 },
     //     { q: "Absolute zero temperature is taken as:", options: ["237°C", "273°C"], answer: 1 },
     //     { q: "Essential condition for heat transfer is:", options: ["Difference in conductivity", "Difference in temperature"], answer: 1 },
@@ -188,8 +188,58 @@
     //     { q: "Gas constant (R) is:", options: ["Sum of Cp & Cv", "Difference of Cp & Cv"], answer: 1 }
     // ];
 
+//   [
+//   // Two Stroke and Four Stroke Engines
+//   { q: "Suction, compression, expansion, and exhaust strokes take place in:", options: ["Steam engine", "Diesel engine"], answer: 1 },
+//   { q: "Suction, compression, exhaust strokes happen in:", options: ["Diesel engine", "Petrol engine"], answer: 1 },
+//   { q: "The two basic types of internal combustion engines are:", options: ["Piston and reciprocating", "Reciprocating and rotary"], answer: 1 },
+//   { q: "The constant volume cycle is also called:", options: ["Carnot cycle", "Otto cycle"], answer: 1 },
+//   { q: "The expression which does not give the efficiency of Otto cycle is:", options: ["Temperature after compression", "Temperature before expansion"], answer: 1 },
+//   { q: "Otto cycle is also known as:", options: ["Constant pressure cycle", "Constant volume cycle"], answer: 1 },
+//   { q: "Diesel engine operates on:", options: ["Constant volume cycle", "Constant pressure cycle"], answer: 1 },
+//   { q: "Two constant volume + two adiabatic processes = ?", options: ["Joule cycle", "Otto cycle"], answer: 1 },
+//   { q: "In a two-stroke engine, how many strokes complete one power cycle?", options: ["Four", "Two"], answer: 1 },
+//   { q: "Which engine type requires a spark plug for ignition?", options: ["Diesel engine", "Petrol engine"], answer: 1 },
+
+//   // Main Parts of Engine and Its Functions
+//   { q: "At TDC, volume above piston is:", options: ["Compression ratio", "Clearance volume"], answer: 1 },
+//   { q: "Compression ratio of diesel engine:", options: ["10 to 15", "16 to 20"], answer: 1 },
+//   { q: "Compression ratio definition:", options: ["Swept volume / cylinder volume", "Volume before / after compression"], answer: 1 },
+//   { q: "The function of the crankshaft in an I.C. engine is to:", options: ["Ignite the fuel", "Convert linear motion to rotary motion"], answer: 1 },
+//   { q: "What is the primary role of the piston in an I.C. engine?", options: ["Cool the engine", "Compress the air-fuel mixture"], answer: 1 },
+//   { q: "The camshaft in an engine controls:", options: ["Fuel injection", "Valve timing"], answer: 1 },
+//   { q: "The connecting rod connects the piston to:", options: ["Camshaft", "Crankshaft"], answer: 1 },
+//   { q: "The function of the flywheel is to:", options: ["Store rotational energy", "Pump fuel"], answer: 0 },
+//   { q: "The cylinder head in an I.C. engine houses:", options: ["Crankshaft", "Valves and spark plug"], answer: 1 },
+//   { q: "The purpose of the intake valve is to:", options: ["Release exhaust gases", "Allow air-fuel mixture into the cylinder"], answer: 1 },
+
+//   // Identification of Symptoms for Engine Overhaul
+//   { q: "As octane number increases, knocking tendency of petrol engine:", options: ["Remains same", "Increases"], answer: 1 },
+//   { q: "As temperature of I.C. engine increases, efficiency will:", options: ["Decrease", "Increase"], answer: 1 },
+//   { q: "Excessive blue smoke from the exhaust indicates:", options: ["Rich fuel mixture", "Burning engine oil"], answer: 1 },
+//   { q: "A knocking sound in an engine may be caused by:", options: ["High compression ratio", "Low octane fuel"], answer: 1 },
+//   { q: "Loss of engine power during operation suggests:", options: ["Clean air filter", "Worn piston rings"], answer: 1 },
+//   { q: "High engine oil consumption is a symptom of:", options: ["Faulty spark plug", "Worn valve seals"], answer: 1 },
+//   { q: "Overheating of an I.C. engine may indicate:", options: ["Proper cooling", "Radiator blockage"], answer: 1 },
+//   { q: "A rough idle in an engine could be due to:", options: ["Correct fuel pressure", "Misfiring spark plug"], answer: 1 },
+//   { q: "Black smoke from the exhaust suggests:", options: ["Lean fuel mixture", "Rich fuel mixture"], answer: 1 },
+//   { q: "Vibration during engine operation may indicate:", options: ["Balanced crankshaft", "Worn engine mounts"], answer: 1 },
+
+//   // Troubleshooting and Maintenance of I.C. Engine
+//   { q: "Specific fuel consumption is defined as:", options: ["Fuel consumption per BHP", "Fuel consumption per hour"], answer: 1 },
+//   { q: "Chemically correct air-fuel ratio is:", options: ["7:1", "15:1"], answer: 1 },
+//   { q: "Nepal Vehicle Mass Emission Standard 2069 is equivalent to:", options: ["ISO 9001", "Euro III"], answer: 1 },
+//   { q: "To fix engine knocking, you should:", options: ["Use lower octane fuel", "Use higher octane fuel"], answer: 1 },
+//   { q: "Regular maintenance of an I.C. engine includes:", options: ["Ignoring air filter", "Changing engine oil"], answer: 1 },
+//   { q: "A clogged fuel injector can be resolved by:", options: ["Replacing spark plugs", "Cleaning or replacing the injector"], answer: 1 },
+//   { q: "To troubleshoot low engine power, check:", options: ["Tire pressure", "Air filter condition"], answer: 1 },
+//   { q: "The purpose of engine tune-up is to:", options: ["Increase engine size", "Optimize performance"], answer: 1 },
+//   { q: "To prevent overheating, ensure:", options: ["Low coolant level", "Proper coolant circulation"], answer: 1 },
+//   { q: "A faulty thermostat in an I.C. engine may cause:", options: ["Normal operation", "Engine overheating"], answer: 1 }
+// ]
+
+  const thermoQuestions = 
   [
-  // Two Stroke and Four Stroke Engines
   { q: "Suction, compression, expansion, and exhaust strokes take place in:", options: ["Steam engine", "Diesel engine"], answer: 1 },
   { q: "Suction, compression, exhaust strokes happen in:", options: ["Diesel engine", "Petrol engine"], answer: 1 },
   { q: "The two basic types of internal combustion engines are:", options: ["Piston and reciprocating", "Reciprocating and rotary"], answer: 1 },
@@ -198,45 +248,15 @@
   { q: "Otto cycle is also known as:", options: ["Constant pressure cycle", "Constant volume cycle"], answer: 1 },
   { q: "Diesel engine operates on:", options: ["Constant volume cycle", "Constant pressure cycle"], answer: 1 },
   { q: "Two constant volume + two adiabatic processes = ?", options: ["Joule cycle", "Otto cycle"], answer: 1 },
-  { q: "In a two-stroke engine, how many strokes complete one power cycle?", options: ["Four", "Two"], answer: 1 },
-  { q: "Which engine type requires a spark plug for ignition?", options: ["Diesel engine", "Petrol engine"], answer: 1 },
-
-  // Main Parts of Engine and Its Functions
   { q: "At TDC, volume above piston is:", options: ["Compression ratio", "Clearance volume"], answer: 1 },
   { q: "Compression ratio of diesel engine:", options: ["10 to 15", "16 to 20"], answer: 1 },
   { q: "Compression ratio definition:", options: ["Swept volume / cylinder volume", "Volume before / after compression"], answer: 1 },
-  { q: "The function of the crankshaft in an I.C. engine is to:", options: ["Ignite the fuel", "Convert linear motion to rotary motion"], answer: 1 },
-  { q: "What is the primary role of the piston in an I.C. engine?", options: ["Cool the engine", "Compress the air-fuel mixture"], answer: 1 },
-  { q: "The camshaft in an engine controls:", options: ["Fuel injection", "Valve timing"], answer: 1 },
-  { q: "The connecting rod connects the piston to:", options: ["Camshaft", "Crankshaft"], answer: 1 },
-  { q: "The function of the flywheel is to:", options: ["Store rotational energy", "Pump fuel"], answer: 0 },
-  { q: "The cylinder head in an I.C. engine houses:", options: ["Crankshaft", "Valves and spark plug"], answer: 1 },
-  { q: "The purpose of the intake valve is to:", options: ["Release exhaust gases", "Allow air-fuel mixture into the cylinder"], answer: 1 },
-
-  // Identification of Symptoms for Engine Overhaul
   { q: "As octane number increases, knocking tendency of petrol engine:", options: ["Remains same", "Increases"], answer: 1 },
   { q: "As temperature of I.C. engine increases, efficiency will:", options: ["Decrease", "Increase"], answer: 1 },
-  { q: "Excessive blue smoke from the exhaust indicates:", options: ["Rich fuel mixture", "Burning engine oil"], answer: 1 },
-  { q: "A knocking sound in an engine may be caused by:", options: ["High compression ratio", "Low octane fuel"], answer: 1 },
-  { q: "Loss of engine power during operation suggests:", options: ["Clean air filter", "Worn piston rings"], answer: 1 },
-  { q: "High engine oil consumption is a symptom of:", options: ["Faulty spark plug", "Worn valve seals"], answer: 1 },
-  { q: "Overheating of an I.C. engine may indicate:", options: ["Proper cooling", "Radiator blockage"], answer: 1 },
-  { q: "A rough idle in an engine could be due to:", options: ["Correct fuel pressure", "Misfiring spark plug"], answer: 1 },
-  { q: "Black smoke from the exhaust suggests:", options: ["Lean fuel mixture", "Rich fuel mixture"], answer: 1 },
-  { q: "Vibration during engine operation may indicate:", options: ["Balanced crankshaft", "Worn engine mounts"], answer: 1 },
-
-  // Troubleshooting and Maintenance of I.C. Engine
   { q: "Specific fuel consumption is defined as:", options: ["Fuel consumption per BHP", "Fuel consumption per hour"], answer: 1 },
   { q: "Chemically correct air-fuel ratio is:", options: ["7:1", "15:1"], answer: 1 },
-  { q: "Nepal Vehicle Mass Emission Standard 2069 is equivalent to:", options: ["ISO 9001", "Euro III"], answer: 1 },
-  { q: "To fix engine knocking, you should:", options: ["Use lower octane fuel", "Use higher octane fuel"], answer: 1 },
-  { q: "Regular maintenance of an I.C. engine includes:", options: ["Ignoring air filter", "Changing engine oil"], answer: 1 },
-  { q: "A clogged fuel injector can be resolved by:", options: ["Replacing spark plugs", "Cleaning or replacing the injector"], answer: 1 },
-  { q: "To troubleshoot low engine power, check:", options: ["Tire pressure", "Air filter condition"], answer: 1 },
-  { q: "The purpose of engine tune-up is to:", options: ["Increase engine size", "Optimize performance"], answer: 1 },
-  { q: "To prevent overheating, ensure:", options: ["Low coolant level", "Proper coolant circulation"], answer: 1 },
-  { q: "A faulty thermostat in an I.C. engine may cause:", options: ["Normal operation", "Engine overheating"], answer: 1 }
-]
+  { q: "Nepal Vehicle Mass Emission Standard 2069 is equivalent to:", options: ["ISO 9001", "Euro III"], answer: 1 }
+];
     function shuffleOptions(questions) {
       return questions.map(q => {
         const correct = q.options[q.answer];
