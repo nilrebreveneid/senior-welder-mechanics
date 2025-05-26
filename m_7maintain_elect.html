@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logsewa Electricity Generation Machinery Mock Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #f8ffae, #43c6ac);
+      margin: 0;
+      padding: 2rem;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    .quiz-container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #1e88e5;
+    }
+
+    .question {
+      margin-bottom: 1.5rem;
+      animation: fadeIn 0.5s;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 1rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .question p {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .options button {
+      display: block;
+      margin: 0.5rem 0;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      background: #e3f2fd;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1rem;
+    }
+
+    .options button:hover {
+      background: #bbdefb;
+      transform: translateX(5px);
+    }
+
+    .correct {
+      background-color: #c8e6c9 !important;
+      animation: pulse 0.5s;
+    }
+
+    .wrong {
+      background-color: #ffcdd2 !important;
+      animation: shake 0.3s;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background: #eee;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      background: #42a5f5;
+      transition: width 0.3s;
+    }
+
+    #timer {
+      text-align: right;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: #d81b60;
+    }
+
+    #score, #results {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      font-weight: bold;
+    }
+
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .results-table th, .results-table td {
+      border: 1px solid #ddd;
+      padding: 0.5rem;
+      text-align: left;
+    }
+
+    .results-table th {
+      background: #f5f5f5;
+    }
+
+    .skip-button {
+      background: #fff3cd;
+      margin-top: 1rem;
+      padding: 0.75rem;
+      width: 100%;
+      border: 1px solid #ffca28;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .skip-button:hover {
+      background: #ffecb3;
+    }
+
+    .next-button {
+      background: #42a5f5;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1rem;
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+
+    .next-button:hover {
+      background: #1e88e5;
+    }
+
+    .next-button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .explanation {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .quiz-container {
+        padding: 1rem;
+      }
+      .options button {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Logsewa Electricity Generation Machinery Mock Test</h1>
+    <div id="timer">Time: 00:00</div>
+    <div class="progress-bar">
+      <div class="progress" id="progress"></div>
+    </div>
+    <div id="quiz"></div>
+    <div id="score"></div>
+    <div id="results" class="hidden">
+      <h2>Quiz Results</h2>
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Your Answer</th>
+            <th>Correct Answer</th>
+            <th>Status</th>
+            <th>Explanation</th>
+          </tr>
+        </thead>
+        <tbody id="results-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <audio id="correct-sound" src="https://www.soundjay.com/buttons/beep-01a.mp3"></audio>
+  <audio id="wrong-sound" src="https://www.soundjay.com/buttons/beep-02.mp3"></audio>
+
+  <script>
+    const questions = [
+      // 8.1 Hydro Power (10 MCQs)
+      { q: "What is the primary function of a penstock in a hydro power plant?", 
+        options: ["To store water", "To direct water to the turbine", "To regulate turbine speed", "To cool the generator"], 
+        answer: 1, 
+        explanation: "The penstock is a large pipe that channels water from the reservoir to the turbine, driving the generator." },
+      { q: "What maintenance task is critical for the turbine blades in a hydro power plant?", 
+        options: ["Regular lubrication of blades", "Inspection for cavitation damage", "Painting the blades annually", "Increasing blade weight"], 
+        answer: 1, 
+        explanation: "Cavitation can erode turbine blades, so regular inspection and repair are essential to maintain efficiency." },
+      { q: "What component in a hydro power plant prevents sudden pressure surges?", 
+        options: ["Surge tank", "Draft tube", "Spillway", "Governor"], 
+        answer: 0, 
+        explanation: "A surge tank absorbs sudden pressure changes in the water flow, protecting the penstock and turbine." },
+      { q: "What is a common cause of reduced efficiency in a hydro power turbine?", 
+        options: ["Excessive water flow", "Sediment accumulation on blades", "High generator speed", "Low reservoir temperature"], 
+        answer: 1, 
+        explanation: "Sediments like sand can accumulate on turbine blades, reducing efficiency and requiring regular cleaning." },
+      { q: "What should be checked during the maintenance of a hydro power generator?", 
+        options: ["Blade angle of the turbine", "Insulation resistance of windings", "Water level in the penstock", "Draft tube length"], 
+        answer: 1, 
+        explanation: "Checking insulation resistance ensures the generator windings are not degraded, preventing electrical failures." },
+      { q: "What is the purpose of a trash rack in a hydro power plant?", 
+        options: ["To increase water flow", "To filter debris before water enters the intake", "To cool the turbine", "To regulate generator speed"], 
+        answer: 1, 
+        explanation: "Trash racks prevent debris like leaves and logs from entering the intake, protecting the turbine." },
+      { q: "What maintenance action is required for the governor system in a hydro power plant?", 
+        options: ["Regular oiling of moving parts", "Replacement of the turbine blades", "Cleaning the reservoir", "Painting the penstock"], 
+        answer: 0, 
+        explanation: "The governor controls turbine speed, and its moving parts require regular lubrication to function smoothly." },
+      { q: "What is a key indicator of bearing failure in a hydro power turbine?", 
+        options: ["Increased water flow", "Excessive vibration or noise", "Higher generator voltage", "Reduced penstock pressure"], 
+        answer: 1, 
+        explanation: "Bearings in turbines can fail due to wear, causing vibrations or noise, which requires immediate maintenance." },
+      { q: "What should be done to prevent corrosion in the penstock of a hydro power plant?", 
+        options: ["Increase water velocity", "Apply protective coatings", "Reduce reservoir water level", "Use plastic pipes"], 
+        answer: 1, 
+        explanation: "Protective coatings like epoxy or galvanizing prevent corrosion in steel penstocks exposed to water." },
+      { q: "What is the role of the draft tube in a hydro power plant?", 
+        options: ["To increase water pressure", "To recover kinetic energy and improve efficiency", "To filter water", "To cool the generator"], 
+        answer: 1, 
+        explanation: "The draft tube slows down the water exiting the turbine, recovering kinetic energy and improving overall efficiency." },
+
+      // 8.2 Diesel Plant (10 MCQs)
+      { q: "What is a critical maintenance task for a diesel engine in a power plant?", 
+        options: ["Cleaning the exhaust pipes weekly", "Regular replacement of fuel filters", "Painting the engine body", "Increasing fuel pressure"], 
+        answer: 1, 
+        explanation: "Fuel filters remove contaminants, and replacing them regularly prevents clogging and ensures efficient combustion." },
+      { q: "What component in a diesel plant requires frequent lubrication checks?", 
+        options: ["Fuel injector", "Crankshaft bearings", "Exhaust manifold", "Radiator fins"], 
+        answer: 1, 
+        explanation: "Crankshaft bearings need regular lubrication to reduce friction and prevent wear during high-speed operation." },
+      { q: "What is a common cause of black smoke in a diesel plant exhaust?", 
+        options: ["Over-lubrication of the engine", "Incomplete combustion due to clogged injectors", "Low fuel pressure", "Excessive coolant temperature"], 
+        answer: 1, 
+        explanation: "Clogged injectors lead to poor fuel atomization, causing incomplete combustion and black smoke." },
+      { q: "What should be monitored to ensure the cooling system of a diesel plant operates effectively?", 
+        options: ["Fuel tank level", "Coolant temperature and level", "Exhaust pipe diameter", "Generator voltage"], 
+        answer: 1, 
+        explanation: "Monitoring coolant temperature and level ensures the engine doesn’t overheat, preventing damage." },
+      { q: "What maintenance action prevents air intake issues in a diesel engine?", 
+        options: ["Cleaning or replacing the air filter", "Increasing fuel injection pressure", "Painting the air intake manifold", "Reducing engine speed"], 
+        answer: 0, 
+        explanation: "A clean air filter ensures proper air supply for combustion, preventing engine performance issues." },
+      { q: "What is the purpose of the governor in a diesel power plant?", 
+        options: ["To cool the engine", "To regulate engine speed", "To filter the fuel", "To increase exhaust pressure"], 
+        answer: 1, 
+        explanation: "The governor maintains a constant engine speed by adjusting fuel supply, ensuring stable power output." },
+      { q: "What should be checked during the maintenance of a diesel generator’s alternator?", 
+        options: ["Fuel injector pressure", "Bearing condition and insulation resistance", "Coolant pH level", "Exhaust temperature"], 
+        answer: 1, 
+        explanation: "Checking bearings and insulation resistance prevents alternator failure due to mechanical or electrical issues." },
+      { q: "What is a sign of fuel pump failure in a diesel plant?", 
+        options: ["Increased exhaust noise", "Difficulty starting the engine or power loss", "Higher coolant temperature", "Reduced generator voltage"], 
+        answer: 1, 
+        explanation: "A failing fuel pump reduces fuel delivery, leading to starting issues or reduced power output." },
+      { q: "What maintenance task is essential for the radiator in a diesel plant?", 
+        options: ["Checking for leaks and cleaning fins", "Increasing coolant flow rate", "Painting the radiator", "Reducing engine speed"], 
+        answer: 0, 
+        explanation: "Cleaning radiator fins and checking for leaks ensures efficient heat dissipation, preventing overheating." },
+      { q: "What is the purpose of the turbocharger in a diesel power plant?", 
+        options: ["To cool the engine", "To increase air intake for better combustion", "To filter exhaust gases", "To reduce fuel consumption"], 
+        answer: 1, 
+        explanation: "A turbocharger forces more air into the combustion chamber, improving combustion efficiency and power output." },
+
+      // 8.3 Thermal Plant (10 MCQs)
+      { q: "What is a critical maintenance task for the boiler in a thermal power plant?", 
+        options: ["Regular cleaning of boiler tubes", "Increasing fuel flow rate", "Painting the boiler exterior", "Reducing steam pressure"], 
+        answer: 0, 
+        explanation: "Boiler tubes can accumulate soot and scale, reducing heat transfer efficiency, so regular cleaning is essential." },
+      { q: "What component in a thermal plant requires frequent inspection for wear?", 
+        options: ["Steam turbine blades", "Fuel storage tank", "Cooling tower fins", "Generator casing"], 
+        answer: 0, 
+        explanation: "Steam turbine blades are subject to high temperatures and pressures, leading to wear that requires regular inspection." },
+      { q: "What is a common cause of reduced efficiency in a thermal plant condenser?", 
+        options: ["Excessive steam pressure", "Fouling of condenser tubes", "High cooling water temperature", "Low turbine speed"], 
+        answer: 1, 
+        explanation: "Fouling from scale or debris in condenser tubes reduces heat transfer, lowering condenser efficiency." },
+      { q: "What should be monitored in the cooling tower of a thermal plant?", 
+        options: ["Fuel consumption rate", "Water circulation and fan operation", "Steam turbine speed", "Generator voltage"], 
+        answer: 1, 
+        explanation: "Proper water circulation and fan operation ensure efficient cooling, maintaining plant performance." },
+      { q: "What maintenance task prevents corrosion in a thermal plant boiler?", 
+        options: ["Increasing steam temperature", "Using deaerated water and corrosion inhibitors", "Reducing fuel supply", "Painting the boiler tubes"], 
+        answer: 1, 
+        explanation: "Deaerated water removes oxygen, and corrosion inhibitors protect boiler surfaces from rust." },
+      { q: "What is the purpose of an economizer in a thermal power plant?", 
+        options: ["To cool the steam", "To preheat feedwater using flue gases", "To filter fuel", "To increase turbine speed"], 
+        answer: 1, 
+        explanation: "An economizer uses waste heat from flue gases to preheat feedwater, improving plant efficiency." },
+      { q: "What is a sign of turbine vibration in a thermal plant?", 
+        options: ["Increased steam pressure", "Unusual noise or shaking", "Higher generator output", "Reduced fuel consumption"], 
+        answer: 1, 
+        explanation: "Vibration in a turbine, often due to imbalance or bearing issues, manifests as noise or shaking, requiring maintenance." },
+      { q: "What maintenance action is required for the coal pulverizer in a thermal plant?", 
+        options: ["Regular lubrication of moving parts", "Increasing coal size", "Reducing air supply", "Painting the pulverizer"], 
+        answer: 0, 
+        explanation: "Pulverizers have moving parts that need lubrication to prevent wear and ensure efficient coal grinding." },
+      { q: "What should be checked in the chimney of a thermal plant?", 
+        options: ["Fuel level", "Structural integrity and soot accumulation", "Steam pressure", "Turbine blade angle"], 
+        answer: 1, 
+        explanation: "The chimney must be inspected for structural damage and cleaned of soot to ensure proper exhaust flow." },
+      { q: "What is the role of the superheater in a thermal plant?", 
+        options: ["To cool the steam", "To increase steam temperature above saturation", "To filter flue gases", "To reduce steam pressure"], 
+        answer: 1, 
+        explanation: "The superheater heats steam above its saturation temperature, improving turbine efficiency." },
+
+      // 8.4 Biomass (10 MCQs)
+      { q: "What is a key maintenance task for a biomass boiler?", 
+        options: ["Cleaning ash from the combustion chamber", "Increasing fuel moisture content", "Painting the boiler exterior", "Reducing air supply"], 
+        answer: 0, 
+        explanation: "Biomass combustion produces ash, which must be cleaned regularly to maintain efficient heat transfer." },
+      { q: "What component in a biomass plant requires regular inspection for clogging?", 
+        options: ["Fuel feeder system", "Steam turbine", "Cooling tower", "Generator windings"], 
+        answer: 0, 
+        explanation: "The fuel feeder system can clog due to uneven biomass material, requiring regular inspection and cleaning." },
+      { q: "What is a common cause of reduced efficiency in a biomass power plant?", 
+        options: ["Excessive steam pressure", "High moisture content in biomass fuel", "Low generator speed", "Reduced cooling water flow"], 
+        answer: 1, 
+        explanation: "High moisture content reduces combustion efficiency, requiring proper drying of biomass fuel." },
+      { q: "What should be monitored in the combustion chamber of a biomass plant?", 
+        options: ["Fuel storage level", "Temperature and air supply", "Generator voltage", "Steam turbine speed"], 
+        answer: 1, 
+        explanation: "Monitoring temperature and air supply ensures complete combustion and prevents unburnt fuel accumulation." },
+      { q: "What maintenance action prevents corrosion in a biomass boiler?", 
+        options: ["Using high-moisture fuel", "Applying anti-corrosion coatings", "Reducing combustion temperature", "Increasing ash accumulation"], 
+        answer: 1, 
+        explanation: "Biomass combustion can produce corrosive gases; coatings protect the boiler surfaces." },
+      { q: "What is the purpose of a cyclone separator in a biomass plant?", 
+        options: ["To cool the exhaust gases", "To remove ash particles from flue gases", "To increase fuel supply", "To regulate steam pressure"], 
+        answer: 1, 
+        explanation: "A cyclone separator removes ash and particulate matter from flue gases, reducing emissions." },
+      { q: "What is a sign of grate failure in a biomass boiler?", 
+        options: ["Increased fuel consumption", "Uneven combustion or clinker formation", "Higher steam pressure", "Reduced generator output"], 
+        answer: 1, 
+        explanation: "A failing grate causes uneven fuel distribution, leading to incomplete combustion and clinker formation." },
+      { q: "What maintenance task is essential for the heat exchanger in a biomass plant?", 
+        options: ["Cleaning tubes to remove soot and ash", "Increasing fuel flow rate", "Reducing steam temperature", "Painting the exchanger"], 
+        answer: 0, 
+        explanation: "Soot and ash accumulation on heat exchanger tubes reduces heat transfer efficiency, requiring regular cleaning." },
+      { q: "What should be checked in the fuel storage system of a biomass plant?", 
+        options: ["Steam pressure", "Moisture content and pest infestation", "Turbine blade condition", "Generator insulation"], 
+        answer: 1, 
+        explanation: "Biomass fuel storage must be checked for moisture and pests to prevent degradation and ensure quality." },
+      { q: "What is the role of the air preheater in a biomass plant?", 
+        options: ["To cool the combustion air", "To heat incoming air using flue gases", "To filter the biomass fuel", "To reduce exhaust emissions"], 
+        answer: 1, 
+        explanation: "An air preheater uses waste heat from flue gases to preheat combustion air, improving efficiency." }
+    ];
+
+    let currentPage = 0;
+    let score = 0;
+    let skipped = [];
+    let userAnswers = Array(questions.length).fill(null);
+    let timerSeconds = 0;
+    let timerInterval;
+    const QUESTIONS_PER_PAGE = 5;
+    const ANSWER_DELAY = 1500; // 1.5 seconds delay
+
+    const quizEl = document.getElementById("quiz");
+    const scoreEl = document.getElementById("score");
+    const resultsEl = document.getElementById("results");
+    const resultsBody = document.getElementById("results-body");
+    const progressEl = document.getElementById("progress");
+    const timerEl = document.getElementById("timer");
+    const correctSound = document.getElementById("correct-sound");
+    const wrongSound = document.getElementById("wrong-sound");
+
+    // Load progress from localStorage
+    function loadProgress() {
+      const saved = localStorage.getItem("quizProgressElectricity");
+      if (saved) {
+        const { currentPage: savedPage, score: savedScore, skipped: savedSkipped, answers: savedAnswers, time: savedTime } = JSON.parse(saved);
+        currentPage = savedPage;
+        score = savedScore;
+        skipped = savedSkipped;
+        userAnswers = savedAnswers || Array(questions.length).fill(null);
+        timerSeconds = savedTime || 0;
+      }
+    }
+
+    // Save progress to localStorage
+    function saveProgress() {
+      localStorage.setItem("quizProgressElectricity", JSON.stringify({
+        currentPage,
+        score,
+        skipped,
+        answers: userAnswers,
+        time: timerSeconds
+      }));
+    }
+
+    // Shuffle array
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Shuffle questions only once at initialization
+    const shuffledQuestions = shuffle([...questions]);
+
+    // Start timer
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        const minutes = Math.floor(timerSeconds / 60);
+        const seconds = timerSeconds % 60;
+        timerEl.textContent = `Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }, 1000);
+    }
+
+    // Update progress bar
+    function updateProgress() {
+      const percentage = ((currentPage * QUESTIONS_PER_PAGE) / questions.length) * 100;
+      progressEl.style.width = `${percentage}%`;
+    }
+
+    // Show questions for the current page
+    function showQuestions(page) {
+      const startIndex = page * QUESTIONS_PER_PAGE;
+      const endIndex = Math.min(startIndex + QUESTIONS_PER_PAGE, questions.length);
+      let html = '';
+      for (let i = startIndex; i < endIndex; i++) {
+        const q = shuffledQuestions[i];
+        const shuffledOptions = shuffle([...q.options].map((opt, j) => ({ text: opt, index: j })));
+        const options = shuffledOptions
+          .map(opt => `<button onclick="checkAnswer(this, ${i}, ${opt.index}, '${opt.text.replace(/'/g, "\\'")}')">${opt.text}</button>`)
+          .join('');
+        html += `
+          <div class="question" data-index="${i}">
+            <p>Q${i + 1}. ${q.q}</p>
+            <div class="options">${options}</div>
+            <button class="skip-button" onclick="skipQuestion(${i})">Skip</button>
+          </div>
+        `;
+      }
+      if (endIndex < questions.length) {
+        html += `<button class="next-button" onclick="nextPage()" disabled>Next</button>`;
+      }
+      quizEl.innerHTML = html;
+      updateProgress();
+      saveProgress();
+      checkNextButton();
+    }
+
+    // Check answer
+    function checkAnswer(button, questionIndex, selected, selectedText) {
+      const q = shuffledQuestions[questionIndex];
+      const correct = q.answer;
+      const buttons = button.parentElement.querySelectorAll("button");
+      buttons.forEach((btn) => {
+        btn.disabled = true;
+        if (q.options.indexOf(btn.innerText) === correct) btn.classList.add("correct");
+        if (btn === button && selected !== correct) btn.classList.add("wrong");
+      });
+
+      userAnswers[questionIndex] = selectedText;
+      if (selected === correct) {
+        score++;
+        correctSound.play().catch(() => console.log("Audio playback failed"));
+      } else {
+        wrongSound.play().catch(() => console.log("Audio playback failed"));
+      }
+
+      saveProgress();
+      checkNextButton();
+    }
+
+    // Skip question
+    function skipQuestion(questionIndex) {
+      if (!skipped.includes(shuffledQuestions[questionIndex])) {
+        skipped.push(shuffledQuestions[questionIndex]);
+        userAnswers[questionIndex] = "Skipped";
+      }
+      const buttons = document.querySelector(`.question[data-index="${questionIndex}"] .options`).querySelectorAll("button");
+      buttons.forEach(btn => btn.disabled = true);
+      saveProgress();
+      checkNextButton();
+    }
+
+    // Check if all questions on the page are answered or skipped
+    function checkNextButton() {
+      const startIndex = currentPage * QUESTIONS_PER_PAGE;
+      const endIndex = Math.min(startIndex + QUESTIONS_PER_PAGE, questions.length);
+      let allAnswered = true;
+      for (let i = startIndex; i < endIndex; i++) {
+        if (userAnswers[i] === null) {
+          allAnswered = false;
+          break;
+        }
+      }
+      const nextButton = document.querySelector(".next-button");
+      if (nextButton) {
+        nextButton.disabled = !allAnswered;
+      }
+    }
+
+    // Move to next page
+    function nextPage() {
+      currentPage++;
+      if (currentPage * QUESTIONS_PER_PAGE < questions.length) {
+        showQuestions(currentPage);
+      } else {
+        endQuiz();
+      }
+    }
+
+    // End quiz and show results
+    function endQuiz() {
+      clearInterval(timerInterval);
+      quizEl.innerHTML = "";
+      scoreEl.innerHTML = `Your score: ${score} / ${questions.length} (${((score / questions.length) * 100).toFixed(2)}%)`;
+      resultsEl.classList.remove("hidden");
+
+      resultsBody.innerHTML = shuffledQuestions.map((q, i) => {
+        const userAnswer = userAnswers[i] === null ? "Not attempted" :
+                         userAnswers[i] === "Skipped" ? "Skipped" :
+                         userAnswers[i];
+        const correctAnswer = q.options[q.answer];
+        const status = userAnswers[i] === q.options[q.answer] ? "Correct" :
+                      userAnswers[i] === "Skipped" ? "Skipped" :
+                      userAnswers[i] === null ? "Not attempted" : "Wrong";
+        return `
+          <tr>
+            <td>${i + 1}. ${q.q}</td>
+            <td>${userAnswer}</td>
+            <td>${correctAnswer}</td>
+            <td class="${status.toLowerCase()}">${status}</td>
+            <td class="explanation">${q.explanation}</td>
+          </tr>
+        `;
+      }).join('');
+
+      // Clear localStorage
+      localStorage.removeItem("quizProgressElectricity");
+    }
+
+    // Initialize
+    loadProgress();
+    startTimer();
+    showQuestions(currentPage);
+  </script>
+</body>
+</html>
