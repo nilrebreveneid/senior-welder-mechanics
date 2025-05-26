@@ -1,118 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Electrical system </title>
+    <title>Electrical System MCQ Quiz</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f5f7fa;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        h1 {
-            text-align: center;
-            color: #333;
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #e0e7ff, #c3dafe);
+            min-height: 100vh;
+            padding: 2rem;
+            line-height: 1.6;
         }
 
         .quiz-container {
             max-width: 900px;
-            margin: auto;
-            background: #fff;
-            padding: 20px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e3a8a;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .progress-bar {
+            background: #e5e7eb;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .progress {
+            background: #3b82f6;
+            height: 100%;
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8fafc;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .timer {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e3a8a;
         }
 
         .question {
-            margin-bottom: 20px;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            transition: transform 0.2s ease;
+        }
+
+        .question:hover {
+            transform: translateY(-2px);
         }
 
         .question p {
-            font-weight: bold;
-            color: #444;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 1rem;
         }
 
         .options button {
             display: block;
-            margin: 6px 0;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            cursor: pointer;
-            text-align: left;
             width: 100%;
-            transition: background-color 0.3s;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            color: #374151;
         }
 
-        .options button:hover {
-            background-color: #e0e0e0;
+        .options button:hover:not(:disabled) {
+            background: #f3f4f6;
+            border-color: #3b82f6;
+            transform: translateX(4px);
         }
 
         .options button.correct {
-            background-color: #c8f7c5;
+            background: #bbf7d0;
+            border-color: #22c55e;
+            color: #166534;
         }
 
         .options button.wrong {
-            background-color: #f7c5c5;
+            background: #fecaca;
+            border-color: #ef4444;
+            color: #991b1b;
+        }
+
+        .options button:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #eff6ff;
+            border-radius: 8px;
+            color: #1e3a8a;
+            font-size: 0.95rem;
+        }
+
+        .score-container {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
         }
 
         .score {
-            font-size: 1.2em;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 30px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+
+        .results-btn {
+            display: none;
+            margin: 1rem auto;
+            padding: 0.75rem 2rem;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .results-btn:hover {
+            background: #2563eb;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            .quiz-container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .question p {
+                font-size: 1rem;
+            }
+
+            .options button {
+                font-size: 0.9rem;
+                padding: 0.8rem;
+            }
         }
     </style>
 </head>
-
 <body>
-    <h1>Electricalsystem mcq</h1>
-    <div class="quiz-container" id="quiz"></div>
-    <div class="score" id="score"></div>
+    <h1>Electrical System MCQ Quiz</h1>
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <div class="timer" id="timer">Time: 00:00</div>
+            <div class="score" id="current-score">Score: 0/33</div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <div id="quiz"></div>
+        <div class="score-container">
+            <div class="score" id="score"></div>
+            <button class="results-btn" id="results-btn">View Results</button>
+        </div>
+    </div>
 
     <script>
-const questions = [
-{ q: "What would be the problem if the starting motor pinion engages with flywheel teeth but cannot crank the flywheel?", options: ["Defective over-running clutch", "Discharged battery"], answer: 1 },
-{ q: "Which of the following tests is performed in the battery using a hydrometer?", options: ["Open circuit voltage test", "Specific gravity test"], answer: 1 },
-{ q: "A 12-volt battery has how many cells?", options: ["12", "6"], answer: 1 },
-{ q: "Vehicle headlight is connected in:", options: ["Series circuit", "Parallel circuit"], answer: 1 },
-{ q: "The commonly used color for fog light is:", options: ["Green", "Yellow"], answer: 1 },
-{ q: "5-cell battery supplies how many volts?", options: ["2V", "10V"], answer: 1 },
-{ q: "ग्यासलाइन थ्री फिल्टर प्रयोग गर्दा कुन टर्मिनल जोडिन्छ?", options: ["-ve", "सकरात्मक दुईवटा टर्मिनल"], answer: 1 },
-{ q: "विद्युत् उपकरणहरू कसरी जडान गरिन्छ?", options: ["Series connection", "Parallel connection"], answer: 0 },
-{ q: "फ्लो मिटरको कार्य के हो?", options: ["ताप मापन", "इन्धनको प्रवाह मापन गर्नु"], answer: 1 },
-{ q: "रेक्टिफायरको कार्य के हो?", options: ["डीसी विद्युतलाई एसीमा परिवर्तन", "एसी विद्युतलाई डीसीमा परिवर्तन गर्नु"], answer: 1 },
-{ q: "Function of relay switch in a circuit is to:", options: ["Increase voltage", "To control a circuit by a separate low power signal"], answer: 1 },
-{ q: "What should be checked first if the headlight of an equipment does not work?", options: ["Battery connection", "Fuse of headlight"], answer: 1 },
-{ q: "Application of DC motor is restricted to low-load speed because:", options: ["Cost of motor is high", "Problems with mechanical commutation"], answer: 1 },
-{ q: "In a hydropower plant, which device converts mechanical to electrical energy?", options: ["Pump", "Generator"], answer: 1 },
-{ q: "In generators, the principle used to convert mechanical motion into electrical energy is:", options: ["Electrical attraction", "Magnetic induction"], answer: 1 },
-{ q: "In left hand rule for generators, the middle finger indicates:", options: ["Direction of motion", "Direction of current flow"], answer: 1 },
-{ q: "Difference in speed between stator field and rotor is:", options: ["Full load speed", "Slip"], answer: 1 },
-{ q: "How many cells are used in a 12-volt car battery?", options: ["8", "6"], answer: 1 },
-{ q: "२ सेलको ५ वाट घाममा चल्ने सौर्य बत्तामा कति भोल्टको बल्ब हुन्छ?", options: ["10V", "2V"], answer: 1 },
-{ q: "गाडीमा सामान्यतः के Defect हुन्छ ?", options: ["Switch contact loose", "Fuse जलेर"], answer: 1 },
-{ q: "When electrical devices are connected in parallel…", options: ["Current flow in each device will be same", "Voltage across each device will be same"], answer: 1 },
-{ q: "यो चित्र कुन भाग हो ?", options: ["क्यापेसिटर", "फ्यूज"], answer: 1 },
-{ q: "कुन तरल पदार्थ मात्र ब्याट्रीमा प्रयोग हुन्छ ?", options: ["Grease", "Distilled water"], answer: 1 },
-{ q: "मोटर स्टार्टरमा कुन प्रकारको एसी प्रकार्य प्रणाली रहन्छ ?", options: ["A Type", "All of the above"], answer: 1 },
-{ q: "इन्जिनमा पेट्रोलको आगो लाग्नको लागि सर्वप्रथम के जरुरी छ ?", options: ["न्यूनतम तापमान", "आत्मप्रज्वलन तापमान"], answer: 1 },
-{ q: "कुन किसिमको इन्धन सस्तो पर्छ ?", options: ["पेट्रोल", "डिजेल"], answer: 1 },
-{ q: "White lead light is used in:", options: ["Failure mode analysis circuit", "Wheatstone bridge circuit"], answer: 1 },
-{ q: "An equipment or device used to convert electrical energy into mechanical energy is:", options: ["Generator", "Motor"], answer: 1 },
-{ q: "Power factor of an alternator depends on:", options: ["Core loss", "Load it connected"], answer: 1 },
-{ q: "Which DC motor is used in machine tool?", options: ["Series motor", "Shunt motor"], answer: 1 },
-{ q: "The power factor of an alternator depends on:", options: ["Speed of rotor", "Load"], answer: 1 },
-{ q: "A machine that converts mechanical energy into electrical energy is known as:", options: ["D.C. motor", "Generator"], answer: 1 },
-{ q: "An equipment or device used to convert mechanical energy into electrical energy is:", options: ["Pump", "Motor"], answer: 1 },
-{ q: "The current in a circuit is directly proportional to total EMF and inversely proportional to resistance is:", options: ["Ohm’s Law", "Kirchhoff’s Law"], answer: 1 },
-{ q: "“Squirrel cage” is the type of:", options: ["Diesel engine", "Electric motor"], answer: 1 },
-{ q: "Joule is a unit of:", options: ["Force", "Energy"], answer: 1 }
-    ];
+        const questions = [
+            { q: "What would be the problem if the starting motor pinion engages with flywheel teeth but cannot crank the flywheel?", options: ["Defective over-running clutch", "Discharged battery"], answer: 1, explanation: "A discharged battery lacks the power to crank the flywheel, even if the pinion engages." },
+            { q: "Which of the following tests is performed in the battery using a hydrometer?", options: ["Open circuit voltage test", "Specific gravity test"], answer: 1, explanation: "A hydrometer measures the specific gravity of battery electrolyte to assess its charge state." },
+            { q: "A 12-volt battery has how many cells?", options: ["12", "6"], answer: 1, explanation: "A 12-volt automotive battery has 6 cells, each producing approximately 2.1 volts." },
+            { q: "Vehicle headlight is connected in:", options: ["Series circuit", "Parallel circuit"], answer: 1, explanation: "Headlights are connected in parallel to ensure consistent voltage and independent operation." },
+            { q: "The commonly used color for fog light is:", options: ["Green", "Yellow"], answer: 1, explanation: "Yellow fog lights improve visibility in adverse weather due to better light penetration." },
+            { q: "5-cell battery supplies how many volts?", options: ["2V", "10V"], answer: 1, explanation: "A 5-cell lead-acid battery supplies approximately 10 volts (2 volts per cell)." },
+            { q: "ग्यासलाइन थ्री फिल्टर प्रयोग गर्दा कुन टर्मिनल जोडिन्छ?", options: ["-ve", "+ve"], answer: 1, explanation: "ग्यासलाइन थ्री फिल्टर सामान्यतः +ve टर्मिनलमा जोडिन्छ।" },
+            { q: "विद्युत् उपकरणहरू कसरी जडान गरिन्छ?", options: ["Series connection", "Parallel connection"], answer: 1, explanation: "विद्युत् उपकरणहरू सामान्यतः समानान्तर (parallel) मा जडान गरिन्छ ताकि प्रत्येकले समान भोल्टेज प्राप्त गरोस्।" },
+            { q: "फ्लो मिटरको कार्य के हो?", options: ["ताप मापन", "इन्धनको प्रवाह मापन गर्नु"], answer: 1, explanation: "फ्लो मिटरले इन्धनको प्रवाह दर मापन गर्छ, जुन इन्जिनको कार्यक्षमता जाँच्न प्रयोग हुन्छ।" },
+            { q: "रेक्टिफायरको कार्य के हो?", options: ["डीसी विद्युतलाई एसीमा परिवर्तन", "एसी विद्युतलाई डीसीमा परिवर्तन गर्नु"], answer: 1, explanation: "रेक्टिफायरले एसी (AC) लाई डीसी (DC) मा परिवर्तन गर्छ, जुन ब्याट्री चार्ज गर्न प्रयोग हुन्छ।" },
+            { q: "Function of relay switch in a circuit is to:", options: ["Increase voltage", "Control a circuit by a separate low power signal"], answer: 1, explanation: "A relay uses a low-power signal to control a high-power circuit, acting as a switch." },
+            { q: "What should be checked first if the headlight of an equipment does not work?", options: ["Battery connection", "Fuse of headlight"], answer: 1, explanation: "The fuse should be checked first, as a blown fuse is a common cause of headlight failure." },
+            { q: "Application of DC motor is restricted to low-load speed because:", options: ["Cost of motor is high", "Problems with mechanical commutation"], answer: 1, explanation: "Mechanical commutation in DC motors limits their performance at high speeds due to wear and sparking." },
+            { q: "In a hydropower plant, which device converts mechanical to electrical energy?", options: ["Pump", "Generator"], answer: 1, explanation: "A generator converts mechanical energy from the turbine into electrical energy in a hydropower plant." },
+            { q: "In generators, the principle used to convert mechanical motion into electrical energy is:", options: ["Electrical attraction", "Magnetic induction"], answer: 1, explanation: "Generators use magnetic induction to produce electrical energy from mechanical motion." },
+            { q: "In left hand rule for generators, the middle finger indicates:", options: ["Direction of motion", "Direction of current flow"], answer: 1, explanation: "In the left-hand rule for generators, the middle finger shows the direction of induced current flow." },
+            { q: "Difference in speed between stator field and rotor is:", options: ["Full load speed", "Slip"], answer: 1, explanation: "Slip is the difference in speed between the stator's magnetic field and the rotor in an induction motor." },
+            { q: "How many cells are used in a 12-volt car battery?", options: ["8", "6"], answer: 1, explanation: "A 12-volt car battery uses 6 cells, each contributing about 2.1 volts." },
+            { q: "२ सेलको ५ वाट घाममा चल्ने सौर्य बत्तामा कति भोल्टको बल्ब हुन्छ?", options: ["10V", "4V"], answer: 1, explanation: "२ सेलको सौर्य ब्याट्रीले ४ भोल्ट (प्रति सेल २ भोल्ट) उत्पादन गर्छ, त्यसैले ४ भोल्टको बल्ब प्रयोग हुन्छ।" },
+            { q: "गाडीमा सामान्यतः के Defect हुन्छ ?", options: ["Switch contact loose", "Fuse जलेर"], answer: 1, explanation: "गाडीमा फ्यूज जल्नु सामान्य डिफेक्ट हो, जसले विद्युतीय प्रणालीमा समस्या निम्त्याउँछ।" },
+            { q: "When electrical devices are connected in parallel…", options: ["Current flow in each device will be same", "Voltage across each device will be same"], answer: 1, explanation: "In a parallel circuit, the voltage across each device remains the same, while current divides." },
+            { q: "यो चित्र कुन भाग हो ?", options: ["क्यापेसिटर", "फ्यूज"], answer: 1, explanation: "चित्रमा फ्यूज देखाइएको छ, जुन सर्किटलाई ओभरलोडबाट जोगाउँछ।" },
+            { q: "कुन तरल पदार्थ मात्र ब्याट्रीमा प्रयोग हुन्छ ?", options: ["Grease", "Distilled water"], answer: 1, explanation: "Distilled water is used in batteries to maintain electrolyte levels, as it is free of impurities." },
+            { q: "मोटर स्टार्टरमा कुन प्रकारको एसी प्रकार्य प्रणाली रहन्छ ?", options: ["A Type", "Star-Delta"], answer: 1, explanation: "Star-Delta starters are commonly used in motor starters to reduce initial current surge." },
+            { q: "इन्जिनमा पेट्रोलको आगो लाग्नको लागि सर्वप्रथम के जरुरी छ ?", options: ["न्यूनतम तापमान", "आत्मप्रज्वलन तापमान"], answer: 1, explanation: "पेट्रोलको आगो लाग्न आत्मप्रज्वलन तापमान (auto-ignition temperature) आवश्यक हुन्छ।" },
+            { q: "कुन किसिमको इन्धन सस्तो पर्छ ?", options: ["पेट्रोल", "डिजेल"], answer: 1, explanation: "डिजेल सामान्यतः पेट्रोलभन्दा सस्तो हुन्छ र इन्धन दक्षता पनि बढी हुन्छ।" },
+            { q: "White lead light is used in:", options: ["Failure mode analysis circuit", "Indicator or warning light"], answer: 1, explanation: "White lead lights are typically used as indicator or warning lights in vehicles." },
+            { q: "An equipment or device used to convert electrical energy into mechanical energy is:", options: ["Generator", "Motor"], answer: 1, explanation: "A motor converts electrical energy into mechanical energy, unlike a generator." },
+            { q: "Power factor of an alternator depends on:", options: ["Core loss", "Load"], answer: 1, explanation: "The power factor of an alternator depends on the type and magnitude of the connected load." },
+            { q: "Which DC motor is used in machine tool?", options: ["Series motor", "Shunt motor"], answer: 1, explanation: "Shunt motors are used in machine tools due to their stable speed under varying loads." },
+            { q: "The power factor of an alternator depends on:", options: ["Speed of rotor", "Load"], answer: 1, explanation: "The power factor is determined by the load, not the rotor speed." },
+            { q: "A machine that converts mechanical energy into electrical energy is:", options: ["D.C. motor", "Generator"], answer: 1, explanation: "A generator converts mechanical energy into electrical energy." },
+            { q: "An equipment or device used to convert mechanical energy into electrical energy is:", options: ["Pump", "Generator"], answer: 1, explanation: "A generator is used to convert mechanical energy into electrical energy, unlike a pump." },
+            { q: "The current in a circuit is directly proportional to total EMF and inversely proportional to resistance is:", options: ["Ohm’s Law", "Kirchhoff’s Law"], answer: 0, explanation: "Ohm’s Law states that current is directly proportional to voltage (EMF) and inversely proportional to resistance." },
+            { q: "“Squirrel cage” is the type of:", options: ["Diesel engine", "Electric motor"], answer: 1, explanation: "A squirrel cage is a type of rotor used in induction motors, known for its simplicity and durability." },
+            { q: "Joule is a unit of:", options: ["Force", "Energy"], answer: 1, explanation: "Joule is the SI unit of energy, measuring work done or energy transferred." }
+        ];
+
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -123,7 +256,41 @@ const questions = [
 
         const quizContainer = document.getElementById('quiz');
         const scoreContainer = document.getElementById('score');
+        const currentScore = document.getElementById('current-score');
+        const progressBar = document.getElementById('progress');
+        const timerDisplay = document.getElementById('timer');
+        const resultsBtn = document.getElementById('results-btn');
         let score = 0;
+        let answeredQuestions = 0;
+        let timeElapsed = 0;
+        let timerInterval;
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeElapsed++;
+                const minutes = Math.floor(timeElapsed / 60).toString().padStart(2, '0');
+                const seconds = (timeElapsed % 60).toString().padStart(2, '0');
+                timerDisplay.textContent = `Time: ${minutes}:${seconds}`;
+            }, 1000);
+        }
+
+        function updateProgress() {
+            const progressPercentage = (answeredQuestions / questions.length) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+        }
+
+        function showResults() {
+            quizContainer.style.display = 'none';
+            scoreContainer.textContent = `Final Score: ${score} out of ${questions.length} (${((score / questions.length) * 100).toFixed(2)}%)`;
+            resultsBtn.style.display = 'block';
+            resultsBtn.onclick = () => {
+                quizContainer.style.display = 'block';
+                scoreContainer.textContent = '';
+                resultsBtn.style.display = 'none';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            clearInterval(timerInterval);
+        }
 
         questions.forEach((q, i) => {
             const div = document.createElement('div');
@@ -133,6 +300,10 @@ const questions = [
             const optsDiv = document.createElement('div');
             optsDiv.classList.add('options');
 
+            const explanationDiv = document.createElement('div');
+            explanationDiv.classList.add('explanation');
+            explanationDiv.textContent = q.explanation;
+
             const shuffled = shuffle(q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.answer })));
 
             shuffled.forEach(({ text, isCorrect }) => {
@@ -140,9 +311,14 @@ const questions = [
                 btn.textContent = text;
                 btn.onclick = () => {
                     if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+                    answeredQuestions++;
+                    updateProgress();
+                    currentScore.textContent = `Score: ${score}/${questions.length}`;
+
                     if (isCorrect) {
                         btn.classList.add('correct');
                         score++;
+                        currentScore.textContent = `Score: ${score}/${questions.length}`;
                     } else {
                         btn.classList.add('wrong');
                         optsDiv.querySelectorAll('button').forEach(b => {
@@ -151,17 +327,23 @@ const questions = [
                             }
                         });
                     }
-                    if (i === questions.length - 1) {
-                        scoreContainer.textContent = `✅ Your Score: ${score} out of ${questions.length}`;
+
+                    optsDiv.querySelectorAll('button').forEach(b => b.disabled = true);
+                    explanationDiv.style.display = 'block';
+
+                    if (answeredQuestions === questions.length) {
+                        showResults();
                     }
                 };
                 optsDiv.appendChild(btn);
             });
 
             div.appendChild(optsDiv);
+            div.appendChild(explanationDiv);
             quizContainer.appendChild(div);
         });
+
+        startTimer();
     </script>
 </body>
-
 </html>
