@@ -1,137 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Senior welder(L5), junior mechanics(L4) & Senior mistri(L4)</title>
-  <script src="https://cdn.counter.dev/script.js" data-id="3df7cf84-4941-413b-8c83-1c2d4cbeb35a" data-utcoffset="6"></script>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-      background: linear-gradient(to right, #6dd5ed, #2193b0);
-      color: #fff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem;
-    }
-
-    header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
-      width: 100%;
-      max-width: 1000px;
-    }
-
-    .card {
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      padding: 1.5rem;
-      text-align: center;
-      transition: 0.3s ease;
-      backdrop-filter: blur(5px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .card a {
-      text-decoration: none;
-      color: #fff;
-      font-size: 1.1rem;
-      font-weight: bold;
-      display: block;
-    }
-
-    .card:hover {
-      transform: scale(1.05);
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-
-    footer {
-      margin-top: auto;
-      padding: 1rem;
-      text-align: center;
-      color: #f0f0f0;
-      font-size: 0.9rem;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Welder (L5), Junior Mechanics (L4) & Senior Mistri (L4)</title>
+    <script src="https://cdn.counter.dev/script.js" data-id="3df7cf84-4941-413b-8c83-1c2d4cbeb35a" data-utcoffset="6"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" defer crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6dd5ed, #2193b0);
+            color: #fff;
+            min-height: 100vh;
+            margin: 0;
+            padding: 1rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            background: rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        header p {
+            font-size: 1.1rem;
+            color: #e0f7fa;
+        }
+        .category {
+            margin-bottom: 2rem;
+        }
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
+            transition: background 0.3s ease;
+        }
+        .category-header:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .category-header h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #e0f7fa;
+        }
+        .category-content {
+            display: none;
+            padding: 1rem;
+        }
+        .category-content.active {
+            display: block;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        .card a {
+            text-decoration: none;
+            color: #e0f7fa;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .card a i {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        .card:hover a i {
+            transform: scale(1.2);
+        }
+        .explore-btn {
+            display: block;
+            margin: 3rem auto;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            color: #fff;
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .explore-btn:hover {
+            transform: scale(1.05);
+        }
+        .explore-btn a {
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+        #back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #2193b0;
+            color: #fff;
+            padding: 0.75rem 1rem;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            display: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        #back-to-top:hover {
+            background: #1e88e5;
+            transform: scale(1.1);
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            color: #e0f7fa;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 2rem;
+        }
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            .category-header h2 {
+                font-size: 1.5rem;
+            }
+            .card {
+                padding: 1rem;
+            }
+            .card a {
+                font-size: 1rem;
+            }
+            .explore-btn {
+                font-size: 1.2rem;
+                padding: 1rem 1.5rem;
+            }
+        }
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.75rem;
+            }
+            header p {
+                font-size: 0.9rem;
+            }
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            .category-header h2 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>📚 Senior welder(L5), junior mechanics(L4) & Senior mistri(L4) Quiz Portal</h1>
-    <p>Select a Topic to Start Your Practice</p>
-  </header>
+    <div class="container">
+        <header>
+            <h1>📚 Senior Welder (L5), Junior Mechanics (L4) & Senior Mistri (L4) Quiz Portal</h1>
+            <p>Select a Topic to Start Your Practice</p>
+        </header>
 
-  <div class="grid-container">
-    <div class="card"><a href="air-condition.html">Air Conditioning (39 MCQs)</a></div>
-    <!-- <div class="card"><a href="fluid-mechanics-som.html">Fluid Mechanics & SOM(56) ONLY for TU5</a></div> -->
-    <div class="card"><a href="safety-practices.html">Safety & Mock Test (70 MCQs)</a></div>
-    <div class="card"><a href="steering-clutch.html">Steering & Clutch (30 MCQs)</a></div>
-    <div class="card"><a href="fuel-lubrication.html">Fuel & Lubrication (50 MCQs)</a></div>
-    <div class="card"><a href="electrical-system.html">Electrical System (36 MCQs)</a></div>
-    <div class="card"><a href="transmission-system.html">Transmission System (25 MCQs)</a></div>
-    <div class="card"><a href="record-keeping.html">Record Keeping (39 MCQs)</a></div>
-    <div class="card"><a href="maintenance-emission.html">Maintenance & Emission (55 MCQs)</a></div>
-    <div class="card"><a href="tyre-starting.html">Tyre & Starting (26 MCQs)</a></div>
-    <div class="card"><a href="hydraulic.html">Hydraulic System (22 MCQs)</a></div>
-    <div class="card"><a href="suspension-system.html">Suspension System (16 MCQs) </a></div>
-    <div class="card"><a href="workshop-practice.html">Workshop Practice (80 MCQs)</a></div>
-    <div class="card"><a href="cooling-system.html">Cooling System (34 MCQs)</a></div>
-    <div class="card"><a href="welding-sheet.html">Welding & Sheet Metal (30 MCQs)</a></div>
-    <div class="card"><a href="braking-system.html">Braking System (28 MCQs)</a></div>
-    <div class="card"><a href="ic-engine-thermo.html">IC Engines & Thermal (81 MCQs)</a></div>
-    <div class="card"><a href="construction-equipment.html">Construction Equipment (32 MCQs)</a></div>
-    <div class="card"><a href="thermodynamics.html">Thermodynamics (127 MCQs)</a></div>
-    <div class="card"><a href="machine_drawing.html">Machine Drawing (71 MCQs)</a></div>
+        <div class="category">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <h2>Welder Mechanics</h2>
+                <span class="text-blue-200">▼</span>
+            </div>
+            <div class="category-content active">
+                <div class="grid-container">
+                    <div class="card"><a href="air-condition.html"><i class="fas fa-snowflake"></i> Air Conditioning (39 MCQs)</a></div>
+                    <div class="card"><a href="safety-practices.html"><i class="fas fa-shield-alt"></i> Safety & Mock Test (70 MCQs)</a></div>
+                    <div class="card"><a href="steering-clutch.html"><i class="fas fa-steering-wheel"></i> Steering & Clutch (30 MCQs)</a></div>
+                    <div class="card"><a href="fuel-lubrication.html"><i class="fas fa-oil-can"></i> Fuel & Lubrication (50 MCQs)</a></div>
+                    <div class="card"><a href="electrical-system.html"><i class="fas fa-bolt"></i> Electrical System (36 MCQs)</a></div>
+                    <div class="card"><a href="transmission-system.html"><i class="fas fa-cogs"></i> Transmission System (25 MCQs)</a></div>
+                    <div class="card"><a href="record-keeping.html"><i class="fas fa-book"></i> Record Keeping (39 MCQs)</a></div>
+                    <div class="card"><a href="maintenance-emission.html"><i class="fas fa-tools"></i> Maintenance & Emission (55 MCQs)</a></div>
+                    <div class="card"><a href="tyre-starting.html"><i class="fas fa-tire"></i> Tyre & Starting (26 MCQs)</a></div>
+                    <div class="card"><a href="hydraulic.html"><i class="fas fa-water"></i> Hydraulic System (22 MCQs)</a></div>
+                    <div class="card"><a href="suspension-system.html"><i class="fas fa-shock-absorber"></i> Suspension System (16 MCQs)</a></div>
+                    <div class="card"><a href="workshop-practice.html"><i class="fas fa-wrench"></i> Workshop Practice (80 MCQs)</a></div>
+                    <div class="card"><a href="cooling-system.html"><i class="fas fa-fan"></i> Cooling System (34 MCQs)</a></div>
+                    <div class="card"><a href="welding-sheet.html"><i class="fas fa-welding-torch"></i> Welding & Sheet Metal (30 MCQs)</a></div>
+                    <div class="card"><a href="braking-system.html"><i class="fas fa-brake-warning"></i> Braking System (28 MCQs)</a></div>
+                    <div class="card"><a href="ic-engine-thermo.html"><i class="fas fa-engine"></i> IC Engines & Thermal (81 MCQs)</a></div>
+                    <div class="card"><a href="construction-equipment.html"><i class="fas fa-tractor"></i> Construction Equipment (32 MCQs)</a></div>
+                    <div class="card"><a href="thermodynamics.html"><i class="fas fa-thermometer"></i> Thermodynamics (127 MCQs)</a></div>
+                    <div class="card"><a href="machine_drawing.html"><i class="fas fa-drafting-compass"></i> Machine Drawing (71 MCQs)</a></div>
+                </div>
+            </div>
+        </div>
 
-    <div class="card"><a href="wk-pra.html">2. workshop practise for mistri mechanical 4TH L3VEL</a></div>
-<!-- 
-    <div class="card"><a href="mock-page.html">📋 View All Mock Tests</a></div> -->
-    <div style="margin-top: 3rem; text-align: center;">
-  <div style="
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-    color: #fff;
-    padding: 1.5rem 2rem;
-    border-radius: 15px;
-    font-size: 1.4rem;
-    font-weight: bold;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    max-width: 500px;
-    margin: auto;
-    transition: transform 0.3s ease;
-  " 
-  onmouseover="this.style.transform='scale(1.05)'"
-  onmouseout="this.style.transform='scale(1)'">
-    <a href="mock-page.html" style="text-decoration: none; color: white; display: block;">
-      🎯 <span style="font-size: 1.2em;">Click here to Explore All Mock Tests (All Most Test)</span> 🧪
-    </a>
-  </div>
-</div>
-   
-    
+        <div class="category">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <h2>Mistri Mechanical</h2>
+                <span class="text-blue-200">▼</span>
+            </div>
+            <div class="category-content active">
+                <div class="grid-container">
+                    <div class="card"><a href="wk-pra.html"><i class="fas fa-wrench"></i> Workshop Practice for Mistri Mechanical 4th Level</a></div>
+                    <div class="card"><a href="machine_drawing.html"><i class="fas fa-drafting-compass"></i> Machine Drawing (71 MCQs)</a></div>
+                    <div class="card"><a href="fuel-lubrication.html"><i class="fas fa-oil-can"></i> Fuel & Lubrication (50 MCQs)</a></div>
+                    <div class="card"><a href="safety-practices.html"><i class="fas fa-shield-alt"></i> Safety & Mock Test (70 MCQs)</a></div>
+                </div>
+            </div>
+        </div>
 
-    
-  </div>
+        <div class="explore-btn">
+            <a href="mock-page.html">
+                🎯 <span>Click here to Explore All Mock Tests (All Most Test)</span> 🧪
+            </a>
+        </div>
 
-  <footer>
-    &copy; 2025 BerlinNeverDie| Designed for all screen sizes 🌐
-  </footer>
+        <footer>
+            © 2025 BerlinNeverDie | Designed for all screen sizes 🌐
+        </footer>
+    </div>
+
+    <div id="back-to-top" aria-label="Back to Top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <script>
+        function toggleCategory(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('span');
+            const isActive = content.classList.contains('active');
+            content.classList.toggle('active');
+            icon.textContent = isActive ? '▼' : '▲';
+        }
+
+        const backToTopBtn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.style.display = 'block';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
 </body>
 </html>
