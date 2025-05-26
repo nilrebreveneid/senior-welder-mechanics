@@ -1,122 +1,602 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Record keeping</title>
+    <title>Logsewa Record Keeping Mock Test</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f5f7fa;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        h1 {
-            text-align: center;
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #e0e7ff, #c3dafe);
+            margin: 0;
+            padding: 2rem;
             color: #333;
+            min-height: 100vh;
         }
 
         .quiz-container {
             max-width: 900px;
             margin: auto;
             background: #fff;
-            padding: 20px;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #1e3a8a;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            text-align: center;
+            color: #1e3a8a;
+            margin: 1rem 0;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f8fafc;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .timer {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #d81b60;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress {
+            height: 100%;
+            background: #3b82f6;
+            transition: width 0.3s ease;
         }
 
         .question {
-            margin-bottom: 20px;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            animation: fadeIn 0.5s;
+            transition: transform 0.2s ease;
+        }
+
+        .question:hover {
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .question p {
-            font-weight: bold;
-            color: #444;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 1rem;
         }
 
         .options button {
             display: block;
-            margin: 6px 0;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            cursor: pointer;
-            text-align: left;
             width: 100%;
-            transition: background-color 0.3s;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            color: #374151;
         }
 
-        .options button:hover {
-            background-color: #e0e0e0;
+        .options button:hover:not(:disabled) {
+            background: #f3f4f6;
+            border-color: #3b82f6;
+            transform: translateX(4px);
         }
 
         .options button.correct {
-            background-color: #c8f7c5;
+            background: #bbf7d0;
+            border-color: #22c55e;
+            color: #166534;
+            animation: pulse 0.5s;
         }
 
         .options button.wrong {
-            background-color: #f7c5c5;
+            background: #fecaca;
+            border-color: #ef4444;
+            color: #991b1b;
+            animation: shake 0.3s;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .options button:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #eff6ff;
+            border-radius: 8px;
+            color: #1e3a8a;
+            font-size: 0.95rem;
+        }
+
+        .skip-button {
+            background: #fff3cd;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            width: 100%;
+            border: 1px solid #ffca28;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .skip-button:hover {
+            background: #ffecb3;
+        }
+
+        .next-button {
+            background: #3b82f6;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 1rem;
+            display: block;
+            width: 100%;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+
+        .next-button:hover:not(:disabled) {
+            background: #2563eb;
+        }
+
+        .next-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .score-container {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
         }
 
         .score {
-            font-size: 1.2em;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .results-table th, .results-table td {
+            border: 1px solid #e5e7eb;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .results-table th {
+            background: #f8fafc;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .results-table .correct {
+            color: #166534;
             font-weight: bold;
+        }
+
+        .results-table .wrong {
+            color: #991b1b;
+            font-weight: bold;
+        }
+
+        .results-table .skipped, .results-table .not-attempted {
+            color: #d97706;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .restart-button {
+            background: #22c55e;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 1rem auto;
+            display: block;
+            width: 100%;
             text-align: center;
-            margin-top: 30px;
+            transition: background 0.3s ease;
+        }
+
+        .restart-button:hover {
+            background: #16a34a;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            .quiz-container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .question p {
+                font-size: 1rem;
+            }
+
+            .options button, .skip-button, .next-button, .restart-button {
+                font-size: 0.9rem;
+                padding: 0.8rem;
+            }
+
+            .results-table th, .results-table td {
+                padding: 0.5rem;
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
-
 <body>
-    <h1>Record keeping mcq</h1>
-    <div class="quiz-container" id="quiz"></div>
-    <div class="score" id="score"></div>
+    <div class="quiz-container">
+        <h1>Logsewa Record Keeping Mock Test</h1>
+        <div class="quiz-header">
+            <div class="timer" id="timer">Time: 00:00</div>
+            <div class="score" id="current-score">Score: 0/35</div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <div id="quiz"></div>
+        <div class="score-container">
+            <div class="score" id="score"></div>
+            <div id="results" class="hidden">
+                <h2>Quiz Results</h2>
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>Your Answer</th>
+                            <th>Correct Answer</th>
+                            <th>Status</th>
+                            <th>Explanation</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-body"></tbody>
+                </table>
+                <button class="restart-button" onclick="restartQuiz()">Restart Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="correct-sound" src="https://www.soundjay.com/buttons/beep-01a.mp3"></audio>
+    <audio id="wrong-sound" src="https://www.soundjay.com/buttons/beep-02.mp3"></audio>
 
     <script>
         const questions = [
-  { q: "What is the importance of record keeping?", options: ["To analyse equipment’s loss or profit", "All of the above"], answer: 1 },
-  { q: "Which is not a safety tool for mechanic?", options: ["Shirt and pant", "Apron and safety boots"], answer: 0 },
-  { q: "Personal safety device मा पर्ने कुन हो?", options: ["Safety helmet", "Fan belt cover"], answer: 0 },
-  { q: "Vehicle maintenance job card is used to record maintenance by:", options: ["Mechanic", "Mechanic and Transport Officer"], answer: 1 },
-  { q: "A job card is a form that contains:", options: ["Description of job only", "All of the above"], answer: 1 },
-  { q: "ट्याक्सीमा फाइदा कति भयो भन्न कुन सूचक प्रयोग गरिन्छ?", options: ["गाडी संख्या", "गाडी वजन"], answer: 0 },
-  { q: "गाडीको हाईब्रिड ब्रेक फ्लुइड कहिले परिवर्तन गर्नु पर्छ?", options: ["मेन्टिनेन्सका बेला", "जब गाडी बिग्रिन्छ"], answer: 0 },
-  { q: "रेडिएटरको पानीको मात्रा मापन गर्ने तरिका कुन हो?", options: ["आँखाले हेरेर", "मेसिनको तापक्रम हेरेर"], answer: 0 },
-  { q: "गाडीको मिटर पढ्न पाइन्छ कि पाइँदैन?", options: ["पाइन्छ", "पाइँदैन"], answer: 0 },
-  { q: "Which of the following is the standard format for recording defects in a vehicle at a service station?", options: ["Job card", "Maintenance manual"], answer: 0 },
-  { q: "निम्नमध्ये कुन कार्यस्थल सुरक्षाका संकेत हुन्?", options: ["सूचना", "सूचना पाटी"], answer: 1 },
-  { q: "At which interval should safety foot wear be inspected?", options: ["Prior to each use", "Every 15 days"], answer: 0 },
-  { q: "Personal protective equipment is required when:", options: ["Engineering controls are not enough", "An employee asks for it"], answer: 0 },
-  { q: "Machine safeguarding is necessary because:", options: ["It makes the machine look attractive", "It minimizes the risk of accident for operator"], answer: 1 },
-  { q: "An activity in which people practice leaving a building quickly is called:", options: ["Fire play", "Fire drill"], answer: 1 },
-  { q: "The general safety rules for a shop mechanic does not include:", options: ["Do not wear an apron jacket or shirt", "Do not wear tie or jewelry"], answer: 1 },
-  { q: "The safety device used during arc welding for eye protection is:", options: ["Black glasses", "Welder helmet"], answer: 1 },
-  { q: "Personal safety tools/device include:", options: ["Apron", "Gloves"], answer: 1 },
-  { q: "The safety device used during arc welding for protection of eye is ……", options: ["Black glasses", "Mask"], answer: 0 },
-  { q: "Safe guarding of machine is a type of", options: ["Safety device", "Personal protective equipment"], answer: 0 },
-  { q: "Methods which show how to perform a task with minimum risk are known as", options: ["Safety devices", "Safe work practices"], answer: 1 },
-  { q: "काम गर्दा निम्नमध्ये कुन सुरक्षा उपकरण प्रयोग गर्नुपर्छ?", options: ["Stick and umbrella", "Safety vest and safety boots"], answer: 1 },
-  { q: "विद्युत् सर्किट बुझ्न प्रयोग गरिने एउटा प्रमुख उपकरण कुन हो?", options: ["स्पीडो मिटर", "भोल्ट मिटर"], answer: 1 },
-  { q: "Which of the following is a safety tool?", options: ["Goggles", "Hammer"], answer: 0 },
-  { q: "Electronic force meter (Measuring Instrument) is:", options: ["Voltmeter", "Dynamometer"], answer: 1 },
-  { q: "व्यक्तिगत सुरक्षा उपकरण के हो?", options: ["पन्जा", "चस्मा"], answer: 0 },
-  { q: "Machine को मर्मत, सञ्चालन, समायोजन आदि जान्न दिइने सूचना कुन manual बाट पाउने ?", options: ["Workshop Manual", "Parts Manual"], answer: 0 },
-  { q: "मेसिनको सञ्चालन, मर्मत गर्न कुन manual चाहिन्छ ?", options: ["Workshop Manual", "Instruction Chart"], answer: 0 },
-  { q: "मेसिनको operation manual कुन प्रकारको जानकारी उपलब्ध गराउँछ ?", options: ["प्रयोगको तरिका र मर्मत", "प्रयोगको तरिका मात्र"], answer: 0 },
-  { q: "Which document is used to track daily usage and issues of a vehicle?", options: ["Log book", "Bill book"], answer: 0 },
-  { q: "Who is responsible for signing the maintenance job card?", options: ["Mechanic and Supervisor", "Driver only"], answer: 0 },
-  { q: "In a workshop, dangerous tools should be stored:", options: ["Out of reach and labeled", "Near entrance"], answer: 0 },
-  { q: "What is the color of a typical safety sign for danger?", options: ["Red", "Blue"], answer: 0 },
-  { q: "Which one is a PPE (Personal Protective Equipment)?", options: ["Helmet", "Spanner"], answer: 0 },
-  { q: "Record keeping helps in:", options: ["Tracking maintenance cost", "Only employee attendance"], answer: 0 },
-  { q: "What should you do before starting maintenance on electrical machines?", options: ["Disconnect the power supply", "Wear gloves only"], answer: 0 },
-  { q: "Safety posters in workshops are used to:", options: ["Create awareness", "Decorate walls"], answer: 0 },
-  { q: "Which of the following is essential in fire-prone areas?", options: ["Fire extinguisher", "Screwdriver"], answer: 0 },
-  { q: "Which safety color code indicates caution?", options: ["Yellow", "Green"], answer: 0 }
-];
-      
+            {
+                q: "What is the importance of record keeping in a workshop?",
+                options: ["To analyze equipment performance and costs", "To decorate the office"],
+                answer: 0,
+                explanation: "Record keeping tracks equipment performance, maintenance costs, and operational efficiency, aiding decision-making."
+            },
+            {
+                q: "Which is NOT a safety tool for a mechanic?",
+                options: ["Shirt and pants", "Safety boots"],
+                answer: 0,
+                explanation: "Shirt and pants are not safety tools; safety boots protect against workplace hazards."
+            },
+            {
+                q: "Personal safety device मा पर्ने कुन हो?",
+                options: ["Safety helmet", "Fan belt cover"],
+                answer: 0,
+                explanation: "A safety helmet is a personal safety device; a fan belt cover is a vehicle component."
+            },
+            {
+                q: "Who uses a vehicle maintenance job card to record maintenance?",
+                options: ["Mechanic only", "Mechanic and supervisor"],
+                answer: 1,
+                explanation: "Both the mechanic and supervisor use the job card to document and verify maintenance tasks."
+            },
+            {
+                q: "What information does a job card typically contain?",
+                options: ["Job description only", "Job description, parts used, and labor details"],
+                answer: 1,
+                explanation: "A job card includes the job description, parts used, labor hours, and other maintenance details."
+            },
+            {
+                q: "Which document is used to track daily usage and issues of a vehicle?",
+                options: ["Logbook", "Bill book"],
+                answer: 0,
+                explanation: "A logbook records daily vehicle usage, mileage, and issues for operational tracking."
+            },
+            {
+                q: "Who is responsible for signing the maintenance job card?",
+                options: ["Mechanic and supervisor", "Driver only"],
+                answer: 0,
+                explanation: "The mechanic and supervisor sign the job card to confirm completed maintenance."
+            },
+            {
+                q: "Which is the standard format for recording defects in a vehicle at a service station?",
+                options: ["Job card", "Maintenance manual"],
+                answer: 0,
+                explanation: "A job card is the standard format for documenting vehicle defects and repairs."
+            },
+            {
+                q: "Record keeping helps in:",
+                options: ["Tracking maintenance costs and schedules", "Only employee attendance"],
+                answer: 0,
+                explanation: "Record keeping tracks maintenance costs, schedules, and equipment performance, not just attendance."
+            },
+            {
+                q: "At which interval should safety footwear be inspected?",
+                options: ["Before each use", "Every 15 days"],
+                answer: 0,
+                explanation: "Safety footwear should be inspected before each use to ensure it is free of damage."
+            },
+            {
+                q: "When is personal protective equipment (PPE) required?",
+                options: ["When engineering controls are insufficient", "When an employee requests it"],
+                answer: 0,
+                explanation: "PPE is required when engineering controls cannot fully eliminate workplace hazards."
+            },
+            {
+                q: "Why is machine safeguarding necessary?",
+                options: ["To enhance machine appearance", "To minimize accident risks for operators"],
+                answer: 1,
+                explanation: "Safeguarding protects operators from hazards like moving parts, reducing accident risks."
+            },
+            {
+                q: "What is an activity where people practice leaving a building quickly called?",
+                options: ["Fire play", "Fire drill"],
+                answer: 1,
+                explanation: "A fire drill is a practice to ensure quick and safe evacuation during emergencies."
+            },
+            {
+                q: "Which is NOT a general safety rule for a shop mechanic?",
+                options: ["Wearing an apron", "Wearing a tie or jewelry"],
+                answer: 1,
+                explanation: "Wearing ties or jewelry is unsafe as they can get caught in machinery."
+            },
+            {
+                q: "What safety device is used during arc welding for eye protection?",
+                options: ["Black glasses", "Welding helmet with shield"],
+                answer: 1,
+                explanation: "A welding helmet with a protective shield safeguards eyes from arc welding’s bright light."
+            },
+            {
+                q: "Which of the following is a personal safety tool?",
+                options: ["Screwdriver", "Gloves"],
+                answer: 1,
+                explanation: "Gloves are a personal safety tool; screwdrivers are not."
+            },
+            {
+                q: "Safeguarding of a machine is a type of:",
+                options: ["Safety device", "Personal protective equipment"],
+                answer: 0,
+                explanation: "Machine safeguarding is a safety device to protect operators, not PPE."
+            },
+            {
+                q: "Methods that show how to perform tasks with minimum risk are known as:",
+                options: ["Safety devices", "Safe work practices"],
+                answer: 1,
+                explanation: "Safe work practices outline procedures to minimize risks during tasks."
+            },
+            {
+                q: "काम गर्दा निम्नमध्ये कुन सुरक्षा उपकरण प्रयोग गर्नुपर्छ?",
+                options: ["छाता र लौरो", "सुरक्षा ज्याकेट र बुट"],
+                answer: 1,
+                explanation: "Safety jackets and boots are essential protective equipment for workplace safety."
+            },
+            {
+                q: "Which of the following is a safety tool?",
+                options: ["Goggles", "Hammer"],
+                answer: 0,
+                explanation: "Goggles protect eyes and are a safety tool; hammers are not."
+            },
+            {
+                q: "What should you do before starting maintenance on electrical machines?",
+                options: ["Disconnect the power supply", "Wear gloves only"],
+                answer: 0,
+                explanation: "Disconnecting the power supply prevents electrical hazards during maintenance."
+            },
+            {
+                q: "Safety posters in workshops are used to:",
+                options: ["Raise awareness about hazards", "Decorate walls"],
+                answer: 0,
+                explanation: "Safety posters educate workers about hazards and safe practices."
+            },
+            {
+                q: "Which is essential in fire-prone areas?",
+                options: ["Fire extinguisher", "Screwdriver"],
+                answer: 0,
+                explanation: "Fire extinguishers are critical for safety in fire-prone areas."
+            },
+            {
+                q: "Which safety color code indicates caution?",
+                options: ["Yellow", "Green"],
+                answer: 0,
+                explanation: "Yellow indicates caution, warning of potential hazards."
+            },
+            {
+                q: "Which one is a PPE (Personal Protective Equipment)?",
+                options: ["Helmet", "Spanner"],
+                answer: 0,
+                explanation: "A helmet is PPE; a spanner is a tool."
+            },
+            {
+                q: "What is the color of a typical safety sign for danger?",
+                options: ["Red", "Blue"],
+                answer: 0,
+                explanation: "Red is used for danger signs to alert workers to serious hazards."
+            },
+            {
+                q: "विद्युत् सर्किट बुझ्न प्रयोग गरिने प्रमुख उपकरण कुन हो?",
+                options: ["स्पीडोमिटर", "भोल्टमिटर"],
+                answer: 1,
+                explanation: "A voltmeter measures voltage in electrical circuits."
+            },
+            {
+                q: "Electronic force meter (measuring instrument) is:",
+                options: ["Voltmeter", "Dynamometer"],
+                answer: 1,
+                explanation: "A dynamometer measures force, torque, or power, not voltage."
+            },
+            {
+                q: "व्यक्तिगत सुरक्षा उपकरण के हो?",
+                options: ["पन्जा (Gloves)", "हथौडा (Hammer)"],
+                answer: 0,
+                explanation: "Gloves are personal protective equipment; hammers are tools."
+            },
+            {
+                q: "Machine को मर्मत, सञ्चालन, समायोजन आदि जान्न दिइने सूचना कुन म्यानुअलमा पाइन्छ?",
+                options: ["Workshop Manual", "Parts Manual"],
+                answer: 0,
+                explanation: "A workshop manual provides detailed maintenance and operation instructions."
+            },
+            {
+                q: "मेसिनको सञ्चालन र मर्मत गर्न कुन म्यानुअल चाहिन्छ?",
+                options: ["Workshop Manual", "Instruction Chart"],
+                answer: 0,
+                explanation: "A workshop manual is essential for machine operation and maintenance."
+            },
+            {
+                q: "मेसिनको operation manual ले कुन प्रकारको जानकारी दिन्छ?",
+                options: ["प्रयोग र मर्मतको तरिका", "केवल प्रयोगको तरिका"],
+                answer: 0,
+                explanation: "An operation manual covers both usage and maintenance procedures."
+            },
+            {
+                q: "In a workshop, where should dangerous tools be stored?",
+                options: ["Out of reach and labeled", "Near the entrance"],
+                answer: 0,
+                explanation: "Dangerous tools should be stored out of reach and clearly labeled for safety."
+            },
+            {
+                q: "गाडीको हाइब्रिड ब्रेक फ्लुइड कहिले परिवर्तन गर्नुपर्छ?",
+                options: ["निर्माताको सिफारिस अनुसार", "गाडी बिग्रँदा"],
+                answer: 0,
+                explanation: "Hybrid brake fluid should be changed per the manufacturer’s recommended schedule."
+            },
+            {
+                q: "रेडिएटरको पानीको मात्रा मापन गर्ने सही तरिका कुन हो?",
+                options: ["रेडिएटर क्याप खोलेर जाँच्ने", "इन्जिन तापक्रम मापन गर्ने"],
+                answer: 0,
+                explanation: "Coolant levels are checked by inspecting the radiator or reservoir, not engine temperature."
+            }
+        ];
+
+        let currentPage = 0;
+        let score = 0;
+        let skipped = [];
+        let userAnswers = Array(questions.length).fill(null);
+        let timerSeconds = 0;
+        let timerInterval;
+        const QUESTIONS_PER_PAGE = 5;
+        const ANSWER_DELAY = 1000;
+
+        const quizEl = document.getElementById("quiz");
+        const scoreEl = document.getElementById("score");
+        const resultsEl = document.getElementById("results");
+        const resultsBody = document.getElementById("results-body");
+        const progressEl = document.getElementById("progress");
+        const timerEl = document.getElementById("timer");
+        const currentScoreEl = document.getElementById("current-score");
+        const correctSound = document.getElementById("correct-sound");
+        const wrongSound = document.getElementById("wrong-sound");
+
+        // Load progress from localStorage
+        function loadProgress() {
+            const saved = localStorage.getItem("quizProgressRecordKeeping");
+            if (saved) {
+                const { currentPage: savedPage, score: savedScore, skipped: savedSkipped, answers: savedAnswers, time: savedTime } = JSON.parse(saved);
+                currentPage = savedPage;
+                score = savedScore;
+                skipped = savedSkipped;
+                userAnswers = savedAnswers || Array(questions.length).fill(null);
+                timerSeconds = savedTime || 0;
+                updateCurrentScore();
+            }
+        }
+
+        // Save progress to localStorage
+        function saveProgress() {
+            localStorage.setItem("quizProgressRecordKeeping", JSON.stringify({
+                currentPage,
+                score,
+                skipped,
+                answers: userAnswers,
+                time: timerSeconds
+            }));
+        }
+
+        // Update current score display
+        function updateCurrentScore() {
+            currentScoreEl.textContent = `Score: ${score}/${questions.length}`;
+        }
+
+        // Shuffle array
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -125,47 +605,249 @@
             return array;
         }
 
-        const quizContainer = document.getElementById('quiz');
-        const scoreContainer = document.getElementById('score');
-        let score = 0;
+        // Start timer
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timerSeconds++;
+                const minutes = Math.floor(timerSeconds / 60);
+                const seconds = timerSeconds % 60;
+                timerEl.textContent = `Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                saveProgress();
+            }, 1000);
+        }
 
-        questions.forEach((q, i) => {
-            const div = document.createElement('div');
-            div.classList.add('question');
-            div.innerHTML = `<p>${i + 1}. ${q.q}</p>`;
+        // Update progress bar
+        function updateProgress() {
+            const answeredCount = userAnswers.filter(answer => answer !== null).length;
+            const percentage = (answeredCount / questions.length) * 100;
+            progressEl.style.width = `${percentage}%`;
+        }
 
-            const optsDiv = document.createElement('div');
-            optsDiv.classList.add('options');
+        // Show questions for the current page
+        function showQuestions(page) {
+            quizEl.innerHTML = '';
+            const startIndex = page * QUESTIONS_PER_PAGE;
+            const endIndex = Math.min(startIndex + QUESTIONS_PER_PAGE, questions.length);
 
-            const shuffled = shuffle(q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.answer })));
+            for (let i = startIndex; i < endIndex; i++) {
+                const q = questions[i];
+                const shuffledOptions = shuffle([...q.options].map((opt, j) => ({ text: opt, index: j })));
+                const optionsHtml = shuffledOptions
+                    .map(opt => `<button onclick="checkAnswer(this, ${i}, ${opt.index}, '${opt.text.replace(/'/g, "\\'")}')">${opt.text}</button>`)
+                    .join('');
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question');
+                questionDiv.dataset.index = i;
+                questionDiv.innerHTML = `
+                    <p>Q${i + 1}. ${q.q}</p>
+                    <div class="options">${optionsHtml}</div>
+                    <button class="skip-button" onclick="skipQuestion(${i})">Skip</button>
+                    <div class="explanation">${q.explanation}</div>
+                `;
+                quizEl.appendChild(questionDiv);
+            }
 
-            shuffled.forEach(({ text, isCorrect }) => {
-                const btn = document.createElement('button');
-                btn.textContent = text;
-                btn.onclick = () => {
-                    if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
-                    if (isCorrect) {
-                        btn.classList.add('correct');
-                        score++;
-                    } else {
-                        btn.classList.add('wrong');
-                        optsDiv.querySelectorAll('button').forEach(b => {
-                            if (b.textContent === shuffled.find(o => o.isCorrect).text) {
-                                b.classList.add('correct');
-                            }
-                        });
-                    }
-                    if (i === questions.length - 1) {
-                        scoreContainer.textContent = `✅ Your Score: ${score} out of ${questions.length}`;
-                    }
-                };
-                optsDiv.appendChild(btn);
+            if (endIndex < questions.length || skipped.length > 0) {
+                const nextButton = document.createElement('button');
+                nextButton.classList.add('next-button');
+                nextButton.textContent = endIndex < questions.length ? 'Next' : 'Review Skipped Questions';
+                nextButton.onclick = nextPage;
+                nextButton.disabled = !areAllQuestionsAnsweredOnPage(startIndex, endIndex);
+                quizEl.appendChild(nextButton);
+            } else {
+                const submitButton = document.createElement('button');
+                submitButton.classList.add('next-button');
+                submitButton.textContent = 'Submit Quiz';
+                submitButton.onclick = endQuiz;
+                submitButton.disabled = !areAllQuestionsAnsweredOnPage(startIndex, endIndex);
+                quizEl.appendChild(submitButton);
+            }
+
+            updateProgress();
+            saveProgress();
+            restoreAnswers(startIndex, endIndex);
+        }
+
+        // Restore previous answers for the current page
+        function restoreAnswers(startIndex, endIndex) {
+            for (let i = startIndex; i < endIndex; i++) {
+                if (userAnswers[i] !== null && userAnswers[i] !== 'Skipped') {
+                    const questionDiv = document.querySelector(`.question[data-index="${i}"]`);
+                    const buttons = questionDiv.querySelectorAll('.options button');
+                    const q = questions[i];
+                    buttons.forEach(btn => {
+                        btn.disabled = true;
+                        if (btn.textContent === q.options[q.answer]) {
+                            btn.classList.add('correct');
+                        }
+                        if (btn.textContent === userAnswers[i] && userAnswers[i] !== q.options[q.answer]) {
+                            btn.classList.add('wrong');
+                        }
+                    });
+                    questionDiv.querySelector('.explanation').style.display = 'block';
+                    questionDiv.querySelector('.skip-button').disabled = true;
+                } else if (userAnswers[i] === 'Skipped') {
+                    const questionDiv = document.querySelector(`.question[data-index="${i}"]`);
+                    questionDiv.querySelectorAll('.options button').forEach(btn => btn.disabled = true);
+                    questionDiv.querySelector('.skip-button').disabled = true;
+                    questionDiv.querySelector('.explanation').style.display = 'block';
+                }
+            }
+        }
+
+        // Check if all questions on the current page are answered or skipped
+        function areAllQuestionsAnsweredOnPage(startIndex, endIndex) {
+            for (let i = startIndex; i < endIndex; i++) {
+                if (userAnswers[i] === null) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Check answer
+        function checkAnswer(button, questionIndex, selected, selectedText) {
+            const q = questions[questionIndex];
+            const correct = q.answer;
+            const buttons = button.parentElement.querySelectorAll("button");
+            const questionDiv = button.closest('.question');
+            const explanationDiv = questionDiv.querySelector('.explanation');
+
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                if (q.options.indexOf(btn.textContent) === correct) {
+                    btn.classList.add('correct');
+                }
+                if (btn === button && selected !== correct) {
+                    btn.classList.add('wrong');
+                }
             });
 
-            div.appendChild(optsDiv);
-            quizContainer.appendChild(div);
-        });
+            questionDiv.querySelector('.skip-button').disabled = true;
+            explanationDiv.style.display = 'block';
+
+            userAnswers[questionIndex] = selectedText;
+            if (selected === correct) {
+                score++;
+                correctSound.play().catch(() => console.log("Audio playback failed"));
+            } else {
+                wrongSound.play().catch(() => console.log("Audio playback failed"));
+            }
+
+            updateCurrentScore();
+            saveProgress();
+            const nextButton = quizEl.querySelector('.next-button');
+            if (nextButton) {
+                nextButton.disabled = !areAllQuestionsAnsweredOnPage(
+                    currentPage * QUESTIONS_PER_PAGE,
+                    Math.min((currentPage + 1) * QUESTIONS_PER_PAGE, questions.length)
+                );
+            }
+
+            setTimeout(() => {
+                if (areAllQuestionsAnsweredOnPage(
+                    currentPage * QUESTIONS_PER_PAGE,
+                    Math.min((currentPage + 1) * QUESTIONS_PER_PAGE, questions.length)
+                )) {
+                    nextPage();
+                }
+            }, ANSWER_DELAY);
+        }
+
+        // Skip question
+        function skipQuestion(questionIndex) {
+            if (!skipped.includes(questions[questionIndex])) {
+                skipped.push(questions[questionIndex]);
+                userAnswers[questionIndex] = 'Skipped';
+                const questionDiv = document.querySelector(`.question[data-index="${questionIndex}"]`);
+                if (questionDiv) {
+                    questionDiv.querySelectorAll('.options button').forEach(btn => btn.disabled = true);
+                    questionDiv.querySelector('.skip-button').disabled = true;
+                    questionDiv.querySelector('.explanation').style.display = 'block';
+                }
+                saveProgress();
+                const nextButton = quizEl.querySelector('.next-button');
+                if (nextButton) {
+                    nextButton.disabled = !areAllQuestionsAnsweredOnPage(
+                        currentPage * QUESTIONS_PER_PAGE,
+                        Math.min((currentPage + 1) * QUESTIONS_PER_PAGE, questions.length),
+                    );
+                }
+            }
+        }
+
+        // Move to next page
+        function nextPage() {
+            if (skipped.length > 0 && currentPage * QUESTIONS_PER_PAGE >= questions.length) {
+                showSkippedQuestions();
+            } else {
+                currentPage++;
+                if (currentPage * QUESTIONS_PER_PAGE < questions.length) {
+                    showQuestions(currentPage);
+                } else if (skipped.length === 0) {
+                    endQuiz();
+                } else {
+                    showSkippedQuestions();
+                }
+            }
+        }
+
+        // Show skipped questions
+        function showSkippedQuestions() {
+            questions.splice(0, questions.length, ...skipped);
+            skipped = [];
+            currentPage = 0;
+            showQuestions(currentPage);
+        }
+
+        // End quiz and show results
+        function endQuiz() {
+            clearInterval(timerInterval);
+            quizEl.innerHTML = '';
+            scoreEl.textContent = `Final Score: ${score} out of ${questions.length} (${((score / questions.length) * 100).toFixed(2)}%)`;
+            resultsEl.classList.remove('hidden');
+
+            resultsBody.innerHTML = questions.map((q, i) => {
+                const userAnswer = userAnswers[i] === null ? 'Not attempted' :
+                                  userAnswers[i] === 'Skipped' ? 'Skipped' :
+                                  userAnswers[i];
+                const correctAnswer = q.options[q.answer];
+                const status = userAnswers[i] === q.options[q.answer] ? 'Correct' :
+                              userAnswers[i] === 'Skipped' ? 'Skipped' :
+                              userAnswers[i] === null ? 'Not-attempted' : 'Wrong';
+                return `
+                    <tr>
+                        <td>${i + 1}. ${q.q}</td>
+                        <td>${userAnswer}</td>
+                        <td>${correctAnswer}</td>
+                        <td class="${status.toLowerCase().replace(' ', '-')}">${status}</td>
+                        <td class="explanation">${q.explanation}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            localStorage.removeItem('quizProgressRecordKeeping');
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            currentPage = 0;
+            score = 0;
+            skipped = [];
+            userAnswers = Array(questions.length).fill(null);
+            timerSeconds = 0;
+            resultsEl.classList.add('hidden');
+            scoreEl.textContent = '';
+            localStorage.removeItem('quizProgressRecordKeeping');
+            startTimer();
+            showQuestions(currentPage);
+            updateCurrentScore();
+        }
+
+        // Initialize
+        loadProgress();
+        startTimer();
+        showQuestions(currentPage);
     </script>
 </body>
-
 </html>
