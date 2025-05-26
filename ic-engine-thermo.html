@@ -1,80 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Full IC Engine & Steam Quiz</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f5f7fa;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        .quiz-container {
-            max-width: 900px;
-            margin: auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .question {
-            margin-bottom: 20px;
-        }
-
-        .question p {
-            font-weight: bold;
-            color: #444;
-        }
-
-        .options button {
-            display: block;
-            margin: 6px 0;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            cursor: pointer;
-            text-align: left;
-            width: 100%;
-            transition: background-color 0.3s;
-        }
-
-        .options button:hover {
-            background-color: #e0e0e0;
-        }
-
-        .options button.correct {
-            background-color: #c8f7c5;
-        }
-
-        .options button.wrong {
-            background-color: #f7c5c5;
-        }
-
-        .score {
-            font-size: 1.2em;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 30px;
-        }
-    </style>
-</head>
-
-<body>
-    <h1>IC Engines & Steam Full Quiz</h1>
-    <div class="quiz-container" id="quiz"></div>
-    <div class="score" id="score"></div>
-
-    <script>
         // For senior welder
     
         //     { q: "When same after doing work in the cylinder passes to condenser, the engine is said to be:", options: ["Slow speed engine", "Condensing steam engine"], answer: 1 },
@@ -159,7 +83,216 @@
         //     { q: "पेट्रोल इन्जिनको भाग होइन:", options: ["Air filter", "Fuel injector"], answer: 1 },
         //     { q: "गाडी स्टार्ट नहुने कारण के हुनसक्छ?", options: ["इन्धन सकिनु", "एयर फिल्टर सफा नगरेको"], answer: 1 },
         // ];
-    const questions = [
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IC Engines & Steam MCQ Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #e0e7ff, #c3dafe);
+            min-height: 100vh;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .quiz-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e3a8a;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .progress-bar {
+            background: #e5e7eb;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .progress {
+            background: #3b82f6;
+            height: 100%;
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+
+        .timer {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+
+        .question {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            transition: transform 0.2s ease;
+        }
+
+        .question:hover {
+            transform: translateY(-2px);
+        }
+
+        .question p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+        }
+
+        .options button {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            color: #374151;
+        }
+
+        .options button:hover:not(:disabled) {
+            background: #f3f4f6;
+            border-color: #3b82f6;
+            transform: translateX(4px);
+        }
+
+        .options button.correct {
+            background: #bbf7d0;
+            border-color: #22c55e;
+            color: #166534;
+        }
+
+        .options button.wrong {
+            background: #fecaca;
+            border-color: #ef4444;
+            color: #991b1b;
+        }
+
+        .options button:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #eff6ff;
+            border-radius: 8px;
+            color: #1e3a8a;
+            font-size: 0.95rem;
+        }
+
+        .score-container {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+        }
+
+        .score {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+
+        .results-btn {
+            display: none;
+            margin: 1rem auto;
+            padding: 0.75rem 2rem;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .results-btn:hover {
+            background: #2563eb;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            .quiz-container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .question p {
+                font-size: 1rem;
+            }
+
+            .options button {
+                font-size: 0.9rem;
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>IC Engines & Steam MCQ Quiz</h1>
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <div class="timer" id="timer">Time: 00:00</div>
+            <div class="score" id="current-score">Score: 0/40</div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <div id="quiz"></div>
+        <div class="score-container">
+            <div class="score" id="score"></div>
+            <button class="results-btn" id="results-btn">View Results</button>
+        </div>
+    </div>
+
+    <script>
+         const questions = [
   // Two Stroke and Four Stroke Engines (12 MCQs)
   { q: "In two stroke engine, power is generated on:", options: ["Half revolution", "One revolution of crankshaft"], answer: 1 },
   { q: "In a four stroke cycle engine, the sequence of operation is:", options: ["Expansion, compression, suction and exhaust", "Suction, compression, expansion and exhaust"], answer: 1 },
@@ -221,8 +354,7 @@
   { q: "Chemically correct air-fuel ratio is:", options: ["7:1", "15:1"], answer: 1 },
   { q: "Nepal Vehicle Mass Emission Standard 2069 is equivalent to:", options: ["ISO 9001", "Euro III"], answer: 1 }
 
-];
-
+  ];
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -233,7 +365,41 @@
 
         const quizContainer = document.getElementById('quiz');
         const scoreContainer = document.getElementById('score');
+        const currentScore = document.getElementById('current-score');
+        const progressBar = document.getElementById('progress');
+        const timerDisplay = document.getElementById('timer');
+        const resultsBtn = document.getElementById('results-btn');
         let score = 0;
+        let answeredQuestions = 0;
+        let timeElapsed = 0;
+        let timerInterval;
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeElapsed++;
+                const minutes = Math.floor(timeElapsed / 60).toString().padStart(2, '0');
+                const seconds = (timeElapsed % 60).toString().padStart(2, '0');
+                timerDisplay.textContent = `Time: ${minutes}:${seconds}`;
+            }, 1000);
+        }
+
+        function updateProgress() {
+            const progressPercentage = (answeredQuestions / questions.length) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+        }
+
+        function showResults() {
+            quizContainer.style.display = 'none';
+            scoreContainer.textContent = `Final Score: ${score} out of ${questions.length} (${((score / questions.length) * 100).toFixed(2)}%)`;
+            resultsBtn.style.display = 'block';
+            resultsBtn.onclick = () => {
+                quizContainer.style.display = 'block';
+                scoreContainer.textContent = '';
+                resultsBtn.style.display = 'none';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            clearInterval(timerInterval);
+        }
 
         questions.forEach((q, i) => {
             const div = document.createElement('div');
@@ -243,19 +409,25 @@
             const optsDiv = document.createElement('div');
             optsDiv.classList.add('options');
 
-            const shuffled = shuffle(q.options.map((opt, index) => ({
-                text: opt,
-                isCorrect: index === q.answer
-            })));
+            const explanationDiv = document.createElement('div');
+            explanationDiv.classList.add('explanation');
+            explanationDiv.textContent = q.explanation;
+
+            const shuffled = shuffle(q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.answer })));
 
             shuffled.forEach(({ text, isCorrect }) => {
                 const btn = document.createElement('button');
                 btn.textContent = text;
                 btn.onclick = () => {
                     if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+                    answeredQuestions++;
+                    updateProgress();
+                    currentScore.textContent = `Score: ${score}/${questions.length}`;
+
                     if (isCorrect) {
                         btn.classList.add('correct');
                         score++;
+                        currentScore.textContent = `Score: ${score}/${questions.length}`;
                     } else {
                         btn.classList.add('wrong');
                         optsDiv.querySelectorAll('button').forEach(b => {
@@ -264,17 +436,23 @@
                             }
                         });
                     }
-                    if (i === questions.length - 1) {
-                        scoreContainer.textContent = `✅ Your Score: ${score} out of ${questions.length}`;
+
+                    optsDiv.querySelectorAll('button').forEach(b => b.disabled = true);
+                    explanationDiv.style.display = 'block';
+
+                    if (answeredQuestions === questions.length) {
+                        showResults();
                     }
                 };
                 optsDiv.appendChild(btn);
             });
 
             div.appendChild(optsDiv);
+            div.appendChild(explanationDiv);
             quizContainer.appendChild(div);
         });
+
+        startTimer();
     </script>
 </body>
-
 </html>
