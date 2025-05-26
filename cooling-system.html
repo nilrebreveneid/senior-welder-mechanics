@@ -1,114 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cooling System Quiz</title>
+    <title>Cooling System MCQ Quiz</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f5f7fa;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        h1 {
-            text-align: center;
-            color: #333;
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #e0e7ff, #c3dafe);
+            min-height: 100vh;
+            padding: 2rem;
+            line-height: 1.6;
         }
 
         .quiz-container {
             max-width: 900px;
-            margin: auto;
-            background: #fff;
-            padding: 20px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e3a8a;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .progress-bar {
+            background: #e5e7eb;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .progress {
+            background: #3b82f6;
+            height: 100%;
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8fafc;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .timer {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e3a8a;
         }
 
         .question {
-            margin-bottom: 20px;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            transition: transform 0.2s ease;
+        }
+
+        .question:hover {
+            transform: translateY(-2px);
         }
 
         .question p {
-            font-weight: bold;
-            color: #444;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 1rem;
         }
 
         .options button {
             display: block;
-            margin: 6px 0;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            cursor: pointer;
-            text-align: left;
             width: 100%;
-            transition: background-color 0.3s;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            color: #374151;
         }
 
-        .options button:hover {
-            background-color: #e0e0e0;
+        .options button:hover:not(:disabled) {
+            background: #f3f4f6;
+            border-color: #3b82f6;
+            transform: translateX(4px);
         }
 
         .options button.correct {
-            background-color: #c8f7c5;
+            background: #bbf7d0;
+            border-color: #22c55e;
+            color: #166534;
         }
 
         .options button.wrong {
-            background-color: #f7c5c5;
+            background: #fecaca;
+            border-color: #ef4444;
+            color: #991b1b;
+        }
+
+        .options button:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #eff6ff;
+            border-radius: 8px;
+            color: #1e3a8a;
+            font-size: 0.95rem;
+        }
+
+        .score-container {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
         }
 
         .score {
-            font-size: 1.2em;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 30px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+
+        .results-btn {
+            display: none;
+            margin: 1rem auto;
+            padding: 0.75rem 2rem;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .results-btn:hover {
+            background: #2563eb;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            .quiz-container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .question p {
+                font-size: 1rem;
+            }
+
+            .options button {
+                font-size: 0.9rem;
+                padding: 0.8rem;
+            }
         }
     </style>
 </head>
-
 <body>
-    <h1>Cooling System Quiz</h1>
-    <div class="quiz-container" id="quiz"></div>
-    <div class="score" id="score"></div>
+    <h1>Cooling System MCQ Quiz</h1>
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <div class="timer" id="timer">Time: 00:00</div>
+            <div class="score" id="current-score">Score: 0/32</div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <div id="quiz"></div>
+        <div class="score-container">
+            <div class="score" id="score"></div>
+            <button class="results-btn" id="results-btn">View Results</button>
+        </div>
+    </div>
+
     <script>
         const questions = [
-            { q: "At what time ‘choke’ used in the engine:", options: ["When the vehicle is idling", "When the engine is cold"], answer: 1 },
-            { q: "The function of radiator fan is:", options: ["Drive water pump", "Divert cool air to radiator to facilitate heat exchange"], answer: 1 },
-            { q: "Water jacket in engine cooling system is the casing surrounding:", options: ["Engine block", "Radiator"], answer: 0 },
-            { q: "The purpose of a thermostat in an engine cooling system is to:", options: ["Prevent the coolant from boiling", "Allow the engine to warm up quickly"], answer: 1 },
-            { q: "The temperature at which tyre inflation pressure should be checked is:", options: ["25°C", "Ambient temperature"], answer: 1 },
-            { q: "Turbochargers are classified as:", options: ["Centrifugal compressors", "Ventilators"], answer: 0 },
-            { q: "Which of the following is commonly used for cooling motorcycle engine?", options: ["Air cooling", "Oil cooling"], answer: 0 },
-            { q: "The purpose of thermostat in engine cooling system is:", options: ["To prevent water from boiling", "All of the above"], answer: 1 },
-            { q: "The thermostat valve of engine cooling system starts to open at about:", options: ["90°C", "60°C"], answer: 1 },
-            { q: "Cooling system का मुख्य भाग कुन हो?", options: ["Fuel filter and fuel pump", "Water pump and radiator"], answer: 1 },
-            { q: "पानी circulate गर्न कारमा कुन प्रकारको pump प्रयोग हुन्छ?", options: ["Vane type", "Centrifugal type"], answer: 1 },
-            { q: "निम्न मध्ये कुन भागले पानी पम्प गर्छ?", options: ["Expansion valve", "Water Pump"], answer: 1 },
-            { q: "Fuel injection pump को काम के हो?", options: ["Fuel supply गर्ने", "Air supply गर्ने"], answer: 0 },
-            { q: "इन्जिन Overheat हुनुको प्रमुख कारण के हो?", options: ["एयर फिल्टर बन्द हुनु", "माशिन्त्र त्रुटि (Mechanical fault)"], answer: 1 },
-            { q: "थर्मोस्टेट भल्भ को मुख्य काम के हो?", options: ["Over heating गर्ने", "इन्जिनको उपयुक्त तापक्रममा राख्ने"], answer: 1 },
-            { q: "डिजेल लोड नभएको कारण के हुन सक्छ?", options: ["फ्युल फिल्टर क्लग भएको", "एयर फिल्टर फ्लो नभएको"], answer: 1 },
-            { q: "In air cooling system, …… is used for increasing surface area to enhance engine cooling:", options: ["Radiator", "Fins"], answer: 1 },
-            { q: "इञ्जिनको चिस्याउने प्रणाली (cooling system) को प्रमुख काम के हो ?", options: ["इन्धनको आयातमा कमी ल्याउनु", "इञ्जिनको ताप को मात्रा घटाउनु"], answer: 1 },
-            { q: "इञ्जिनको चिस्याउने प्रणालीमा Antifreeze राख्नुको सही तरिका कुन हो ?", options: ["इञ्जिन आइडल अवस्थामा हुँदा रेडिएटर फिलर क्याप खोलेर हाल्ने", "इञ्जिन बन्द भएपछि एण्टिफ्रिज बाहिरी ट्याङ्की (coolant reservoir) मा राख्ने"], answer: 1 },
-            { q: "The commonly used antifreeze solution in automobile engine is:", options: ["Carbon disulphate", "Ethylene glycol"], answer: 1 },
-            { q: "Radiator is a part of:", options: ["Thermostat", "Engine को cooling system"], answer: 1 },
-            { q: "Cylinder of internal combustion engine is measured in terms of its:", options: ["Displacement and efficiency", "Diameter and bore"], answer: 1 },
-            { q: "Carbon deposit in cylinder is removed by:", options: ["Ignition system", "Clearance volume बढाउने"], answer: 1 },
-            { q: "Turbocharged engine:", options: ["Is less efficient due to power absorbed in driving turbocharger", "Is more efficient because it uses energy from the exhaust gas that would otherwise be wasted"], answer: 1 },
-            { q: "The purpose of the gearbox is:", options: ["To multiply the torque being transmitted by the engine", "All of the above"], answer: 1 },
-            { q: "The following is considered as best antifreeze solution:", options: ["Distilled glycerine", "Ethylene glycol"], answer: 1 },
-            { q: "कूलिङ्ग प्रणालीमा पानी कहिले हाल्न उपयुक्त समय कुन हो?", options: ["सवेरे", "इन्जिन चिसो भएपछि"], answer: 1 },
-            { q: "रेडिएटरमा पानी हाल्ने बेलामा कुन प्रकारको पानी प्रयोग गर्नु उपयुक्त हुन्छ?", options: ["नर्मल पानी", "ट्याङ्की पानी"], answer: 1 },
-            { q: "रेडिएटरमा पानी हाल्न कुन यन्त्र प्रयोग गरिन्छ?", options: ["हातले", "हाइड्रोलिक होज"], answer: 1 },
-            { q: "हाईब्रिड हाइन्ड्रलिक प्रणाली प्रयोग गर्दा कस्तो ब्रेक फ्लुइड प्रयोग गर्नुपर्छ?", options: ["मेसिनको वाटर फ्लुइड", "हाइड्रोलिक ब्रेक लिक्विड प्रयोग गर्न सकिन्छ"], answer: 1 },
-            { q: "रेडिएटरको तापक्रम नाप्ने यन्त्र कुन हो?", options: ["गाडीको बत्ती", "थर्मामीटर"], answer: 1 },
-            { q: "रेडिएटरको क्याप निकाल्दा इन्जिनको अवस्था कस्तो हुनुपर्छ?", options: ["इन्जिन तातो अवस्थामा", "इन्जिन चिसो अवस्थामा हुनुपर्छ"], answer: 1 },
-            { q: "रेडिएटरमा आवश्यक पानीको मात्रा कति हुनुपर्छ?", options: ["इन्जिनको सिलिन्डरको मात्रा भन्दा बढी", "इन्जिनको सिलिन्डरको मात्रा बराबर"], answer: 1 },
-            { q: "रेडिएटरको प्रमुख कार्य के हो?", options: ["इन्धन जलाउनु", "ताप निकाल्नु"], answer: 1 }
+            { q: "At what time ‘choke’ used in the engine:", options: ["When the vehicle is idling", "When the engine is cold"], answer: 1, explanation: "The choke is used when the engine is cold to enrich the fuel-air mixture, aiding startup." },
+            { q: "The function of radiator fan is:", options: ["Drive water pump", "Divert cool air to radiator to facilitate heat exchange"], answer: 1, explanation: "The radiator fan pulls cool air through the radiator to enhance heat dissipation from the coolant." },
+            { q: "Water jacket in engine cooling system is the casing surrounding:", options: ["Engine block", "Radiator"], answer: 0, explanation: "The water jacket surrounds the engine block and cylinder head, allowing coolant to absorb engine heat." },
+            { q: "The purpose of a thermostat in an engine cooling system is to:", options: ["Prevent the coolant from boiling", "Allow the engine to warm up quickly"], answer: 1, explanation: "The thermostat regulates coolant flow to help the engine reach optimal operating temperature quickly." },
+            { q: "The temperature at which tyre inflation pressure should be checked is:", options: ["25°C", "Ambient temperature"], answer: 1, explanation: "Tyre pressure should be checked at ambient temperature, typically when tyres are cold, for accurate readings." },
+            { q: "Turbochargers are classified as:", options: ["Centrifugal compressors", "Ventilators"], answer: 0, explanation: "Turbochargers are centrifugal compressors that use exhaust gases to boost engine power." },
+            { q: "Which of the following is commonly used for cooling motorcycle engine?", options: ["Air cooling", "Oil cooling"], answer: 0, explanation: "Air cooling is commonly used in motorcycle engines due to its simplicity and effectiveness." },
+            { q: "The purpose of thermostat in engine cooling system is:", options: ["To prevent water from boiling", "Maintain optimal engine temperature"], answer: 1, explanation: "The thermostat maintains the engine's optimal temperature by controlling coolant flow." },
+            { q: "The thermostat valve of engine cooling system starts to open at about:", options: ["90°C", "82°C"], answer: 1, explanation: "The thermostat typically starts opening around 82°C to allow coolant circulation and prevent overheating." },
+            { q: "Cooling system का मुख्य भाग कुन हो?", options: ["Fuel filter and fuel pump", "Water pump and radiator"], answer: 1, explanation: "वाटर पम्प र रेडिएटर कूलिङ सिस्टमका मुख्य भाग हुन्, जसले इन्जिनको ताप नियन्त्रण गर्छ।" },
+            { q: "पानी circulate गर्न कारमा कुन प्रकारको pump प्रयोग हुन्छ?", options: ["Vane type", "Centrifugal type"], answer: 1, explanation: "Centrifugal pumps are used in cars to circulate coolant efficiently through the cooling system." },
+            { q: "निम्न मध्ये कुन भागले पानी पम्प गर्छ?", options: ["Expansion valve", "Water Pump"], answer: 1, explanation: "वाटर पम्पले कूलिङ सिस्टममा पानी सर्कुलेट गर्छ।" },
+            { q: "Fuel injection pump को काम के हो?", options: ["Fuel supply गर्ने", "Air supply गर्ने"], answer: 0, explanation: "Fuel injection pump supplies pressurized fuel to the engine for combustion." },
+            { q: "इन्जिन Overheat हुनुको प्रमुख कारण के हो?", options: ["एयर फिल्टर बन्द हुनु", "कूल्याण्टको कमी वा रेडिएटरको खराबी"], answer: 1, explanation: "इन्जिन ओभरहिट हुनुको कारण कूल्याण्टको कमी, रेडिएटरको खराबी वा थर्मोस्टेटको समस्या हुन सक्छ।" },
+            { q: "थर्मोस्टेट भल्भ को मुख्य काम के हो?", options: ["Over heating गर्ने", "इन्जिनको उपयुक्त तापक्रममा राख्ने"], answer: 1, explanation: "थर्मोस्टेट भल्भले इन्जिनको तापक्रमलाई उपयुक्त स्तरमा राख्छ।" },
+            { q: "डिजेल लोड नभएको कारण के हुन सक्छ?", options: ["फ्युल फिल्टर क्लग भएको", "एयर फिल्टर क्लग भएको"], answer: 0, explanation: "क्लग भएको फ्युल फिल्टरले डिजेल इन्जिनमा इन्धन आपूर्ति कम गर्छ, जसले लोड नहुने समस्या निम्त्याउँछ।" },
+            { q: "In air cooling system, …… is used for increasing surface area to enhance engine cooling:", options: ["Radiator", "Fins"], answer: 1, explanation: "Fins increase the surface area for better heat dissipation in air-cooled engines." },
+            { q: "इञ्जिनको चिस्याउने प्रणाली (cooling system) को प्रमुख काम के हो ?", options: ["इन्धनको आयातमा कमी ल्याउनु", "इञ्जिनको ताप को मात्रा घटाउनु"], answer: 1, explanation: "कूलिङ सिस्टमले इन्जिनको तापलाई नियन्त्रण गर्छ, जसले इन्जिनलाई ओभरहिट हुनबाट जोगाउँछ।" },
+            { q: "इञ्जिनको चिस्याउने प्रणालीमा Antifreeze राख्नुको सही तरिका कुन हो ?", options: ["इञ्जिन आइडल अवस्थामा हुँदा रेडिएटर फिलर क्याप खोलेर हाल्ने", "इञ्जिन बन्द भएपछि एण्टिफ्रिज बाहिरी ट्याङ्की (coolant reservoir) मा राख्ने"], answer: 1, explanation: "एण्टिफ्रिज इन्जिन चिसो भएपछि रिजर्भायर ट्याङ्कीमा राख्नु सुरक्षित हुन्छ।" },
+            { q: "The commonly used antifreeze solution in automobile engine is:", options: ["Carbon disulphate", "Ethylene glycol"], answer: 1, explanation: "Ethylene glycol is the most commonly used antifreeze in automotive cooling systems." },
+            { q: "Radiator is a part of:", options: ["Thermostat", "Engine cooling system"], answer: 1, explanation: "The radiator is a key component of the engine cooling system, dissipating heat from the coolant." },
+            { q: "Cylinder of internal combustion engine is measured in terms of its:", options: ["Displacement and efficiency", "Bore and stroke"], answer: 1, explanation: "Cylinder size is measured by bore (diameter) and stroke (piston travel distance)." },
+            { q: "Carbon deposit in cylinder is removed by:", options: ["Ignition system", "Decarbonizing or cleaning"], answer: 1, explanation: "Carbon deposits are removed by decarbonizing, often through chemical cleaning or mechanical Mbps: mechanical means." },
+            { q: "Turbocharged engine:", options: ["Is less efficient due to power absorbed in driving turbocharger", "Is more efficient because it uses energy from the exhaust gas"], answer: 1, explanation: "Turbochargers improve efficiency by using exhaust gas energy to increase engine power." },
+            { q: "The purpose of the gearbox is:", options: ["To multiply the torque being transmitted by the engine", "All of the above"], answer: 0, explanation: "The gearbox multiplies torque and adjusts engine speed to suit driving conditions." },
+            { q: "The following is considered as best antifreeze solution:", options: ["Distilled glycerine", "Ethylene glycol"], answer: 1, explanation: "Ethylene glycol is the preferred antifreeze due to its effective freeze-point depression and heat transfer properties." },
+            { q: "कूलिङ्ग प्रणालीमा पानी कहिले हाल्न उपयुक्त समय कुन हो?", options: ["सवेरे", "इन्जिन चिसो भएपछि"], answer: 1, explanation: "इन्जिन चिसो भएपछि पानी हाल्नु उपयुक्त हुन्छ किनभने तातो अवस्थामा क्याप खोल्दा खतरा हुन सक्छ।" },
+            { q: "रेडिएटरमा पानी हाल्ने बेलामा कुन प्रकारको पानी प्रयोग गर्नु उपयुक्त हुन्छ?", options: ["नर्मल पानी", "डिस्टिल्ड पानी"], answer: 1, explanation: "डिस्टिल्ड पानीले रेडिएटरमा मिनरल जम्मा हुनबाट जोगाउँछ।" },
+            { q: "रेडिएटरमा पानी हाल्न कुन यन्त्र प्रयोग गरिन्छ?", options: ["हातले", "फनेल"], answer: 1, explanation: "फनेलले रेडिएटरमा पानी सजिलै र सुरक्षित रूपमा हाल्न सकिन्छ।" },
+            { q: "हाईब्रिड हाइन्ड्रलिक प्रणाली प्रयोग गर्दा कस्तो ब्रेक फ्लुइड प्रयोग गर्नुपर्छ?", options: ["मेसिनको वाटर फ्लुइड", "DOT-approved brake fluid"], answer: 1, explanation: "Hybrid hydraulic systems require DOT-approved brake fluid, not water-based fluids." },
+            { q: "रेडिएटरको तापक्रम नाप्ने यन्त्र कुन हो?", options: ["गाडीको बत्ती", "थर्मामीटर"], answer: 1, explanation: "थर्मामीटरले रेडिएटरको तापक्रम नाप्न प्रयोग गरिन्छ।" },
+            { q: "रेडिएटरको क्याप निकाल्दा इन्जिनको अवस्था कस्तो हुनुपर्छ?", options: ["इन्जिन तातो अवस्थामा", "इन्जिन चिसो अवस्थामा"], answer: 1, explanation: "इन्जिन चिसो भएपछि क्याप निकाल्नुपर्छ, तातो अवस्थामा दबाबले खतरा हुन सक्छ।" },
+            { q: "रेडिएटरमा आवश्यक पानीको मात्रा कति हुनुपर्छ?", options: ["इन्जिनको सिलिन्डरको मात्रा भन्दा बढी", "रेडिएटरको क्षमता अनुसार"], answer: 1, explanation: "रेडिएटरको क्षमता अनुसार पानी र एण्टिफ्रिजको मिश्रण हाल्नुपर्छ।" },
+            { q: "रेडिएटरको प्रमुख कार्य के हो?", options: ["इन्धन जलाउनु", "ताप निकाल्नु"], answer: 1, explanation: "रेडिएटरले इन्जिनको तापलाई कूल्याण्ट मार्फत बाहिर निकाल्छ।" }
         ];
 
         function shuffle(array) {
@@ -121,7 +254,41 @@
 
         const quizContainer = document.getElementById('quiz');
         const scoreContainer = document.getElementById('score');
+        const currentScore = document.getElementById('current-score');
+        const progressBar = document.getElementById('progress');
+        const timerDisplay = document.getElementById('timer');
+        const resultsBtn = document.getElementById('results-btn');
         let score = 0;
+        let answeredQuestions = 0;
+        let timeElapsed = 0;
+        let timerInterval;
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeElapsed++;
+                const minutes = Math.floor(timeElapsed / 60).toString().padStart(2, '0');
+                const seconds = (timeElapsed % 60).toString().padStart(2, '0');
+                timerDisplay.textContent = `Time: ${minutes}:${seconds}`;
+            }, 1000);
+        }
+
+        function updateProgress() {
+            const progressPercentage = (answeredQuestions / questions.length) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+        }
+
+        function showResults() {
+            quizContainer.style.display = 'none';
+            scoreContainer.textContent = `Final Score: ${score} out of ${questions.length} (${((score / questions.length) * 100).toFixed(2)}%)`;
+            resultsBtn.style.display = 'block';
+            resultsBtn.onclick = () => {
+                quizContainer.style.display = 'block';
+                scoreContainer.textContent = '';
+                resultsBtn.style.display = 'none';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            clearInterval(timerInterval);
+        }
 
         questions.forEach((q, i) => {
             const div = document.createElement('div');
@@ -131,6 +298,10 @@
             const optsDiv = document.createElement('div');
             optsDiv.classList.add('options');
 
+            const explanationDiv = document.createElement('div');
+            explanationDiv.classList.add('explanation');
+            explanationDiv.textContent = q.explanation;
+
             const shuffled = shuffle(q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.answer })));
 
             shuffled.forEach(({ text, isCorrect }) => {
@@ -138,9 +309,14 @@
                 btn.textContent = text;
                 btn.onclick = () => {
                     if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+                    answeredQuestions++;
+                    updateProgress();
+                    currentScore.textContent = `Score: ${score}/${questions.length}`;
+
                     if (isCorrect) {
                         btn.classList.add('correct');
                         score++;
+                        currentScore.textContent = `Score: ${score}/${questions.length}`;
                     } else {
                         btn.classList.add('wrong');
                         optsDiv.querySelectorAll('button').forEach(b => {
@@ -149,17 +325,23 @@
                             }
                         });
                     }
-                    if (i === questions.length - 1) {
-                        scoreContainer.textContent = `✅ Your Score: ${score} out of ${questions.length}`;
+
+                    optsDiv.querySelectorAll('button').forEach(b => b.disabled = true);
+                    explanationDiv.style.display = 'block';
+
+                    if (answeredQuestions === questions.length) {
+                        showResults();
                     }
                 };
                 optsDiv.appendChild(btn);
             });
 
             div.appendChild(optsDiv);
+            div.appendChild(explanationDiv);
             quizContainer.appendChild(div);
         });
+
+        startTimer();
     </script>
 </body>
-
 </html>
