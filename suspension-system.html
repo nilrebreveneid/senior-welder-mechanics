@@ -334,128 +334,129 @@
     <audio id="wrong-sound" src="https://www.soundjay.com/buttons/beep-02.mp3"></audio>
 
     <script>
-const questions = [
-    {
-        q: "What is the primary function of a vehicle’s suspension system?",
-        options: ["To increase engine power", "To isolate the vehicle from road shocks", "To regulate fuel flow", "To control steering"],
-        answer: 1,
-        explanation: "The suspension system absorbs road shocks and vibrations, ensuring a comfortable ride."
-    },
-    {
-        q: "Which component in a suspension system primarily supports the vehicle’s weight?",
-        options: ["Shock absorber", "Spring", "Stabilizer bar", "Control arm"],
-        answer: 1,
-        explanation: "Springs (leaf, coil, or torsion) bear the vehicle’s weight and maintain ride height."
-    },
-    {
-        q: "What is the main role of a shock absorber in a suspension system?",
-        options: ["To support vehicle weight", "To dissipate energy and control spring motion", "To increase ground clearance", "To connect wheels to the chassis"],
-        answer: 1,
-        explanation: "Shock absorbers dampen spring oscillations, ensuring stability and comfort."
-    },
-    {
-        q: "Which type of spring is commonly used in heavy-duty vehicles like trucks?",
-        options: ["Coil spring", "Leaf spring", "Torsion bar", "Air spring"],
-        answer: 1,
-        explanation: "Leaf springs are robust and used in trucks for their high load-bearing capacity."
-    },
-    {
-        q: "What does minimizing unsprung mass in a suspension system improve?",
-        options: ["Vehicle ride comfort", "Fuel efficiency", "Engine power", "Braking distance"],
-        answer: 0,
-        explanation: "Lower unsprung mass (e.g., wheels, tires) improves ride comfort, handling, and traction."
-    },
-    {
-        q: "What is a common problem in a vehicle’s suspension system?",
-        options: ["Worn shock absorbers or ball joints", "Engine overheating", "Low battery voltage", "Clogged fuel filter"],
-        answer: 0,
-        explanation: "Worn shock absorbers and ball joints cause poor handling and uneven tire wear."
-    },
-    {
-        q: "Which component is NOT part of a vehicle’s suspension system?",
-        options: ["Spring coil", "Differential", "Control arm", "Shock absorber"],
-        answer: 1,
-        explanation: "The differential is part of the drivetrain, not the suspension system."
-    },
-    {
-        q: "Why are leaf springs often used in suspension systems?",
-        options: ["For their high load capacity", "For their low cost", "For high-speed handling", "For minimal maintenance"],
-        answer: 0,
-        explanation: "Leaf springs are used for their ability to support heavy loads, especially in trucks."
-    },
-    {
-        q: "सस्पेन्सन प्रणालीको मुख्य काम के हो? (What is the main function of a suspension system?)",
-        options: ["गाडीको झटका कम गर्ने (Reduce vehicle shocks)", "इन्जिनको शक्ति बढाउने (Increase engine power)", "ब्रेक लागाउने (Apply brakes)", "लाइट नियन्त्रण गर्ने (Control lights)"],
-        answer: 0,
-        explanation: "सस्पेन्सन प्रणालीले सडकको झटका र कम्पन कम गर्छ। (The suspension system absorbs shocks and vibrations for a smoother ride.)"
-    },
-    {
-        q: "Which type of suspension system is commonly used in passenger cars?",
-        options: ["MacPherson strut", "Rigid axle", "Leaf spring", "Torsion beam"],
-        answer: 0,
-        explanation: "MacPherson struts are compact and widely used in passenger car suspensions for cost and performance."
-    },
-    {
-        q: "What is the purpose of a control arm in a suspension system?",
-        options: ["To connect the wheel assembly to the chassis", "To regulate engine temperature", "To engage gears", "To charge the battery"],
-        answer: 0,
-        explanation: "Control arms link the wheel assembly to the chassis, allowing controlled movement."
-    },
-    {
-        q: "Which suspension system component helps maintain tire contact with the road?",
-        options: ["Stabilizer bar", "Clutch disc", "Fuel pump", "Ignition coil"],
-        answer: 0,
-        explanation: "Stabilizer bars reduce body roll, ensuring better tire contact during turns."
-    },
-    {
-        q: "What indicates a failing shock absorber?",
-        options: ["Excessive bouncing after bumps", "Increased engine noise", "Dim headlights", "Low fuel efficiency"],
-        answer: 0,
-        explanation: "Worn shock absorbers cause excessive bouncing and poor handling after hitting bumps."
-    },
-    {
-        q: "What type of suspension is used in vehicles requiring high ground clearance?",
-        options: ["Independent suspension", "Solid axle suspension", "MacPherson strut", "Air suspension"],
-        answer: 1,
-        explanation: "Solid axle suspensions are durable and provide high ground clearance for off-road vehicles."
-    },
-    {
-        q: "What is the function of a torsion bar in a suspension system?",
-        options: ["To absorb shocks", "To act as a spring", "To reduce body roll", "To align wheels"],
-        answer: 1,
-        explanation: "Torsion bars twist to provide spring action, supporting the vehicle’s weight."
-    },
-    {
-        q: "Which maintenance task prevents premature suspension wear?",
-        options: ["Regular tire rotation", "Engine oil change", "Battery replacement", "Fuel filter cleaning"],
-        answer: 0,
-        explanation: "Tire rotation ensures even wear, reducing stress on suspension components."
-    },
-    {
-        q: "What is the benefit of an independent suspension system?",
-        options: ["Improved ride quality", "Higher load capacity", "Lower maintenance cost", "Increased ground clearance"],
-        answer: 0,
-        explanation: "Independent suspension allows each wheel to move independently, improving ride quality and handling."
-    },
-    {
-        q: "Which component reduces body roll during cornering?",
-        options: ["Leaf spring", "Anti-roll bar", "Shock absorber", "Control arm"],
-        answer: 1,
-        explanation: "Anti-roll bars (stabilizer bars) minimize body roll by connecting opposite wheels."
-    },
-    {
-        q: "What causes a vehicle to pull to one side due to suspension issues?",
-        options: ["Worn suspension bushings", "Low fuel pressure", "Dirty air filter", "Weak battery"],
-        answer: 0,
-        explanation: "Worn bushings cause misalignment, leading to pulling or uneven handling."
-    },
-    {
-        q: "Which suspension type is best for heavy-duty load-carrying vehicles?",
-        options: ["Air suspension", "Leaf spring suspension", "MacPherson strut", "Independent suspension"],
-        answer: 1,
-        explanation: "Leaf spring suspensions are robust and ideal for heavy-duty load-carrying vehicles."
-    }
-];
+        const questions = [
+            {
+                q: "What is the primary function of a vehicle’s suspension system?",
+                options: ["To increase engine power", "To isolate the vehicle from road shocks", "To regulate fuel flow", "To control steering"],
+                answer: 1,
+                explanation: "The suspension system absorbs road shocks and vibrations, ensuring a comfortable ride."
+            },
+            {
+                q: "Which component in a suspension system primarily supports the vehicle’s weight?",
+                options: ["Shock absorber", "Spring", "Stabilizer bar", "Control arm"],
+                answer: 1,
+                explanation: "Springs (leaf, coil, or torsion) bear the vehicle’s weight and maintain ride height."
+            },
+            {
+                q: "What is the main role of a shock absorber in a suspension system?",
+                options: ["To support vehicle weight", "To dissipate energy and control spring motion", "To increase ground clearance", "To connect wheels to the chassis"],
+                answer: 1,
+                explanation: "Shock absorbers dampen spring oscillations, ensuring stability and comfort."
+            },
+            {
+                q: "Which type of spring is commonly used in heavy-duty vehicles like trucks?",
+                options: ["Coil spring", "Leaf spring", "Torsion bar", "Air spring"],
+                answer: 1,
+                explanation: "Leaf springs are robust and used in trucks for their high load-bearing capacity."
+            },
+            {
+                q: "What does minimizing unsprung mass in a suspension system improve?",
+                options: ["Vehicle ride comfort", "Fuel efficiency", "Engine power", "Braking distance"],
+                answer: 0,
+                explanation: "Lower unsprung mass (e.g., wheels, tires) improves ride comfort, handling, and traction."
+            },
+            {
+                q: "What is a common problem in a vehicle’s suspension system?",
+                options: ["Worn shock absorbers or ball joints", "Engine overheating", "Low battery voltage", "Clogged fuel filter"],
+                answer: 0,
+                explanation: "Worn shock absorbers and ball joints cause poor handling and uneven tire wear."
+            },
+            {
+                q: "Which component is NOT part of a vehicle’s suspension system?",
+                options: ["Spring coil", "Differential", "Control arm", "Shock absorber"],
+                answer: 1,
+                explanation: "The differential is part of the drivetrain, not the suspension system."
+            },
+            {
+                q: "Why are leaf springs often used in suspension systems?",
+                options: ["For their high load capacity", "For their low cost", "For high-speed handling", "For minimal maintenance"],
+                answer: 0,
+                explanation: "Leaf springs are used for their ability to support heavy loads, especially in trucks."
+            },
+            {
+                q: "सस्पेन्सन प्रणालीको मुख्य काम के हो? (What is the main function of a suspension system?)",
+                options: ["गाडीको झटका कम गर्ने (Reduce vehicle shocks)", "इन्जिनको शक्ति बढाउने (Increase engine power)", "ब्रेक लागाउने (Apply brakes)", "लाइट नियन्त्रण गर्ने (Control lights)"],
+                answer: 0,
+                explanation: "सस्पेन्सन प्रणालीले सडकको झटका र कम्पन कम गर्छ। (The suspension system absorbs shocks and vibrations for a smoother ride.)"
+            },
+            {
+                q: "Which type of suspension system is commonly used in passenger cars?",
+                options: ["MacPherson strut", "Rigid axle", "Leaf spring", "Torsion beam"],
+                answer: 0,
+                explanation: "MacPherson struts are compact and widely used in passenger car suspensions for cost and performance."
+            },
+            {
+                q: "What is the purpose of a control arm in a suspension system?",
+                options: ["To connect the wheel assembly to the chassis", "To regulate engine temperature", "To engage gears", "To charge the battery"],
+                answer: 0,
+                explanation: "Control arms link the wheel assembly to the chassis, allowing controlled movement."
+            },
+            {
+                q: "Which suspension system component helps maintain tire contact with the road?",
+                options: ["Stabilizer bar", "Clutch disc", "Fuel pump", "Ignition coil"],
+                answer: 0,
+                explanation: "Stabilizer bars reduce body roll, ensuring better tire contact during turns."
+            },
+            {
+                q: "What indicates a failing shock absorber?",
+                options: ["Excessive bouncing after bumps", "Increased engine noise", "Dim headlights", "Low fuel efficiency"],
+                answer: 0,
+                explanation: "Worn shock absorbers cause excessive bouncing and poor handling after hitting bumps."
+            },
+            {
+                q: "What type of suspension is used in vehicles requiring high ground clearance?",
+                options: ["Independent suspension", "Solid axle suspension", "MacPherson strut", "Air suspension"],
+                answer: 1,
+                explanation: "Solid axle suspensions are durable and provide high ground clearance for off-road vehicles."
+            },
+            {
+                q: "What is the function of a torsion bar in a suspension system?",
+                options: ["To absorb shocks", "To act as a spring", "To reduce body roll", "To align wheels"],
+                answer: 1,
+                explanation: "Torsion bars twist to provide spring action, supporting the vehicle’s weight."
+            },
+            {
+                q: "Which maintenance task prevents premature suspension wear?",
+                options: ["Regular tire rotation", "Engine oil change", "Battery replacement", "Fuel filter cleaning"],
+                answer: 0,
+                explanation: "Tire rotation ensures even wear, reducing stress on suspension components."
+            },
+            {
+                q: "What is the benefit of an independent suspension system?",
+                options: ["Improved ride quality", "Higher load capacity", "Lower maintenance cost", "Increased ground clearance"],
+                answer: 0,
+                explanation: "Independent suspension allows each wheel to move independently, improving ride quality and handling."
+            },
+            {
+                q: "Which component reduces body roll during cornering?",
+                options: ["Leaf spring", "Anti-roll bar", "Shock absorber", "Control arm"],
+                answer: 1,
+                explanation: "Anti-roll bars (stabilizer bars) minimize body roll by connecting opposite wheels."
+            },
+            {
+                q: "What causes a vehicle to pull to one side due to suspension issues?",
+                options: ["Worn suspension bushings", "Low fuel pressure", "Dirty air filter", "Weak battery"],
+                answer: 0,
+                explanation: "Worn bushings cause misalignment, leading to pulling or uneven handling."
+            },
+            {
+                q: "Which suspension type is best for heavy-duty load-carrying vehicles?",
+                options: ["Air suspension", "Leaf spring suspension", "MacPherson strut", "Independent suspension"],
+                answer: 1,
+                explanation: "Leaf spring suspensions are robust and ideal for heavy-duty load-carrying vehicles."
+            }
+        ];
+
         let currentPage = 0;
         let score = 0;
         let skipped = [];
@@ -475,18 +476,14 @@ const questions = [
         const correctSound = document.getElementById("correct-sound");
         const wrongSound = document.getElementById("wrong-sound");
 
-        // Load progress from localStorage
-        function loadProgress() {
-            const saved = localStorage.getItem("quizProgressSuspension");
-            if (saved) {
-                const { currentPage: savedPage, score: savedScore, skipped: savedSkipped, answers: savedAnswers, time: savedTime } = JSON.parse(saved);
-                currentPage = savedPage;
-                score = savedScore;
-                skipped = savedSkipped;
-                userAnswers = savedAnswers || Array(questions.length).fill(null);
-                timerSeconds = savedTime || 0;
-                updateCurrentScore();
-            }
+        // Clear progress to start fresh
+        function clearProgress() {
+            localStorage.removeItem("quizProgressSuspension");
+            currentPage = 0;
+            score = 0;
+            skipped = [];
+            userAnswers = Array(questions.length).fill(null);
+            timerSeconds = 0;
         }
 
         // Save progress to localStorage
@@ -574,34 +571,6 @@ const questions = [
 
             updateProgress();
             saveProgress();
-            restoreAnswers(startIndex, endIndex);
-        }
-
-        // Restore previous answers for the current page
-        function restoreAnswers(startIndex, endIndex) {
-            for (let i = startIndex; i < endIndex; i++) {
-                if (userAnswers[i] !== null && userAnswers[i] !== 'Skipped') {
-                    const questionDiv = document.querySelector(`.question[data-index="${i}"]`);
-                    const buttons = questionDiv.querySelectorAll('.options button');
-                    const q = questions[i];
-                    buttons.forEach(btn => {
-                        btn.disabled = true;
-                        if (btn.textContent === q.options[q.answer]) {
-                            btn.classList.add('correct');
-                        }
-                        if (btn.textContent === userAnswers[i] && userAnswers[i] !== q.options[q.answer]) {
-                            btn.classList.add('wrong');
-                        }
-                    });
-                    questionDiv.querySelector('.explanation').style.display = 'block';
-                    questionDiv.querySelector('.skip-button').disabled = true;
-                } else if (userAnswers[i] === 'Skipped') {
-                    const questionDiv = document.querySelector(`.question[data-index="${i}"]`);
-                    questionDiv.querySelectorAll('.options button').forEach(btn => btn.disabled = true);
-                    questionDiv.querySelector('.skip-button').disabled = true;
-                    questionDiv.querySelector('.explanation').style.display = 'block';
-                }
-            }
         }
 
         // Check if all questions on the current page are answered or skipped
@@ -738,23 +707,24 @@ const questions = [
 
         // Restart quiz
         function restartQuiz() {
-            currentPage = 0;
-            score = 0;
-            skipped = [];
-            userAnswers = Array(questions.length).fill(null);
-            timerSeconds = 0;
+            clearProgress();
             resultsEl.classList.add('hidden');
             scoreEl.textContent = '';
-            localStorage.removeItem('quizProgressSuspension');
             startTimer();
             showQuestions(currentPage);
             updateCurrentScore();
         }
 
-        // Initialize
-        loadProgress();
-        startTimer();
-        showQuestions(currentPage);
+        // Initialize quiz
+        function initialize() {
+            clearProgress(); // Reset all progress on page load
+            startTimer();
+            showQuestions(currentPage);
+            updateCurrentScore();
+        }
+
+        // Start quiz on page load
+        initialize();
     </script>
 </body>
 </html>
