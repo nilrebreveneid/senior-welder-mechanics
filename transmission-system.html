@@ -334,159 +334,158 @@
     <audio id="wrong-sound" src="https://www.soundjay.com/buttons/beep-02.mp3"></audio>
 
     <script>
-        const questions = [
-            {
-                q: "What are the main components of a vehicle’s transmission system?",
-                options: ["Engine, clutch, brakes", "Gearbox, propeller shaft, differential"],
-                answer: 1,
-                explanation: "The transmission system includes the gearbox, propeller shaft, and differential to transfer power."
-            },
-            {
-                q: "The propeller shaft transmits power from the gearbox to which component?",
-                options: ["Differential", "Rear axle"],
-                answer: 0,
-                explanation: "The propeller shaft transfers power from the gearbox to the differential."
-            },
-            {
-                q: "A gearbox with four forward speeds and one reverse speed is called a:",
-                options: ["5-speed gearbox", "4-speed gearbox"],
-                answer: 0,
-                explanation: "It’s a 5-speed gearbox, as the reverse gear is counted in the total."
-            },
-            {
-                q: "Which gear should a car use to overcome greater resistance?",
-                options: ["4th gear", "1st gear"],
-                answer: 1,
-                explanation: "1st gear provides maximum torque to overcome resistance, such as when starting or climbing."
-            },
-            {
-                q: "गाडी अगाडि बढाउँदा कुन गियर प्रयोग हुन्छ?",
-                options: ["पहिलो गियर", "तेस्रो गियर"],
-                answer: 0,
-                explanation: "First gear is used to start the vehicle due to its high torque output."
-            },
-            {
-                q: "What does a tachometer measure in a vehicle?",
-                options: ["Engine speed (RPM)", "Vehicle weight"],
-                answer: 0,
-                explanation: "A tachometer measures the engine’s rotational speed in revolutions per minute (RPM)."
-            },
-            {
-                q: "Which gear is used to transmit power between two perpendicular shafts?",
-                options: ["Spur gear", "Bevel gear"],
-                answer: 1,
-                explanation: "Bevel gears are used to transfer power between perpendicular shafts, as in differentials."
-            },
-            {
-                q: "What is the function of a gearbox in an automobile?",
-                options: ["To increase engine power", "To provide variable speed and torque"],
-                answer: 1,
-                explanation: "The gearbox adjusts speed and torque to suit driving conditions."
-            },
-            {
-                q: "Which gear is used for high speed but low torque transmission?",
-                options: ["1st gear", "4th gear"],
-                answer: 1,
-                explanation: "Higher gears like 4th provide high speed but lower torque."
-            },
-            {
-                q: "What is the purpose of a universal joint in a transmission system?",
-                options: ["To connect propeller shaft to differential", "To connect gearbox to steering"],
-                answer: 0,
-                explanation: "Universal joints allow torque transfer at angles between the propeller shaft and differential."
-            },
-            {
-                q: "What is the function of a slip joint in a propeller shaft?",
-                options: ["To allow length variation", "To provide lubrication"],
-                answer: 0,
-                explanation: "Slip joints accommodate changes in propeller shaft length due to suspension movement."
-            },
-            {
-                q: "Where is the clutch located in a vehicle’s transmission system?",
-                options: ["Between engine and gearbox", "Between gearbox and wheels"],
-                answer: 0,
-                explanation: "The clutch is positioned between the engine and gearbox to engage/disengage power."
-            },
-            {
-                q: "What is the primary function of a differential in a vehicle?",
-                options: ["To provide equal speed to both wheels", "To allow wheels to rotate at different speeds"],
-                answer: 1,
-                explanation: "The differential allows wheels to rotate at different speeds, especially during turns."
-            },
-            {
-                q: "Which shaft transfers power from the engine to the gearbox?",
-                options: ["Propeller shaft", "Clutch shaft"],
-                answer: 1,
-                explanation: "The clutch shaft connects the engine to the gearbox via the clutch."
-            },
-            {
-                q: "When is a helical gear preferred in a transmission system?",
-                options: ["For high noise operation", "For smooth and quiet operation"],
-                answer: 1,
-                explanation: "Helical gears provide smoother and quieter operation due to gradual tooth engagement."
-            },
-            {
-                q: "Which component in the transmission system absorbs jerks and shocks?",
-                options: ["Clutch", "Differential"],
-                answer: 0,
-                explanation: "The clutch, with its springs, absorbs shocks during power engagement."
-            },
-            {
-                q: "Which device disconnects power flow without stopping the engine?",
-                options: ["Clutch", "Brake"],
-                answer: 0,
-                explanation: "The clutch disengages the engine from the transmission without stopping the engine."
-            },
-            {
-                q: "Which key type is used for mounting gears in gearboxes?",
-                options: ["Saddle key", "Square key"],
-                answer: 1,
-                explanation: "Square keys secure gears to shafts in gearboxes for reliable torque transfer."
-            },
-            {
-                q: "What is a common symptom of a worn clutch in a transmission system?",
-                options: ["Clutch slippage", "Increased fuel efficiency"],
-                answer: 0,
-                explanation: "A worn clutch causes slippage, reducing power transfer efficiency."
-            },
-            {
-                q: "What is the purpose of a synchronizer in a manual transmission?",
-                options: ["To increase torque", "To match gear speeds for smooth shifting"],
-                answer: 1,
-                explanation: "Synchronizers equalize gear speeds to prevent grinding during shifts."
-            },
-            {
-                q: "In an automatic transmission, what engages the gears?",
-                options: ["Manual linkage", "Hydraulic multi-plate clutches"],
-                answer: 1,
-                explanation: "Hydraulic multi-plate clutches engage gears in automatic transmissions."
-            },
-            {
-                q: "What is the role of the torque converter in an automatic transmission?",
-                options: ["To lock the wheels", "To multiply torque and connect engine to transmission"],
-                answer: 1,
-                explanation: "The torque converter multiplies torque and smoothly transfers power in automatics."
-            },
-            {
-                q: "Which transmission component prevents gear damage during shifting?",
-                options: ["Flywheel", "Synchronizer"],
-                answer: 1,
-                explanation: "Synchronizers match gear speeds to prevent damage during shifts."
-            },
-            {
-                q: "What maintenance task helps prolong transmission life?",
-                options: ["Regular fluid checks", "Tire rotation"],
-                answer: 0,
-                explanation: "Regularly checking and replacing transmission fluid prevents wear and overheating."
-            },
-            {
-                q: "What causes a vehicle to jerk during gear shifts?",
-                options: ["Worn clutch or synchronizers", "Low tire pressure"],
-                answer: 0,
-                explanation: "Worn clutch or synchronizers cause rough gear shifts, leading to jerking."
-            }
-        ];
-
+     const questions = [
+    {
+        q: "What are the main components of a vehicle’s transmission system?",
+        options: ["Engine, clutch, brakes", "Gearbox, propeller shaft, differential", "Radiator, battery, alternator", "Steering wheel, suspension, tires"],
+        answer: 1,
+        explanation: "The transmission system includes the gearbox, propeller shaft, and differential to transfer power from the engine to the wheels."
+    },
+    {
+        q: "The propeller shaft transmits power from the gearbox to which component?",
+        options: ["Differential", "Rear axle", "Engine", "Clutch"],
+        answer: 0,
+        explanation: "The propeller shaft transfers power from the gearbox to the differential, which distributes it to the wheels."
+    },
+    {
+        q: "A gearbox with four forward speeds and one reverse speed is called a:",
+        options: ["5-speed gearbox", "4-speed gearbox", "6-speed gearbox", "3-speed gearbox"],
+        answer: 0,
+        explanation: "A gearbox with four forward speeds and one reverse is referred to as a 5-speed gearbox, counting all gears."
+    },
+    {
+        q: "Which gear should a car use to overcome greater resistance?",
+        options: ["4th gear", "1st gear", "3rd gear", "Reverse gear"],
+        answer: 1,
+        explanation: "1st gear provides maximum torque to overcome resistance, such as when starting or climbing steep slopes."
+    },
+    {
+        q: "गाडी अगाडि बढाउँदा कुन गियर प्रयोग हुन्छ? (Which gear is used to move a vehicle forward?)",
+        options: ["पहिलो गियर (First gear)", "तेस्रो गियर (Third gear)", "रिभर्स गियर (Reverse gear)", "न्यूट्रल (Neutral)"],
+        answer: 0,
+        explanation: "पहिलो गियर उच्च टर्क प्रदान गर्छ, जुन गाडी सुरु गर्न प्रयोग हुन्छ। (First gear is used to start the vehicle due to its high torque output.)"
+    },
+    {
+        q: "What does a tachometer measure in a vehicle?",
+        options: ["Engine speed (RPM)", "Vehicle weight", "Fuel level", "Tire pressure"],
+        answer: 0,
+        explanation: "A tachometer measures the engine’s rotational speed in revolutions per minute (RPM)."
+    },
+    {
+        q: "Which gear is used to transmit power between two perpendicular shafts?",
+        options: ["Spur gear", "Bevel gear", "Helical gear", "Worm gear"],
+        answer: 1,
+        explanation: "Bevel gears are used to transfer power between perpendicular shafts, as in differentials."
+    },
+    {
+        q: "What is the function of a gearbox in an automobile?",
+        options: ["To increase engine power", "To provide variable speed and torque", "To cool the engine", "To charge the battery"],
+        answer: 1,
+        explanation: "The gearbox adjusts speed and torque to suit driving conditions, optimizing vehicle performance."
+    },
+    {
+        q: "Which gear is used for high speed but low torque transmission?",
+        options: ["1st gear", "4th gear", "2nd gear", "Reverse gear"],
+        answer: 1,
+        explanation: "Higher gears like 4th provide high speed but lower torque, suitable for cruising."
+    },
+    {
+        q: "What is the purpose of a universal joint in a transmission system?",
+        options: ["To connect propeller shaft to differential", "To connect gearbox to steering", "To regulate fuel flow", "To cool the transmission"],
+        answer: 0,
+        explanation: "Universal joints allow torque transfer at varying angles between the propeller shaft and differential."
+    },
+    {
+        q: "What is the function of a slip joint in a propeller shaft?",
+        options: ["To allow length variation", "To provide lubrication", "To increase torque", "To reduce noise"],
+        answer: 0,
+        explanation: "Slip joints accommodate changes in propeller shaft length due to suspension movement."
+    },
+    {
+        q: "Where is the clutch located in a vehicle’s transmission system?",
+        options: ["Between engine and gearbox", "Between gearbox and wheels", "Between differential and axle", "Between steering and gearbox"],
+        answer: 0,
+        explanation: "The clutch is positioned between the engine and gearbox to engage or disengage power."
+    },
+    {
+        q: "What is the primary function of a differential in a vehicle?",
+        options: ["To provide equal speed to both wheels", "To allow wheels to rotate at different speeds", "To increase engine power", "To reduce fuel consumption"],
+        answer: 1,
+        explanation: "The differential allows wheels to rotate at different speeds, especially during turns, for smooth handling."
+    },
+    {
+        q: "Which shaft transfers power from the engine to the gearbox?",
+        options: ["Propeller shaft", "Clutch shaft", "Drive shaft", "Axle shaft"],
+        answer: 1,
+        explanation: "The clutch shaft (or input shaft) connects the engine to the gearbox via the clutch."
+    },
+    {
+        q: "When is a helical gear preferred in a transmission system?",
+        options: ["For high noise operation", "For smooth and quiet operation", "For low-speed applications only", "For perpendicular shafts"],
+        answer: 1,
+        explanation: "Helical gears provide smoother and quieter operation due to gradual tooth engagement."
+    },
+    {
+        q: "Which component in the transmission system absorbs jerks and shocks?",
+        options: ["Clutch", "Differential", "Propeller shaft", "Gearbox"],
+        answer: 0,
+        explanation: "The clutch, with its springs, absorbs shocks during power engagement for smoother operation."
+    },
+    {
+        q: "Which device disconnects power flow without stopping the engine?",
+        options: ["Clutch", "Brake", "Accelerator", "Ignition switch"],
+        answer: 0,
+        explanation: "The clutch disengages the engine from the transmission without stopping the engine."
+    },
+    {
+        q: "Which key type is used for mounting gears in gearboxes?",
+        options: ["Saddle key", "Square key", "Round key", "Taper key"],
+        answer: 1,
+        explanation: "Square keys secure gears to shafts in gearboxes for reliable torque transfer."
+    },
+    {
+        q: "What is a common symptom of a worn clutch in a transmission system?",
+        options: ["Clutch slippage", "Increased fuel efficiency", "Smooth gear shifts", "Reduced engine noise"],
+        answer: 0,
+        explanation: "A worn clutch causes slippage, reducing power transfer efficiency and causing performance issues."
+    },
+    {
+        q: "What is the purpose of a synchronizer in a manual transmission?",
+        options: ["To increase torque", "To match gear speeds for smooth shifting", "To lock the differential", "To cool the gearbox"],
+        answer: 1,
+        explanation: "Synchronizers equalize gear speeds to prevent grinding during shifts."
+    },
+    {
+        q: "In an automatic transmission, what engages the gears?",
+        options: ["Manual linkage", "Hydraulic multi-plate clutches", "Mechanical levers", "Electric motors"],
+        answer: 1,
+        explanation: "Hydraulic multi-plate clutches engage gears in automatic transmissions for smooth operation."
+    },
+    {
+        q: "What is the role of the torque converter in an automatic transmission?",
+        options: ["To lock the wheels", "To multiply torque and connect engine to transmission", "To reduce engine speed", "To charge the battery"],
+        answer: 1,
+        explanation: "The torque converter multiplies torque and smoothly transfers power from the engine to the transmission."
+    },
+    {
+        q: "Which transmission component prevents gear damage during shifting?",
+        options: ["Flywheel", "Synchronizer", "Propeller shaft", "Clutch plate"],
+        answer: 1,
+        explanation: "Synchronizers match gear speeds to prevent damage during shifts in manual transmissions."
+    },
+    {
+        q: "What maintenance task helps prolong transmission life?",
+        options: ["Regular fluid checks", "Tire rotation", "Battery replacement", "Air filter cleaning"],
+        answer: 0,
+        explanation: "Regularly checking and replacing transmission fluid prevents wear and overheating."
+    },
+    {
+        q: "What causes a vehicle to jerk during gear shifts?",
+        options: ["Worn clutch or synchronizers", "Low tire pressure", "Dirty fuel filter", "Weak battery"],
+        answer: 0,
+        explanation: "Worn clutch or synchronizers cause rough gear shifts, leading to jerking."
+    }
+];
         let currentPage = 0;
         let score = 0;
         let skipped = [];
