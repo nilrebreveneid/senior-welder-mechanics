@@ -207,42 +207,212 @@
     </div>
 
     <script>
-        const questions = [
-            { q: "At what time ‘choke’ used in the engine:", options: ["When the vehicle is idling", "When the engine is cold"], answer: 1, explanation: "The choke is used when the engine is cold to enrich the fuel-air mixture, aiding startup." },
-            { q: "The function of radiator fan is:", options: ["Drive water pump", "Divert cool air to radiator to facilitate heat exchange"], answer: 1, explanation: "The radiator fan pulls cool air through the radiator to enhance heat dissipation from the coolant." },
-            { q: "Water jacket in engine cooling system is the casing surrounding:", options: ["Engine block", "Radiator"], answer: 0, explanation: "The water jacket surrounds the engine block and cylinder head, allowing coolant to absorb engine heat." },
-            { q: "The purpose of a thermostat in an engine cooling system is to:", options: ["Prevent the coolant from boiling", "Allow the engine to warm up quickly"], answer: 1, explanation: "The thermostat regulates coolant flow to help the engine reach optimal operating temperature quickly." },
-            { q: "The temperature at which tyre inflation pressure should be checked is:", options: ["25°C", "Ambient temperature"], answer: 1, explanation: "Tyre pressure should be checked at ambient temperature, typically when tyres are cold, for accurate readings." },
-            { q: "Turbochargers are classified as:", options: ["Centrifugal compressors", "Ventilators"], answer: 0, explanation: "Turbochargers are centrifugal compressors that use exhaust gases to boost engine power." },
-            { q: "Which of the following is commonly used for cooling motorcycle engine?", options: ["Air cooling", "Oil cooling"], answer: 0, explanation: "Air cooling is commonly used in motorcycle engines due to its simplicity and effectiveness." },
-            { q: "The purpose of thermostat in engine cooling system is:", options: ["To prevent water from boiling", "Maintain optimal engine temperature"], answer: 1, explanation: "The thermostat maintains the engine's optimal temperature by controlling coolant flow." },
-            { q: "The thermostat valve of engine cooling system starts to open at about:", options: ["90°C", "82°C"], answer: 1, explanation: "The thermostat typically starts opening around 82°C to allow coolant circulation and prevent overheating." },
-            { q: "Cooling system का मुख्य भाग कुन हो?", options: ["Fuel filter and fuel pump", "Water pump and radiator"], answer: 1, explanation: "वाटर पम्प र रेडिएटर कूलिङ सिस्टमका मुख्य भाग हुन्, जसले इन्जिनको ताप नियन्त्रण गर्छ।" },
-            { q: "पानी circulate गर्न कारमा कुन प्रकारको pump प्रयोग हुन्छ?", options: ["Vane type", "Centrifugal type"], answer: 1, explanation: "Centrifugal pumps are used in cars to circulate coolant efficiently through the cooling system." },
-            { q: "निम्न मध्ये कुन भागले पानी पम्प गर्छ?", options: ["Expansion valve", "Water Pump"], answer: 1, explanation: "वाटर पम्पले कूलिङ सिस्टममा पानी सर्कुलेट गर्छ।" },
-            { q: "Fuel injection pump को काम के हो?", options: ["Fuel supply गर्ने", "Air supply गर्ने"], answer: 0, explanation: "Fuel injection pump supplies pressurized fuel to the engine for combustion." },
-            { q: "इन्जिन Overheat हुनुको प्रमुख कारण के हो?", options: ["एयर फिल्टर बन्द हुनु", "कूल्याण्टको कमी वा रेडिएटरको खराबी"], answer: 1, explanation: "इन्जिन ओभरहिट हुनुको कारण कूल्याण्टको कमी, रेडिएटरको खराबी वा थर्मोस्टेटको समस्या हुन सक्छ।" },
-            { q: "थर्मोस्टेट भल्भ को मुख्य काम के हो?", options: ["Over heating गर्ने", "इन्जिनको उपयुक्त तापक्रममा राख्ने"], answer: 1, explanation: "थर्मोस्टेट भल्भले इन्जिनको तापक्रमलाई उपयुक्त स्तरमा राख्छ।" },
-            { q: "डिजेल लोड नभएको कारण के हुन सक्छ?", options: ["फ्युल फिल्टर क्लग भएको", "एयर फिल्टर क्लग भएको"], answer: 0, explanation: "क्लग भएको फ्युल फिल्टरले डिजेल इन्जिनमा इन्धन आपूर्ति कम गर्छ, जसले लोड नहुने समस्या निम्त्याउँछ।" },
-            { q: "In air cooling system, …… is used for increasing surface area to enhance engine cooling:", options: ["Radiator", "Fins"], answer: 1, explanation: "Fins increase the surface area for better heat dissipation in air-cooled engines." },
-            { q: "इञ्जिनको चिस्याउने प्रणाली (cooling system) को प्रमुख काम के हो ?", options: ["इन्धनको आयातमा कमी ल्याउनु", "इञ्जिनको ताप को मात्रा घटाउनु"], answer: 1, explanation: "कूलिङ सिस्टमले इन्जिनको तापलाई नियन्त्रण गर्छ, जसले इन्जिनलाई ओभरहिट हुनबाट जोगाउँछ।" },
-            { q: "इञ्जिनको चिस्याउने प्रणालीमा Antifreeze राख्नुको सही तरिका कुन हो ?", options: ["इञ्जिन आइडल अवस्थामा हुँदा रेडिएटर फिलर क्याप खोलेर हाल्ने", "इञ्जिन बन्द भएपछि एण्टिफ्रिज बाहिरी ट्याङ्की (coolant reservoir) मा राख्ने"], answer: 1, explanation: "एण्टिफ्रिज इन्जिन चिसो भएपछि रिजर्भायर ट्याङ्कीमा राख्नु सुरक्षित हुन्छ।" },
-            { q: "The commonly used antifreeze solution in automobile engine is:", options: ["Carbon disulphate", "Ethylene glycol"], answer: 1, explanation: "Ethylene glycol is the most commonly used antifreeze in automotive cooling systems." },
-            { q: "Radiator is a part of:", options: ["Thermostat", "Engine cooling system"], answer: 1, explanation: "The radiator is a key component of the engine cooling system, dissipating heat from the coolant." },
-            { q: "Cylinder of internal combustion engine is measured in terms of its:", options: ["Displacement and efficiency", "Bore and stroke"], answer: 1, explanation: "Cylinder size is measured by bore (diameter) and stroke (piston travel distance)." },
-            { q: "Carbon deposit in cylinder is removed by:", options: ["Ignition system", "Decarbonizing or cleaning"], answer: 1, explanation: "Carbon deposits are removed by decarbonizing, often through chemical cleaning or mechanical Mbps: mechanical means." },
-            { q: "Turbocharged engine:", options: ["Is less efficient due to power absorbed in driving turbocharger", "Is more efficient because it uses energy from the exhaust gas"], answer: 1, explanation: "Turbochargers improve efficiency by using exhaust gas energy to increase engine power." },
-            { q: "The purpose of the gearbox is:", options: ["To multiply the torque being transmitted by the engine", "All of the above"], answer: 0, explanation: "The gearbox multiplies torque and adjusts engine speed to suit driving conditions." },
-            { q: "The following is considered as best antifreeze solution:", options: ["Distilled glycerine", "Ethylene glycol"], answer: 1, explanation: "Ethylene glycol is the preferred antifreeze due to its effective freeze-point depression and heat transfer properties." },
-            { q: "कूलिङ्ग प्रणालीमा पानी कहिले हाल्न उपयुक्त समय कुन हो?", options: ["सवेरे", "इन्जिन चिसो भएपछि"], answer: 1, explanation: "इन्जिन चिसो भएपछि पानी हाल्नु उपयुक्त हुन्छ किनभने तातो अवस्थामा क्याप खोल्दा खतरा हुन सक्छ।" },
-            { q: "रेडिएटरमा पानी हाल्ने बेलामा कुन प्रकारको पानी प्रयोग गर्नु उपयुक्त हुन्छ?", options: ["नर्मल पानी", "डिस्टिल्ड पानी"], answer: 1, explanation: "डिस्टिल्ड पानीले रेडिएटरमा मिनरल जम्मा हुनबाट जोगाउँछ।" },
-            { q: "रेडिएटरमा पानी हाल्न कुन यन्त्र प्रयोग गरिन्छ?", options: ["हातले", "फनेल"], answer: 1, explanation: "फनेलले रेडिएटरमा पानी सजिलै र सुरक्षित रूपमा हाल्न सकिन्छ।" },
-            { q: "हाईब्रिड हाइन्ड्रलिक प्रणाली प्रयोग गर्दा कस्तो ब्रेक फ्लुइड प्रयोग गर्नुपर्छ?", options: ["मेसिनको वाटर फ्लुइड", "DOT-approved brake fluid"], answer: 1, explanation: "Hybrid hydraulic systems require DOT-approved brake fluid, not water-based fluids." },
-            { q: "रेडिएटरको तापक्रम नाप्ने यन्त्र कुन हो?", options: ["गाडीको बत्ती", "थर्मामीटर"], answer: 1, explanation: "थर्मामीटरले रेडिएटरको तापक्रम नाप्न प्रयोग गरिन्छ।" },
-            { q: "रेडिएटरको क्याप निकाल्दा इन्जिनको अवस्था कस्तो हुनुपर्छ?", options: ["इन्जिन तातो अवस्थामा", "इन्जिन चिसो अवस्थामा"], answer: 1, explanation: "इन्जिन चिसो भएपछि क्याप निकाल्नुपर्छ, तातो अवस्थामा दबाबले खतरा हुन सक्छ।" },
-            { q: "रेडिएटरमा आवश्यक पानीको मात्रा कति हुनुपर्छ?", options: ["इन्जिनको सिलिन्डरको मात्रा भन्दा बढी", "रेडिएटरको क्षमता अनुसार"], answer: 1, explanation: "रेडिएटरको क्षमता अनुसार पानी र एण्टिफ्रिजको मिश्रण हाल्नुपर्छ।" },
-            { q: "रेडिएटरको प्रमुख कार्य के हो?", options: ["इन्धन जलाउनु", "ताप निकाल्नु"], answer: 1, explanation: "रेडिएटरले इन्जिनको तापलाई कूल्याण्ट मार्फत बाहिर निकाल्छ।" }
-        ];
+  const questions = [
+    {
+        q: "At what time is the ‘choke’ used in the engine?",
+        options: ["When the vehicle is idling", "When the engine is cold", "When the engine is overheating", "When the vehicle is at high speed"],
+        answer: 1,
+        explanation: "The choke is used when the engine is cold to enrich the fuel-air mixture, aiding startup."
+    },
+    {
+        q: "The function of the radiator fan is:",
+        options: ["Drive water pump", "Divert cool air to radiator to facilitate heat exchange", "Cool the engine oil", "Increase fuel efficiency"],
+        answer: 1,
+        explanation: "The radiator fan pulls cool air through the radiator to enhance heat dissipation from the coolant."
+    },
+    {
+        q: "Water jacket in the engine cooling system is the casing surrounding:",
+        options: ["Engine block", "Radiator", "Fuel tank", "Exhaust manifold"],
+        answer: 0,
+        explanation: "The water jacket surrounds the engine block and cylinder head, allowing coolant to absorb engine heat."
+    },
+    {
+        q: "The purpose of a thermostat in an engine cooling system is to:",
+        options: ["Prevent the coolant from boiling", "Allow the engine to warm up quickly", "Pump coolant to the radiator", "Cool the engine oil"],
+        answer: 1,
+        explanation: "The thermostat regulates coolant flow to help the engine reach optimal operating temperature quickly."
+    },
+    {
+        q: "The temperature at which tyre inflation pressure should be checked is:",
+        options: ["25°C", "Ambient temperature", "50°C", "0°C"],
+        answer: 1,
+        explanation: "Tyre pressure should be checked at ambient temperature, typically when tyres are cold, for accurate readings."
+    },
+    {
+        q: "Turbochargers are classified as:",
+        options: ["Centrifugal compressors", "Ventilators", "Reciprocating pumps", "Axial fans"],
+        answer: 0,
+        explanation: "Turbochargers are centrifugal compressors that use exhaust gases to boost engine power."
+    },
+    {
+        q: "Which of the following is commonly used for cooling motorcycle engines?",
+        options: ["Air cooling", "Oil cooling", "Water cooling", "Hybrid cooling"],
+        answer: 0,
+        explanation: "Air cooling is commonly used in motorcycle engines due to its simplicity and effectiveness."
+    },
+    {
+        q: "The purpose of a thermostat in an engine cooling system is:",
+        options: ["To prevent water from boiling", "Maintain optimal engine temperature", "Increase fuel flow", "Reduce exhaust emissions"],
+        answer: 1,
+        explanation: "The thermostat maintains the engine’s optimal temperature by controlling coolant flow."
+    },
+    {
+        q: "The thermostat valve of an engine cooling system starts to open at about:",
+        options: ["90°C", "82°C", "100°C", "70°C"],
+        answer: 1,
+        explanation: "The thermostat typically starts opening around 82°C to allow coolant circulation and prevent overheating."
+    },
+    {
+        q: "Cooling system का मुख्य भाग कुन हो? (Which are the main components of a cooling system?)",
+        options: ["Fuel filter and fuel pump", "Water pump and radiator", "Air filter and carburetor", "Battery and alternator"],
+        answer: 1,
+        explanation: "वाटर पम्प र रेडिएटर कूलिङ सिस्टमका मुख्य भाग हुन्। (The water pump and radiator are key components of the cooling system.)"
+    },
+    {
+        q: "पानी circulate गर्न कारमा कुन प्रकारको pump प्रयोग हुन्छ? (Which type of pump is used to circulate water in a car?)",
+        options: ["Vane type", "Centrifugal type", "Gear type", "Diaphragm type"],
+        answer: 1,
+        explanation: "Centrifugal pumps are used in cars to circulate coolant efficiently through the cooling system."
+    },
+    {
+        q: "निम्न मध्ये कुन भागले पानी पम्प गर्छ? (Which component pumps water?)",
+        options: ["Expansion valve", "Water Pump", "Fuel injector", "Thermostat"],
+        answer: 1,
+        explanation: "वाटर पम्पले कूलिङ सिस्टममा पानी सर्कुलेट गर्छ। (The water pump circulates water in the cooling system.)"
+    },
+    {
+        q: "Fuel injection pump को काम के हो? (What is the function of a fuel injection pump?)",
+        options: ["Fuel supply गर्ने (Supply fuel)", "Air supply गर्ने (Supply air)", "Coolant supply गर्ने (Supply coolant)", "Oil supply गर्ने (Supply oil)"],
+        answer: 0,
+        explanation: "Fuel injection pump supplies pressurized fuel to the engine for combustion."
+    },
+    {
+        q: "इन्जिन Overheat हुनुको प्रमुख कारण के हो? (What is the primary cause of engine overheating?)",
+        options: ["एयर फिल्टर बन्द हुनु (Clogged air filter)", "कूल्याण्टको कमी वा रेडिएटरको खराबी (Low coolant or radiator failure)", "टायरको कम चाप (Low tire pressure)", "ब्याट्रीको कमजोरी (Weak battery)"],
+        answer: 1,
+        explanation: "कूल्याण्टको कमी, रेडिएटरको खराबी वा थर्मोस्टेटको समस्याले इन्जिन ओभरहिट हुन्छ। (Low coolant, radiator issues, or thermostat failure cause engine overheating.)"
+    },
+    {
+        q: "थर्मोस्टेट भल्भ को मुख्य काम के हो? (What is the main function of a thermostat valve?)",
+        options: ["Over heating गर्ने (Cause overheating)", "इन्जिनको उपयुक्त तापक्रममा राख्ने (Maintain optimal engine temperature)", "इन्धन प्रवाह नियन्त्रण (Control fuel flow)", "ब्रेक लागाउने (Apply brakes)"],
+        answer: 1,
+        explanation: "थर्मोस्टेट भल्भले इन्जिनको तापक्रमलाई उपयुक्त स्तरमा राख्छ। (The thermostat valve maintains optimal engine temperature.)"
+    },
+    {
+        q: "डिजेल लोड नभएको कारण के हुन सक्छ? (What can cause a diesel engine to not take load?)",
+        options: ["फ्युल फिल्टर क्लग भएको (Clogged fuel filter)", "एयर फिल्टर क्लग भएको (Clogged air filter)", "रेडिएटरमा पानीको कमी (Low radiator water)", "टायरको कम चाप (Low tire pressure)"],
+        answer: 0,
+        explanation: "क्लग भएको फ्युल फिल्टरले इन्धन आपूर्ति कम गर्छ। (A clogged fuel filter reduces fuel supply, causing load issues.)"
+    },
+    {
+        q: "In an air cooling system, …… is used for increasing surface area to enhance engine cooling:",
+        options: ["Radiator", "Fins", "Water pump", "Thermostat"],
+        answer: 1,
+        explanation: "Fins increase the surface area for better heat dissipation in air-cooled engines."
+    },
+    {
+        q: "इञ्जिनको चिस्याउने प्रणाली (cooling system) को प्रमुख काम के हो? (What is the primary function of an engine cooling system?)",
+        options: ["इन्धनको आयातमा कमी ल्याउनु (Reduce fuel consumption)", "इञ्जिनको ताप को मात्रा घटाउनु (Reduce engine heat)", "गाडीको गति बढाउनु (Increase vehicle speed)", "ब्रेकको प्रभावकारिता बढाउनु (Enhance brake effectiveness)"],
+        answer: 1,
+        explanation: "कूलिङ सिस्टमले इन्जिनको तापलाई नियन्त्रण गर्छ। (The cooling system controls engine heat to prevent overheating.)"
+    },
+    {
+        q: "इञ्जिनको चिस्याउने प्रणालीमा Antifreeze राख्नुको सही तरिका कुन हो? (What is the correct way to add antifreeze to a cooling system?)",
+        options: ["इञ्जिन तातो हुँदा रेडिएटर क्याप खोलेर (When engine is hot, open radiator cap)", "इञ्जिन चिसो भएपछि रिजर्भायर ट्याङ्कीमा (When engine is cold, in coolant reservoir)", "इन्जिन चलिरहँदा (While engine is running)", "रेडिएटरमा पानी नभएमा (When radiator has no water)"],
+        answer: 1,
+        explanation: "एण्टिफ्रिज इन्जिन चिसो भएपछि रिजर्भायरमा राख्नु सुरक्षित हुन्छ। (Adding antifreeze to the reservoir when the engine is cold is safe.)"
+    },
+    {
+        q: "The commonly used antifreeze solution in an automobile engine is:",
+        options: ["Carbon disulphate", "Ethylene glycol", "Distilled water", "Glycerine"],
+        answer: 1,
+        explanation: "Ethylene glycol is the most commonly used antifreeze in automotive cooling systems."
+    },
+    {
+        q: "Radiator is a part of:",
+        options: ["Thermostat", "Engine cooling system", "Fuel system", "Braking system"],
+        answer: 1,
+        explanation: "The radiator is a key component of the engine cooling system, dissipating heat from the coolant."
+    },
+    {
+        q: "Cylinder of an internal combustion engine is measured in terms of its:",
+        options: ["Displacement and efficiency", "Bore and stroke", "Weight and material", "Compression ratio"],
+        answer: 1,
+        explanation: "Cylinder size is measured by bore (diameter) and stroke (piston travel distance)."
+    },
+    {
+        q: "Carbon deposit in cylinder is removed by:",
+        options: ["Ignition system", "Decarbonizing or cleaning", "Fuel injection", "Coolant flush"],
+        answer: 1,
+        explanation: "Carbon deposits are removed by decarbonizing, often through chemical or mechanical cleaning."
+    },
+    {
+        q: "A turbocharged engine:",
+        options: ["Is less efficient due to power absorbed in driving turbocharger", "Is more efficient because it uses energy from the exhaust gas", "Requires more coolant", "Produces less torque"],
+        answer: 1,
+        explanation: "Turbochargers improve efficiency by using exhaust gas energy to increase engine power."
+    },
+    {
+        q: "The purpose of the gearbox is:",
+        options: ["To multiply the torque being transmitted by the engine", "To cool the engine", "To charge the battery", "To reduce exhaust emissions"],
+        answer: 0,
+        explanation: "The gearbox multiplies torque and adjusts engine speed to suit driving conditions."
+    },
+    {
+        q: "The following is considered as the best antifreeze solution:",
+        options: ["Distilled glycerine", "Ethylene glycol", "Carbon tetrachloride", "Plain water"],
+        answer: 1,
+        explanation: "Ethylene glycol is the preferred antifreeze due to its effective freeze-point depression and heat transfer properties."
+    },
+    {
+        q: "कूलिङ्ग प्रणालीमा पानी कहिले हाल्न उपयुक्त समय कुन हो? (When is the best time to add water to the cooling system?)",
+        options: ["सवेरे (Morning)", "इन्जिन चिसो भएपछि (After engine cools)", "इन्जिन तातो हुँदा (When engine is hot)", "गाडी चलाउँदा (While driving)"],
+        answer: 1,
+        explanation: "इन्जिन चिसो भएपछि पानी हाल्नु सुरक्षित हुन्छ। (Adding water when the engine is cold prevents risks from pressure buildup.)"
+    },
+    {
+        q: "रेडिएटरमा पानी हाल्ने बेलामा कुन प्रकारको पानी प्रयोग गर्नु उपयुक्त हुन्छ? (What type of water is suitable for adding to a radiator?)",
+        options: ["नर्मल पानी (Normal water)", "डिस्टिल्ड पानी (Distilled water)", "खोलाको पानी (River water)", "उमालेको पानी (Boiled water)"],
+        answer: 1,
+        explanation: "डिस्टिल्ड पानीले मिनरल जम्मा हुनबाट जोगाउँछ। (Distilled water prevents mineral buildup in the radiator.)"
+    },
+    {
+        q: "रेडिएटरमा पानी हाल्न कुन यन्त्र प्रयोग गरिन्छ? (Which tool is used to add water to a radiator?)",
+        options: ["हातले (By hand)", "फनेल (Funnel)", "स्क्रू ड्राइभर (Screwdriver)", "रेन्च (Wrench)"],
+        answer: 1,
+        explanation: "फनेलले पानी सजिलै र सुरक्षित रूपमा हाल्न सकिन्छ। (A funnel allows safe and easy pouring of water into the radiator.)"
+    },
+    {
+        q: "हाईब्रिड हाइन्ड्रलिक प्रणाली प्रयोग गर्दा कस्तो ब्रेक फ्लुइड प्रयोग गर्नुपर्छ? (What type of brake fluid is used in a hybrid hydraulic system?)",
+        options: ["मेसिनको वाटर फ्लुइड (Machine water fluid)", "DOT-approved brake fluid", "इन्जिन तेल (Engine oil)", "कूल्याण्ट (Coolant)"],
+        answer: 1,
+        explanation: "DOT-approved brake fluid is required for hybrid hydraulic brake systems."
+    },
+    {
+        q: "रेडिएटरको तापक्रम नाप्ने यन्त्र कुन हो? (Which device measures radiator temperature?)",
+        options: ["गाडीको बत्ती (Vehicle light)", "थर्मामीटर (Thermometer)", "ट्याकोमिटर (Tachometer)", "प्रेसर गेज (Pressure gauge)"],
+        answer: 1,
+        explanation: "थर्मामीटरले रेडिएटरको तापक्रम नाप्छ। (A thermometer measures radiator temperature.)"
+    },
+    {
+        q: "रेडिएटरको क्याप निकाल्दा इन्जिनको अवस्था कस्तो हुनुपर्छ? (What should the engine’s condition be when removing the radiator cap?)",
+        options: ["इन्जिन तातो अवस्थामा (Engine hot)", "इन्जिन चिसो अवस्थामा (Engine cold)", "इन्जिन चलिरहेको अवस्थामा (Engine running)", "इन्जिन न्यूट्रलमा (Engine in neutral)"],
+        answer: 1,
+        explanation: "इन्जिन चिसो भएपछि क्याप निकाल्नुपर्छ। (The radiator cap should be removed when the engine is cold to avoid pressure-related risks.)"
+    },
+    {
+        q: "रेडिएटरमा आवश्यक पानीको मात्रा कति हुनुपर्छ? (How much water is required in a radiator?)",
+        options: ["इन्जिनको सिलिन्डरको मात्रा भन्दा बढी (More than cylinder capacity)", "रेडिएटरको क्षमता अनुसार (As per radiator capacity)", "आधा रेडिएटर मात्र (Half the radiator)", "कुनै पानी नचाहिने (No water needed)"],
+        answer: 1,
+        explanation: "रेडिएटरको क्षमता अनुसार पानी र एण्टिफ्रिजको मिश्रण हाल्नुपर्छ। (Water and antifreeze should match the radiator’s capacity.)"
+    },
+    {
+        q: "रेडिएटरको प्रमुख कार्य के हो? (What is the primary function of a radiator?)",
+        options: ["इन्धन जलाउनु (Burn fuel)", "ताप निकाल्नु (Dissipate heat)", "गति बढाउनु (Increase speed)", "ब्रेक लागाउनु (Apply brakes)"],
+        answer: 1,
+        explanation: "रेडिएटरले इन्जिनको तापलाई कूल्याण्ट मार्फत बाहिर निकाल्छ। (The radiator dissipates engine heat through the coolant.)"
+    }
+];
 
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
