@@ -417,265 +417,265 @@
     <audio id="wrong-sound" src="https://www.soundjay.com/buttons/beep-02.mp3"></audio>
 
     <script>
-        const questions = [
-            // 1.1 Basic Knowledge of Measuring Instruments
-            {
-                q: "Which tool is used to measure valve tappet clearance?",
-                options: ["Vernier caliper", "Feeler gauge"],
-                answer: 1,
-                explanation: "A feeler gauge measures small gaps, such as valve tappet clearance, with high precision."
-            },
-            {
-                q: "How is end play of gears and oil pump typically checked?",
-                options: ["Vernier caliper and feeler gauge", "Straight edge and feeler gauge"],
-                answer: 1,
-                explanation: "A straight edge and feeler gauge are used to measure end play by checking gaps."
-            },
-            {
-                q: "What is a feeler gauge used to measure?",
-                options: ["Gap between two surfaces", "Thickness of a plate"],
-                answer: 0,
-                explanation: "Feeler gauges measure small clearances or gaps between two surfaces."
-            },
-            {
-                q: "Which tool checks the accuracy of micrometers, calipers, and dial indicators?",
-                options: ["Slip gauge", "Feeler gauge"],
-                answer: 0,
-                explanation: "Slip gauges provide precise reference measurements to calibrate instruments."
-            },
-            {
-                q: "What is the accuracy of a metric outside micrometer?",
-                options: ["0.001 mm", "0.02 mm"],
-                answer: 0,
-                explanation: "Metric outside micrometers typically have an accuracy of 0.001 mm."
-            },
-            {
-                q: "Which gauge is used to measure the diameter of a shaft?",
-                options: ["Ring gauge", "Snap gauge"],
-                answer: 0,
-                explanation: "Ring gauges are used to check the external diameter of shafts."
-            },
-            {
-                q: "Which instrument measures both external and internal diameters of shafts?",
-                options: ["Outside micrometer", "Vernier caliper"],
-                answer: 1,
-                explanation: "Vernier calipers can measure both internal and external diameters."
-            },
-            {
-                q: "फिलर गेज कुन कार्यका लागि प्रयोग गरिन्छ?",
-                options: ["क्लियरेन्स मापन", "व्यास मापन"],
-                answer: 0,
-                explanation: "Feeler gauges measure clearances between mating surfaces."
-            },
-            {
-                q: "What does a feeler gauge check?",
-                options: ["Clearance between two mating surfaces", "External diameter"],
-                answer: 0,
-                explanation: "Feeler gauges are used to measure gaps between surfaces."
-            },
-            {
-                q: "Diameter नाप्ने उपकरण कुन हो?",
-                options: ["Vernier caliper", "Feeler gauge"],
-                answer: 0,
-                explanation: "Vernier calipers are versatile for measuring diameters."
-            },
-            {
-                q: "Which tool is used to measure the height of a store rack?",
-                options: ["Vernier caliper", "Try square"],
-                answer: 0,
-                explanation: "Vernier calipers can measure heights accurately."
-            },
-            {
-                q: "Which gauge is used to test the accuracy of holes?",
-                options: ["Plug gauge", "Ring gauge"],
-                answer: 0,
-                explanation: "Plug gauges check the accuracy of internal hole diameters."
-            },
+      const questions = [
+  // 1.1 Basic Knowledge of Measuring Instruments
+  {
+    q: "Which tool is used to measure valve tappet clearance?",
+    options: ["Vernier caliper", "Feeler gauge", "Micrometer", "Dial indicator"],
+    answer: 1,
+    explanation: "A feeler gauge measures small gaps, such as valve tappet clearance, with high precision."
+  },
+  {
+    q: "How is end play of gears and oil pump typically checked?",
+    options: ["Vernier caliper and feeler gauge", "Straight edge and feeler gauge", "Micrometer and dial gauge", "Slip gauge and ruler"],
+    answer: 1,
+    explanation: "A straight edge and feeler gauge are used to measure end play by checking gaps."
+  },
+  {
+    q: "What is a feeler gauge used to measure?",
+    options: ["Gap between two surfaces", "Thickness of a plate", "Diameter of a shaft", "Length of a rod"],
+    answer: 0,
+    explanation: "Feeler gauges measure small clearances or gaps between two surfaces."
+  },
+  {
+    q: "Which tool checks the accuracy of micrometers, calipers, and dial indicators?",
+    options: ["Slip gauge", "Feeler gauge", "Ring gauge", "Straight edge"],
+    answer: 0,
+    explanation: "Slip gauges provide precise reference measurements to calibrate instruments."
+  },
+  {
+    q: "What is the accuracy of a metric outside micrometer?",
+    options: ["0.001 mm", "0.02 mm", "0.1 mm", "1 mm"],
+    answer: 0,
+    explanation: "Metric outside micrometers typically have an accuracy of 0.001 mm for precise measurements."
+  },
+  {
+    q: "Which gauge is used to measure the diameter of a shaft?",
+    options: ["Ring gauge", "Snap gauge", "Plug gauge", "Feeler gauge"],
+    answer: 0,
+    explanation: "Ring gauges are used to check the external diameter of shafts with high accuracy."
+  },
+  {
+    q: "Which instrument measures both external and internal diameters of shafts?",
+    options: ["Outside micrometer", "Vernier caliper", "Ring gauge", "Dial indicator"],
+    answer: 1,
+    explanation: "Vernier calipers are versatile, measuring both internal and external diameters."
+  },
+  {
+    q: "फिलर गेज कुन कार्यका लागि प्रयोग गरिन्छ? (What is a feeler gauge used for?)",
+    options: ["क्लियरेन्स मापन (Measuring clearance)", "व्यास मापन (Measuring diameter)", "लम्बाइ मापन (Measuring length)", "कोण मापन (Measuring angle)"],
+    answer: 0,
+    explanation: "फिलर गेजले दुई सतह बीचको क्लियरेन्स मापन गर्छ। (Feeler gauges measure clearances between mating surfaces.)"
+  },
+  {
+    q: "What does a feeler gauge check?",
+    options: ["Clearance between two mating surfaces", "External diameter", "Surface roughness", "Material thickness"],
+    answer: 0,
+    explanation: "Feeler gauges are used to measure gaps between surfaces, such as in engine components."
+  },
+  {
+    q: "Diameter नाप्ने उपकरण कुन हो? (Which tool is used to measure diameter?)",
+    options: ["Vernier caliper", "Feeler gauge", "Try square", "Protractor"],
+    answer: 0,
+    explanation: "Vernier calipers are versatile for measuring internal and external diameters."
+  },
+  {
+    q: "Which tool is used to measure the height of a store rack?",
+    options: ["Vernier caliper", "Try square", "Tape measure", "Feeler gauge"],
+    answer: 2,
+    explanation: "A tape measure is suitable for measuring larger dimensions like the height of a store rack."
+  },
+  {
+    q: "Which gauge is used to test the accuracy of holes?",
+    options: ["Plug gauge", "Ring gauge", "Snap gauge", "Feeler gauge"],
+    answer: 0,
+    explanation: "Plug gauges check the accuracy of internal hole diameters."
+  },
 
-            // 1.2 Basic Knowledge of Metric, FPS, and SI Unit
-            {
-                q: "What does the unit 'Pound' measure?",
-                options: ["Time", "Weight"],
-                answer: 1,
-                explanation: "Pound is a unit of weight in the FPS system."
-            },
-            {
-                q: "FPS प्रणालीमा लामखुट्टे गाडीको मापनलाई के भनिन्छ?",
-                options: ["इन्च", "यार्ड"],
-                answer: 0,
-                explanation: "In the FPS system, small lengths like a mosquito net are measured in inches."
-            },
-            {
-                q: "Which is not a fundamental quantity in physics?",
-                options: ["Volume", "Length"],
-                answer: 0,
-                explanation: "Volume is a derived quantity, while length is fundamental."
-            },
-            {
-                q: "Which is a non-SI unit accepted for use with SI units?",
-                options: ["Liter", "Gray"],
-                answer: 0,
-                explanation: "Liter is a non-SI unit accepted for volume measurement with SI units."
-            },
+  // 1.2 Basic Knowledge of Metric, FPS, and SI Unit
+  {
+    q: "What does the unit 'Pound' measure?",
+    options: ["Time", "Weight", "Length", "Temperature"],
+    answer: 1,
+    explanation: "Pound is a unit of weight in the FPS (Foot-Pound-Second) system."
+  },
+  {
+    q: "FPS प्रणालीमा लामखुट्टे गाडीको मापनलाई के भनिन्छ? (What is the unit for measuring small lengths like a mosquito net in the FPS system?)",
+    options: ["इन्च (Inch)", "यार्ड (Yard)", "फुट (Foot)", "माइल (Mile)"],
+    answer: 0,
+    explanation: "In the FPS system, small lengths like a mosquito net are measured in inches."
+  },
+  {
+    q: "Which is not a fundamental quantity in physics?",
+    options: ["Volume", "Length", "Mass", "Time"],
+    answer: 0,
+    explanation: "Volume is a derived quantity, while length, mass, and time are fundamental quantities."
+  },
+  {
+    q: "Which is a non-SI unit accepted for use with SI units?",
+    options: ["Liter", "Gray", "Pascal", "Joule"],
+    answer: 0,
+    explanation: "Liter is a non-SI unit accepted for volume measurement alongside SI units."
+  },
 
-            // 1.3 Basic Knowledge of Hand Tools and Their Applications
-            {
-                q: "गाडीको लागि कुन टूल प्रयोग गरिन्छ?",
-                options: ["टप्स", "स्प्यानर"],
-                answer: 1,
-                explanation: "Spanners are used to tighten or loosen nuts and bolts in vehicles."
-            },
-            {
-                q: "The size of a 10mm digital spanner is represented as:",
-                options: ["M10", "M*10"],
-                answer: 0,
-                explanation: "M10 denotes a metric spanner size of 10 mm."
-            },
-            {
-                q: "तस्बिरमा देखिएको उपकरण कुन हो?",
-                options: ["टायर हब", "रिङ स्प्यानर"],
-                answer: 1,
-                explanation: "A ring spanner is a hand tool for turning nuts and bolts."
-            },
-            {
-                q: "स्क्रू फाल्ने बेलामा कुन औजार प्रयोग गरिन्छ?",
-                options: ["स्क्रू ड्राइभर", "फिलर गेज"],
-                answer: 0,
-                explanation: "A screwdriver is used to drive or remove screws."
-            },
+  // 1.3 Basic Knowledge of Hand Tools and Their Applications
+  {
+    q: "गाडीको लागि कुन टूल प्रयोग गरिन्छ? (Which tool is used for vehicles?)",
+    options: ["टप्स (Taps)", "स्प्यानर (Spanner)", "फाइल (File)", "ह्यामर (Hammer)"],
+    answer: 1,
+    explanation: "स्प्यानरले गाडीमा नट र बोल्ट कस्न वा खोल्न प्रयोग गरिन्छ। (Spanners are used to tighten or loosen nuts and bolts in vehicles.)"
+  },
+  {
+    q: "The size of a 10mm digital spanner is represented as:",
+    options: ["M10", "M*10", "10M", "MM10"],
+    answer: 0,
+    explanation: "M10 denotes a metric spanner size of 10 mm for bolts or nuts."
+  },
+  {
+    q: "तस्बिरमा देखिएको उपकरण कुन हो? (Which tool is shown in the image?)",
+    options: ["टायर हब (Tire hub)", "रिङ स्प्यानर (Ring spanner)", "स्क्रू ड्राइभर (Screwdriver)", "प्लायर (Pliers)"],
+    answer: 1,
+    explanation: "रिङ स्प्यानर नट र बोल्ट घुमाउन प्रयोग हुन्छ। (A ring spanner is a hand tool for turning nuts and bolts.)"
+  },
+  {
+    q: "स्क्रू फाल्ने बेलामा कुन औजार प्रयोग गरिन्छ? (Which tool is used to drive screws?)",
+    options: ["स्क्रू ड्राइभर (Screwdriver)", "फिलर गेज (Feeler gauge)", "स्प्यानर (Spanner)", "ह्यामर (Hammer)"],
+    answer: 0,
+    explanation: "स्क्रू ड्राइभरले स्क्रू हटाउन वा राख्न प्रयोग गरिन्छ। (A screwdriver is used to drive or remove screws.)"
+  },
 
-            // 1.4 Basic Knowledge of Lathe, Milling, Shaper, Grinding, and Drilling Machine
-            {
-                q: "What is facing in machining?",
-                options: ["Beveling the workpiece end", "Producing a flat surface on workpiece ends"],
-                answer: 1,
-                explanation: "Facing creates a flat surface on the ends of a workpiece."
-            },
-            {
-                q: "What does the facing operation achieve?",
-                options: ["Beveling the end", "Flat surface on workpiece ends"],
-                answer: 1,
-                explanation: "Facing machines the ends of a workpiece to produce a flat surface."
-            },
-            {
-                q: "What is used to hold and rotate the workpiece in a lathe?",
-                options: ["Centers", "Mandrel"],
-                answer: 0,
-                explanation: "Centers hold and rotate the workpiece in a lathe."
-            },
-            {
-                q: "Lathe मेशिन कुन कार्यका लागि प्रयोग गरिन्छ?",
-                options: ["घुमाउने कार्य", "मिलिंग कार्य"],
-                answer: 0,
-                explanation: "Lathes are used for turning operations to shape rotating workpieces."
-            },
-            {
-                q: "Which is not a part of a shaper machine?",
-                options: ["Taper box", "Table"],
-                answer: 0,
-                explanation: "A taper box is not a standard component of a shaper."
-            },
-            {
-                q: "Which operation cannot be performed on a lathe?",
-                options: ["Drilling", "Milling"],
-                answer: 1,
-                explanation: "Milling requires a milling machine, not a lathe."
-            },
-            {
-                q: "What type of threads does a lathe spindle have?",
-                options: ["External threads", "Internal threads"],
-                answer: 0,
-                explanation: "Lathe spindles typically have external threads for mounting chucks."
-            },
-            {
-                q: "Which machine is used for the turning process?",
-                options: ["Lathe machine", "Drilling machine"],
-                answer: 0,
-                explanation: "Turning is performed on a lathe to shape cylindrical workpieces."
-            },
-            {
-                q: "Which machine uses a multiple teeth cutter?",
-                options: ["Milling machine", "Planer"],
-                answer: 0,
-                explanation: "Milling machines use multi-tooth cutters for material removal."
-            },
-            {
-                q: "What is the operation called when the workpiece is stationary and the tool reciprocates?",
-                options: ["Shaping", "Slotting"],
-                answer: 0,
-                explanation: "Shaping involves a reciprocating tool cutting a stationary workpiece."
-            },
-            {
-                q: "What does a drilling machine produce?",
-                options: ["Circular holes", "Hexagonal holes"],
-                answer: 0,
-                explanation: "Drilling machines create circular holes in workpieces."
-            },
-            {
-                q: "What type of operation is grinding?",
-                options: ["Surface finishing", "Facing"],
-                answer: 0,
-                explanation: "Grinding is a surface finishing operation for precision and smoothness."
-            },
-            {
-                q: "How is a twist drill specified?",
-                options: ["By a number indicating hole size", "By an alphabet indicating hole size"],
-                answer: 0,
-                explanation: "Twist drills are specified by numbers or sizes indicating the hole diameter."
-            },
+  // 1.4 Basic Knowledge of Lathe, Milling, Shaper, Grinding, and Drilling Machine
+  {
+    q: "What is facing in machining?",
+    options: ["Beveling the workpiece end", "Producing a flat surface on workpiece ends", "Cutting threads", "Drilling holes"],
+    answer: 1,
+    explanation: "Facing creates a flat surface on the ends of a workpiece, typically on a lathe."
+  },
+  {
+    q: "What does the facing operation achieve?",
+    options: ["Beveling the end", "Flat surface on workpiece ends", "Cylindrical shaping", "Surface texturing"],
+    answer: 1,
+    explanation: "Facing machines the ends of a workpiece to produce a smooth, flat surface."
+  },
+  {
+    q: "What is used to hold and rotate the workpiece in a lathe?",
+    options: ["Centers", "Mandrel", "Collet", "Tool post"],
+    answer: 0,
+    explanation: "Centers hold and rotate the workpiece in a lathe for turning operations."
+  },
+  {
+    q: "Lathe मेशिन कुन कार्यका लागि प्रयोग गरिन्छ? (What is a lathe machine used for?)",
+    options: ["घुमाउने कार्य (Turning operations)", "मिलिंग कार्य (Milling operations)", "ग्राइन्डिंग कार्य (Grinding operations)", "ड्रिलिंग कार्य (Drilling operations)"],
+    answer: 0,
+    explanation: "लेथ मेसिनले घुमाउने कार्यमार्फत वस्तुलाई आकार दिन्छ। (Lathes are used for turning operations to shape rotating workpieces.)"
+  },
+  {
+    q: "Which is not a part of a shaper machine?",
+    options: ["Taper box", "Table", "Ram", "Tool head"],
+    answer: 0,
+    explanation: "A taper box is not a standard component of a shaper, which includes a table, ram, and tool head."
+  },
+  {
+    q: "Which operation cannot be performed on a lathe?",
+    options: ["Drilling", "Milling", "Turning", "Thread cutting"],
+    answer: 1,
+    explanation: "Milling requires a milling machine, while drilling, turning, and thread cutting can be done on a lathe."
+  },
+  {
+    q: "What type of threads does a lathe spindle have?",
+    options: ["External threads", "Internal threads", "No threads", "Tapered threads"],
+    answer: 0,
+    explanation: "Lathe spindles typically have external threads for mounting chucks or faceplates."
+  },
+  {
+    q: "Which machine is used for the turning process?",
+    options: ["Lathe machine", "Drilling machine", "Milling machine", "Grinding machine"],
+    answer: 0,
+    explanation: "Turning is performed on a lathe to shape cylindrical workpieces."
+  },
+  {
+    q: "Which machine uses a multiple teeth cutter?",
+    options: ["Milling machine", "Planer", "Shaper", "Lathe"],
+    answer: 0,
+    explanation: "Milling machines use multi-tooth cutters for material removal across various surfaces."
+  },
+  {
+    q: "What is the operation called when the workpiece is stationary and the tool reciprocates?",
+    options: ["Shaping", "Slotting", "Turning", "Milling"],
+    answer: 0,
+    explanation: "Shaping involves a reciprocating tool cutting a stationary workpiece on a shaper machine."
+  },
+  {
+    q: "What does a drilling machine produce?",
+    options: ["Circular holes", "Hexagonal holes", "Square holes", "Irregular slots"],
+    answer: 0,
+    explanation: "Drilling machines create circular holes in workpieces using drill bits."
+  },
+  {
+    q: "What type of operation is grinding?",
+    options: ["Surface finishing", "Facing", "Drilling", "Turning"],
+    answer: 0,
+    explanation: "Grinding is a surface finishing operation for achieving precision and smoothness."
+  },
+  {
+    q: "How is a twist drill specified?",
+    options: ["By a number indicating hole size", "By an alphabet indicating hole size", "By color coding", "By shank length"],
+    answer: 0,
+    explanation: "Twist drills are specified by numbers or sizes indicating the hole diameter they produce."
+  },
 
-            // 1.5 Basic Knowledge of Arc Welding and Oxy-Acetylene Welding
-            {
-                q: "What is the electrode coating material in arc welding?",
-                options: ["Flux", "Slag"],
-                answer: 0,
-                explanation: "Flux coats the electrode to protect the weld pool from contamination."
-            },
-            {
-                q: "Which welding is used for hydraulic excavator arm fabrication?",
-                options: ["Gas welding", "Arc welding"],
-                answer: 1,
-                explanation: "Arc welding is robust for heavy-duty applications like excavator arms."
-            },
-            {
-                q: "Which is not a welding tool?",
-                options: ["Electrode", "Radiator"],
-                answer: 1,
-                explanation: "Radiators are not used in welding; electrodes are essential."
-            },
-            {
-                q: "Which gas is used in TIG welding?",
-                options: ["Argon and helium", "CO₂ and H₂"],
-                answer: 0,
-                explanation: "Argon and helium are inert gases used as shielding in TIG welding."
-            },
-            {
-                q: "Which tool is used to remove slag in welding?",
-                options: ["Chipping hammer", "Gas welder"],
-                answer: 0,
-                explanation: "A chipping hammer removes slag from welds."
-            },
-            {
-                q: "In arc welding with DC current, where is greater heat generated?",
-                options: ["Positive pole (anode)", "Negative pole (cathode)"],
-                answer: 0,
-                explanation: "The positive pole generates more heat in DC arc welding."
-            },
-            {
-                q: "Which is a welding tool?",
-                options: ["Electrode", "Radiator"],
-                answer: 0,
-                explanation: "Electrodes are used in arc welding, unlike radiators."
-            },
+  // 1.5 Basic Knowledge of Arc Welding and Oxy-Acetylene Welding
+  {
+    q: "What is the electrode coating material in arc welding?",
+    options: ["Flux", "Slag", "Solder", "Paint"],
+    answer: 0,
+    explanation: "Flux coats the electrode to protect the weld pool from contamination and stabilize the arc."
+  },
+  {
+    q: "Which welding is used for hydraulic excavator arm fabrication?",
+    options: ["Gas welding", "Arc welding", "TIG welding", "Spot welding"],
+    answer: 1,
+    explanation: "Arc welding is robust and suitable for heavy-duty applications like excavator arm fabrication."
+  },
+  {
+    q: "Which is not a welding tool?",
+    options: ["Electrode", "Radiator", "Chipping hammer", "Welding torch"],
+    answer: 1,
+    explanation: "Radiators are not used in welding; electrodes, chipping hammers, and torches are essential."
+  },
+  {
+    q: "Which gas is used in TIG welding?",
+    options: ["Argon and helium", "CO₂ and H₂", "Oxygen and acetylene", "Nitrogen and CO₂"],
+    answer: 0,
+    explanation: "Argon and helium are inert gases used as shielding gases in TIG welding."
+  },
+  {
+    q: "Which tool is used to remove slag in welding?",
+    options: ["Chipping hammer", "Gas welder", "Wire brush", "Screwdriver"],
+    answer: 0,
+    explanation: "A chipping hammer removes slag from welds to ensure a clean surface."
+  },
+  {
+    q: "In arc welding with DC current, where is greater heat generated?",
+    options: ["Positive pole (anode)", "Negative pole (cathode)", "Workpiece only", "Electrode tip only"],
+    answer: 0,
+    explanation: "In DC arc welding, the positive pole (anode) generates more heat due to electron flow."
+  },
+  {
+    q: "Which is a welding tool?",
+    options: ["Electrode", "Radiator", "Fuel pump", "Battery"],
+    answer: 0,
+    explanation: "Electrodes are used in arc welding to create the weld, unlike radiators or fuel pumps."
+  },
 
-            // 1.6 Basic Knowledge of Power Transmission in Workshop
-            {
-                q: "How does a starter motor run the flywheel of an engine?",
-                options: ["Chain drive", "Gear drive"],
-                answer: 1,
-                explanation: "A gear drive connects the starter motor to the flywheel for engine cranking."
-            }
-        ];
+  // 1.6 Basic Knowledge of Power Transmission in Workshop
+  {
+    q: "How does a starter motor run the flywheel of an engine?",
+    options: ["Chain drive", "Gear drive", "Belt drive", "Shaft drive"],
+    answer: 1,
+    explanation: "A gear drive connects the starter motor to the flywheel for engine cranking."
+  }
+];
 
         let currentPage = 0;
         let score = 0;
