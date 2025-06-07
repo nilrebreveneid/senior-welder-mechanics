@@ -208,35 +208,175 @@
 
     <script>
         const questions = [
-            { q: "The brakes employed in cars are usually operated:", options: ["Mechanically", "Hydraulically"], answer: 1, explanation: "Most modern cars use hydraulic brakes because they provide efficient force transmission for consistent braking." },
-            { q: "Disc र Drum-type brake मा के फरक छ?", options: ["Disc type घुम्दैन र drum type घुम्दछ", "Disc type मा बढी र drum type मा कम friction लाग्छ"], answer: 0, explanation: "Disc brakes use a stationary disc and caliper, while drum brakes rotate with the wheel, using shoes inside a drum for friction." },
-            { q: "Brake is required to stop the machine:", options: ["Within the shortest possible distance", "Within certain distance according to road surface"], answer: 1, explanation: "Brakes aim to stop the vehicle in the shortest possible distance, considering road conditions for safety." },
-            { q: "What may be the cause of brake pedal going to floor without producing brake action?", options: ["Excessively worn brake lining", "All of the above"], answer: 1, explanation: "A soft brake pedal can result from worn linings, air in the hydraulic line, or low brake fluid, all contributing to poor braking." },
-            { q: "The term Brake Horse Power (BHP) means:", options: ["Power available at the shaft", "Power generated in the engine"], answer: 0, explanation: "Brake Horse Power (BHP) is the power measured at the engine's output shaft, not the gross power generated." },
-            { q: "Which of the following applications is series motor invariably used?", options: ["Motor for operation in AC or DC", "Starter for car"], answer: 1, explanation: "Series motors are used in car starters due to their high torque at low speeds, ideal for cranking the engine." },
-            { q: "A fully charged 6 cell automotive battery should indicate:", options: ["12V", "12.6V"], answer: 1, explanation: "A fully charged 6-cell lead-acid battery shows 12.6V to 12.8V at rest, with each cell contributing about 2.1V." },
-            { q: "The energy of expanding gases is transferred by piston to connecting rod through:", options: ["Bearing", "Gudgeon pin"], answer: 1, explanation: "The gudgeon pin (or piston pin) connects the piston to the connecting rod, transferring the force of expanding gases." },
-            { q: "Tachometer measures the:", options: ["Temperature", "Speed of a flywheel"], answer: 1, explanation: "A tachometer measures the rotational speed (RPM) of an engine's flywheel or crankshaft." },
-            { q: "If the car pulls to one side when the brakes are applied, the cause could not be:", options: ["Low rear tire pressure", "Broken spring or centre bolt"], answer: 0, explanation: "Low rear tire pressure affects handling but not brake pull; uneven brake wear or a broken spring can cause pulling." },
-            { q: "ब्रेक सिस्टमको मुख्य काम के हो?", options: ["गाडीको गियर बढाउने", "गाडी रोक्ने"], answer: 1, explanation: "ब्रेक सिस्टमको मुख्य काम गाडीलाई सुरक्षित रूपमा रोक्नु हो।" },
-            { q: "डिस्क ब्रेकमा कुन पार्ट ब्रेक सिस्टममा समावेश हुन्छ?", options: ["टायर हब", "ब्रेक प्याड"], answer: 1, explanation: "डिस्क ब्रेकमा ब्रेक प्याडले डिस्कमा घर्षण सिर्जना गर्छ, जसले गाडीलाई रोक्छ।" },
-            { q: "हाइड्रोलिक ब्रेक सिस्टममा प्रयोग गरिने भाग कुन हो?", options: ["ह्याण्ड ब्रेक", "मास्टर सिलिन्डर"], answer: 1, explanation: "हाइड्रोलिक ब्रेकमा मास्टर सिलिन्डरले ब्रेक फ्लुइडलाई चाप दिएर ब्रेक लगाउँछ।" },
-            { q: "ब्रेक लिङ्केज प्रणालीमा समावेश हुने भाग:", options: ["ह्याण्ड सिलिन्डर", "ब्रेक पेडल"], answer: 1, explanation: "ब्रेक लिङ्केजमा ब्रेक पेडल समावेश हुन्छ, जसले हाइड्रोलिक प्रणालीलाई सक्रिय गर्छ।" },
-            { q: "गाडीमा ब्रेक लाइटको काम के हो?", options: ["गाडीको गतिमा वृद्धि गर्नु", "ब्रेक लागेको संकेत दिनु"], answer: 1, explanation: "ब्रेक लाइटले अन्य चालकहरूलाई ब्रेक लागेको संकेत दिन्छ, सुरक्षालाई बढाउँछ।" },
-            { q: "When brake is applied on a moving vehicle, the kinetic energy is converted into?", options: ["Light energy", "Heat energy"], answer: 1, explanation: "Braking converts kinetic energy into heat energy through friction in the brake system." },
-            { q: "The advantage of a tubeless tyre over tubed tyre is:", options: ["Slow air leakage", "Less chances of running flat"], answer: 1, explanation: "Tubeless tyres have slower air leakage and are less likely to go flat suddenly due to their sealed design." },
-            { q: "The parking brakes employed in vehicles are generally operated:", options: ["Hydraulically", "Mechanically"], answer: 1, explanation: "Parking brakes are typically mechanical, using cables to engage the brakes independently of the hydraulic system." },
-            { q: "The parking brake generally acts on:", options: ["Front wheels", "Rear wheels"], answer: 1, explanation: "Parking brakes usually act on the rear wheels to securely hold the vehicle when stationary." },
-            { q: "इन्जिनमा गाडीको ब्रेक लगाउँदा के हुन्छ?", options: ["गति बढ्न थाल्छ", "गतिज ऊर्जा तापमा बदलिन्छ"], answer: 1, explanation: "ब्रेक लगाउँदा गाडीको गतिज ऊर्जा घर्षणद्वारा ताप ऊर्जामा बदलिन्छ।" },
-            { q: "The air inside hydraulic line of braking system results in:", options: ["Both (A) and (B)", "Poor braking action"], answer: 1, explanation: "Air in the hydraulic line causes a spongy pedal and poor braking action due to compressibility." },
-            { q: "तलको ब्रेकिङ्ग प्रणालीको कार्य के हो?", options: ["इन्धन इन्जेक्सनलाई नियन्त्रण गर्नु", "सवारीलाई चलायमान अवस्था नियन्त्रण गर्नु"], answer: 1, explanation: "ब्रेकिङ्ग प्रणालीले सवारीको गति नियन्त्रण र रोक्ने काम गर्छ।" },
-            { q: "एयर ब्रेक प्रणालीको असफलताका कारण कारको ब्रेक प्रणालीको मर्मत गर्नुपर्ने कारणहरू के हुन सक्छ?", options: ["चापमा आएको परिवर्तन", "पिस्टनमा भएको क्षति"], answer: 1, explanation: "पिस्टनमा क्षति वा चाप परिवर्तनले एयर ब्रेक प्रणालीको प्रभावकारिता कम गर्छ।" },
-            { q: "Crank and crankshaft को कार्य के हो?", options: ["Cooling water सापूर्ति गर्ने", "Reciprocating motion लाई rotary मा परिवर्तन गर्ने"], answer: 1, explanation: "Crankshaft ले पिस्टनको रैखिक गतिलाई रोटरी गतिमा बदल्छ, जसले इन्जिनको शक्ति हस्तान्तरण गर्छ।" },
-            { q: "गाडीमा बैक हुँदा सहायक ब्रेकको आवश्यकता किन पर्छ ?", options: ["सहायक ब्रेकले प्रणालीलाई सन्तुलनमा राख्छ", "मुख्य ब्रेकले पर्याप्त काम नगर्दा"], answer: 1, explanation: "सहायक ब्रेकले मुख्य ब्रेक अपर्याप्त हुँदा गाडीलाई नियन्त्रणमा राख्छ।" },
-            { q: "उकालो चढ्दा गाडीलाई कसरी रोक्न सकिन्छ ?", options: ["ब्रेक मात्र लगाउने", "इन्जिन ब्रेकिङ्ग र ह्याण्ड ब्रेक प्रयोग गर्ने"], answer: 1, explanation: "उकालोमा इन्जिन ब्रेकिङ्ग र ह्याण्ड ब्रेकले गाडीलाई सुरक्षित रोक्छ।" },
-            { q: "गाडीमा प्रयोग हुने डिफरन्सियलको मुख्य काम के हो ?", options: ["गाडीलाई चिप्लो बाटोमा बढी गतिको सहारा दिने", "घुमाउँदा आन्तरिक र बाह्य पाङ्ग्राहरूको गतिको भिन्नता अनुसार शक्ति वितरण गर्नु"], answer: 1, explanation: "डिफरन्सियलले पाङ्ग्राहरूको गति भिन्नता अनुसार शक्ति वितरण गर्छ, जसले घुमाउँदा स्थिरता कायम राख्छ।" },
-            { q: "उकालो तथा ओरालो सडकमा कुन सवारीलाई पहिलो प्राथमिकता दिइन्छ ?", options: ["ओरालो", "उकालो"], answer: 1, explanation: "उकालो चढ्ने सवारीलाई प्राथमिकता दिइन्छ किनभने तिनलाई गति कायम राख्न बढी शक्ति चाहिन्छ।" }
-        ];
+    {
+        q: "The brakes employed in cars are usually operated:",
+        options: ["Mechanically", "Hydraulically", "Pneumatically", "Electronically"],
+        answer: 1,
+        explanation: "Most modern cars use hydraulic brakes for efficient force transmission and consistent braking."
+    },
+    {
+        q: "Disc र Drum-type brake मा के फरक छ? (What is the difference between disc and drum-type brakes?)",
+        options: ["Disc type घुम्दैन र drum type घुम्दछ (Disc is stationary, drum rotates)", "Disc type मा बढी र drum type मा कम friction लाग्छ (Disc has more, drum has less friction)", "Disc type मा तेल र drum type मा हावा प्रयोग हुन्छ (Disc uses oil, drum uses air)", "Disc type सस्तो र drum type महँगो हुन्छ (Disc is cheaper, drum is expensive)"],
+        answer: 0,
+        explanation: "डिस्क ब्रेकमा डिस्क स्थिर हुन्छ र ड्रम ब्रेक पाङ्ग्रासँग घुम्छ। (Disc brakes use a stationary disc and caliper, while drum brakes rotate with the wheel, using shoes inside a drum.)"
+    },
+    {
+        q: "Brake is required to stop the machine:",
+        options: ["Within the shortest possible distance", "Within certain distance according to road surface", "Without considering road conditions", "Only at high speeds"],
+        answer: 1,
+        explanation: "Brakes aim to stop the vehicle within a safe distance, considering road surface conditions."
+    },
+    {
+        q: "What may be the cause of brake pedal going to floor without producing brake action?",
+        options: ["Excessively worn brake lining", "High tire pressure", "Dirty air filter", "Worn clutch disc"],
+        answer: 0,
+        explanation: "Worn brake linings, air in the hydraulic line, or low brake fluid cause a soft pedal and poor braking."
+    },
+    {
+        q: "The term Brake Horse Power (BHP) means:",
+        options: ["Power available at the shaft", "Power generated in the engine", "Power used by brakes", "Power at the wheels"],
+        answer: 0,
+        explanation: "Brake Horse Power (BHP) is the power measured at the engine’s output shaft, after internal losses."
+    },
+    {
+        q: "Which of the following applications is series motor invariably used?",
+        options: ["Motor for operation in AC or DC", "Starter for car", "Air conditioning compressor", "Fuel pump"],
+        answer: 1,
+        explanation: "Series motors are used in car starters due to their high torque at low speeds, ideal for cranking."
+    },
+    {
+        q: "A fully charged 6 cell automotive battery should indicate:",
+        options: ["12V", "12.6V", "11.5V", "13.5V"],
+        answer: 1,
+        explanation: "A fully charged 6-cell lead-acid battery shows 12.6V to 12.8V at rest, with each cell at ~2.1V."
+    },
+    {
+        q: "The energy of expanding gases is transferred by piston to connecting rod through:",
+        options: ["Bearing", "Gudgeon pin", "Crankshaft", "Camshaft"],
+        answer: 1,
+        explanation: "The gudgeon pin connects the piston to the connecting rod, transferring the force of expanding gases."
+    },
+    {
+        q: "Tachometer measures the:",
+        options: ["Temperature", "Speed of a flywheel", "Fuel level", "Oil pressure"],
+        answer: 1,
+        explanation: "A tachometer measures the rotational speed (RPM) of an engine’s flywheel or crankshaft."
+    },
+    {
+        q: "If the car pulls to one side when the brakes are applied, the cause could not be:",
+        options: ["Low rear tire pressure", "Broken spring or centre bolt", "Uneven brake pad wear", "Leaking brake cylinder"],
+        answer: 0,
+        explanation: "Low rear tire pressure affects handling but not brake pull; uneven brake wear or a broken spring can cause pulling."
+    },
+    {
+        q: "ब्रेक सिस्टमको मुख्य काम के हो? (What is the main function of the brake system?)",
+        options: ["गाडीको गियर बढाउने (Increase gear)", "गाडी रोक्ने (Stop the vehicle)", "इन्जिनको शक्ति बढाउने (Increase engine power)", "टायरको चाप मापन गर्ने (Measure tire pressure)"],
+        answer: 1,
+        explanation: "ब्रेक सिस्टमले गाडीलाई सुरक्षित रूपमा रोक्नु हो। (The brake system safely stops the vehicle.)"
+    },
+    {
+        q: "डिस्क ब्रेकमा कुन पार्ट ब्रेक सिस्टममा समावेश हुन्छ? (Which part is included in a disc brake system?)",
+        options: ["टायर हब (Tire hub)", "ब्रेक प्याड (Brake pad)", "क्लच डिस्क (Clutch disc)", "फ्युल पम्प (Fuel pump)"],
+        answer: 1,
+        explanation: "ब्रेक प्याडले डिस्कमा घर्षण सिर्जना गर्छ। (Brake pads create friction on the disc to stop the vehicle.)"
+    },
+    {
+        q: "हाइड्रोलिक ब्रेक सिस्टममा प्रयोग गरिने भाग कुन हो? (Which component is used in a hydraulic brake system?)",
+        options: ["ह्याण्ड ब्रेक (Hand brake)", "मास्टर सिलिन्डर (Master cylinder)", "स्पार्क प्लग (Spark plug)", "एयर फिल्टर (Air filter)"],
+        answer: 1,
+        explanation: "मास्टर सिलिन्डरले ब्रेक फ्लुइडलाई चाप दिएर ब्रेक लगाउँछ। (The master cylinder pressurizes brake fluid to engage brakes.)"
+    },
+    {
+        q: "ब्रेक लिङ्केज प्रणालीमा समावेश हुने भाग: (Which component is part of the brake linkage system?)",
+        options: ["ह्याण्ड सिलिन्डर (Hand cylinder)", "ब्रेक पेडल (Brake pedal)", "टायर (Tire)", "रेडिएटर (Radiator)"],
+        answer: 1,
+        explanation: "ब्रेक पेडलले हाइड्रोलिक प्रणालीलाई सक्रिय गर्छ। (The brake pedal activates the hydraulic brake system.)"
+    },
+    {
+        q: "गाडीमा ब्रेक लाइटको काम के हो? (What is the function of a brake light in a vehicle?)",
+        options: ["गाडीको गतिमा वृद्धि गर्नु (Increase vehicle speed)", "ब्रेक लागेको संकेत दिनु (Signal brake application)", "इन्जिनको ताप मापन (Measure engine temperature)", "टायरको चाप जाँच्ने (Check tire pressure)"],
+        answer: 1,
+        explanation: "ब्रेक लाइटले ब्रेक लागेको संकेत दिन्छ। (Brake lights signal to other drivers that brakes are applied.)"
+    },
+    {
+        q: "When brake is applied on a moving vehicle, the kinetic energy is converted into?",
+        options: ["Light energy", "Heat energy", "Sound energy", "Electrical energy"],
+        answer: 1,
+        explanation: "Braking converts kinetic energy into heat energy through friction in the brake system."
+    },
+    {
+        q: "The advantage of a tubeless tyre over tubed tyre is:",
+        options: ["Higher weight", "Less chances of running flat", "Faster air leakage", "Lower durability"],
+        answer: 1,
+        explanation: "Tubeless tyres have slower air leakage and are less likely to go flat suddenly due to their sealed design."
+    },
+    {
+        q: "The parking brakes employed in vehicles are generally operated:",
+        options: ["Hydraulically", "Mechanically", "Pneumatically", "Electronically"],
+        answer: 1,
+        explanation: "Parking brakes are typically mechanical, using cables to engage independently of the hydraulic system."
+    },
+    {
+        q: "The parking brake generally acts on:",
+        options: ["Front wheels", "Rear wheels", "All wheels", "Steering wheel"],
+        answer: 1,
+        explanation: "Parking brakes usually act on the rear wheels to securely hold the vehicle when stationary."
+    },
+    {
+        q: "इन्जिनमा गाडीको ब्रेक लगाउँदा के हुन्छ? (What happens when brakes are applied in a vehicle?)",
+        options: ["गति बढ्न थाल्छ (Speed increases)", "गतिज ऊर्जा तापमा बदलिन्छ (Kinetic energy converts to heat)", "इन्जिन बन्द हुन्छ (Engine stops)", "टायरको चाप बढ्छ (Tire pressure increases)"],
+        answer: 1,
+        explanation: "ब्रेक लगाउँदा गतिज ऊर्जा ताप ऊर्जामा बदलिन्छ। (Braking converts kinetic energy into heat energy via friction.)"
+    },
+    {
+        q: "The air inside hydraulic line of braking system results in:",
+        options: ["Increased braking force", "Poor braking action", "Cooler brakes", "Faster response"],
+        answer: 1,
+        explanation: "Air in hydraulic brake lines causes a spongy pedal and poor braking action due to compressibility."
+    },
+    {
+        q: "तलको ब्रेकिङ्ग प्रणालीको कार्य के हो? (What is the function of the braking system?)",
+        options: ["इन्धन इन्जेक्सनलाई नियन्त्रण गर्नु (Control fuel injection)", "सवारीलाई चलायमान अवस्था नियन्त्रण गर्नु (Control vehicle motion)", "इन्जिनको ताप कम गर्नु (Reduce engine temperature)", "टायरको चाप मापन गर्नु (Measure tire pressure)"],
+        answer: 1,
+        explanation: "ब्रेकिङ्ग प्रणालीले सवारीको गति नियन्त्रण र रोक्ने काम गर्छ। (The braking system controls and stops vehicle motion.)"
+    },
+    {
+        q: "एयर ब्रेक प्रणालीको असफलताका कारण कारको ब्रेक प्रणालीको मर्मत गर्नुपर्ने कारणहरू के हुन सक्छ? (What can cause air brake system failure requiring repair?)",
+        options: ["चापमा आएको परिवर्तन (Pressure changes)", "पिस्टनमा भएको क्षति (Piston damage)", "टायरको घर्षण (Tire friction)", "इन्जिनको ताप (Engine heat)"],
+        answer: 1,
+        explanation: "पिस्टनमा क्षति वा चाप परिवर्तनले एयर ब्रेकको प्रभावकारिता कम गर्छ। (Piston damage or pressure changes reduce air brake effectiveness.)"
+    },
+    {
+        q: "Crank and crankshaft को कार्य के हो? (What is the function of the crank and crankshaft?)",
+        options: ["Cooling water सापूर्ति गर्ने (Supply cooling water)", "Reciprocating motion लाई rotary मा परिवर्तन गर्ने (Convert reciprocating to rotary motion)", "इन्धन इन्जेक्सन (Fuel injection)", "ब्रेक लगाउने (Apply brakes)"],
+        answer: 1,
+        explanation: "क्र्याङ्कशाफ्टले पिस्टनको रैखिक गतिलाई रोटरी गतिमा बदल्छ। (The crankshaft converts the piston’s linear motion to rotary motion.)"
+    },
+    {
+        q: "गाडीमा बैक हुँदा सहायक ब्रेकको आवश्यकता किन पर्छ? (Why is an auxiliary brake needed when reversing a vehicle?)",
+        options: ["सहायक ब्रेकले प्रणालीलाई सन्तुलनमा राख्छ (Auxiliary brake balances the system)", "मुख्य ब्रेकले पर्याप्त काम नगर्दा (When main brake is insufficient)", "इन्जिनको गति बढाउन (To increase engine speed)", "टायरको चाप कम गर्न (To reduce tire pressure)"],
+        answer: 1,
+        explanation: "सहायक ब्रेकले मुख्य ब्रेक अपर्याप्त हुँदा नियन्त्रण गर्छ। (Auxiliary brakes assist when the main brake is insufficient.)"
+    },
+    {
+        q: "उकालो चढ्दा गाडीलाई कसरी रोक्न सकिन्छ? (How can a vehicle be stopped while climbing a hill?)",
+        options: ["ब्रेक मात्र लगाउने (Apply brake only)", "इन्जिन ब्रेकिङ्ग र ह्याण्ड ब्रेक प्रयोग गर्ने (Use engine braking and hand brake)", "गियर बढाउने (Increase gear)", "एक्सेलेरेटर थिच्ने (Press accelerator)"],
+        answer: 1,
+        explanation: "इन्जिन ब्रेकिङ्ग र ह्याण्ड ब्रेकले उकालोमा गाडीलाई सुरक्षित रोक्छ। (Engine braking and hand brake safely stop the vehicle on a hill.)"
+    },
+    {
+        q: "गाडीमा प्रयोग हुने डिफरन्सियलको मुख्य काम के हो? (What is the main function of a differential in a vehicle?)",
+        options: ["गाडीलाई चिप्लो बाटोमा बढी गतिको सहारा दिने (Support speed on slippery roads)", "घुमाउँदा आन्तरिक र बाह्य पाङ्ग्राहरूको गतिको भिन्नता अनुसार शक्ति वितरण गर्नु (Distribute power based on wheel speed differences)", "इन्जिनको शक्ति बढाउने (Increase engine power)", "ब्रेकको प्रभावकारिता बढाउने (Enhance brake effectiveness)"],
+        answer: 1,
+        explanation: "डिफरन्सियलले पाङ्ग्राहरूको गति भिन्नता अनुसार शक्ति वितरण गर्छ। (The differential distributes power based on wheel speed differences during turns.)"
+    },
+    {
+        q: "उकालो तथा ओरालो सडकमा कुन सवारीलाई पहिलो प्राथमिकता दिइन्छ? (Which vehicle gets priority on uphill or downhill roads?)",
+        options: ["ओरालो (Downhill)", "उकालो (Uphill)", "समान गति (Equal speed)", "सबैलाई समान (All equal)"],
+        answer: 1,
+        explanation: "उकालो चढ्ने सवारीलाई प्राथमिकता दिइन्छ किनभने तिनलाई गति कायम राख्न बढी शक्ति चाहिन्छ। (Uphill vehicles get priority due to higher power needs to maintain momentum.)"
+    }
+];
 
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
