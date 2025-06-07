@@ -294,67 +294,315 @@
     <script>
          const questions = [
   // Two Stroke and Four Stroke Engines (12 MCQs)
-  { q: "In two stroke engine, power is generated on:", options: ["Half revolution", "One revolution of crankshaft"], answer: 1 },
-  { q: "In a four stroke cycle engine, the sequence of operation is:", options: ["Expansion, compression, suction and exhaust", "Suction, compression, expansion and exhaust"], answer: 1 },
-  { q: "The four operations in 4-stroke engine are completed in how many crankshaft revolutions?", options: ["1", "2"], answer: 1 },
-  { q: "In four-stroke engine, which stroke is known as power stroke?", options: ["Compression stroke", "Expansion stroke"], answer: 1 },
-  { q: "For the same power, a two-stroke cycle engine occupies:", options: ["More", "Less"], answer: 1 },
-  { q: "A two-stroke cycle engine uses the fuel:", options: ["Steam only", "Petrol and air only"], answer: 1 },
-  { q: "The four operations (suction, compression, expansion, exhaust) in 4-stroke engines are completed in:", options: ["4 revolutions", "2 revolutions of the crankshaft"], answer: 1 },
-  { q: "In four-stroke engines, the power stroke is also known as:", options: ["Expansion stroke", "Exhaust stroke"], answer: 1 },
-  { q: "Section: ignition, expansion, and exhaust stroke takes place in:", options: ["Petrol engine", "Four stroke petrol engine"], answer: 1 },
-  { q: "Compared to the life of a spark plug of a two-stroke engine, the spark plug life of a four-stroke engine is approximately:", options: ["Half", "Twice"], answer: 1 },
-  { q: "Otto cycle is related to:", options: ["Diesel engine", "Petrol engine"], answer: 1 },
-  { q: "Air is compressed to a high pressure, fuel is injected at a temperature above ignition point which burns nearly at constant pressure. Such cycle is called:", options: ["Otto cycle", "Diesel cycle"], answer: 1 },
+  {
+    q: "In a two-stroke engine, power is generated on:",
+    options: ["Half revolution", "One revolution of crankshaft", "Two revolutions", "Every stroke"],
+    answer: 1,
+    explanation: "A two-stroke engine generates power once per crankshaft revolution, as it completes the cycle in one revolution."
+  },
+  {
+    q: "In a four-stroke cycle engine, the sequence of operation is:",
+    options: ["Expansion, compression, suction, exhaust", "Suction, compression, expansion, exhaust", "Compression, suction, exhaust, expansion", "Suction, exhaust, compression, expansion"],
+    answer: 1,
+    explanation: "The four-stroke cycle follows suction (intake), compression, expansion (power), and exhaust in that order."
+  },
+  {
+    q: "The four operations in a 4-stroke engine are completed in how many crankshaft revolutions?",
+    options: ["1", "2", "3", "4"],
+    answer: 1,
+    explanation: "A four-stroke engine completes its cycle (suction, compression, expansion, exhaust) in two crankshaft revolutions."
+  },
+  {
+    q: "In a four-stroke engine, which stroke is known as the power stroke?",
+    options: ["Compression stroke", "Expansion stroke", "Suction stroke", "Exhaust stroke"],
+    answer: 1,
+    explanation: "The expansion stroke, where combustion drives the piston, is the power stroke in a four-stroke engine."
+  },
+  {
+    q: "For the same power, a two-stroke cycle engine occupies:",
+    options: ["More space", "Less space", "Same space", "Double the space"],
+    answer: 1,
+    explanation: "Two-stroke engines are more compact for the same power due to their simpler design and fewer moving parts."
+  },
+  {
+    q: "A two-stroke cycle engine uses the fuel:",
+    options: ["Steam only", "Petrol and air only", "Diesel only", "Petrol or diesel mixed with oil"],
+    answer: 3,
+    explanation: "Two-stroke engines typically use a petrol or diesel mixture with oil for lubrication, as they lack a separate oil sump."
+  },
+  {
+    q: "The four operations (suction, compression, expansion, exhaust) in 4-stroke engines are completed in:",
+    options: ["4 revolutions", "2 revolutions of the crankshaft", "1 revolution", "3 revolutions"],
+    answer: 1,
+    explanation: "A four-stroke engine completes its cycle in two crankshaft revolutions."
+  },
+  {
+    q: "In four-stroke engines, the power stroke is also known as:",
+    options: ["Exhaust stroke", "Expansion stroke", "Compression stroke", "Suction stroke"],
+    answer: 1,
+    explanation: "The power stroke, where combustion occurs, is also called the expansion stroke."
+  },
+  {
+    q: "Suction, ignition, expansion, and exhaust strokes take place in:",
+    options: ["Petrol engine", "Four-stroke petrol engine", "Two-stroke diesel engine", "Steam engine"],
+    answer: 1,
+    explanation: "These strokes occur specifically in a four-stroke petrol engine, which uses spark ignition."
+  },
+  {
+    q: "Compared to the life of a spark plug in a two-stroke engine, the spark plug life of a four-stroke engine is approximately:",
+    options: ["Half", "Twice", "Same", "Quarter"],
+    answer: 1,
+    explanation: "Four-stroke engines fire spark plugs once every two revolutions, doubling their life compared to two-stroke engines."
+  },
+  {
+    q: "Otto cycle is related to:",
+    options: ["Diesel engine", "Petrol engine", "Steam engine", "Gas turbine"],
+    answer: 1,
+    explanation: "The Otto cycle is the thermodynamic cycle used in petrol (spark-ignition) engines."
+  },
+  {
+    q: "Air is compressed to a high pressure, fuel is injected at a temperature above ignition point which burns nearly at constant pressure. Such cycle is called:",
+    options: ["Otto cycle", "Diesel cycle", "Carnot cycle", "Rankine cycle"],
+    answer: 1,
+    explanation: "The Diesel cycle involves compression-ignition and fuel burning at near-constant pressure."
+  },
 
   // Main Parts of Engine and Its Functions (9 MCQs)
-  { q: "Which of the following part is not present in diesel engine?", options: ["Oil ring", "Spark plug"], answer: 1 },
-  { q: "The camshaft of a 4-stroke I.C. engine running at 1500 rpm will run at:", options: ["3000 rpm", "750 rpm"], answer: 1 },
-  { q: "The stroke of an engine is the:", options: ["Volume of the cylinder", "Distance between TDC and BDC"], answer: 1 },
-  { q: "Compression rings of automotive engines are generally made of:", options: ["High carbon steel", "Cast iron and steel"], answer: 1 },
-  { q: "Compression ratio is the:", options: ["Swept volume to clearance volume", "Total volume to clearance volume"], answer: 1 },
-  { q: "If four-cylinder engine has capacity of 2.0 liter, what is swept volume of a single cylinder?", options: ["800 cc", "500 cc"], answer: 1 },
-  { q: "पिस्टनमा लाग्ने Compression ring को Gap मापन गर्न कुन उपकरण प्रयोग गरिन्छ?", options: ["भर्ने गेज", "फिलर गेज"], answer: 1 },
-  { q: "Cylinder Head को Compression Test गर्ने उपकरण कुन हो?", options: ["हाइड्रोस्टेटर", "कम्प्रेसर"], answer: 1 },
-  { q: "Machine parts like cylinders, piston rings, valves, crank shaft, connecting rod, governors, indicators etc. are related to:", options: ["Petrol engine", "Steam engine"], answer: 1 },
+  {
+    q: "Which of the following part is not present in a diesel engine?",
+    options: ["Oil ring", "Spark plug", "Piston", "Fuel injector"],
+    answer: 1,
+    explanation: "Diesel engines use compression ignition, not spark plugs, which are found in petrol engines."
+  },
+  {
+    q: "The camshaft of a 4-stroke I.C. engine running at 1500 rpm will run at:",
+    options: ["3000 rpm", "750 rpm", "1500 rpm", "1000 rpm"],
+    answer: 1,
+    explanation: "The camshaft runs at half the crankshaft speed in a 4-stroke engine, so 1500 rpm ÷ 2 = 750 rpm."
+  },
+  {
+    q: "The stroke of an engine is the:",
+    options: ["Volume of the cylinder", "Distance between TDC and BDC", "Piston diameter", "Compression ratio"],
+    answer: 1,
+    explanation: "Stroke is the distance the piston travels between Top Dead Center (TDC) and Bottom Dead Center (BDC)."
+  },
+  {
+    q: "Compression rings of automotive engines are generally made of:",
+    options: ["High carbon steel", "Cast iron and steel", "Aluminum", "Brass"],
+    answer: 1,
+    explanation: "Compression rings are typically made of cast iron or steel for durability and heat resistance."
+  },
+  {
+    q: "Compression ratio is the:",
+    options: ["Swept volume to clearance volume", "Total volume to clearance volume", "Swept volume to total volume", "Clearance volume to swept volume"],
+    answer: 1,
+    explanation: "Compression ratio is the ratio of total volume (swept + clearance) to clearance volume."
+  },
+  {
+    q: "If a four-cylinder engine has a capacity of 2.0 liters, what is the swept volume of a single cylinder?",
+    options: ["800 cc", "500 cc", "1000 cc", "400 cc"],
+    answer: 1,
+    explanation: "2.0 liters = 2000 cc ÷ 4 cylinders = 500 cc per cylinder."
+  },
+  {
+    q: "पिस्टनमा लाग्ने Compression ring को Gap मापन गर्न कुन उपकरण प्रयोग गरिन्छ? (Which tool is used to measure the gap of a compression ring on a piston?)",
+    options: ["Vernier caliper", "Feeler gauge", "Micrometer", "Dial gauge"],
+    answer: 1,
+    explanation: "फिलर गेजले कम्प्रेसन रिङको ग्याप मापन गर्छ। (A feeler gauge measures the gap of a compression ring.)"
+  },
+  {
+    q: "Cylinder Head को Compression Test गर्ने उपकरण कुन हो? (Which tool is used for a compression test on a cylinder head?)",
+    options: ["Hydrometer", "Compression tester", "Multimeter", "Torque wrench"],
+    answer: 1,
+    explanation: "कम्प्रेसन टेस्टरले सिलिन्डरको चाप जाँच गर्छ। (A compression tester measures cylinder compression.)"
+  },
+  {
+    q: "Machine parts like cylinders, piston rings, valves, crankshaft, connecting rod, governors, indicators, etc. are related to:",
+    options: ["Petrol engine", "Steam engine", "Electric motor", "Hydraulic pump"],
+    answer: 0,
+    explanation: "These components are integral to internal combustion engines, such as petrol engines."
+  },
 
   // Identification of Symptoms for Engine Overhaul (3 MCQs)
-  { q: "Presence of water in the engine oil sump means:", options: ["Water in the fuel system", "Damaged head gasket of the engine"], answer: 1 },
-  { q: "The primary function of a catalytic converter is:", options: ["Reduce noise of engine", "Burns the remaining hydrocarbon and carbon monoxide that pass in exhaust"], answer: 1 },
-  { q: "Exhaust emission produced by motorcycles consists of:", options: ["Carbon monoxide", "Hydrocarbon"], answer: 1 },
+  {
+    q: "Presence of water in the engine oil sump means:",
+    options: ["Water in the fuel system", "Damaged head gasket", "Clogged air filter", "Faulty oil pump"],
+    answer: 1,
+    explanation: "A damaged head gasket allows coolant to leak into the oil sump, causing water contamination."
+  },
+  {
+    q: "The primary function of a catalytic converter is:",
+    options: ["Reduce engine noise", "Burn remaining hydrocarbon and carbon monoxide in exhaust", "Increase fuel efficiency", "Cool exhaust gases"],
+    answer: 1,
+    explanation: "Catalytic converters reduce emissions by converting harmful hydrocarbons and carbon monoxide into less harmful gases."
+  },
+  {
+    q: "Exhaust emission produced by motorcycles consists of:",
+    options: ["Carbon monoxide", "Hydrocarbon", "Nitrogen oxides", "All of the above"],
+    answer: 3,
+    explanation: "Motorcycle exhaust contains carbon monoxide, hydrocarbons, and nitrogen oxides, contributing to pollution."
+  },
 
   // Troubleshooting and Maintenance of I.C. Engine (10 MCQs)
-  { q: "Maximum oil pressure in the lubrication system is controlled by:", options: ["Oil filter", "Pressure relief valve"], answer: 1 },
-  { q: "The carbon from the cylinder head of an engine is removed with:", options: ["Soap", "Scraper"], answer: 1 },
-  { q: "The advantage of the fuel injection system over the carburetor system is:", options: ["Improved power output", "All of the above"], answer: 1 },
-  { q: "The carburetor supplies …… into the engine cylinder.", options: ["Air", "Air fuel mixture"], answer: 1 },
-  { q: "In which of the following fuel injector is used?", options: ["Spark-ignition engines", "Compression-ignition engines"], answer: 1 },
-  { q: "Which of the following is indication of problem in fuel injection pump?", options: ["Difficulty starting", "All of the above"], answer: 1 },
-  { q: "The fuel injection timing in a distributor type pump is controlled by:", options: ["Changing plunger stroke", "Rotating the cam ring"], answer: 1 },
-  { q: "The secondary dry-type filter element of an engine of excavator is cleaned:", options: ["Directing compressed air nozzle to outer surface of element", "It is not cleaned but only changed as required"], answer: 1 },
-  { q: "गाडी स्टार्ट नहुने कारण के हुनसक्छ?", options: ["इन्धन सकिनु", "एयर फिल्टर सफा नगरेको"], answer: 1 },
-  { q: "The following is considered as best antifreeze solution:", options: ["Methanol", "Ethylene glycol"], answer: 1 },
+  {
+    q: "Maximum oil pressure in the lubrication system is controlled by:",
+    options: ["Oil filter", "Pressure relief valve", "Oil pump", "Crankshaft"],
+    answer: 1,
+    explanation: "The pressure relief valve regulates maximum oil pressure to prevent damage to the lubrication system."
+  },
+  {
+    q: "The carbon from the cylinder head of an engine is removed with:",
+    options: ["Soap", "Scraper", "Water jet", "Sandpaper"],
+    answer: 1,
+    explanation: "A scraper is used to remove carbon deposits from the cylinder head during maintenance."
+  },
+  {
+    q: "The advantage of the fuel injection system over the carburetor system is:",
+    options: ["Improved power output", "Better fuel efficiency", "Precise fuel delivery", "All of the above"],
+    answer: 3,
+    explanation: "Fuel injection systems offer better efficiency, precise delivery, and improved power compared to carburetors."
+  },
+  {
+    q: "The carburetor supplies …… into the engine cylinder.",
+    options: ["Air", "Air-fuel mixture", "Fuel only", "Coolant"],
+    answer: 1,
+    explanation: "The carburetor mixes air and fuel in the correct ratio and supplies it to the engine cylinder."
+  },
+  {
+    q: "In which of the following is a fuel injector used?",
+    options: ["Spark-ignition engines", "Compression-ignition engines", "Steam engines", "Electric engines"],
+    answer: 1,
+    explanation: "Fuel injectors are used in compression-ignition (diesel) engines for precise fuel delivery."
+  },
+  {
+    q: "Which of the following is an indication of a problem in the fuel injection pump?",
+    options: ["Difficulty starting", "Excessive smoke", "Reduced power", "All of the above"],
+    answer: 3,
+    explanation: "A faulty fuel injection pump can cause difficulty starting, excessive smoke, and reduced power."
+  },
+  {
+    q: "The fuel injection timing in a distributor-type pump is controlled by:",
+    options: ["Changing plunger stroke", "Rotating the cam ring", "Adjusting nozzle size", "Varying fuel pressure"],
+    answer: 1,
+    explanation: "Rotating the cam ring adjusts the timing of fuel injection in a distributor-type pump."
+  },
+  {
+    q: "The secondary dry-type filter element of an engine of an excavator is cleaned:",
+    options: ["With compressed air on the outer surface", "It is not cleaned but only changed as required", "By washing with water", "By brushing with a soft brush"],
+    answer: 1,
+    explanation: "Secondary dry-type filters are not cleaned; they are replaced when clogged to ensure engine protection."
+  },
+  {
+    q: "गाडी स्टार्ट नहुने कारण के हुनसक्छ? (What could cause a vehicle not to start?)",
+    options: ["इन्धन सकिनु (No fuel)", "एयर फिल्टर सफा नगरेको (Dirty air filter)", "टायरको कम चाप (Low tire pressure)", "रेडिएटरमा पानीको कमी (Low radiator water)"],
+    answer: 0,
+    explanation: "इन्धनको अभावले गाडी स्टार्ट हुँदैन। (Lack of fuel is a common reason for a vehicle not starting.)"
+  },
+  {
+    q: "The following is considered as the best antifreeze solution:",
+    options: ["Methanol", "Ethylene glycol", "Distilled water", "Glycerine"],
+    answer: 1,
+    explanation: "Ethylene glycol is the preferred antifreeze due to its effective freeze-point depression and heat transfer properties."
+  },
 
-
-        
-  { q: "Suction, compression, expansion, and exhaust strokes take place in:", options: ["Steam engine", "Diesel engine"], answer: 1 },
-  { q: "Suction, compression, exhaust strokes happen in:", options: ["Diesel engine", "Petrol engine"], answer: 1 },
-  { q: "The two basic types of internal combustion engines are:", options: ["Piston and reciprocating", "Reciprocating and rotary"], answer: 1 },
-  { q: "The constant volume cycle is also called:", options: ["Carnot cycle", "Otto cycle"], answer: 1 },
-  { q: "The expression which does not give the efficiency of Otto cycle is:", options: ["Temperature after compression", "Temperature before expansion"], answer: 1 },
-  { q: "Otto cycle is also known as:", options: ["Constant pressure cycle", "Constant volume cycle"], answer: 1 },
-  { q: "Diesel engine operates on:", options: ["Constant volume cycle", "Constant pressure cycle"], answer: 1 },
-  { q: "Two constant volume + two adiabatic processes = ?", options: ["Joule cycle", "Otto cycle"], answer: 1 },
-  { q: "At TDC, volume above piston is:", options: ["Compression ratio", "Clearance volume"], answer: 1 },
-  { q: "Compression ratio of diesel engine:", options: ["10 to 15", "16 to 20"], answer: 1 },
-  { q: "Compression ratio definition:", options: ["Swept volume / cylinder volume", "Volume before / after compression"], answer: 1 },
-  { q: "As octane number increases, knocking tendency of petrol engine:", options: ["Remains same", "Increases"], answer: 1 },
-  { q: "As temperature of I.C. engine increases, efficiency will:", options: ["Decrease", "Increase"], answer: 1 },
-  { q: "Specific fuel consumption is defined as:", options: ["Fuel consumption per BHP", "Fuel consumption per hour"], answer: 1 },
-  { q: "Chemically correct air-fuel ratio is:", options: ["7:1", "15:1"], answer: 1 },
-  { q: "Nepal Vehicle Mass Emission Standard 2069 is equivalent to:", options: ["ISO 9001", "Euro III"], answer: 1 }
-
-  ];
+  // Additional Questions
+  {
+    q: "Suction, compression, expansion, and exhaust strokes take place in:",
+    options: ["Steam engine", "Diesel engine", "Electric motor", "Gas turbine"],
+    answer: 1,
+    explanation: "These strokes occur in a four-stroke diesel engine, completing the combustion cycle."
+  },
+  {
+    q: "Suction, compression, exhaust strokes happen in:",
+    options: ["Steam engine", "Petrol engine", "Electric motor", "Hybrid engine"],
+    answer: 1,
+    explanation: "Suction, compression, and exhaust strokes are part of the four-stroke cycle in a petrol engine."
+  },
+  {
+    q: "The two basic types of internal combustion engines are:",
+    options: ["Piston and reciprocating", "Reciprocating and rotary", "Diesel and steam", "Petrol and electric"],
+    answer: 1,
+    explanation: "Internal combustion engines are classified as reciprocating (e.g., piston engines) and rotary (e.g., Wankel engines)."
+  },
+  {
+    q: "The constant volume cycle is also called:",
+    options: ["Carnot cycle", "Otto cycle", "Rankine cycle", "Joule cycle"],
+    answer: 1,
+    explanation: "The Otto cycle, used in petrol engines, is a constant volume cycle where combustion occurs at constant volume."
+  },
+  {
+    q: "The expression which does not give the efficiency of the Otto cycle is:",
+    options: ["Temperature after compression", "Temperature before expansion", "Compression ratio", "Heat rejection"],
+    answer: 1,
+    explanation: "Otto cycle efficiency depends on compression ratio, not specifically the temperature before expansion."
+  },
+  {
+    q: "Otto cycle is also known as:",
+    options: ["Constant pressure cycle", "Constant volume cycle", "Adiabatic cycle", "Isothermal cycle"],
+    answer: 1,
+    explanation: "The Otto cycle is a constant volume cycle, as combustion occurs at constant volume in petrol engines."
+  },
+  {
+    q: "Diesel engine operates on:",
+    options: ["Constant volume cycle", "Constant pressure cycle", "Constant temperature cycle", "Adiabatic cycle"],
+    answer: 1,
+    explanation: "Diesel engines operate on the Diesel cycle, where combustion occurs at near-constant pressure."
+  },
+  {
+    q: "Two constant volume + two adiabatic processes = ?",
+    options: ["Joule cycle", "Otto cycle", "Carnot cycle", "Rankine cycle"],
+    answer: 1,
+    explanation: "The Otto cycle consists of two constant volume processes (heat addition/rejection) and two adiabatic processes (compression/expansion)."
+  },
+  {
+    q: "At TDC, volume above piston is:",
+    options: ["Compression ratio", "Clearance volume", "Swept volume", "Total volume"],
+    answer: 1,
+    explanation: "At Top Dead Center (TDC), the volume above the piston is the clearance volume."
+  },
+  {
+    q: "Compression ratio of a diesel engine:",
+    options: ["10 to 15", "16 to 20", "5 to 8", "25 to 30"],
+    answer: 1,
+    explanation: "Diesel engines typically have a compression ratio of 16:1 to 20:1 for efficient compression ignition."
+  },
+  {
+    q: "Compression ratio definition:",
+    options: ["Swept volume / cylinder volume", "Volume before / after compression", "Clearance volume / total volume", "Swept volume / clearance volume"],
+    answer: 1,
+    explanation: "Compression ratio is the total volume before compression divided by the volume after compression (clearance volume)."
+  },
+  {
+    q: "As octane number increases, knocking tendency of a petrol engine:",
+    options: ["Increases", "Decreases", "Remains same", "Fluctuates"],
+    answer: 1,
+    explanation: "Higher octane numbers reduce the knocking tendency in petrol engines by improving fuel stability."
+  },
+  {
+    q: "As temperature of an I.C. engine increases, efficiency will:",
+    options: ["Decrease", "Increase", "Remain constant", "Fluctuate"],
+    answer: 1,
+    explanation: "Higher operating temperatures improve thermal efficiency in I.C. engines, up to a limit."
+  },
+  {
+    q: "Specific fuel consumption is defined as:",
+    options: ["Fuel consumption per BHP", "Fuel consumption per hour", "Fuel consumption per kilometer", "Fuel consumption per liter"],
+    answer: 0,
+    explanation: "Specific fuel consumption is the fuel used per unit of brake horsepower produced."
+  },
+  {
+    q: "Chemically correct air-fuel ratio is:",
+    options: ["7:1", "15:1", "10:1", "20:1"],
+    answer: 1,
+    explanation: "The chemically correct (stoichiometric) air-fuel ratio for petrol engines is approximately 15:1 by mass."
+  },
+  {
+    q: "Nepal Vehicle Mass Emission Standard 2069 is equivalent to:",
+    options: ["ISO 9001", "Euro III", "Bharat Stage II", "EPA Tier 1"],
+    answer: 1,
+    explanation: "Nepal Vehicle Mass Emission Standard 2069 aligns with Euro III emission norms for vehicles."
+  }
+];
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
