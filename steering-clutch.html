@@ -334,188 +334,189 @@
     <audio id="wrong-sound" src="https://www.soundjay.com/buttons/beep-02.mp3"></audio>
 
     <script>
-      const questions = [
-    {
-        q: "Which gear type is commonly used in a vehicle’s steering system?",
-        options: ["Bevel gear", "Rack and pinion", "Spur gear", "Helical gear"],
-        answer: 1,
-        explanation: "Rack and pinion is widely used in steering systems for its simplicity and precise control."
-    },
-    {
-        q: "What should be checked first for a stiff steering wheel in a hydraulic power steering system?",
-        options: ["Hydraulic hoses condition", "Hydraulic fluid level", "Tire pressure", "Steering linkage"],
-        answer: 1,
-        explanation: "Low hydraulic fluid level is the most common cause of stiff steering and should be checked first."
-    },
-    {
-        q: "Why is a propeller shaft typically tubular instead of solid?",
-        options: ["To reduce strength", "To minimize weight and sag", "To increase flexibility", "To enhance torque"],
-        answer: 1,
-        explanation: "A tubular shaft is lighter and resists sagging better than a solid shaft of the same strength."
-    },
-    {
-        q: "What is the primary function of a vehicle’s steering system?",
-        options: ["To control engine speed", "To achieve angular motion of the wheels", "To regulate braking", "To adjust suspension height"],
-        answer: 1,
-        explanation: "The steering system directs the vehicle by turning the wheels at the desired angle."
-    },
-    {
-        q: "What is the function of a universal joint in a propeller shaft?",
-        options: ["To increase shaft length", "To transfer torque at an angle", "To reduce vibration", "To lubricate the shaft"],
-        answer: 1,
-        explanation: "Universal joints allow torque transmission between misaligned shafts, such as in a drivetrain."
-    },
-    {
-        q: "What is the basic function of a clutch in a vehicle?",
-        options: ["To transmit engine torque to the transmission", "To maintain constant vehicle speed", "To cool the engine", "To charge the battery"],
-        answer: 0,
-        explanation: "The clutch connects the engine to the transmission, allowing power transfer and gear changes."
-    },
-    {
-        q: "Which clutch type is commonly used in passenger vehicles?",
-        options: ["Single-plate clutch", "Cone clutch", "Multi-plate clutch", "Centrifugal clutch"],
-        answer: 0,
-        explanation: "Single-plate clutches are simple and widely used in manual transmission passenger vehicles."
-    },
-    {
-        q: "Steering gear मा gear sector वा toothed roller को mesh कुनसँग हुन्छ? (Which component meshes with the gear sector or toothed roller in a steering gear?)",
-        options: ["Ball bearing", "Worm gear", "Tie rod", "Steering shaft"],
-        answer: 1,
-        explanation: "वर्म र रोलर स्टेरिङमा टूथ्ड रोलर वर्म गियरसँग मेश हुन्छ। (In worm and roller steering, the toothed roller meshes with a worm gear for precise control.)"
-    },
-    {
-        q: "Clutch ले सामान्यतः कति टोक़ ट्रान्समिट गर्छ? (How much torque does a clutch typically transmit?)",
-        options: ["80% of maximum engine torque", "Up to 120% of maximum engine torque", "50% of maximum engine torque", "Exactly 100% of engine torque"],
-        answer: 1,
-        explanation: "क्लचले अधिकतम इन्जिन टर्कको १२०% सम्म ट्रान्समिट गर्न सक्छ। (Clutches are designed to transmit up to 120% of engine torque to handle peak loads.)"
-    },
-    {
-        q: "कुन पार्ट स्टेरिङ सिस्टममा समावेश हुन्छ? (Which part is included in the steering system?)",
-        options: ["Brake caliper", "Steering gear", "Fuel injector", "Clutch disc"],
-        answer: 1,
-        explanation: "स्टेरिङ गियर स्टेरिङ सिस्टमको महत्वपूर्ण कम्पोनेन्ट हो। (The steering gear is a critical component of the steering system, unlike brake calipers.)"
-    },
-    {
-        q: "स्टेरिङ सिस्टमको मुख्य काम के हो? (What is the main function of the steering system?)",
-        options: ["गाडी रोक्ने (Stop the vehicle)", "गाडीको दिशा नियन्त्रण गर्ने (Control vehicle direction)", "इन्जिनको गति नियन्त्रण (Control engine speed)", "ब्रेक लागाउने (Apply brakes)"],
-        answer: 1,
-        explanation: "स्टेरिङ सिस्टमले गाडीको दिशा नियन्त्रण गर्छ। (The steering system controls the vehicle’s direction by turning the wheels.)"
-    },
-    {
-        q: "Which component converts steering wheel rotation into lateral motion?",
-        options: ["Steering shaft", "Steering gearbox", "Tie rod", "Kingpin"],
-        answer: 1,
-        explanation: "The steering gearbox (e.g., rack and pinion) converts rotational input into lateral wheel movement."
-    },
-    {
-        q: "What does excessive play in the steering wheel cause?",
-        options: ["Easier turning", "Difficulty controlling the vehicle", "Improved fuel efficiency", "Smoother braking"],
-        answer: 1,
-        explanation: "Excessive play reduces steering precision, making vehicle control difficult."
-    },
-    {
-        q: "What can cause over-steering in an automobile?",
-        options: ["High tire pressure", "Worn rear suspension components", "Low hydraulic fluid", "Worn clutch"],
-        answer: 1,
-        explanation: "Worn rear suspension components can cause over-steering by destabilizing the rear end."
-    },
-    {
-        q: "Which is NOT a type of clutch?",
-        options: ["Diaphragm clutch", "Synchronizing clutch", "Single-plate clutch", "Multi-plate clutch"],
-        answer: 1,
-        explanation: "Synchronizing refers to transmission components, not a clutch type."
-    },
-    {
-        q: "Which alignment parameter is part of the steering system?",
-        options: ["Wheelbase", "Caster", "Track width", "Ride height"],
-        answer: 1,
-        explanation: "Caster is a steering alignment angle affecting stability and returnability."
-    },
-    {
-        q: "What is the function of the tie-rod end in a steering system?",
-        options: ["To absorb road shocks", "To connect steering linkage to wheels", "To increase engine torque", "To cool the steering gear"],
-        answer: 1,
-        explanation: "Tie-rod ends link the steering gearbox to the wheels for directional control."
-    },
-    {
-        q: "Which parts are typically found in a steering wheel assembly?",
-        options: ["Brake pedal and hub", "Spoke, hub, and rim", "Clutch disc and flywheel", "Gearbox and differential"],
-        answer: 1,
-        explanation: "The steering wheel consists of spokes, a hub, and a rim for driver input."
-    },
-    {
-        q: "What is the role of the flywheel in a clutch system?",
-        options: ["To start the engine", "To smooth out power impulses", "To engage gears", "To reduce fuel consumption"],
-        answer: 1,
-        explanation: "The flywheel stores energy and smooths engine power delivery to the clutch."
-    },
-    {
-        q: "What is the primary function of the clutch in a vehicle?",
-        options: ["To transfer power from engine to transmission", "To cool the engine", "To regulate tire pressure", "To charge the battery"],
-        answer: 0,
-        explanation: "The clutch enables power transfer from the engine to the transmission."
-    },
-    {
-        q: "In a planetary gear set of an automatic transmission, which component increases torque?",
-        options: ["Planet carrier", "Sun gear", "Ring gear", "Clutch pack"],
-        answer: 0,
-        explanation: "The planet carrier, as the output member in certain configurations, contributes to torque multiplication."
-    },
-    {
-        q: "What enables gear changes in an automatic transmission?",
-        options: ["Synchronizer", "Hydraulic multi-plate clutch", "Manual linkage", "Bevel gear"],
-        answer: 1,
-        explanation: "Hydraulic multi-plate clutches engage and disengage gears in automatic transmissions."
-    },
-    {
-        q: "In a single dry plate clutch, how are torsional vibrations absorbed?",
-        options: ["By the pressure plate", "By coil springs in the clutch disc", "By the flywheel", "By the release bearing"],
-        answer: 1,
-        explanation: "Coil springs in the clutch disc absorb torsional vibrations for smooth engagement."
-    },
-    {
-        q: "Which component connects the clutch pedal to the clutch mechanism?",
-        options: ["Clutch disc", "Clutch cable or linkage", "Pressure plate", "Flywheel"],
-        answer: 1,
-        explanation: "The clutch cable or linkage transmits pedal movement to the clutch mechanism."
-    },
-    {
-        q: "What is the primary purpose of a steering damper?",
-        options: ["To enhance acceleration", "To reduce steering vibrations", "To increase tire pressure", "To cool the steering fluid"],
-        answer: 1,
-        explanation: "A steering damper minimizes vibrations and stabilizes steering, especially at high speeds."
-    },
-    {
-        q: "Which gear in a manual transmission provides maximum torque multiplication?",
-        options: ["4th gear", "1st gear", "3rd gear", "Reverse gear"],
-        answer: 1,
-        explanation: "1st gear provides the highest torque multiplication for starting and heavy loads."
-    },
-    {
-        q: "Which part allows angular movement of front wheels for smooth turning?",
-        options: ["Differential", "Kingpin", "Propeller shaft", "Clutch"],
-        answer: 1,
-        explanation: "The kingpin allows the front wheels to pivot for steering."
-    },
-    {
-        q: "In front-wheel drive vehicles, where is the transmission system typically placed?",
-        options: ["At the rear", "Alongside the engine", "Near the rear axle", "Above the fuel tank"],
-        answer: 1,
-        explanation: "In front-wheel drive vehicles, the transmission is integrated with the engine at the front."
-    },
-    {
-        q: "What is a common symptom of a worn clutch?",
-        options: ["Clutch slippage", "Improved fuel efficiency", "Smoother gear shifts", "Reduced engine noise"],
-        answer: 0,
-        explanation: "A worn clutch causes slippage, reducing power transfer and efficiency."
-    },
-    {
-        q: "What maintenance task helps prevent steering system wear?",
-        options: ["Checking tire pressure", "Regular wheel alignment", "Changing engine oil", "Replacing air filter"],
-        answer: 1,
-        explanation: "Regular wheel alignment reduces stress on steering components and ensures proper handling."
-    }
-];
+        const questions = [
+            {
+                q: "Which gear type is commonly used in a vehicle’s steering system?",
+                options: ["Bevel gear", "Rack and pinion", "Spur gear", "Helical gear"],
+                answer: 1,
+                explanation: "Rack and pinion is widely used in steering systems for its simplicity and precise control."
+            },
+            {
+                q: "What should be checked first for a stiff steering wheel in a hydraulic power steering system?",
+                options: ["Hydraulic hoses condition", "Hydraulic fluid level", "Tire pressure", "Steering linkage"],
+                answer: 1,
+                explanation: "Low hydraulic fluid level is the most common cause of stiff steering and should be checked first."
+            },
+            {
+                q: "Why is a propeller shaft typically tubular instead of solid?",
+                options: ["To reduce strength", "To minimize weight and sag", "To increase flexibility", "To enhance torque"],
+                answer: 1,
+                explanation: "A tubular shaft is lighter and resists sagging better than a solid shaft of the same strength."
+            },
+            {
+                q: "What is the primary function of a vehicle’s steering system?",
+                options: ["To control engine speed", "To achieve angular motion of the wheels", "To regulate braking", "To adjust suspension height"],
+                answer: 1,
+                explanation: "The steering system directs the vehicle by turning the wheels at the desired angle."
+            },
+            {
+                q: "What is the function of a universal joint in a propeller shaft?",
+                options: ["To increase shaft length", "To transfer torque at an angle", "To reduce vibration", "To lubricate the shaft"],
+                answer: 1,
+                explanation: "Universal joints allow torque transmission between misaligned shafts, such as in a drivetrain."
+            },
+            {
+                q: "What is the basic function of a clutch in a vehicle?",
+                options: ["To transmit engine torque to the transmission", "To maintain constant vehicle speed", "To cool the engine", "To charge the battery"],
+                answer: 0,
+                explanation: "The clutch connects the engine to the transmission, allowing power transfer and gear changes."
+            },
+            {
+                q: "Which clutch type is commonly used in passenger vehicles?",
+                options: ["Single-plate clutch", "Cone clutch", "Multi-plate clutch", "Centrifugal clutch"],
+                answer: 0,
+                explanation: "Single-plate clutches are simple and widely used in manual transmission passenger vehicles."
+            },
+            {
+                q: "Steering gear मा gear sector वा toothed roller को mesh कुनसँग हुन्छ? (Which component meshes with the gear sector or toothed roller in a steering gear?)",
+                options: ["Ball bearing", "Worm gear", "Tie rod", "Steering shaft"],
+                answer: 1,
+                explanation: "वर्म र रोलर स्टेरिङमा टूथ्ड रोलर वर्म गियरसँग मेश हुन्छ। (In worm and roller steering, the toothed roller meshes with a worm gear for precise control.)"
+            },
+            {
+                q: "Clutch ले सामान्यतः कति टोक़ ट्रान्समिट गर्छ? (How much torque does a clutch typically transmit?)",
+                options: ["80% of maximum engine torque", "Up to 120% of maximum engine torque", "50% of maximum engine torque", "Exactly 100% of engine torque"],
+                answer: 1,
+                explanation: "क्लचले अधिकतम इन्जिन टर्कको १२०% सम्म ट्रान्समिट गर्न सक्छ। (Clutches are designed to transmit up to 120% of engine torque to handle peak loads.)"
+            },
+            {
+                q: "कुन पार्ट स्टेरिङ सिस्टममा समावेश हुन्छ? (Which part is included in the steering system?)",
+                options: ["Brake caliper", "Steering gear", "Fuel injector", "Clutch disc"],
+                answer: 1,
+                explanation: "स्टेरिङ गियर स्टेरिङ सिस्टमको महत्वपूर्ण कम्पोनेन्ट हो। (The steering gear is a critical component of the steering system, unlike brake calipers.)"
+            },
+            {
+                q: "स्टेरिङ सिस्टमको मुख्य काम के हो? (What is the main function of the steering system?)",
+                options: ["गाडी रोक्ने (Stop the vehicle)", "गाडीको दिशा नियन्त्रण गर्ने (Control vehicle direction)", "इन्जिनको गति नियन्त्रण (Control engine speed)", "ब्रेक लागाउने (Apply brakes)"],
+                answer: 1,
+                explanation: "स्टेरिङ सिस्टमले गाडीको दिशा नियन्त्रण गर्छ। (The steering system controls the vehicle’s direction by turning the wheels.)"
+            },
+            {
+                q: "Which component converts steering wheel rotation into lateral motion?",
+                options: ["Steering shaft", "Steering gearbox", "Tie rod", "Kingpin"],
+                answer: 1,
+                explanation: "The steering gearbox (e.g., rack and pinion) converts rotational input into lateral wheel movement."
+            },
+            {
+                q: "What does excessive play in the steering wheel cause?",
+                options: ["Easier turning", "Difficulty controlling the vehicle", "Improved fuel efficiency", "Smoother braking"],
+                answer: 1,
+                explanation: "Excessive play reduces steering precision, making vehicle control difficult."
+            },
+            {
+                q: "What can cause over-steering in an automobile?",
+                options: ["High tire pressure", "Worn rear suspension components", "Low hydraulic fluid", "Worn clutch"],
+                answer: 1,
+                explanation: "Worn rear suspension components can cause over-steering by destabilizing the rear end."
+            },
+            {
+                q: "Which is NOT a type of clutch?",
+                options: ["Diaphragm clutch", "Synchronizing clutch", "Single-plate clutch", "Multi-plate clutch"],
+                answer: 1,
+                explanation: "Synchronizing refers to transmission components, not a clutch type."
+            },
+            {
+                q: "Which alignment parameter is part of the steering system?",
+                options: ["Wheelbase", "Caster", "Track width", "Ride height"],
+                answer: 1,
+                explanation: "Caster is a steering alignment angle affecting stability and returnability."
+            },
+            {
+                q: "What is the function of the tie-rod end in a steering system?",
+                options: ["To absorb road shocks", "To connect steering linkage to wheels", "To increase engine torque", "To cool the steering gear"],
+                answer: 1,
+                explanation: "Tie-rod ends link the steering gearbox to the wheels for directional control."
+            },
+            {
+                q: "Which parts are typically found in a steering wheel assembly?",
+                options: ["Brake pedal and hub", "Spoke, hub, and rim", "Clutch disc and flywheel", "Gearbox and differential"],
+                answer: 1,
+                explanation: "The steering wheel consists of spokes, a hub, and a rim for driver input."
+            },
+            {
+                q: "What is the role of the flywheel in a clutch system?",
+                options: ["To start the engine", "To smooth out power impulses", "To engage gears", "To reduce fuel consumption"],
+                answer: 1,
+                explanation: "The flywheel stores energy and smooths engine power delivery to the clutch."
+            },
+            {
+                q: "What is the primary function of the clutch in a vehicle?",
+                options: ["To transfer power from engine to transmission", "To cool the engine", "To regulate tire pressure", "To charge the battery"],
+                answer: 0,
+                explanation: "The clutch enables power transfer from the engine to the transmission."
+            },
+            {
+                q: "In a planetary gear set of an automatic transmission, which component increases torque?",
+                options: ["Planet carrier", "Sun gear", "Ring gear", "Clutch pack"],
+                answer: 0,
+                explanation: "The planet carrier, as the output member in certain configurations, contributes to torque multiplication."
+            },
+            {
+                q: "What enables gear changes in an automatic transmission?",
+                options: ["Synchronizer", "Hydraulic multi-plate clutch", "Manual linkage", "Bevel gear"],
+                answer: 1,
+                explanation: "Hydraulic multi-plate clutches engage and disengage gears in automatic transmissions."
+            },
+            {
+                q: "In a single dry plate clutch, how are torsional vibrations absorbed?",
+                options: ["By the pressure plate", "By coil springs in the clutch disc", "By the flywheel", "By the release bearing"],
+                answer: 1,
+                explanation: "Coil springs in the clutch disc absorb torsional vibrations for smooth engagement."
+            },
+            {
+                q: "Which component connects the clutch pedal to the clutch mechanism?",
+                options: ["Clutch disc", "Clutch cable or linkage", "Pressure plate", "Flywheel"],
+                answer: 1,
+                explanation: "The clutch cable or linkage transmits pedal movement to the clutch mechanism."
+            },
+            {
+                q: "What is the primary purpose of a steering damper?",
+                options: ["To enhance acceleration", "To reduce steering vibrations", "To increase tire pressure", "To cool the steering fluid"],
+                answer: 1,
+                explanation: "A steering damper minimizes vibrations and stabilizes steering, especially at high speeds."
+            },
+            {
+                q: "Which gear in a manual transmission provides maximum torque multiplication?",
+                options: ["4th gear", "1st gear", "3rd gear", "Reverse gear"],
+                answer: 1,
+                explanation: "1st gear provides the highest torque multiplication for starting and heavy loads."
+            },
+            {
+                q: "Which part allows angular movement of front wheels for smooth turning?",
+                options: ["Differential", "Kingpin", "Propeller shaft", "Clutch"],
+                answer: 1,
+                explanation: "The kingpin allows the front wheels to pivot for steering."
+            },
+            {
+                q: "In front-wheel drive vehicles, where is the transmission system typically placed?",
+                options: ["At the rear", "Alongside the engine", "Near the rear axle", "Above the fuel tank"],
+                answer: 1,
+                explanation: "In front-wheel drive vehicles, the transmission is integrated with the engine at the front."
+            },
+            {
+                q: "What is a common symptom of a worn clutch?",
+                options: ["Clutch slippage", "Improved fuel efficiency", "Smoother gear shifts", "Reduced engine noise"],
+                answer: 0,
+                explanation: "A worn clutch causes slippage, reducing power transfer and efficiency."
+            },
+            {
+                q: "What maintenance task helps prevent steering system wear?",
+                options: ["Checking tire pressure", "Regular wheel alignment", "Changing engine oil", "Replacing air filter"],
+                answer: 1,
+                explanation: "Regular wheel alignment reduces stress on steering components and ensures proper handling."
+            }
+        ];
+
         let currentPage = 0;
         let score = 0;
         let skipped = [];
@@ -535,18 +536,14 @@
         const correctSound = document.getElementById("correct-sound");
         const wrongSound = document.getElementById("wrong-sound");
 
-        // Load progress from localStorage
-        function loadProgress() {
-            const saved = localStorage.getItem("quizProgressSteeringClutch");
-            if (saved) {
-                const { currentPage: savedPage, score: savedScore, skipped: savedSkipped, answers: savedAnswers, time: savedTime } = JSON.parse(saved);
-                currentPage = savedPage;
-                score = savedScore;
-                skipped = savedSkipped;
-                userAnswers = savedAnswers || Array(questions.length).fill(null);
-                timerSeconds = savedTime || 0;
-                updateCurrentScore();
-            }
+        // Clear progress to start fresh
+        function clearProgress() {
+            localStorage.removeItem("quizProgressSteeringClutch");
+            currentPage = 0;
+            score = 0;
+            skipped = [];
+            userAnswers = Array(questions.length).fill(null);
+            timerSeconds = 0;
         }
 
         // Save progress to localStorage
@@ -634,34 +631,6 @@
 
             updateProgress();
             saveProgress();
-            restoreAnswers(startIndex, endIndex);
-        }
-
-        // Restore previous answers for the current page
-        function restoreAnswers(startIndex, endIndex) {
-            for (let i = startIndex; i < endIndex; i++) {
-                if (userAnswers[i] !== null && userAnswers[i] !== 'Skipped') {
-                    const questionDiv = document.querySelector(`.question[data-index="${i}"]`);
-                    const buttons = questionDiv.querySelectorAll('.options button');
-                    const q = questions[i];
-                    buttons.forEach(btn => {
-                        btn.disabled = true;
-                        if (btn.textContent === q.options[q.answer]) {
-                            btn.classList.add('correct');
-                        }
-                        if (btn.textContent === userAnswers[i] && userAnswers[i] !== q.options[q.answer]) {
-                            btn.classList.add('wrong');
-                        }
-                    });
-                    questionDiv.querySelector('.explanation').style.display = 'block';
-                    questionDiv.querySelector('.skip-button').disabled = true;
-                } else if (userAnswers[i] === 'Skipped') {
-                    const questionDiv = document.querySelector(`.question[data-index="${i}"]`);
-                    questionDiv.querySelectorAll('.options button').forEach(btn => btn.disabled = true);
-                    questionDiv.querySelector('.skip-button').disabled = true;
-                    questionDiv.querySelector('.explanation').style.display = 'block';
-                }
-            }
         }
 
         // Check if all questions on the current page are answered or skipped
@@ -798,23 +767,24 @@
 
         // Restart quiz
         function restartQuiz() {
-            currentPage = 0;
-            score = 0;
-            skipped = [];
-            userAnswers = Array(questions.length).fill(null);
-            timerSeconds = 0;
+            clearProgress();
             resultsEl.classList.add('hidden');
             scoreEl.textContent = '';
-            localStorage.removeItem('quizProgressSteeringClutch');
             startTimer();
             showQuestions(currentPage);
             updateCurrentScore();
         }
 
-        // Initialize
-        loadProgress();
-        startTimer();
-        showQuestions(currentPage);
+        // Initialize quiz
+        function initialize() {
+            clearProgress(); // Reset all progress on page load
+            startTimer();
+            showQuestions(currentPage);
+            updateCurrentScore();
+        }
+
+        // Start quiz on page load
+        initialize();
     </script>
 </body>
 </html>
