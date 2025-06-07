@@ -207,47 +207,242 @@
     </div>
 
     <script>
-        const questions = [
-            { q: "Air conditioning is a system for controlling:", options: ["Temperature", "All of the above"], answer: 1, explanation: "Air conditioning controls temperature, humidity, air quality, and circulation for comfort." },
-            { q: "The moisture in refrigerant is removed by:", options: ["Expansion valve", "Drier"], answer: 1, explanation: "The drier (or filter-drier) removes moisture from the refrigerant to prevent corrosion and freezing in the system." },
-            { q: "Freon group of refrigerants are:", options: ["Non-toxic but inflammable", "Non-toxic and non-inflammable"], answer: 1, explanation: "Freon refrigerants, like R22, are non-toxic and non-inflammable, making them safe for use in air conditioning." },
-            { q: "During a refrigeration cycle, heat is rejected by the refrigerant in the:", options: ["Evaporator", "Condenser"], answer: 1, explanation: "The condenser rejects heat from the refrigerant to the surroundings, allowing it to condense into a liquid." },
-            { q: "One ton of refrigeration is equal to the refrigeration effect corresponding to melting 1000 kg of ice in:", options: ["1 hour", "24 hours"], answer: 1, explanation: "One ton of refrigeration is defined as the cooling effect to melt 1000 kg of ice in 24 hours, equivalent to 3.517 kW." },
-            { q: "Which of the following refrigerants has the lowest freezing point?", options: ["Freon-12", "Freon-22"], answer: 1, explanation: "Freon-22 has a lower freezing point (-160°C) than Freon-12 (-157.7°C), making it suitable for low-temperature applications." },
-            { q: "Which type of air conditioning is suitable in Kathmandu in the month of Shrawan and Bhadra?", options: ["Cooling", "Cooling and dehumidification"], answer: 1, explanation: "Shrawan and Bhadra are humid months in Kathmandu, so cooling with dehumidification is ideal for comfort." },
-            { q: "Which of the following is CFC type refrigerant?", options: ["R404", "R22"], answer: 1, explanation: "R22 is a chlorofluorocarbon (CFC) type refrigerant, while R404 is an HFC blend." },
-            { q: "This is not the type of refrigerant used in the air conditioning system:", options: ["R12", "R410A"], answer: 0, explanation: "R12 is a CFC refrigerant, now phased out due to environmental concerns, while R410A is commonly used." },
-            { q: "Which of the following components is used as a heating coil in air conditioning system?", options: ["Evaporator", "Condenser"], answer: 0, explanation: "The evaporator absorbs heat, acting as a cooling coil, not a heating coil." },
-            { q: "एअर कण्डिसनिङ्गमा के-के कुरालाई नियन्त्रण गरिन्छ?", options: ["माथिका सबै", "Human comfort"], answer: 0, explanation: "एअर कण्डिसनिङ्गले तापमान, आर्द्रता, हावाको गुणस्तर र प्रवाहलाई नियन्त्रण गर्छ।" },
-            { q: "In which of the following condition, human sweats more?", options: ["Relative humidity 0%", "Relative humidity 50%"], answer: 1, explanation: "Higher relative humidity (50%) prevents sweat evaporation, increasing discomfort." },
-            { q: "Which of the following component is used as cooling coil in air conditioning system?", options: ["Evaporator", "Condenser"], answer: 0, explanation: "The evaporator acts as the cooling coil, absorbing heat from the indoor air." },
-            { q: "Evaporator is the component of the following system", options: ["Fuel system of engine", "Air conditioning system"], answer: 1, explanation: "The evaporator is a key component in air conditioning, absorbing heat to cool the air." },
-            { q: "The most commonly used commercial refrigerant is:", options: ["Sulphur dioxide", "R410A"], answer: 1, explanation: "R410A is widely used in modern air conditioning systems due to its efficiency and lower environmental impact." },
-            { q: "Air conditioning is a simultaneous control of:", options: ["Bacteria and dust", "Temperature and humidity"], answer: 1, explanation: "Air conditioning controls temperature, humidity, and air quality for comfort." },
-            { q: "The difference between vapor compression and vapor absorption refrigeration cycle is that:", options: ["Absorption cycle requires more work input", "Absorption cycle requires less work input"], answer: 1, explanation: "Vapor absorption cycles use heat energy, requiring less mechanical work compared to compression cycles." },
-            { q: "For large air conditioning application more than 1 TR, which type of compressor is preferably used?", options: ["Reciprocating", "Centrifugal"], answer: 1, explanation: "Centrifugal compressors are preferred for large systems (>1 TR) due to their efficiency and capacity." },
-            { q: "How much is 1 ton of refrigeration in SI unit?", options: ["120 KJ/Min", "210 KJ/Min"], answer: 1, explanation: "1 ton of refrigeration equals 210 kJ/min (3.517 kW) in SI units." },
-            { q: "Which is the component in the air conditioning system of grader?", options: ["Refrigerant", "All of the above"], answer: 1, explanation: "All components, including refrigerant, are part of the air conditioning system in a grader." },
-            { q: "एअर कन्डिसनिङ्ग ले के उपयुक्त गर्दछ?", options: ["हावा, चाप र चुम्बक", "हावा, चाप र तापमान"], answer: 1, explanation: "एअर कन्डिसनिङ्गले हावा, चाप र तापमानलाई नियन्त्रण गर्छ।" },
-            { q: "सुविधा जनक अवस्था (Comfort Conditions) कुन हो?", options: ["25°C DBT र 100% RH", "25°C DBT र 40% RH"], answer: 1, explanation: "25°C DBT र 40% RH सुविधाजनक अवस्था हो किनभने कम आर्द्रताले आरामदायी अनुभव हुन्छ।" },
-            { q: "Accumulators should have volume to store at least ________ of refrigerant charge.", options: ["25%", "50%"], answer: 1, explanation: "Accumulators store at least 50% of the refrigerant charge to prevent liquid slugging in the compressor." },
-            { q: "Where does the lowest temperature occur in a vapor compression cycle?", options: ["Condenser", "Evaporator"], answer: 1, explanation: "The lowest temperature occurs in the evaporator, where the refrigerant absorbs heat." },
-            { q: "A thermostatic expansion valve in the refrigeration system:", options: ["Is suitable only for constant load system", "Ensures the evaporator is completely filled with refrigerant"], answer: 1, explanation: "The thermostatic expansion valve regulates refrigerant flow to ensure the evaporator is filled efficiently." },
-            { q: "The following type of expansion device is utilized in flooded evaporator:", options: ["Capillary tube", "Float valve"], answer: 1, explanation: "Float valves are used in flooded evaporators to maintain a constant liquid level." },
-            { q: "In air cooling system, …… is used for increasing surface area to enhance engine cooling.", options: ["Condenser", "Fins"], answer: 1, explanation: "Fins increase the surface area for better heat dissipation in cooling systems." },
-            { q: "एयर कन्डिसनिङ्ग के-के कुरामा निर्भर गर्छ?", options: ["तापमान", "मानिसको सेवा"], answer: 0, explanation: "एयर कन्डिसनिङ्ग तापमान, आर्द्रता र हावाको गुणस्तरमा निर्भर गर्छ।" },
-            { q: "एयर कन्डिशनले के कुस वस्तुबाट काम गर्छ?", options: ["एयर", "रेफ्रिजरन्ट"], answer: 1, explanation: "एयर कन्डिशनले रेफ्रिजरन्टबाट काम गर्छ, जसले तापलाई अवशोषित र निष्कासन गर्छ।" },
-            { q: "ए.सी. सिस्टमको मुख्य काम के हो?", options: ["हावालाई सफा बनाउने", "A र B दुवै"], answer: 1, explanation: "ए.सी. सिस्टमले हावालाई सफा र तापमान नियन्त्रण गर्छ।" },
-            { q: "What is the main function of a condenser in a refrigeration system?", options: ["To absorb heat from the surroundings", "To reject heat from the refrigerant"], answer: 1, explanation: "The condenser rejects heat from the refrigerant to the surroundings, allowing it to condense." },
-            { q: "Which of the following refrigerants has the highest ozone depletion potential (ODP)?", options: ["R12", "R134a"], answer: 0, explanation: "R12 (a CFC) has a higher ODP than R134a (an HFC), which is ozone-friendly." },
-            { q: "Which component controls the flow of refrigerant into the evaporator?", options: ["Compressor", "Expansion valve"], answer: 1, explanation: "The expansion valve regulates the flow of refrigerant into the evaporator for efficient cooling." },
-            { q: "What is the effect of high humidity on human comfort in air conditioning?", options: ["Increases discomfort", "Improves comfort"], answer: 0, explanation: "High humidity reduces sweat evaporation, increasing discomfort." },
-            { q: "The pressure in the suction line of a refrigeration system is:", options: ["Low pressure", "High pressure"], answer: 0, explanation: "The suction line carries low-pressure refrigerant vapor to the compressor." },
-            { q: "रेडिएटरको तापक्रम कहिले नाप्नुपर्छ?", options: ["इन्जिन तातो हुँदा", "इन्जिन चिसो हुँदा"], answer: 0, explanation: "रेडिएटरको तापक्रम इन्जिन तातो हुँदा नाप्नुपर्छ किनभने त्यसले वास्तविक अवस्था देखाउँछ।" },
-            { q: "Freon group of refrigerants are:", options: ["Inflammable", "Non-inflammable and non-toxic"], answer: 1, explanation: "Freon refrigerants are generally non-inflammable and non-toxic, suitable for air conditioning." },
-            { q: "The pressure at the outlet of a refrigerant compressor is called:", options: ["Suction pressure", "Discharge pressure"], answer: 1, explanation: "The outlet of the compressor has high-pressure refrigerant, known as discharge pressure." },
-            { q: "रेफ्रिजेरेसन तथा AC system मा प्रयोग हुने component कुन हो?", options: ["Combustion chamber", "Compressor"], answer: 1, explanation: "कम्प्रेसर रेफ्रिजेरेसन र AC सिस्टमको मुख्य कम्पोनेन्ट हो।" }
-        ];
+       const questions = [
+    {
+        q: "Air conditioning is a system for controlling:",
+        options: ["Temperature", "Humidity", "Air quality", "All of the above"],
+        answer: 3,
+        explanation: "Air conditioning systems regulate temperature, humidity, air quality, and circulation to ensure indoor comfort."
+    },
+    {
+        q: "The moisture in refrigerant is removed by:",
+        options: ["Expansion valve", "Drier", "Condenser", "Evaporator"],
+        answer: 1,
+        explanation: "The drier (filter-drier) removes moisture from the refrigerant to prevent corrosion and freezing in the system."
+    },
+    {
+        q: "Freon group of refrigerants are:",
+        options: ["Toxic and inflammable", "Non-toxic and inflammable", "Toxic and non-inflammable", "Non-toxic and non-inflammable"],
+        answer: 3,
+        explanation: "Freon refrigerants (e.g., R22, R134a) are generally non-toxic and non-inflammable, making them safe for air conditioning."
+    },
+    {
+        q: "During a refrigeration cycle, heat is rejected by the refrigerant in the:",
+        options: ["Evaporator", "Condenser", "Compressor", "Expansion valve"],
+        answer: 1,
+        explanation: "The condenser rejects heat from the refrigerant to the surroundings, allowing it to condense into a liquid."
+    },
+    {
+        q: "One ton of refrigeration is equal to the refrigeration effect corresponding to melting 1000 kg of ice in:",
+        options: ["1 hour", "12 hours", "24 hours", "48 hours"],
+        answer: 2,
+        explanation: "One ton of refrigeration is the cooling effect required to melt 1000 kg of ice in 24 hours, equivalent to 3.517 kW."
+    },
+    {
+        q: "Which of the following refrigerants has the lowest freezing point?",
+        options: ["Freon-12", "Freon-22", "R134a", "R410A"],
+        answer: 1,
+        explanation: "Freon-22 has a freezing point of -160°C, lower than Freon-12 (-157.7°C), R134a (-103.3°C), and R410A (blend, ~ -155°C)."
+    },
+    {
+        q: "Which type of air conditioning is suitable in Kathmandu in the month of Shrawan and Bhadra?",
+        options: ["Cooling only", "Heating only", "Cooling and dehumidification", "Ventilation only"],
+        answer: 2,
+        explanation: "Shrawan and Bhadra are humid months in Kathmandu, so cooling with dehumidification is ideal for comfort."
+    },
+    {
+        q: "Which of the following is a CFC-type refrigerant?",
+        options: ["R134a", "R404A", "R12", "R410A"],
+        answer: 2,
+        explanation: "R12 is a chlorofluorocarbon (CFC), while R134a, R404A, and R410A are HFC refrigerants."
+    },
+    {
+        q: "This is not commonly used as a refrigerant in modern air conditioning systems:",
+        options: ["R410A", "R134a", "R12", "R32"],
+        answer: 2,
+        explanation: "R12, a CFC refrigerant, is phased out due to its high ozone depletion potential, while R410A, R134a, and R32 are used."
+    },
+    {
+        q: "Which component is used as a heating coil in an air conditioning system?",
+        options: ["Evaporator", "Condenser", "Electric heater", "Compressor"],
+        answer: 2,
+        explanation: "An electric heater is used as a heating coil in air conditioning systems for heating modes, unlike the evaporator or condenser."
+    },
+    {
+        q: "एअर कण्डिसनिङ्गमा के-के कुरालाई नियन्त्रण गरिन्छ? (What does air conditioning control?)",
+        options: ["तापमान (Temperature)", "आर्द्रता (Humidity)", "हावाको गुणस्तर (Air quality)", "माथिका सबै (All of the above)"],
+        answer: 3,
+        explanation: "एअर कण्डिसनिङ्गले तापमान, आर्द्रता, हावाको गुणस्तर र प्रवाहलाई नियन्त्रण गर्छ। (Air conditioning controls temperature, humidity, air quality, and circulation.)"
+    },
+    {
+        q: "In which condition does a human sweat more?",
+        options: ["Relative humidity 0%", "Relative humidity 25%", "Relative humidity 50%", "Relative humidity 75%"],
+        answer: 3,
+        explanation: "Higher relative humidity (75%) reduces sweat evaporation, increasing discomfort and perceived sweating."
+    },
+    {
+        q: "Which component is used as a cooling coil in an air conditioning system?",
+        options: ["Condenser", "Evaporator", "Compressor", "Expansion valve"],
+        answer: 1,
+        explanation: "The evaporator acts as the cooling coil, absorbing heat from indoor air to provide cooling."
+    },
+    {
+        q: "Evaporator is a component of the following system:",
+        options: ["Fuel system", "Air conditioning system", "Exhaust system", "Suspension system"],
+        answer: 1,
+        explanation: "The evaporator is a key component in air conditioning systems, absorbing heat to cool the air."
+    },
+    {
+        q: "The most commonly used commercial refrigerant in modern air conditioning is:",
+        options: ["Sulphur dioxide", "Ammonia", "R410A", "R22"],
+        answer: 2,
+        explanation: "R410A is widely used in modern air conditioning due to its efficiency and lower environmental impact."
+    },
+    {
+        q: "Air conditioning is a simultaneous control of:",
+        options: ["Bacteria, dust, and odor", "Temperature, humidity, and air quality", "Noise and vibration", "Light and sound"],
+        answer: 1,
+        explanation: "Air conditioning controls temperature, humidity, and air quality to ensure indoor comfort."
+    },
+    {
+        q: "The difference between vapor compression and vapor absorption refrigeration cycles is that:",
+        options: ["Compression cycle uses heat energy", "Absorption cycle uses less mechanical work", "Compression cycle requires no refrigerant", "Absorption cycle uses a compressor"],
+        answer: 1,
+        explanation: "Vapor absorption cycles use heat energy, requiring less mechanical work than compression cycles."
+    },
+    {
+        q: "For large air conditioning applications (>1 TR), which compressor is preferably used?",
+        options: ["Reciprocating", "Rotary", "Centrifugal", "Scroll"],
+        answer: 2,
+        explanation: "Centrifugal compressors are preferred for large systems (>1 TR) due to their high efficiency and capacity."
+    },
+    {
+        q: "How much is 1 ton of refrigeration in SI units?",
+        options: ["120 kJ/min", "180 kJ/min", "210 kJ/min", "240 kJ/min"],
+        answer: 2,
+        explanation: "1 ton of refrigeration equals 210 kJ/min (3.517 kW) in SI units."
+    },
+    {
+        q: "Which is a component in the air conditioning system of a grader?",
+        options: ["Refrigerant", "Catalytic converter", "Fuel injector", "Transmission"],
+        answer: 0,
+        explanation: "Refrigerant is a key component in the air conditioning system of a grader, enabling heat transfer."
+    },
+    {
+        q: "एअर कन्डिसनिङ्ग ले के उपयुक्त गर्दछ? (What does air conditioning utilize?)",
+        options: ["हावा, चाप र चुम्बक (Air, pressure, and magnet)", "हावा, चाप र तापमान (Air, pressure, and temperature)", "ध्वनि र प्रकाश (Sound and light)", "रंग र गंध (Color and odor)"],
+        answer: 1,
+        explanation: "एअर कन्डिसनिङ्गले हावा, चाप र तापमानलाई नियन्त्रण गर्छ। (Air conditioning controls air, pressure, and temperature.)"
+    },
+    {
+        q: "सुविधा जनक अवस्था (Comfort Conditions) कुन हो? (Which is a comfort condition?)",
+        options: ["25°C DBT र 100% RH", "25°C DBT र 60% RH", "25°C DBT र 40% RH", "30°C DBT र 20% RH"],
+        answer: 2,
+        explanation: "25°C DBT र 40% RH सुविधाजनक अवस्था हो किनभने कम आर्द्रताले आरामदायी अनुभव हुन्छ। (25°C DBT and 40% RH provide comfortable conditions.)"
+    },
+    {
+        q: "Accumulators should have volume to store at least ________ of refrigerant charge.",
+        options: ["25%", "50%", "75%", "100%"],
+        answer: 1,
+        explanation: "Accumulators store at least 50% of the refrigerant charge to prevent liquid slugging in the compressor."
+    },
+    {
+        q: "Where does the lowest temperature occur in a vapor compression cycle?",
+        options: ["Condenser", "Compressor", "Evaporator", "Expansion valve"],
+        answer: 2,
+        explanation: "The lowest temperature occurs in the evaporator, where the refrigerant absorbs heat from the surroundings."
+    },
+    {
+        q: "A thermostatic expansion valve in a refrigeration system:",
+        options: ["Increases compressor pressure", "Ensures evaporator is filled with refrigerant", "Removes moisture", "Cools the condenser"],
+        answer: 1,
+        explanation: "The thermostatic expansion valve regulates refrigerant flow to ensure the evaporator is efficiently filled."
+    },
+    {
+        q: "The following type of expansion device is utilized in a flooded evaporator:",
+        options: ["Capillary tube", "Thermostatic valve", "Float valve", "Automatic valve"],
+        answer: 2,
+        explanation: "Float valves maintain a constant liquid level in flooded evaporators for efficient operation."
+    },
+    {
+        q: "In air cooling systems, …… is used for increasing surface area to enhance engine cooling.",
+        options: ["Condenser", "Fins", "Evaporator", "Compressor"],
+        answer: 1,
+        explanation: "Fins increase the surface area for better heat dissipation in air cooling systems."
+    },
+    {
+        q: "एयर कन्डिसनिङ्ग के-के कुरामा निर्भर गर्छ? (What does air conditioning depend on?)",
+        options: ["तापमान, आर्द्रता र हावाको गुणस्तर (Temperature, humidity, and air quality)", "मानिसको सेवा (Human service)", "प्रकाश र ध्वनि (Light and sound)", "रंग र गंध (Color and odor)"],
+        answer: 0,
+        explanation: "एयर कन्डिसनिङ्ग तापमान, आर्द्रता र हावाको गुणस्तरमा निर्भर गर्छ। (Air conditioning depends on temperature, humidity, and air quality.)"
+    },
+    {
+        q: "एयर कन्डिशनले के कुराबाट काम गर्छ? (What does air conditioning operate with?)",
+        options: ["हावा (Air)", "रेफ्रिजरन्ट (Refrigerant)", "पानी (Water)", "तेल (Oil)"],
+        answer: 1,
+        explanation: "एयर कन्डिशनले रेफ्रिजरन्ट Ascorb and reject heat.)"
+    },
+    {
+        q: "ए.सी. सिस्टमको मुख्य काम के हो? (What is the main function of an AC system?)",
+        options: ["हावालाई सफा बनाउने (Clean the air)", "तापमान र आर्द्रता नियन्त्रण (Control temperature and humidity)", "केवल तापमान नियन्त्रण (Only temperature control)", "हावाको गति नियन्त्रण (Control air velocity)"],
+        answer: 1,
+        explanation: "ए.सी. सिस्टमले तापमान र आर्द्रता नियन्त्रण गर्छ। (AC systems control temperature and humidity for comfort.)"
+    },
+    {
+        q: "What is the main function of a condenser in a refrigeration system?",
+        options: ["Absorb heat", "Reject heat from refrigerant", "Compress refrigerant", "Expand refrigerant"],
+        answer: 1,
+        explanation: "The condenser rejects heat from the refrigerant to the surroundings, allowing it to condense."
+    },
+    {
+        q: "Which refrigerant has the highest ozone depletion potential (ODP)?",
+        options: ["R134a", "R410A", "R12", "R32"],
+        answer: 2,
+        explanation: "R12 (a CFC) has a high ODP, while R134a, R410A, and R32 (HFCs) are ozone-friendly."
+    },
+    {
+        q: "Which component controls the flow of refrigerant into the evaporator?",
+        options: ["Compressor", "Condenser", "Expansion valve", "Evaporator"],
+        answer: 2,
+        explanation: "The expansion valve regulates refrigerant flow into the evaporator for efficient cooling."
+    },
+    {
+        q: "What is the effect of high humidity on human comfort in air conditioning?",
+        options: ["Increases discomfort", "Improves comfort", "No effect", "Reduces temperature"],
+        answer: 0,
+        explanation: "High humidity reduces sweat evaporation, increasing discomfort."
+    },
+    {
+        q: "The pressure in the suction line of a refrigeration system is:",
+        options: ["Low pressure", "High pressure", "Medium pressure", "No pressure"],
+        answer: 0,
+        explanation: "The suction line carries low-pressure refrigerant vapor to the compressor."
+    },
+    {
+        q: "रेडिएटरको तापक्रम कहिले नाप्नुपर्छ? (When should the radiator temperature be measured?)",
+        options: ["इन्जिन तातो हुँदा (Engine hot)", "इन्जिन चिसो हुँदा (Engine cold)", "इन्जिन बन्द हुँदा (Engine off)", "इन्जिन चलिरहँदा (Engine running)"],
+        answer: 0,
+        explanation: "रेडिएटरको तापक्रम इन्जिन तातो हुँदा नाप्नुपर्छ किनभने त्यसले वास्तविक अवस्था देखाउँछ। (Measure radiator temperature when the engine is hot for accurate results.)"
+    },
+    {
+        q: "Freon group of refrigerants are:",
+        options: ["Toxic and inflammable", "Non-toxic and inflammable", "Toxic and non-inflammable", "Non-toxic and non-inflammable"],
+        answer: 3,
+        explanation: "Freon refrigerants are generally non-toxic and non-inflammable, suitable for air conditioning."
+    },
+    {
+        q: "The pressure at the outlet of a refrigerant compressor is called:",
+        options: ["Suction pressure", "Discharge pressure", "Low pressure", "Equalized pressure"],
+        answer: 1,
+        explanation: "The outlet of the compressor has high-pressure refrigerant, known as discharge pressure."
+    },
+    {
+        q: "रेफ्रिजेरेसन तथा AC system मा प्रयोग हुने component कुन हो? (Which is a component used in refrigeration and AC systems?)",
+        options: ["Combustion chamber", "Compressor", "Fuel pump", "Radiator"],
+        answer: 1,
+        explanation: "कम्प्रेसर रेफ्रिजेरेसन र AC सिस्टमको मुख्य कम्पोनेन्ट हो। (The compressor is a key component in refrigeration and AC systems.)"
+    }
+];
 
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
