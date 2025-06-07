@@ -207,27 +207,122 @@
     </div>
 
     <script>
-        const questions = [
-            { q: "In the hydraulic system, valves are used to control:", options: ["Direction of flow of hydraulic oil", "All of the above"], answer: 1, explanation: "Valves in hydraulic systems control the direction, pressure, and flow rate of hydraulic oil." },
-            { q: "Air passing through the fins of hydraulic oil cooler is from:", options: ["Air conditioning system of the machine", "Radiator fan of hydraulic cooling system"], answer: 1, explanation: "The radiator fan in the hydraulic cooling system circulates air through the oil cooler fins to dissipate heat." },
-            { q: "In hydraulic system if the filter is not serviced when the indicator shows potential problem, then which will happen:", options: ["The oil will heat up", "The relief valve may open, dumping dirty oil into the system"], answer: 1, explanation: "A clogged filter can cause the relief valve to open, allowing contaminated oil to circulate and damage components." },
-            { q: "The component of the torque converter that drives the oil is:", options: ["Impeller", "Stator"], answer: 0, explanation: "The impeller, driven by the engine, pumps oil to transmit power in a torque converter." },
-            { q: "निम्न मध्ये हाइड्रोलिक प्रणालीको घटक कुन हो?", options: ["Control valve", "पिस्टन"], answer: 0, explanation: "कन्ट्रोल भल्भ हाइड्रोलिक प्रणालीको मुख्य घटक हो, जसले तेलको प्रवाह नियन्त्रण गर्छ।" },
-            { q: "Which of the following is not a part of the hydraulic system?", options: ["Alternator", "Cylinder"], answer: 0, explanation: "The alternator is part of the electrical system, not the hydraulic system." },
-            { q: "The pressure at the outlet of a refrigeration compressor is called:", options: ["Suction pressure", "Discharge pressure"], answer: 1, explanation: "The pressure at the compressor outlet is the discharge pressure, higher than the suction pressure." },
-            { q: "Which of the following equipment/device/system uses hydraulic system?", options: ["Braking system", "Hydraulic jack"], answer: 1, explanation: "Hydraulic jacks use hydraulic systems to lift heavy loads, as do some braking systems." },
-            { q: "Which is the component of hydraulic system?", options: ["Universal joint", "Control valve"], answer: 1, explanation: "Control valves regulate the flow and pressure in hydraulic systems." },
-            { q: "The basic principle that makes hydraulic system possible is:", options: ["Pascal’s principle", "Bernoulli’s theorem"], answer: 0, explanation: "Pascal’s principle states that pressure applied to a confined fluid is transmitted equally, enabling hydraulic systems." },
-            { q: "A hydraulic system is:", options: ["All of the above", "Capable of moving heavier loads than mechanical system"], answer: 1, explanation: "Hydraulic systems can move heavier loads efficiently due to high pressure and force multiplication." },
-            { q: "निम्नमध्ये कुन फिल्टरलाई हाइड्रोलिक सिस्टमको आवश्यक तत्वका रूपमा प्रयोग गर्न सकिँदैन?", options: ["हाइड्रोलिक आयल फिल्टर", "हाइड्रोलिक पम्प"], answer: 1, explanation: "हाइड्रोलिक पम्प फिल्टर होइन, यो तेललाई सर्कुलेट गर्ने कम्पोनेन्ट हो।" },
-            { q: "हाइड्रोलिक सिस्टम कुन सिद्धान्तमा आधारित छ?", options: ["पास्कलको सिद्धान्त", "न्यूटनको"], answer: 0, explanation: "हाइड्रोलिक सिस्टम पास्कलको सिद्धान्तमा आधारित छ, जसले दबाबको समान वितरण गर्छ।" },
-            { q: "The performance of a hydraulic pump is based on:", options: ["Amount of oil pump can deliver in a minute", "All of the above"], answer: 0, explanation: "Hydraulic pump performance is measured by the volume of oil it delivers per unit time." },
-            { q: "When hydraulic oil is dirty and contaminated, then what will be its effect on machine?", options: ["It damages engine", "It damages control valve and hydraulic cylinder"], answer: 1, explanation: "Contaminated hydraulic oil can wear out control valves and cylinders, reducing system efficiency." },
-            { q: "निम्नमध्ये कुन कार्य हाइड्रोलिक प्रणाली प्रयोग नभई हाइड्रोलिक प्रणाली नभएको गाडीमा गर्न सकिँदैन ?", options: ["इन्जिन स्टार्ट गर्न", "स्टेरिङ चलाउन"], answer: 1, explanation: "हाइड्रोलिक पावर स्टेरिङ सिस्टम नभएको गाडीमा स्टेरिङ चलाउन गाह्रो हुन्छ।" },
-            { q: "हाइड्रोलिक ब्रेक प्रणालीमा तेलको कमी भएमा के हुन्छ ?", options: ["ब्रेक चाँडो लाग्ने", "ब्रेक नलाग्ने"], answer: 1, explanation: "हाइड्रोलिक तेलको कमीले ब्रेक प्रणालीमा दबाब कम हुन्छ, जसले ब्रेक लाग्दैन।" },
-            { q: "For weighing large loads, weighing system is mostly used:", options: ["Lever system", "Hydraulic weighing system"], answer: 1, explanation: "Hydraulic weighing systems are used for large loads due to their precision and capacity." },
-            { q: "The air inside hydraulic line of braking system results in:", options: ["Poor braking action", "Both (A) and (B)"], answer: 0, explanation: "Air in hydraulic brake lines causes a spongy pedal and poor braking action due to compressibility." }
-        ];
+       const questions = [
+    {
+        q: "In the hydraulic system, valves are used to control:",
+        options: ["Direction of flow of hydraulic oil", "Engine temperature", "Fuel injection", "Air pressure"],
+        answer: 0,
+        explanation: "Valves in hydraulic systems control the direction, pressure, and flow rate of hydraulic oil."
+    },
+    {
+        q: "Air passing through the fins of hydraulic oil cooler is from:",
+        options: ["Air conditioning system of the machine", "Radiator fan of hydraulic cooling system", "Engine exhaust", "Cabin ventilation"],
+        answer: 1,
+        explanation: "The radiator fan in the hydraulic cooling system circulates air through the oil cooler fins to dissipate heat."
+    },
+    {
+        q: "In a hydraulic system, if the filter is not serviced when the indicator shows a potential problem, then which will happen:",
+        options: ["The oil will cool down", "The relief valve may open, dumping dirty oil into the system", "The pump will stop", "The system will overheat"],
+        answer: 1,
+        explanation: "A clogged filter can cause the relief valve to open, allowing contaminated oil to circulate and damage components."
+    },
+    {
+        q: "The component of the torque converter that drives the oil is:",
+        options: ["Impeller", "Stator", "Turbine", "Clutch"],
+        answer: 0,
+        explanation: "The impeller, driven by the engine, pumps oil to transmit power in a torque converter."
+    },
+    {
+        q: "निम्न मध्ये हाइड्रोलिक प्रणालीको घटक कुन हो? (Which of the following is a component of a hydraulic system?)",
+        options: ["Control valve", "Piston", "Alternator", "Spark plug"],
+        answer: 0,
+        explanation: "कन्ट्रोल भल्भ हाइड्रोलिक प्रणालीको मुख्य घटक हो, जसले तेलको प्रवाह नियन्त्रण गर्छ। (Control valves regulate the flow and pressure in hydraulic systems.)"
+    },
+    {
+        q: "Which of the following is not a part of the hydraulic system?",
+        options: ["Alternator", "Cylinder", "Pump", "Reservoir"],
+        answer: 0,
+        explanation: "The alternator is part of the electrical system, not the hydraulic system."
+    },
+    {
+        q: "The pressure at the outlet of a refrigeration compressor is called:",
+        options: ["Suction pressure", "Discharge pressure", "Equalized pressure", "Low pressure"],
+        answer: 1,
+        explanation: "The pressure at the compressor outlet is the discharge pressure, higher than the suction pressure."
+    },
+    {
+        q: "Which of the following equipment/device/system uses a hydraulic system?",
+        options: ["Air conditioning system", "Hydraulic jack", "Fuel injection system", "Exhaust system"],
+        answer: 1,
+        explanation: "Hydraulic jacks use hydraulic systems to lift heavy loads, as do some braking systems."
+    },
+    {
+        q: "Which is the component of a hydraulic system?",
+        options: ["Universal joint", "Control valve", "Carburetor", "Ignition coil"],
+        answer: 1,
+        explanation: "Control valves regulate the flow and pressure in hydraulic systems."
+    },
+    {
+        q: "The basic principle that makes hydraulic system possible is:",
+        options: ["Pascal’s principle", "Bernoulli’s theorem", "Newton’s law", "Archimedes’ principle"],
+        answer: 0,
+        explanation: "Pascal’s principle states that pressure applied to a confined fluid is transmitted equally, enabling hydraulic systems."
+    },
+    {
+        q: "A hydraulic system is:",
+        options: ["Less efficient than mechanical systems", "Capable of moving heavier loads than mechanical systems", "Used only for cooling", "Unable to transmit power"],
+        answer: 1,
+        explanation: "Hydraulic systems can move heavier loads efficiently due to high pressure and force multiplication."
+    },
+    {
+        q: "निम्नमध्ये कुन फिल्टरलाई हाइड्रोलिक सिस्टमको आवश्यक तत्वका रूपमा प्रयोग गर्न सकिँदैन? (Which of the following cannot be used as an essential filter in a hydraulic system?)",
+        options: ["हाइड्रोलिक आयल फिल्टर (Hydraulic oil filter)", "हाइड्रोलिक पम्प (Hydraulic pump)", "एयर फिल्टर (Air filter)", "फ्युल फिल्टर (Fuel filter)"],
+        answer: 1,
+        explanation: "हाइड्रोलिक पम्प फिल्टर होइन, यो तेललाई सर्कुलेट गर्ने कम्पोनेन्ट हो। (A hydraulic pump is not a filter; it circulates oil.)"
+    },
+    {
+        q: "हाइड्रोलिक सिस्टम कुन सिद्धान्तमा आधारित छ? (What principle is a hydraulic system based on?)",
+        options: ["पास्कलको सिद्धान्त (Pascal’s principle)", "न्यूटनको सिद्धान्त (Newton’s principle)", "बर्नोलीको सिद्धान्त (Bernoulli’s principle)", "आर्किमिडिजको सिद्धान्त (Archimedes’ principle)"],
+        answer: 0,
+        explanation: "हाइड्रोलिक सिस्टम पास्कलको सिद्धान्तमा आधारित छ, जसले दबाबको समान वितरण गर्छ। (Hydraulic systems are based on Pascal’s principle, which ensures equal pressure distribution.)"
+    },
+    {
+        q: "The performance of a hydraulic pump is based on:",
+        options: ["Amount of oil pump can deliver in a minute", "Engine horsepower", "Fuel consumption", "Coolant temperature"],
+        answer: 0,
+        explanation: "Hydraulic pump performance is measured by the volume of oil it delivers per unit time."
+    },
+    {
+        q: "When hydraulic oil is dirty and contaminated, then what will be its effect on the machine?",
+        options: ["It improves efficiency", "It damages control valve and hydraulic cylinder", "It cools the system", "It increases fuel economy"],
+        answer: 1,
+        explanation: "Contaminated hydraulic oil can wear out control valves and cylinders, reducing system efficiency."
+    },
+    {
+        q: "निम्नमध्ये कुन कार्य हाइड्रोलिक प्रणाली प्रयोग नभई हाइड्रोलिक प्रणाली नभएको गाडीमा गर्न सकिँदैन? (Which task cannot be performed in a vehicle without a hydraulic system?)",
+        options: ["इन्जिन स्टार्ट गर्न (Start the engine)", "स्टेरिङ चलाउन (Operate steering)", "लाइट बाल्न (Turn on lights)", "हर्न बजाउन (Sound the horn)"],
+        answer: 1,
+        explanation: "हाइड्रोलिक पावर स्टेरिङ सिस्टम नभएको गाडीमा स्टेरिङ चलाउन गाह्रो हुन्छ। (Operating power steering is difficult without a hydraulic system.)"
+    },
+    {
+        q: "हाइड्रोलिक ब्रेक प्रणालीमा तेलको कमी भएमा के हुन्छ? (What happens if there is a lack of oil in a hydraulic brake system?)",
+        options: ["ब्रेक चाँडो लाग्ने (Brakes engage faster)", "ब्रेक नलाग्ने (Brakes fail to engage)", "गाडीको गति बढ्ने (Vehicle speed increases)", "इन्जिन बन्द हुने (Engine stops)"],
+        answer: 1,
+        explanation: "हाइड्रोलिक तेलको कमीले ब्रेक प्रणालीमा दबाब कम हुन्छ, जसले ब्रेक लाग्दैन। (Low hydraulic oil reduces brake system pressure, causing brake failure.)"
+    },
+    {
+        q: "For weighing large loads, the weighing system mostly used is:",
+        options: ["Lever system", "Hydraulic weighing system", "Mechanical scale", "Electronic balance"],
+        answer: 1,
+        explanation: "Hydraulic weighing systems are used for large loads due to their precision and capacity."
+    },
+    {
+        q: "The air inside hydraulic line of braking system results in:",
+        options: ["Poor braking action", "Increased braking force", "Cooler brakes", "Faster response"],
+        answer: 0,
+        explanation: "Air in hydraulic brake lines causes a spongy pedal and poor braking action due to compressibility."
+    }
+];
 
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
