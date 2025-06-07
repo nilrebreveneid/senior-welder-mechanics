@@ -79,9 +79,7 @@
         //     { q: "If the workpiece is stationary, the tool reciprocates and cuts in one direction only. Such operation is called:", options: ["Shaping", "Slotting"], answer: 0 },
         //     { q: "Drilling machines are employed for producing:", options: ["Circular holes", "Hexagonal holes"], answer: 0 }
         // ]; -->
-
-
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -417,7 +415,7 @@
     <audio id="wrong-sound" src="https://www.soundjay.com/buttons/beep-02.mp3"></audio>
 
     <script>
-      const questions = [
+            const questions = [
   // 1.1 Basic Knowledge of Measuring Instruments
   {
     q: "Which tool is used to measure valve tappet clearance?",
@@ -676,7 +674,6 @@
     explanation: "A gear drive connects the starter motor to the flywheel for engine cranking."
   }
 ];
-
         let currentPage = 0;
         let score = 0;
         let skipped = [];
@@ -696,18 +693,14 @@
         const correctSound = document.getElementById("correct-sound");
         const wrongSound = document.getElementById("wrong-sound");
 
-        // Load progress from localStorage
-        function loadProgress() {
-            const saved = localStorage.getItem("quizProgressWorkshop");
-            if (saved) {
-                const { currentPage: savedPage, score: savedScore, skipped: savedSkipped, answers: savedAnswers, time: savedTime } = JSON.parse(saved);
-                currentPage = savedPage;
-                score = savedScore;
-                skipped = savedSkipped;
-                userAnswers = savedAnswers || Array(questions.length).fill(null);
-                timerSeconds = savedTime || 0;
-                updateCurrentScore();
-            }
+        // Clear progress to start fresh
+        function clearProgress() {
+            localStorage.removeItem("quizProgressWorkshop");
+            currentPage = 0;
+            score = 0;
+            skipped = [];
+            userAnswers = Array(questions.length).fill(null);
+            timerSeconds = 0;
         }
 
         // Save progress to localStorage
@@ -795,34 +788,6 @@
 
             updateProgress();
             saveProgress();
-            restoreAnswers(startIndex, endIndex);
-        }
-
-        // Restore previous answers for the current page
-        function restoreAnswers(startIndex, endIndex) {
-            for (let i = startIndex; i < endIndex; i++) {
-                if (userAnswers[i] !== null && userAnswers[i] !== 'Skipped') {
-                    const questionDiv = document.querySelector(`.question[data-index="${i}"]`);
-                    const buttons = questionDiv.querySelectorAll('.options button');
-                    const q = questions[i];
-                    buttons.forEach(btn => {
-                        btn.disabled = true;
-                        if (btn.textContent === q.options[q.answer]) {
-                            btn.classList.add('correct');
-                        }
-                        if (btn.textContent === userAnswers[i] && userAnswers[i] !== q.options[q.answer]) {
-                            btn.classList.add('wrong');
-                        }
-                    });
-                    questionDiv.querySelector('.explanation').style.display = 'block';
-                    questionDiv.querySelector('.skip-button').disabled = true;
-                } else if (userAnswers[i] === 'Skipped') {
-                    const questionDiv = document.querySelector(`.question[data-index="${i}"]`);
-                    questionDiv.querySelectorAll('.options button').forEach(btn => btn.disabled = true);
-                    questionDiv.querySelector('.skip-button').disabled = true;
-                    questionDiv.querySelector('.explanation').style.display = 'block';
-                }
-            }
         }
 
         // Check if all questions on the current page are answered or skipped
@@ -959,23 +924,24 @@
 
         // Restart quiz
         function restartQuiz() {
-            currentPage = 0;
-            score = 0;
-            skipped = [];
-            userAnswers = Array(questions.length).fill(null);
-            timerSeconds = 0;
+            clearProgress();
             resultsEl.classList.add('hidden');
             scoreEl.textContent = '';
-            localStorage.removeItem('quizProgressWorkshop');
             startTimer();
             showQuestions(currentPage);
             updateCurrentScore();
         }
 
-        // Initialize
-        loadProgress();
-        startTimer();
-        showQuestions(currentPage);
+        // Initialize quiz
+        function initialize() {
+            clearProgress(); // Reset all progress on page load
+            startTimer();
+            showQuestions(currentPage);
+            updateCurrentScore();
+        }
+
+        // Start quiz on page load
+        initialize();
     </script>
 </body>
 </html>
