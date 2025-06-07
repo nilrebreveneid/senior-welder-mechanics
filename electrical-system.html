@@ -208,44 +208,223 @@
 
     <script>
         const questions = [
-            { q: "What would be the problem if the starting motor pinion engages with flywheel teeth but cannot crank the flywheel?", options: ["Defective over-running clutch", "Discharged battery"], answer: 1, explanation: "A discharged battery lacks the power to crank the flywheel, even if the pinion engages." },
-            { q: "Which of the following tests is performed in the battery using a hydrometer?", options: ["Open circuit voltage test", "Specific gravity test"], answer: 1, explanation: "A hydrometer measures the specific gravity of battery electrolyte to assess its charge state." },
-            { q: "A 12-volt battery has how many cells?", options: ["12", "6"], answer: 1, explanation: "A 12-volt automotive battery has 6 cells, each producing approximately 2.1 volts." },
-            { q: "Vehicle headlight is connected in:", options: ["Series circuit", "Parallel circuit"], answer: 1, explanation: "Headlights are connected in parallel to ensure consistent voltage and independent operation." },
-            { q: "The commonly used color for fog light is:", options: ["Green", "Yellow"], answer: 1, explanation: "Yellow fog lights improve visibility in adverse weather due to better light penetration." },
-            { q: "5-cell battery supplies how many volts?", options: ["2V", "10V"], answer: 1, explanation: "A 5-cell lead-acid battery supplies approximately 10 volts (2 volts per cell)." },
-            { q: "ग्यासलाइन थ्री फिल्टर प्रयोग गर्दा कुन टर्मिनल जोडिन्छ?", options: ["-ve", "+ve"], answer: 1, explanation: "ग्यासलाइन थ्री फिल्टर सामान्यतः +ve टर्मिनलमा जोडिन्छ।" },
-            { q: "विद्युत् उपकरणहरू कसरी जडान गरिन्छ?", options: ["Series connection", "Parallel connection"], answer: 1, explanation: "विद्युत् उपकरणहरू सामान्यतः समानान्तर (parallel) मा जडान गरिन्छ ताकि प्रत्येकले समान भोल्टेज प्राप्त गरोस्।" },
-            { q: "फ्लो मिटरको कार्य के हो?", options: ["ताप मापन", "इन्धनको प्रवाह मापन गर्नु"], answer: 1, explanation: "फ्लो मिटरले इन्धनको प्रवाह दर मापन गर्छ, जुन इन्जिनको कार्यक्षमता जाँच्न प्रयोग हुन्छ।" },
-            { q: "रेक्टिफायरको कार्य के हो?", options: ["डीसी विद्युतलाई एसीमा परिवर्तन", "एसी विद्युतलाई डीसीमा परिवर्तन गर्नु"], answer: 1, explanation: "रेक्टिफायरले एसी (AC) लाई डीसी (DC) मा परिवर्तन गर्छ, जुन ब्याट्री चार्ज गर्न प्रयोग हुन्छ।" },
-            { q: "Function of relay switch in a circuit is to:", options: ["Increase voltage", "Control a circuit by a separate low power signal"], answer: 1, explanation: "A relay uses a low-power signal to control a high-power circuit, acting as a switch." },
-            { q: "What should be checked first if the headlight of an equipment does not work?", options: ["Battery connection", "Fuse of headlight"], answer: 1, explanation: "The fuse should be checked first, as a blown fuse is a common cause of headlight failure." },
-            { q: "Application of DC motor is restricted to low-load speed because:", options: ["Cost of motor is high", "Problems with mechanical commutation"], answer: 1, explanation: "Mechanical commutation in DC motors limits their performance at high speeds due to wear and sparking." },
-            { q: "In a hydropower plant, which device converts mechanical to electrical energy?", options: ["Pump", "Generator"], answer: 1, explanation: "A generator converts mechanical energy from the turbine into electrical energy in a hydropower plant." },
-            { q: "In generators, the principle used to convert mechanical motion into electrical energy is:", options: ["Electrical attraction", "Magnetic induction"], answer: 1, explanation: "Generators use magnetic induction to produce electrical energy from mechanical motion." },
-            { q: "In left hand rule for generators, the middle finger indicates:", options: ["Direction of motion", "Direction of current flow"], answer: 1, explanation: "In the left-hand rule for generators, the middle finger shows the direction of induced current flow." },
-            { q: "Difference in speed between stator field and rotor is:", options: ["Full load speed", "Slip"], answer: 1, explanation: "Slip is the difference in speed between the stator's magnetic field and the rotor in an induction motor." },
-            { q: "How many cells are used in a 12-volt car battery?", options: ["8", "6"], answer: 1, explanation: "A 12-volt car battery uses 6 cells, each contributing about 2.1 volts." },
-            { q: "२ सेलको ५ वाट घाममा चल्ने सौर्य बत्तामा कति भोल्टको बल्ब हुन्छ?", options: ["10V", "4V"], answer: 1, explanation: "२ सेलको सौर्य ब्याट्रीले ४ भोल्ट (प्रति सेल २ भोल्ट) उत्पादन गर्छ, त्यसैले ४ भोल्टको बल्ब प्रयोग हुन्छ।" },
-            { q: "गाडीमा सामान्यतः के Defect हुन्छ ?", options: ["Switch contact loose", "Fuse जलेर"], answer: 1, explanation: "गाडीमा फ्यूज जल्नु सामान्य डिफेक्ट हो, जसले विद्युतीय प्रणालीमा समस्या निम्त्याउँछ।" },
-            { q: "When electrical devices are connected in parallel…", options: ["Current flow in each device will be same", "Voltage across each device will be same"], answer: 1, explanation: "In a parallel circuit, the voltage across each device remains the same, while current divides." },
-            { q: "यो चित्र कुन भाग हो ?", options: ["क्यापेसिटर", "फ्यूज"], answer: 1, explanation: "चित्रमा फ्यूज देखाइएको छ, जुन सर्किटलाई ओभरलोडबाट जोगाउँछ।" },
-            { q: "कुन तरल पदार्थ मात्र ब्याट्रीमा प्रयोग हुन्छ ?", options: ["Grease", "Distilled water"], answer: 1, explanation: "Distilled water is used in batteries to maintain electrolyte levels, as it is free of impurities." },
-            { q: "मोटर स्टार्टरमा कुन प्रकारको एसी प्रकार्य प्रणाली रहन्छ ?", options: ["A Type", "Star-Delta"], answer: 1, explanation: "Star-Delta starters are commonly used in motor starters to reduce initial current surge." },
-            { q: "इन्जिनमा पेट्रोलको आगो लाग्नको लागि सर्वप्रथम के जरुरी छ ?", options: ["न्यूनतम तापमान", "आत्मप्रज्वलन तापमान"], answer: 1, explanation: "पेट्रोलको आगो लाग्न आत्मप्रज्वलन तापमान (auto-ignition temperature) आवश्यक हुन्छ।" },
-            { q: "कुन किसिमको इन्धन सस्तो पर्छ ?", options: ["पेट्रोल", "डिजेल"], answer: 1, explanation: "डिजेल सामान्यतः पेट्रोलभन्दा सस्तो हुन्छ र इन्धन दक्षता पनि बढी हुन्छ।" },
-            { q: "White lead light is used in:", options: ["Failure mode analysis circuit", "Indicator or warning light"], answer: 1, explanation: "White lead lights are typically used as indicator or warning lights in vehicles." },
-            { q: "An equipment or device used to convert electrical energy into mechanical energy is:", options: ["Generator", "Motor"], answer: 1, explanation: "A motor converts electrical energy into mechanical energy, unlike a generator." },
-            { q: "Power factor of an alternator depends on:", options: ["Core loss", "Load"], answer: 1, explanation: "The power factor of an alternator depends on the type and magnitude of the connected load." },
-            { q: "Which DC motor is used in machine tool?", options: ["Series motor", "Shunt motor"], answer: 1, explanation: "Shunt motors are used in machine tools due to their stable speed under varying loads." },
-            { q: "The power factor of an alternator depends on:", options: ["Speed of rotor", "Load"], answer: 1, explanation: "The power factor is determined by the load, not the rotor speed." },
-            { q: "A machine that converts mechanical energy into electrical energy is:", options: ["D.C. motor", "Generator"], answer: 1, explanation: "A generator converts mechanical energy into electrical energy." },
-            { q: "An equipment or device used to convert mechanical energy into electrical energy is:", options: ["Pump", "Generator"], answer: 1, explanation: "A generator is used to convert mechanical energy into electrical energy, unlike a pump." },
-            { q: "The current in a circuit is directly proportional to total EMF and inversely proportional to resistance is:", options: ["Ohm’s Law", "Kirchhoff’s Law"], answer: 0, explanation: "Ohm’s Law states that current is directly proportional to voltage (EMF) and inversely proportional to resistance." },
-            { q: "“Squirrel cage” is the type of:", options: ["Diesel engine", "Electric motor"], answer: 1, explanation: "A squirrel cage is a type of rotor used in induction motors, known for its simplicity and durability." },
-            { q: "Joule is a unit of:", options: ["Force", "Energy"], answer: 1, explanation: "Joule is the SI unit of energy, measuring work done or energy transferred." }
-        ];
-
+    {
+        q: "What would be the problem if the starting motor pinion engages with flywheel teeth but cannot crank the flywheel?",
+        options: ["Defective over-running clutch", "Discharged battery", "Faulty spark plug", "Worn clutch disc"],
+        answer: 1,
+        explanation: "A discharged battery lacks the power to crank the flywheel, even if the pinion engages."
+    },
+    {
+        q: "Which of the following tests is performed in the battery using a hydrometer?",
+        options: ["Open circuit voltage test", "Specific gravity test", "Load test", "Capacity test"],
+        answer: 1,
+        explanation: "A hydrometer measures the specific gravity of battery electrolyte to assess its charge state."
+    },
+    {
+        q: "A 12-volt battery has how many cells?",
+        options: ["4", "6", "8", "12"],
+        answer: 1,
+        explanation: "A 12-volt automotive battery has 6 cells, each producing approximately 2.1 volts."
+    },
+    {
+        q: "Vehicle headlight is connected in:",
+        options: ["Series circuit", "Parallel circuit", "Hybrid circuit", "Open circuit"],
+        answer: 1,
+        explanation: "Headlights are connected in parallel to ensure consistent voltage and independent operation."
+    },
+    {
+        q: "The commonly used color for fog light is:",
+        options: ["Green", "Yellow", "Red", "Blue"],
+        answer: 1,
+        explanation: "Yellow fog lights improve visibility in adverse weather due to better light penetration."
+    },
+    {
+        q: "5-cell battery supplies how many volts?",
+        options: ["2V", "10V", "12V", "8V"],
+        answer: 1,
+        explanation: "A 5-cell lead-acid battery supplies approximately 10 volts (2 volts per cell)."
+    },
+    {
+        q: "ग्यासलाइन थ्री फिल्टर प्रयोग गर्दा कुन टर्मिनल जोडिन्छ? (Which terminal is connected when using a gasoline three filter?)",
+        options: ["-ve (Negative)", "+ve (Positive)", "Neutral", "Ground"],
+        answer: 1,
+        explanation: "ग्यासलाइन थ्री फिल्टर सामान्यतः +ve टर्मिनलमा जोडिन्छ। (The gasoline three filter is typically connected to the positive terminal.)"
+    },
+    {
+        q: "विद्युत् उपकरणहरू कसरी जडान गरिन्छ? (How are electrical devices connected?)",
+        options: ["Series connection", "Parallel connection", "Star connection", "Delta connection"],
+        answer: 1,
+        explanation: "विद्युत् उपकरणहरू सामान्यतः समानान्तर (parallel) मा जडान गरिन्छ ताकि प्रत्येकले समान भोल्टेज प्राप्त गरोस्। (Electrical devices are typically connected in parallel to ensure equal voltage.)"
+    },
+    {
+        q: "फ्लो मिटरको कार्य के हो? (What is the function of a flow meter?)",
+        options: ["ताप मापन (Measure temperature)", "इन्धनको प्रवाह मापन गर्नु (Measure fuel flow)", "भोल्टेज मापन (Measure voltage)", "दबाब मापन (Measure pressure)"],
+        answer: 1,
+        explanation: "फ्लो मिटरले इन्धनको प्रवाह दर मापन गर्छ, जुन इन्जिनको कार्यक्षमता जाँच्न प्रयोग हुन्छ। (A flow meter measures fuel flow rate, used to assess engine efficiency.)"
+    },
+    {
+        q: "रेक्टिफायरको कार्य के हो? (What is the function of a rectifier?)",
+        options: ["डीसी विद्युतलाई एसीमा परिवर्तन (DC to AC)", "एसी विद्युतलाई डीसीमा परिवर्तन गर्नु (AC to DC)", "भोल्टेज बढाउने (Increase voltage)", "करेण्ट घटाउने (Decrease current)"],
+        answer: 1,
+        explanation: "रेक्टिफायरले एसी (AC) लाई डीसी (DC) मा परिवर्तन गर्छ, जुन ब्याट्री चार्ज गर्न प्रयोग हुन्छ। (A rectifier converts AC to DC, used for battery charging.)"
+    },
+    {
+        q: "Function of relay switch in a circuit is to:",
+        options: ["Increase voltage", "Control a circuit by a separate low power signal", "Reduce current", "Store energy"],
+        answer: 1,
+        explanation: "A relay uses a low-power signal to control a high-power circuit, acting as a switch."
+    },
+    {
+        q: "What should be checked first if the headlight of an equipment does not work?",
+        options: ["Battery connection", "Fuse of headlight", "Bulb filament", "Wiring insulation"],
+        answer: 1,
+        explanation: "The fuse should be checked first, as a blown fuse is a common cause of headlight failure."
+    },
+    {
+        q: "Application of DC motor is restricted to low-load speed because:",
+        options: ["Cost of motor is high", "Problems with mechanical commutation", "Low efficiency", "High weight"],
+        answer: 1,
+        explanation: "Mechanical commutation in DC motors limits performance at high speeds due to wear and sparking."
+    },
+    {
+        q: "In a hydropower plant, which device converts mechanical to electrical energy?",
+        options: ["Pump", "Generator", "Turbine", "Transformer"],
+        answer: 1,
+        explanation: "A generator converts mechanical energy from the turbine into electrical energy in a hydropower plant."
+    },
+    {
+        q: "In generators, the principle used to convert mechanical motion into electrical energy is:",
+        options: ["Electrical attraction", "Magnetic induction", "Capacitance", "Resistance"],
+        answer: 1,
+        explanation: "Generators use magnetic induction to produce electrical energy from mechanical motion."
+    },
+    {
+        q: "In left hand rule for generators, the middle finger indicates:",
+        options: ["Direction of motion", "Direction of current flow", "Magnetic field direction", "Force direction"],
+        answer: 1,
+        explanation: "In the left-hand rule for generators, the middle finger shows the direction of induced current flow."
+    },
+    {
+        q: "Difference in speed between stator field and rotor is:",
+        options: ["Full load speed", "Slip", "Synchronous speed", "Rated speed"],
+        answer: 1,
+        explanation: "Slip is the difference in speed between the stator's magnetic field and the rotor in an induction motor."
+    },
+    {
+        q: "How many cells are used in a 12-volt car battery?",
+        options: ["4", "6", "8", "10"],
+        answer: 1,
+        explanation: "A 12-volt car battery uses 6 cells, each contributing about 2.1 volts."
+    },
+    {
+        q: "२ सेलको ५ वाट घाममा चल्ने सौर्य बत्तामा कति भोल्टको बल्ब हुन्छ? (What is the voltage of the bulb in a 5-watt solar light with 2 cells?)",
+        options: ["10V", "4V", "6V", "8V"],
+        answer: 1,
+        explanation: "२ सेलको सौर्य ब्याट्रीले ४ भोल्ट (प्रति सेल २ भोल्ट) उत्पादन गर्छ, त्यसैले ४ भोल्टको बल्ब प्रयोग हुन्छ। (A 2-cell solar battery produces 4 volts, so a 4-volt bulb is used.)"
+    },
+    {
+        q: "गाडीमा सामान्यतः के Defect हुन्छ? (What is a common defect in a vehicle?)",
+        options: ["Switch contact loose", "Fuse जलेर (Blown fuse)", "Worn tire", "Low coolant"],
+        answer: 1,
+        explanation: "गाडीमा फ्यूज जल्नु सामान्य डिफेक्ट हो, जसले विद्युतीय प्रणालीमा समस्या निम्त्याउँछ। (A blown fuse is a common defect, causing electrical system issues.)"
+    },
+    {
+        q: "When electrical devices are connected in parallel…",
+        options: ["Current flow in each device will be same", "Voltage across each device will be same", "Resistance will be same", "Power will be same"],
+        answer: 1,
+        explanation: "In a parallel circuit, the voltage across each device remains the same, while current divides."
+    },
+    {
+        q: "यो चित्र कुन भाग हो? (What part is shown in the picture?)",
+        options: ["क्यापेसिटर (Capacitor)", "फ्यूज (Fuse)", "रेजिस्टर (Resistor)", "डायोड (Diode)"],
+        answer: 1,
+        explanation: "चित्रमा फ्यूज देखाइएको छ, जुन सर्किटलाई ओभरलोडबाट जोगाउँछ। (The picture shows a fuse, which protects the circuit from overload.)"
+    },
+    {
+        q: "कुन तरल पदार्थ मात्र ब्याट्रीमा प्रयोग हुन्छ? (Which liquid is used exclusively in batteries?)",
+        options: ["Grease", "Distilled water", "Engine oil", "Brake fluid"],
+        answer: 1,
+        explanation: "Distilled water is used in batteries to maintain electrolyte levels, as it is free of impurities."
+    },
+    {
+        q: "मोटर स्टार्टरमा कुन प्रकारको एसी प्रकार्य प्रणाली रहन्छ? (Which type of AC system is used in motor starters?)",
+        options: ["A Type", "Star-Delta", "Direct Online", "Soft Starter"],
+        answer: 1,
+        explanation: "Star-Delta starters are commonly used in motor starters to reduce initial current surge."
+    },
+    {
+        q: "इन्जिनमा पेट्रोलको आगो लाग्नको लागि सर्वप्रथम के जरुरी छ? (What is primarily required for petrol to ignite in an engine?)",
+        options: ["न्यूनतम तापमान (Minimum temperature)", "आत्मप्रज्वलन तापमान (Auto-ignition temperature)", "उच्च दबाब (High pressure)", "कम्प्रेसन अनुपात (Compression ratio)"],
+        answer: 1,
+        explanation: "पेट्रोलको आगो लाग्न आत्मप्रज्वलन तापमान (auto-ignition temperature) आवश्यक हुन्छ। (Petrol requires its auto-ignition temperature to ignite.)"
+    },
+    {
+        q: "कुन किसिमको इन्धन सस्तो पर्छ? (Which fuel is generally cheaper?)",
+        options: ["पेट्रोल (Petrol)", "डिजेल (Diesel)", "CNG", "LPG"],
+        answer: 1,
+        explanation: "डिजेल सामान्यतः पेट्रोलभन्दा सस्तो हुन्छ र इन्धन दक्षता पनि बढी हुन्छ। (Diesel is generally cheaper than petrol and offers higher fuel efficiency.)"
+    },
+    {
+        q: "White lead light is used in:",
+        options: ["Failure mode analysis circuit", "Indicator or warning light", "Headlight", "Fog light"],
+        answer: 1,
+        explanation: "White lead lights are typically used as indicator or warning lights in vehicles."
+    },
+    {
+        q: "An equipment or device used to convert electrical energy into mechanical energy is:",
+        options: ["Generator", "Motor", "Transformer", "Rectifier"],
+        answer: 1,
+        explanation: "A motor converts electrical energy into mechanical energy, unlike a generator."
+    },
+    {
+        q: "Power factor of an alternator depends on:",
+        options: ["Core loss", "Load", "Rotor speed", "Temperature"],
+        answer: 1,
+        explanation: "The power factor of an alternator depends on the type and magnitude of the connected load."
+    },
+    {
+        q: "Which DC motor is used in machine tool?",
+        options: ["Series motor", "Shunt motor", "Compound motor", "Brushless motor"],
+        answer: 1,
+        explanation: "Shunt motors are used in machine tools due to their stable speed under varying loads."
+    },
+    {
+        q: "The power factor of an alternator depends on:",
+        options: ["Speed of rotor", "Load", "Frequency", "Voltage"],
+        answer: 1,
+        explanation: "The power factor is determined by the load, not rotor speed, frequency, or voltage."
+    },
+    {
+        q: "A machine that converts mechanical energy into electrical energy is:",
+        options: ["D.C. motor", "Generator", "Transformer", "Inverter"],
+        answer: 1,
+        explanation: "A generator converts mechanical energy into electrical energy."
+    },
+    {
+        q: "An equipment or device used to convert mechanical energy into electrical energy is:",
+        options: ["Pump", "Generator", "Motor", "Compressor"],
+        answer: 1,
+        explanation: "A generator converts mechanical energy into electrical energy, unlike a pump or motor."
+    },
+    {
+        q: "The current in a circuit is directly proportional to total EMF and inversely proportional to resistance is:",
+        options: ["Ohm’s Law", "Kirchhoff’s Law", "Faraday’s Law", "Ampere’s Law"],
+        answer: 0,
+        explanation: "Ohm’s Law states that current is directly proportional to voltage (EMF) and inversely proportional to resistance."
+    },
+    {
+        q: "“Squirrel cage” is the type of:",
+        options: ["Diesel engine", "Electric motor", "Gearbox", "Pump"],
+        answer: 1,
+        explanation: "A squirrel cage is a type of rotor used in induction motors, known for its simplicity and durability."
+    },
+    {
+        q: "Joule is a unit of:",
+        options: ["Force", "Energy", "Power", "Current"],
+        answer: 1,
+        explanation: "Joule is the SI unit of energy, measuring work done or energy transferred."
+    }
+];
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
