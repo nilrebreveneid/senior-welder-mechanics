@@ -334,189 +334,188 @@
     <audio id="wrong-sound" src="https://www.soundjay.com/buttons/beep-02.mp3"></audio>
 
     <script>
-        const questions = [
-            {
-                q: "What is brazing in metal joining?",
-                options: ["Melting the base metal", "Using a non-ferrous filler metal"],
-                answer: 1,
-                explanation: "Brazing joins metals using a non-ferrous filler metal with a melting point above 450°C but below the base metal’s melting point."
-            },
-            {
-                q: "Which gas combination is used in gas welding?",
-                options: ["Oxygen and acetylene", "Oxygen and hydrogen"],
-                answer: 0,
-                explanation: "Oxygen and acetylene produce a high-temperature flame suitable for gas welding."
-            },
-            {
-                q: "What is spot welding?",
-                options: ["Electric resistance welding", "Gas welding"],
-                answer: 0,
-                explanation: "Spot welding is a resistance welding process that joins metal sheets by applying electric current at specific points."
-            },
-            {
-                q: "Which metal can be welded using electric arc welding?",
-                options: ["Medium carbon steel", "Wood"],
-                answer: 0,
-                explanation: "Medium carbon steel can be arc welded with proper techniques, unlike non-metals like wood."
-            },
-            {
-                q: "What happens in oxy-acetylene welding when oxygen supply is excessive?",
-                options: ["Oxidizing flame", "Neutral flame"],
-                answer: 0,
-                explanation: "Excess oxygen creates an oxidizing flame, which can oxidize the weld metal."
-            },
-            {
-                q: "What material is used to coat a welding electrode?",
-                options: ["Flux", "Slag"],
-                answer: 0,
-                explanation: "Flux coats the electrode to shield the weld pool from atmospheric contamination."
-            },
-            {
-                q: "What is the filler material used in soldering?",
-                options: ["Tin-lead alloy", "Zinc-copper alloy"],
-                answer: 0,
-                explanation: "Soldering uses a tin-lead alloy with a low melting point to join metals."
-            },
-            {
-                q: "What edge preparation is required for welding plates thicker than 15 mm?",
-                options: ["Double V or U groove on both sides", "Single V groove on one side"],
-                answer: 0,
-                explanation: "Double V or U grooves ensure proper penetration for thick plates."
-            },
-            {
-                q: "How is a neutral flame obtained in oxy-acetylene welding?",
-                options: ["Equal volumes of oxygen and acetylene", "More oxygen than acetylene"],
-                answer: 0,
-                explanation: "A neutral flame, ideal for welding, results from equal volumes of oxygen and acetylene."
-            },
-            {
-                q: "Which is an example of a male and female joint in metalwork?",
-                options: ["Nuts and bolts", "Butt weld"],
-                answer: 0,
-                explanation: "Nuts and bolts form a male-female joint, unlike a butt weld, which is a welded joint."
-            },
-            {
-                q: "What is a joint made by fastening two edges of sheet metal together called?",
-                options: ["Seam", "Lap joint"],
-                answer: 0,
-                explanation: "A seam is a joint where sheet metal edges are fastened together, often by welding or folding."
-            },
-            {
-                q: "Which process is a type of resistance welding?",
-                options: ["Spot welding", "Arc welding"],
-                answer: 0,
-                explanation: "Spot welding is a resistance welding process, unlike arc welding, which is fusion welding."
-            },
-            {
-                q: "Which is an example of fusion welding?",
-                options: ["Arc welding", "Resistance welding"],
-                answer: 0,
-                explanation: "Arc welding melts the base metal and filler, making it a fusion welding process."
-            },
-            {
-                q: "Welding defect पत्ता लगाउन NDT मा कुन test समावेश हुन्छ?",
-                options: ["Magnetic particle test", "Visual inspection only"],
-                answer: 0,
-                explanation: "Magnetic particle testing is an NDT method to detect surface and near-surface weld defects."
-            },
-            {
-                q: "Welding electrode को तातोमा ध्यान दिनु पर्ने कारण के हो?",
-                options: ["सुरक्षा र गुणस्तर कायम राख्न", "धातुमा फुर्सद राख्न"],
-                answer: 0,
-                explanation: "Managing electrode heat ensures welder safety and maintains weld quality."
-            },
-            {
-                q: "Metallic sheet काट्ने सामान्य विधि कुन हो?",
-                options: ["Plasma cutting", "Chiseling"],
-                answer: 0,
-                explanation: "Plasma cutting is a common, precise method for cutting metallic sheets."
-            },
-            {
-                q: "A cold chisel is typically made of:",
-                options: ["High carbon steel", "Mild steel"],
-                answer: 0,
-                explanation: "High carbon steel is used for cold chisels due to its hardness and durability."
-            },
-            {
-                q: "What chemical is used to generate acetylene for gas welding?",
-                options: ["Calcium carbide", "Calcium carbonate"],
-                answer: 0,
-                explanation: "Calcium carbide reacts with water to produce acetylene gas for welding."
-            },
-            {
-                q: "Which is a common welding defect?",
-                options: ["Crack", "Perfect weld"],
-                answer: 0,
-                explanation: "Cracks are a common weld imperfection, compromising structural integrity."
-            },
-            {
-                q: "Butt joint भनेको के हो?",
-                options: ["दुई टुक्रा सिधा राखी जोड्ने", "एकअर्काको माथि राखी जोड्ने"],
-                answer: 0,
-                explanation: "A butt joint aligns two metal pieces edge-to-edge for welding."
-            },
-            {
-                q: "Which is a welding testing method?",
-                options: ["Ultrasonic test", "Visual inspection only"],
-                answer: 0,
-                explanation: "Ultrasonic testing is a non-destructive method to detect internal weld defects."
-            },
-            {
-                q: "Which welding process is suitable for grey cast iron?",
-                options: ["TIG welding", "Arc welding"],
-                answer: 0,
-                explanation: "TIG welding provides precise control, reducing cracking in grey cast iron."
-            },
-            {
-                q: "In arc welding, how is the electric arc produced?",
-                options: ["By voltage difference", "By mechanical friction"],
-                answer: 0,
-                explanation: "The arc is created by a voltage difference between the electrode and workpiece."
-            },
-            {
-                q: "Which process joins metals without melting the base material?",
-                options: ["Brazing", "Arc welding"],
-                answer: 0,
-                explanation: "Brazing uses a filler metal to join metals without melting the base material."
-            },
-            {
-                q: "Where is electron beam welding typically performed?",
-                options: ["Vacuum", "Open air"],
-                answer: 0,
-                explanation: "Electron beam welding requires a vacuum to prevent beam scattering."
-            },
-            {
-                q: "What is the temperature range of an electric arc in arc welding?",
-                options: ["6000°C to 7000°C", "4000°C to 5000°C"],
-                answer: 0,
-                explanation: "The electric arc reaches temperatures of 6000°C to 7000°C."
-            },
-            {
-                q: "Which provides better arc stability in welding?",
-                options: ["DC welding", "AC welding"],
-                answer: 0,
-                explanation: "DC welding offers a more stable arc due to consistent current flow."
-            },
-            {
-                q: "पातलो फलाम काट्न प्रयोग गरिने ग्याँस वेल्डिङ प्रक्रिया कुन हो?",
-                options: ["प्लाज्मा कटिङ", "ग्यास वेल्डिङ"],
-                answer: 0,
-                explanation: "Plasma cutting is precise and effective for cutting thin iron sheets."
-            },
-            {
-                q: "In arc welding with DC current, where is greater heat generated?",
-                options: ["Positive pole (anode)", "Negative pole (cathode)"],
-                answer: 0,
-                explanation: "In DC welding, the positive pole (anode) generates more heat due to electron flow."
-            },
-            {
-                q: "What is the process of cutting a flat sheet to a desired shape called?",
-                options: ["Blanking", "Trimming"],
-                answer: 0,
-                explanation: "Blanking is the process of cutting a flat sheet into a specific shape."
-            }
-        ];
-
+     const questions = [
+  {
+    q: "What is brazing in metal joining?",
+    options: ["Melting the base metal", "Using a non-ferrous filler metal", "Cutting metal sheets", "Forging metal parts"],
+    answer: 1,
+    explanation: "Brazing joins metals using a non-ferrous filler metal with a melting point above 450°C but below the base metal’s melting point."
+  },
+  {
+    q: "Which gas combination is used in gas welding?",
+    options: ["Oxygen and acetylene", "Oxygen and hydrogen", "Nitrogen and acetylene", "Carbon dioxide and oxygen"],
+    answer: 0,
+    explanation: "Oxygen and acetylene produce a high-temperature flame suitable for gas welding."
+  },
+  {
+    q: "What is spot welding?",
+    options: ["Electric resistance welding", "Gas welding", "Arc welding", "Laser welding"],
+    answer: 0,
+    explanation: "Spot welding is a resistance welding process that joins metal sheets by applying electric current at specific points."
+  },
+  {
+    q: "Which metal can be welded using electric arc welding?",
+    options: ["Medium carbon steel", "Wood", "Plastic", "Ceramic"],
+    answer: 0,
+    explanation: "Medium carbon steel can be arc welded with proper techniques, unlike non-metals like wood, plastic, or ceramic."
+  },
+  {
+    q: "What happens in oxy-acetylene welding when oxygen supply is excessive?",
+    options: ["Oxidizing flame", "Neutral flame", "Carburizing flame", "No flame"],
+    answer: 0,
+    explanation: "Excess oxygen creates an oxidizing flame, which can oxidize the weld metal and affect weld quality."
+  },
+  {
+    q: "What material is used to coat a welding electrode?",
+    options: ["Flux", "Slag", "Solder", "Paint"],
+    answer: 0,
+    explanation: "Flux coats the electrode to shield the weld pool from atmospheric contamination and stabilize the arc."
+  },
+  {
+    q: "What is the filler material used in soldering?",
+    options: ["Tin-lead alloy", "Zinc-copper alloy", "Aluminum alloy", "Steel wire"],
+    answer: 0,
+    explanation: "Soldering uses a tin-lead alloy with a low melting point to join metals."
+  },
+  {
+    q: "What edge preparation is required for welding plates thicker than 15 mm?",
+    options: ["Double V or U groove on both sides", "Single V groove on one side", "No groove needed", "Square edge"],
+    answer: 0,
+    explanation: "Double V or U grooves ensure proper penetration and strength for welding thick plates."
+  },
+  {
+    q: "How is a neutral flame obtained in oxy-acetylene welding?",
+    options: ["Equal volumes of oxygen and acetylene", "More oxygen than acetylene", "More acetylene than oxygen", "No oxygen supply"],
+    answer: 0,
+    explanation: "A neutral flame, ideal for welding, results from equal volumes of oxygen and acetylene."
+  },
+  {
+    q: "Which is an example of a male and female joint in metalwork?",
+    options: ["Nuts and bolts", "Butt weld", "Lap weld", "Seam weld"],
+    answer: 0,
+    explanation: "Nuts and bolts form a male-female joint, unlike welds, which are permanent joints."
+  },
+  {
+    q: "What is a joint made by fastening two edges of sheet metal together called?",
+    options: ["Seam", "Lap joint", "Butt joint", "T-joint"],
+    answer: 0,
+    explanation: "A seam is a joint where sheet metal edges are fastened together, often by welding or folding."
+  },
+  {
+    q: "Which process is a type of resistance welding?",
+    options: ["Spot welding", "Arc welding", "TIG welding", "MIG welding"],
+    answer: 0,
+    explanation: "Spot welding is a resistance welding process, unlike arc, TIG, or MIG, which are fusion welding methods."
+  },
+  {
+    q: "Which is an example of fusion welding?",
+    options: ["Arc welding", "Resistance welding", "Brazing", "Soldering"],
+    answer: 0,
+    explanation: "Arc welding melts the base metal and filler, making it a fusion welding process."
+  },
+  {
+    q: "Welding defect पत्ता लगाउन NDT मा कुन test समावेश हुन्छ? (Which test is included in NDT to detect welding defects?)",
+    options: ["Magnetic particle test", "Visual inspection only", "Hardness test", "Tensile test"],
+    answer: 0,
+    explanation: "Magnetic particle testing detects surface and near-surface weld defects in NDT."
+  },
+  {
+    q: "Welding electrode को तातोमा ध्यान दिनु पर्ने कारण के हो? (Why is it important to manage the heat of a welding electrode?)",
+    options: ["सुरक्षा र गुणस्तर कायम राख्न (For safety and quality)", "धातुमा फुर्सद राख्न (To keep metal idle)", "इलेक्ट्रोडको आयु घटाउन (To reduce electrode life)", "वेल्डिङ गति बढाउन (To increase welding speed)"],
+    answer: 0,
+    explanation: "इलेक्ट्रोडको तातो व्यवस्थापनले वेल्डरको सुरक्षा र वेल्डको गुणस्तर सुनिश्चित गर्छ। (Managing electrode heat ensures welder safety and weld quality.)"
+  },
+  {
+    q: "Metallic sheet काट्ने सामान्य विधि कुन हो? (What is a common method for cutting metallic sheets?)",
+    options: ["Plasma cutting", "Chiseling", "Hammering", "Filing"],
+    answer: 0,
+    explanation: "प्लाज्मा कटिङ धातुको पातलो पाना काट्न सटीक र सामान्य विधि हो। (Plasma cutting is a precise and common method for cutting metal sheets.)"
+  },
+  {
+    q: "A cold chisel is typically made of:",
+    options: ["High carbon steel", "Mild steel", "Aluminum", "Copper"],
+    answer: 0,
+    explanation: "High carbon steel is used for cold chisels due to its hardness and durability."
+  },
+  {
+    q: "What chemical is used to generate acetylene for gas welding?",
+    options: ["Calcium carbide", "Calcium carbonate", "Sodium chloride", "Potassium nitrate"],
+    answer: 0,
+    explanation: "Calcium carbide reacts with water to produce acetylene gas for welding."
+  },
+  {
+    q: "Which is a common welding defect?",
+    options: ["Crack", "Perfect weld", "Smooth bead", "Uniform penetration"],
+    answer: 0,
+    explanation: "Cracks are a common weld imperfection, compromising structural integrity."
+  },
+  {
+    q: "Butt joint भनेको के हो? (What is a butt joint?)",
+    options: ["दुई टुक्रा सिधा राखी जोड्ने (Joining two pieces edge-to-edge)", "एकअर्काको माथि राखी जोड्ने (Joining by overlapping)", "कोणमा जोड्ने (Joining at an angle)", "पाइप जोड्ने (Joining pipes)"],
+    answer: 0,
+    explanation: "बट जोइन्टले दुई धातुका टुक्रालाई सिधा जोड्छ। (A butt joint aligns two metal pieces edge-to-edge for welding.)"
+  },
+  {
+    q: "Which is a welding testing method?",
+    options: ["Ultrasonic test", "Visual inspection only", "Hardness test", "Impact test"],
+    answer: 0,
+    explanation: "Ultrasonic testing is a non-destructive method to detect internal weld defects."
+  },
+  {
+    q: "Which welding process is suitable for grey cast iron?",
+    options: ["TIG welding", "Arc welding", "Resistance welding", "Plasma welding"],
+    answer: 0,
+    explanation: "TIG welding provides precise control, reducing cracking in grey cast iron."
+  },
+  {
+    q: "In arc welding, how is the electric arc produced?",
+    options: ["By voltage difference", "By mechanical friction", "By gas pressure", "By magnetic induction"],
+    answer: 0,
+    explanation: "The arc is created by a voltage difference between the electrode and workpiece."
+  },
+  {
+    q: "Which process joins metals without melting the base material?",
+    options: ["Brazing", "Arc welding", "MIG welding", "TIG welding"],
+    answer: 0,
+    explanation: "Brazing uses a filler metal to join metals without melting the base material."
+  },
+  {
+    q: "Where is electron beam welding typically performed?",
+    options: ["Vacuum", "Open air", "Underwater", "Inert gas atmosphere"],
+    answer: 0,
+    explanation: "Electron beam welding requires a vacuum to prevent beam scattering."
+  },
+  {
+    q: "What is the temperature range of an electric arc in arc welding?",
+    options: ["6000°C to 7000°C", "4000°C to 5000°C", "2000°C to 3000°C", "8000°C to 9000°C"],
+    answer: 0,
+    explanation: "The electric arc reaches temperatures of 6000°C to 7000°C, enabling metal fusion."
+  },
+  {
+    q: "Which provides better arc stability in welding?",
+    options: ["DC welding", "AC welding", "Gas welding", "Plasma welding"],
+    answer: 0,
+    explanation: "DC welding offers a more stable arc due to consistent current flow."
+  },
+  {
+    q: "पातलो फलाम काट्न प्रयोग गरिने ग्याँस वेल्डिङ प्रक्रिया कुन हो? (Which gas welding process is used for cutting thin iron?)",
+    options: ["प्लाज्मा कटिङ (Plasma cutting)", "ग्यास वेल्डिङ (Gas welding)", "आर्क वेल्डिङ (Arc welding)", "टिग वेल्डिङ (TIG welding)"],
+    answer: 0,
+    explanation: "प्लाज्मा कटिङ पातलो फलाम काट्न सटीक र प्रभावकारी छ। (Plasma cutting is precise for cutting thin iron sheets.)"
+  },
+  {
+    q: "In arc welding with DC current, where is greater heat generated?",
+    options: ["Positive pole (anode)", "Negative pole (cathode)", "Workpiece only", "Electrode tip only"],
+    answer: 0,
+    explanation: "In DC welding, the positive pole (anode) generates more heat due to electron flow."
+  },
+  {
+    q: "What is the process of cutting a flat sheet to a desired shape called?",
+    options: ["Blanking", "Trimming", "Shearing", "Bending"],
+    answer: 0,
+    explanation: "Blanking is the process of cutting a flat sheet into a specific shape using a die."
+  }
+];
         let currentPage = 0;
         let score = 0;
         let skipped = [];
