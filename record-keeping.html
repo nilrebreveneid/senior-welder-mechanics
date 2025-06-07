@@ -334,219 +334,212 @@
     <audio id="wrong-sound" src="https://www.soundjay.com/buttons/beep-02.mp3"></audio>
 
     <script>
-        const questions = [
-            {
-                q: "What is the importance of record keeping in a workshop?",
-                options: ["To analyze equipment performance and costs", "To decorate the office"],
-                answer: 0,
-                explanation: "Record keeping tracks equipment performance, maintenance costs, and operational efficiency, aiding decision-making."
-            },
-            {
-                q: "Which is NOT a safety tool for a mechanic?",
-                options: ["Shirt and pants", "Safety boots"],
-                answer: 0,
-                explanation: "Shirt and pants are not safety tools; safety boots protect against workplace hazards."
-            },
-            {
-                q: "Personal safety device मा पर्ने कुन हो?",
-                options: ["Safety helmet", "Fan belt cover"],
-                answer: 0,
-                explanation: "A safety helmet is a personal safety device; a fan belt cover is a vehicle component."
-            },
-            {
-                q: "Who uses a vehicle maintenance job card to record maintenance?",
-                options: ["Mechanic only", "Mechanic and supervisor"],
-                answer: 1,
-                explanation: "Both the mechanic and supervisor use the job card to document and verify maintenance tasks."
-            },
-            {
-                q: "What information does a job card typically contain?",
-                options: ["Job description only", "Job description, parts used, and labor details"],
-                answer: 1,
-                explanation: "A job card includes the job description, parts used, labor hours, and other maintenance details."
-            },
-            {
-                q: "Which document is used to track daily usage and issues of a vehicle?",
-                options: ["Logbook", "Bill book"],
-                answer: 0,
-                explanation: "A logbook records daily vehicle usage, mileage, and issues for operational tracking."
-            },
-            {
-                q: "Who is responsible for signing the maintenance job card?",
-                options: ["Mechanic and supervisor", "Driver only"],
-                answer: 0,
-                explanation: "The mechanic and supervisor sign the job card to confirm completed maintenance."
-            },
-            {
-                q: "Which is the standard format for recording defects in a vehicle at a service station?",
-                options: ["Job card", "Maintenance manual"],
-                answer: 0,
-                explanation: "A job card is the standard format for documenting vehicle defects and repairs."
-            },
-            {
-                q: "Record keeping helps in:",
-                options: ["Tracking maintenance costs and schedules", "Only employee attendance"],
-                answer: 0,
-                explanation: "Record keeping tracks maintenance costs, schedules, and equipment performance, not just attendance."
-            },
-            {
-                q: "At which interval should safety footwear be inspected?",
-                options: ["Before each use", "Every 15 days"],
-                answer: 0,
-                explanation: "Safety footwear should be inspected before each use to ensure it is free of damage."
-            },
-            {
-                q: "When is personal protective equipment (PPE) required?",
-                options: ["When engineering controls are insufficient", "When an employee requests it"],
-                answer: 0,
-                explanation: "PPE is required when engineering controls cannot fully eliminate workplace hazards."
-            },
-            {
-                q: "Why is machine safeguarding necessary?",
-                options: ["To enhance machine appearance", "To minimize accident risks for operators"],
-                answer: 1,
-                explanation: "Safeguarding protects operators from hazards like moving parts, reducing accident risks."
-            },
-            {
-                q: "What is an activity where people practice leaving a building quickly called?",
-                options: ["Fire play", "Fire drill"],
-                answer: 1,
-                explanation: "A fire drill is a practice to ensure quick and safe evacuation during emergencies."
-            },
-            {
-                q: "Which is NOT a general safety rule for a shop mechanic?",
-                options: ["Wearing an apron", "Wearing a tie or jewelry"],
-                answer: 1,
-                explanation: "Wearing ties or jewelry is unsafe as they can get caught in machinery."
-            },
-            {
-                q: "What safety device is used during arc welding for eye protection?",
-                options: ["Black glasses", "Welding helmet with shield"],
-                answer: 1,
-                explanation: "A welding helmet with a protective shield safeguards eyes from arc welding’s bright light."
-            },
-            {
-                q: "Which of the following is a personal safety tool?",
-                options: ["Screwdriver", "Gloves"],
-                answer: 1,
-                explanation: "Gloves are a personal safety tool; screwdrivers are not."
-            },
-            {
-                q: "Safeguarding of a machine is a type of:",
-                options: ["Safety device", "Personal protective equipment"],
-                answer: 0,
-                explanation: "Machine safeguarding is a safety device to protect operators, not PPE."
-            },
-            {
-                q: "Methods that show how to perform tasks with minimum risk are known as:",
-                options: ["Safety devices", "Safe work practices"],
-                answer: 1,
-                explanation: "Safe work practices outline procedures to minimize risks during tasks."
-            },
-            {
-                q: "काम गर्दा निम्नमध्ये कुन सुरक्षा उपकरण प्रयोग गर्नुपर्छ?",
-                options: ["छाता र लौरो", "सुरक्षा ज्याकेट र बुट"],
-                answer: 1,
-                explanation: "Safety jackets and boots are essential protective equipment for workplace safety."
-            },
-            {
-                q: "Which of the following is a safety tool?",
-                options: ["Goggles", "Hammer"],
-                answer: 0,
-                explanation: "Goggles protect eyes and are a safety tool; hammers are not."
-            },
-            {
-                q: "What should you do before starting maintenance on electrical machines?",
-                options: ["Disconnect the power supply", "Wear gloves only"],
-                answer: 0,
-                explanation: "Disconnecting the power supply prevents electrical hazards during maintenance."
-            },
-            {
-                q: "Safety posters in workshops are used to:",
-                options: ["Raise awareness about hazards", "Decorate walls"],
-                answer: 0,
-                explanation: "Safety posters educate workers about hazards and safe practices."
-            },
-            {
-                q: "Which is essential in fire-prone areas?",
-                options: ["Fire extinguisher", "Screwdriver"],
-                answer: 0,
-                explanation: "Fire extinguishers are critical for safety in fire-prone areas."
-            },
-            {
-                q: "Which safety color code indicates caution?",
-                options: ["Yellow", "Green"],
-                answer: 0,
-                explanation: "Yellow indicates caution, warning of potential hazards."
-            },
-            {
-                q: "Which one is a PPE (Personal Protective Equipment)?",
-                options: ["Helmet", "Spanner"],
-                answer: 0,
-                explanation: "A helmet is PPE; a spanner is a tool."
-            },
-            {
-                q: "What is the color of a typical safety sign for danger?",
-                options: ["Red", "Blue"],
-                answer: 0,
-                explanation: "Red is used for danger signs to alert workers to serious hazards."
-            },
-            {
-                q: "विद्युत् सर्किट बुझ्न प्रयोग गरिने प्रमुख उपकरण कुन हो?",
-                options: ["स्पीडोमिटर", "भोल्टमिटर"],
-                answer: 1,
-                explanation: "A voltmeter measures voltage in electrical circuits."
-            },
-            {
-                q: "Electronic force meter (measuring instrument) is:",
-                options: ["Voltmeter", "Dynamometer"],
-                answer: 1,
-                explanation: "A dynamometer measures force, torque, or power, not voltage."
-            },
-            {
-                q: "व्यक्तिगत सुरक्षा उपकरण के हो?",
-                options: ["पन्जा (Gloves)", "हथौडा (Hammer)"],
-                answer: 0,
-                explanation: "Gloves are personal protective equipment; hammers are tools."
-            },
-            {
-                q: "Machine को मर्मत, सञ्चालन, समायोजन आदि जान्न दिइने सूचना कुन म्यानुअलमा पाइन्छ?",
-                options: ["Workshop Manual", "Parts Manual"],
-                answer: 0,
-                explanation: "A workshop manual provides detailed maintenance and operation instructions."
-            },
-            {
-                q: "मेसिनको सञ्चालन र मर्मत गर्न कुन म्यानुअल चाहिन्छ?",
-                options: ["Workshop Manual", "Instruction Chart"],
-                answer: 0,
-                explanation: "A workshop manual is essential for machine operation and maintenance."
-            },
-            {
-                q: "मेसिनको operation manual ले कुन प्रकारको जानकारी दिन्छ?",
-                options: ["प्रयोग र मर्मतको तरिका", "केवल प्रयोगको तरिका"],
-                answer: 0,
-                explanation: "An operation manual covers both usage and maintenance procedures."
-            },
-            {
-                q: "In a workshop, where should dangerous tools be stored?",
-                options: ["Out of reach and labeled", "Near the entrance"],
-                answer: 0,
-                explanation: "Dangerous tools should be stored out of reach and clearly labeled for safety."
-            },
-            {
-                q: "गाडीको हाइब्रिड ब्रेक फ्लुइड कहिले परिवर्तन गर्नुपर्छ?",
-                options: ["निर्माताको सिफारिस अनुसार", "गाडी बिग्रँदा"],
-                answer: 0,
-                explanation: "Hybrid brake fluid should be changed per the manufacturer’s recommended schedule."
-            },
-            {
-                q: "रेडिएटरको पानीको मात्रा मापन गर्ने सही तरिका कुन हो?",
-                options: ["रेडिएटर क्याप खोलेर जाँच्ने", "इन्जिन तापक्रम मापन गर्ने"],
-                answer: 0,
-                explanation: "Coolant levels are checked by inspecting the radiator or reservoir, not engine temperature."
-            }
-        ];
-
+      const questions = [
+    {
+        q: "What is the importance of record keeping in a workshop?",
+        options: ["To analyze equipment performance and costs", "To decorate the office", "To track employee salaries", "To monitor office supplies"],
+        answer: 0,
+        explanation: "Record keeping tracks equipment performance, maintenance costs, and operational efficiency, aiding decision-making."
+    },
+    {
+        q: "Which is NOT a safety tool for a mechanic?",
+        options: ["Shirt and pants", "Safety boots", "Goggles", "Gloves"],
+        answer: 0,
+        explanation: "Shirt and pants are not safety tools; safety boots, goggles, and gloves protect against workplace hazards."
+    },
+    {
+        q: "Personal safety device मा पर्ने कुन हो? (Which is a personal safety device?)",
+        options: ["Safety helmet", "Fan belt cover", "Wrench", "Screwdriver"],
+        answer: 0,
+        explanation: "सुरक्षा हेलमेट व्यक्तिगत सुरक्षा उपकरण हो; फ्यान बेल्ट कभर गाडीको कम्पोनेन्ट हो। (A safety helmet is a personal safety device; a fan belt cover is a vehicle component.)"
+    },
+    {
+        q: "Who uses a vehicle maintenance job card to record maintenance?",
+        options: ["Mechanic only", "Mechanic and supervisor", "Driver only", "Office clerk"],
+        answer: 1,
+        explanation: "Both the mechanic and supervisor use the job card to document and verify maintenance tasks."
+    },
+    {
+        q: "What information does a job card typically contain?",
+        options: ["Job description only", "Job description, parts used, and labor details", "Vehicle purchase date", "Driver’s license details"],
+        answer: 1,
+        explanation: "A job card includes the job description, parts used, labor hours, and other maintenance details."
+    },
+    {
+        q: "Which document is used to track daily usage and issues of a vehicle?",
+        options: ["Logbook", "Bill book", "Service manual", "Warranty card"],
+        answer: 0,
+        explanation: "A logbook records daily vehicle usage, mileage, and issues for operational tracking."
+    },
+    {
+        q: "Who is responsible for signing the maintenance job card?",
+        options: ["Mechanic and supervisor", "Driver only", "Customer only", "Accountant"],
+        answer: 0,
+        explanation: "The mechanic and supervisor sign the job card to confirm completed maintenance."
+    },
+    {
+        q: "Which is the standard format for recording defects in a vehicle at a service station?",
+        options: ["Job card", "Maintenance manual", "Logbook", "Inventory list"],
+        answer: 0,
+        explanation: "A job card is the standard format for documenting vehicle defects and repairs."
+    },
+    {
+        q: "Record keeping helps in:",
+        options: ["Tracking maintenance costs and schedules", "Only employee attendance", "Monitoring fuel prices", "Managing office furniture"],
+        answer: 0,
+        explanation: "Record keeping tracks maintenance costs, schedules, and equipment performance, not just attendance."
+    },
+    {
+        q: "At which interval should safety footwear be inspected?",
+        options: ["Before each use", "Every 15 days", "Every month", "Every 6 months"],
+        answer: 0,
+        explanation: "Safety footwear should be inspected before each use to ensure it is free of damage."
+    },
+    {
+        q: "When is personal protective equipment (PPE) required?",
+        options: ["When engineering controls are insufficient", "When an employee requests it", "Only during night shifts", "When tools are new"],
+        answer: 0,
+        explanation: "PPE is required when engineering controls cannot fully eliminate workplace hazards."
+    },
+    {
+        q: "Why is machine safeguarding necessary?",
+        options: ["To enhance machine appearance", "To minimize accident risks for operators", "To increase machine speed", "To reduce maintenance costs"],
+        answer: 1,
+        explanation: "Safeguarding protects operators from hazards like moving parts, reducing accident risks."
+    },
+    {
+        q: "What is an activity where people practice leaving a building quickly called?",
+        options: ["Fire play", "Fire drill", "Safety audit", "Evacuation game"],
+        answer: 1,
+        explanation: "A fire drill is a practice to ensure quick and safe evacuation during emergencies."
+    },
+    {
+        q: "Which is NOT a general safety rule for a shop mechanic?",
+        options: ["Wearing an apron", "Wearing a tie or jewelry", "Using safety goggles", "Keeping the workspace clean"],
+        answer: 1,
+        explanation: "Wearing ties or jewelry is unsafe as they can get caught in machinery."
+    },
+    {
+        q: "What safety device is used during arc welding for eye protection?",
+        options: ["Black glasses", "Welding helmet with shield", "Safety goggles", "Sunglasses"],
+        answer: 1,
+        explanation: "A welding helmet with a protective shield safeguards eyes from arc welding’s bright light."
+    },
+    {
+        q: "Which of the following is a personal safety tool?",
+        options: ["Screwdriver", "Gloves", "Wrench", "Pliers"],
+        answer: 1,
+        explanation: "Gloves are a personal safety tool; screwdrivers, wrenches, and pliers are not."
+    },
+    {
+        q: "Safeguarding of a machine is a type of:",
+        options: ["Safety device", "Personal protective equipment", "Maintenance tool", "Operational control"],
+        answer: 0,
+        explanation: "Machine safeguarding is a safety device to protect operators, not PPE."
+    },
+    {
+        q: "Methods that show how to perform tasks with minimum risk are known as:",
+        options: ["Safety devices", "Safe work practices", "Machine guards", "Tool calibrations"],
+        answer: 1,
+        explanation: "Safe work practices outline procedures to minimize risks during tasks."
+    },
+    {
+        q: "काम गर्दा निम्नमध्ये कुन सुरक्षा उपकरण प्रयोग गर्नुपर्छ? (Which safety equipment should be used while working?)",
+        options: ["छाता र लौरो (Umbrella and stick)", "सुरक्षा ज्याकेट र बुट (Safety jacket and boots)", "सामान्य जुत्ता (Regular shoes)", "टोपी (Cap)"],
+        answer: 1,
+        explanation: "सुरक्षा ज्याकेट र बुट कार्यस्थलको सुरक्षाका लागि आवश्यक छन्। (Safety jackets and boots are essential for workplace safety.)"
+    },
+    {
+        q: "Which of the following is a safety tool?",
+        options: ["Goggles", "Hammer", "Screwdriver", "Chisel"],
+        answer: 0,
+        explanation: "Goggles protect eyes and are a safety tool; hammers, screwdrivers, and chisels are not."
+    },
+    {
+        q: "What should you do before starting maintenance on electrical machines?",
+        options: ["Disconnect the power supply", "Wear gloves only", "Increase machine speed", "Clean the machine"],
+        answer: 0,
+        explanation: "Disconnecting the power supply prevents electrical hazards during maintenance."
+    },
+    {
+        q: "Safety posters in workshops are used to:",
+        options: ["Raise awareness about hazards", "Decorate walls", "Track attendance", "List inventory"],
+        answer: 0,
+        explanation: "Safety posters educate workers about hazards and safe practices."
+    },
+    {
+        q: "Which is essential in fire-prone areas?",
+        options: ["Fire extinguisher", "Screwdriver", "Wrench", "Ladder"],
+        answer: 0,
+        explanation: "Fire extinguishers are critical for safety in fire-prone areas."
+    },
+    {
+        q: "Which one is a PPE (Personal Protective Equipment)?",
+        options: ["Helmet", "Spanner", "Pliers", "Tape measure"],
+        answer: 0,
+        explanation: "A helmet is PPE; spanners, pliers, and tape measures are tools."
+    },
+    {
+        q: "What is the color of a typical safety sign for danger?",
+        options: ["Red", "Blue", "Green", "Yellow"],
+        answer: 0,
+        explanation: "Red is used for danger signs to alert workers to serious hazards."
+    },
+    {
+        q: "विद्युत् सर्किट बुझ्न प्रयोग गरिने प्रमुख उपकरण कुन हो? (Which is the primary tool used to understand an electrical circuit?)",
+        options: ["स्पीडोमिटर (Speedometer)", "भोल्टमिटर (Voltmeter)", "टेन्सन गेज (Tension gauge)", "स्क्रू ड्राइभर (Screwdriver)"],
+        answer: 1,
+        explanation: "भोल्टमिटरले विद्युतीय सर्किटमा भोल्टेज मापन गर्छ। (A voltmeter measures voltage in electrical circuits.)"
+    },
+    {
+        q: "Electronic force meter (measuring instrument) is:",
+        options: ["Voltmeter", "Dynamometer", "Ammeter", "Ohmmeter"],
+        answer: 1,
+        explanation: "A dynamometer measures force, torque, or power, not voltage, current, or resistance."
+    },
+    {
+        q: "व्यक्तिगत सुरक्षा उपकरण के हो? (What is personal protective equipment?)",
+        options: ["पन्जा (Gloves)", "हथौडा (Hammer)", "रेन्च (Wrench)", "पेचकस (Screwdriver)"],
+        answer: 0,
+        explanation: "पन्जा व्यक्तिगत सुरक्षा उपकरण हो; हथौडा, रेन्च, र पेचकस उपकरण हुन्। (Gloves are personal protective equipment; hammers, wrenches, and screwdrivers are tools.)"
+    },
+    {
+        q: "Machine को मर्मत, सञ्चालन, समायोजन आदि जान्न दिइने सूचना कुन म्यानुअलमा पाइन्छ? (Which manual provides information on machine maintenance, operation, and adjustment?)",
+        options: ["Workshop Manual", "Parts Manual", "Sales Brochure", "Warranty Card"],
+        answer: 0,
+        explanation: "वर्कशप म्यानुअलले मर्मत र सञ्चालनको विस्तृत जानकारी दिन्छ। (A workshop manual provides detailed maintenance and operation instructions.)"
+    },
+    {
+        q: "मेसिनको सञ्चालन र मर्मत गर्न कुन म्यानुअल चाहिन्छ? (Which manual is needed for machine operation and maintenance?)",
+        options: ["Workshop Manual", "Instruction Chart", "Parts Catalog", "User Guide"],
+        answer: 0,
+        explanation: "वर्कशप म्यानुअल मेसिनको सञ्चालन र मर्मतको लागि आवश्यक छ। (A workshop manual is essential for machine operation and maintenance.)"
+    },
+    {
+        q: "मेसिनको operation manual ले कुन प्रकारको जानकारी दिन्छ? (What type of information does an operation manual provide?)",
+        options: ["प्रयोग र मर्मतको तरिका (Usage and maintenance methods)", "केवल प्रयोगको तरिका (Only usage methods)", "केवल पार्ट्सको जानकारी (Only parts information)", "केवल लागतको जानकारी (Only cost information)"],
+        answer: 0,
+        explanation: "अपरेसन म्यानुअलले प्रयोग र मर्मतको प्रक्रिया समेट्छ। (An operation manual covers both usage and maintenance procedures.)"
+    },
+    {
+        q: "In a workshop, where should dangerous tools be stored?",
+        options: ["Out of reach and labeled", "Near the entrance", "On the workbench", "In an open box"],
+        answer: 0,
+        explanation: "Dangerous tools should be stored out of reach and clearly labeled for safety."
+    },
+    {
+        q: "गाडीको हाइब्रिड ब्रेक फ्लुइड कहिले परिवर्तन गर्नुपर्छ? (When should hybrid vehicle brake fluid be changed?)",
+        options: ["निर्माताको सिफारिस अनुसार (Per manufacturer’s recommendation)", "गाडी बिग्रँदा (When the vehicle breaks down)", "हरेक हप्ता (Every week)", "हरेक 6 महिना (Every 6 months)"],
+        answer: 0,
+        explanation: "हाइब्रिड ब्रेक फ्लुइड निर्माताको सिफारिस अनुसार परिवर्तन गर्नुपर्छ। (Hybrid brake fluid should be changed per the manufacturer’s recommended schedule.)"
+    },
+    {
+        q: "रेडिएटरको पानीको मात्रा मापन गर्ने सही तरिका कुन हो? (What is the correct way to measure radiator coolant level?)",
+        options: ["रेडिएटर क्याप खोलेर जाँच्ने (Check by opening radiator cap)", "इन्जिन तापक्रम मापन गर्ने (Measure engine temperature)", "टायरको हावा जाँच्ने (Check tire pressure)", "तेलको स्तर जाँच्ने (Check oil level)"],
+        answer: 0,
+        explanation: "कूल्याण्टको स्तर रेडिएटर वा रिजर्भायरमा जाँचिन्छ। (Coolant levels are checked by inspecting the radiator or reservoir.)"
+    }
+];
         let currentPage = 0;
         let score = 0;
         let skipped = [];
