@@ -207,41 +207,182 @@
     </div>
 
     <script>
-        const questions = [
-            { q: "A feeler gauge is used to measure:", options: ["Thickness of a plate", "Space (gap) between two surfaces"], answer: 1, explanation: "A feeler gauge is used to measure the gap or clearance between two surfaces, such as in engine components." },
-            { q: "The accuracy of micrometer, caliper, and dial indicator can be checked by:", options: ["Feeler gauge", "Slip gauge"], answer: 1, explanation: "Slip gauges (gauge blocks) are precision tools used to calibrate measuring instruments like micrometers and calipers." },
-            { q: "A twist drill is specified by:", options: ["An alphabet specifying hole size", "A number specifying hole size"], answer: 1, explanation: "Twist drills are specified by numbers or letters indicating their diameter, which corresponds to the hole size." },
-            { q: "In comparison with a radial ply tyre, one advantage of a cross ply tyre is:", options: ["Longer life", "Smoother ride at lower speed"], answer: 1, explanation: "Cross ply tyres provide a smoother ride at lower speeds due to their flexible sidewalls, but radial tyres typically last longer." },
-            { q: "The advantage of wheel mounted machine over the track mounted one is:", options: ["It is easy to mobilize", "All of the above"], answer: 0, explanation: "Wheel-mounted machines are easier to mobilize on roads compared to track-mounted machines, which are better for rough terrain." },
-            { q: "For which of the following operation, dozer is not suitable?", options: ["Leveling", "Deep excavation"], answer: 1, explanation: "Dozers are suitable for leveling and pushing earth but not for deep excavation, which requires excavators." },
-            { q: "For compaction during road construction we use:", options: ["Excavator", "Road roller"], answer: 1, explanation: "Road rollers are specifically designed for compacting soil, asphalt, or gravel during road construction." },
-            { q: "The main component to drive the track chain of an excavator is:", options: ["Heavy duty belt", "Sprocket"], answer: 1, explanation: "The sprocket drives the track chain in an excavator, providing the necessary traction for movement." },
-            { q: "If a 100 kVA diesel generator is to be loaded in a truck, which equipment should be used?", options: ["Loader", "Crane"], answer: 1, explanation: "A crane is used to lift heavy equipment like a 100 kVA generator onto a truck due to its weight and size." },
-            { q: "To determine the owning cost per hour of a bulldozer over its life we do not need:", options: ["Cost of fuel required for operation", "Insurance costs"], answer: 0, explanation: "Fuel cost is critical for calculating operating costs, not owning costs, which include insurance, depreciation, and maintenance." },
-            { q: "To determine the operating costs over a period for a bulldozer we consider:", options: ["Operator’s wages", "All of the above"], answer: 1, explanation: "Operating costs include operator wages, fuel, maintenance, and repairs." },
-            { q: "For earth cutting and moving earth over a distance of 50 meters we use:", options: ["Excavator", "Scraper"], answer: 1, explanation: "Scrapers are ideal for cutting and moving earth over moderate distances like 50 meters, while excavators are better for digging." },
-            { q: "The main attachment on the front of a bulldozer is called:", options: ["Mold board", "Blade"], answer: 1, explanation: "The blade is the primary attachment on a bulldozer, used for pushing earth." },
-            { q: "Motor Grader are used mostly for:", options: ["Purely excavation", "Finishing, shaping, bank sloping and ditching"], answer: 1, explanation: "Motor graders are used for finishing surfaces, shaping slopes, and creating ditches, not deep excavation." },
-            { q: "Compaction को लागि प्रयोग हुने मुख्य उपकरण:", options: ["Mobile crane", "Road roller"], answer: 1, explanation: "रोड रोलर कम्प्याक्सनको लागि प्रयोग हुने मुख्य उपकरण हो, जसले माटो र सडकलाई समतल र कडा बनाउँछ।" },
-            { q: "Hydraulic excavator को काम के हो?", options: ["Compactor गर्ने", "खाल्डो खन्ने (To dig pit)"], answer: 1, explanation: "हाइड्रोलिक एक्स्काभेटरले खाल्डो खन्ने र माटो हटाउने काम गर्छ।" },
-            { q: "निम्न मध्ये कुन उपकरण गाड्ने हो?", options: ["लोडर (Loader)", "एक्स्काभेटर (Excavator)"], answer: 1, explanation: "एक्स्काभेटर गाड्ने (खन्ने) कामको लागि डिजाइन गरिएको हो।" },
-            { q: "In grading operation, a guinea hopper is responsible for:", options: ["Setting the grade hubs", "Directing the trucks dumping the material"], answer: 1, explanation: "A guinea hopper directs trucks to dump material accurately during grading operations." },
-            { q: "In order to raise and shift heavy loads from one place to another, the …… are employed in the construction of big works.", options: ["Trucks", "Cranes"], answer: 1, explanation: "Cranes are used to lift and shift heavy loads in construction projects." },
-            { q: "If engine starts but stalls on idle, problem may be …", options: ["Fuel low in tank", "All of the above"], answer: 1, explanation: "Low fuel, clogged filters, or faulty fuel systems can cause an engine to stall at idle." },
-            { q: "Lifting hook प्रयोग गर्दा प्रयोग गरिने औजार कुन हो ?", options: ["ट्रक", "क्रेन"], answer: 1, explanation: "लिफ्टिङ हुकसँग क्रेन प्रयोग गरिन्छ, जसले भारी वस्तु उठाउँछ।" },
-            { q: "तलका मध्ये कुन machine ले सवारी साधन ट्रकमा राख्न सकिन्छ ?", options: ["Grader machine", "Crane machine"], answer: 1, explanation: "क्रेन मेसिनले सवारी साधनलाई ट्रकमा राख्न सकिन्छ।" },
-            { q: "To break rock, rock breaker is attached to:", options: ["Truck", "Excavator"], answer: 1, explanation: "A rock breaker is typically attached to an excavator for breaking hard surfaces like rock." },
-            { q: "In order to raise and shift heavy loads from one place to another, the ___ are employed in the construction of big works.", options: ["Conveyors", "Cranes"], answer: 1, explanation: "Cranes are used for lifting and shifting heavy loads in large construction projects." },
-            { q: "In order to raise and shift heavy loads from one place to another, the ___ are employed in the construction of big works.", options: ["Conveyors", "Cranes"], answer: 1, explanation: "Cranes are essential for moving heavy loads in construction, unlike conveyors which transport materials." },
-            { q: "भारी सवारी साधन टायर चेक गर्न शेरर स्क्रिन मेसिनमा कुन यन्त्र प्रयोग गरिन्छ?", options: ["कम्प्रेसर", "एअर गेज"], answer: 1, explanation: "एअर गेजले टायरको हावाको चाप जाँच गर्न प्रयोग गरिन्छ।" },
-            { q: "ट्रयाक्टर प्रयोग गरिएपछि निम्नमध्ये के कार्य गर्नुपर्छ?", options: ["रेसिंग गरेर सफा गर्नु", "नियमित मर्मत र सफाइ गर्नु"], answer: 1, explanation: "ट्रयाक्टरको प्रयोगपछि नियमित मर्मत र सफाइले यसको आयु र कार्यक्षमता बढ्छ।" },
-            { q: "The track life is mainly affected by the condition of:", options: ["Bushings", "All of the above"], answer: 1, explanation: "Track life depends on bushings, sprockets, and rollers, all of which affect wear and performance." },
-            { q: "In grading operation, a guinea hopper is responsible for:", options: ["Setting the grade hubs", "Directing the trucks that are dumping the material to be spread"], answer: 1, explanation: "A guinea hopper ensures trucks dump material accurately for grading operations." },
-            { q: "Loader कुन कार्यमा प्रयोग हुन्छ?", options: ["रोलरले सम्याउने कार्य", "माटो र ढुंगा लोड गर्न"], answer: 1, explanation: "लोडरले माटो, ढुंगा वा अन्य सामग्री लोड गर्न प्रयोग गरिन्छ।" },
-            { q: "Jack-type equipment:", options: ["माटो हटाउने यन्त्र", "गाडी उठाउने यन्त्र"], answer: 1, explanation: "ज्याक-प्रकारको उपकरण गाडी वा भारी वस्तु उठाउन प्रयोग गरिन्छ।" },
-            { q: "For lifting a load 10 feet high you will use:", options: ["Excavator", "Crane"], answer: 1, explanation: "A crane is used for lifting loads to significant heights, unlike an excavator, which is for digging." }
-        ];
-
+       const questions = [
+  {
+    q: "A feeler gauge is used to measure:",
+    options: ["Thickness of a plate", "Space (gap) between two surfaces", "Diameter of a bolt", "Length of a shaft"],
+    answer: 1,
+    explanation: "A feeler gauge measures the gap or clearance between two surfaces, such as in engine components."
+  },
+  {
+    q: "The accuracy of micrometer, caliper, and dial indicator can be checked by:",
+    options: ["Feeler gauge", "Slip gauge", "Vernier scale", "Dial gauge"],
+    answer: 1,
+    explanation: "Slip gauges (gauge blocks) are precision tools used to calibrate measuring instruments like micrometers and calipers."
+  },
+  {
+    q: "A twist drill is specified by:",
+    options: ["An alphabet specifying hole size", "A number specifying hole size", "Color coding", "Shank length"],
+    answer: 1,
+    explanation: "Twist drills are specified by numbers or letters indicating their diameter, corresponding to the hole size."
+  },
+  {
+    q: "In comparison with a radial ply tyre, one advantage of a cross ply tyre is:",
+    options: ["Longer life", "Smoother ride at lower speed", "Better fuel efficiency", "Higher speed capability"],
+    answer: 1,
+    explanation: "Cross ply tyres provide a smoother ride at lower speeds due to flexible sidewalls, though radial tyres last longer."
+  },
+  {
+    q: "The advantage of a wheel-mounted machine over a track-mounted one is:",
+    options: ["It is easy to mobilize", "Better traction on rough terrain", "Higher load capacity", "Lower maintenance cost"],
+    answer: 0,
+    explanation: "Wheel-mounted machines are easier to mobilize on roads, while track-mounted machines excel on rough terrain."
+  },
+  {
+    q: "For which of the following operations is a dozer not suitable?",
+    options: ["Leveling", "Deep excavation", "Pushing earth", "Clearing debris"],
+    answer: 1,
+    explanation: "Dozers are ideal for leveling and pushing earth but not for deep excavation, which requires excavators."
+  },
+  {
+    q: "For compaction during road construction, we use:",
+    options: ["Excavator", "Road roller", "Bulldozer", "Crane"],
+    answer: 1,
+    explanation: "Road rollers are designed to compact soil, asphalt, or gravel during road construction."
+  },
+  {
+    q: "The main component to drive the track chain of an excavator is:",
+    options: ["Heavy duty belt", "Sprocket", "Hydraulic cylinder", "Counterweight"],
+    answer: 1,
+    explanation: "The sprocket drives the track chain in an excavator, providing traction for movement."
+  },
+  {
+    q: "If a 100 kVA diesel generator is to be loaded in a truck, which equipment should be used?",
+    options: ["Loader", "Crane", "Bulldozer", "Grader"],
+    answer: 1,
+    explanation: "A crane is used to lift heavy equipment like a 100 kVA generator onto a truck due to its weight."
+  },
+  {
+    q: "To determine the owning cost per hour of a bulldozer over its life, we do not need:",
+    options: ["Cost of fuel required for operation", "Insurance costs", "Depreciation cost", "Maintenance cost"],
+    answer: 0,
+    explanation: "Fuel cost is part of operating costs, not owning costs, which include insurance, depreciation, and maintenance."
+  },
+  {
+    q: "To determine the operating costs over a period for a bulldozer, we consider:",
+    options: ["Operator’s wages", "Purchase price", "Insurance premium", "Depreciation"],
+    answer: 0,
+    explanation: "Operating costs include operator wages, fuel, and maintenance, while purchase price and insurance are owning costs."
+  },
+  {
+    q: "For earth cutting and moving earth over a distance of 50 meters, we use:",
+    options: ["Excavator", "Scraper", "Loader", "Dozer"],
+    answer: 1,
+    explanation: "Scrapers are ideal for cutting and moving earth over moderate distances like 50 meters."
+  },
+  {
+    q: "The main attachment on the front of a bulldozer is called:",
+    options: ["Mold board", "Blade", "Bucket", "Ripper"],
+    answer: 1,
+    explanation: "The blade is the primary attachment on a bulldozer, used for pushing earth."
+  },
+  {
+    q: "Motor graders are used mostly for:",
+    options: ["Purely excavation", "Finishing, shaping, bank sloping, and ditching", "Compacting soil", "Lifting heavy loads"],
+    answer: 1,
+    explanation: "Motor graders are used for finishing surfaces, shaping slopes, and creating ditches."
+  },
+  {
+    q: "Compaction को लागि प्रयोग हुने मुख्य उपकरण: (What is the main equipment used for compaction?)",
+    options: ["Mobile crane", "Road roller", "Excavator", "Loader"],
+    answer: 1,
+    explanation: "रोड रोलरले माटो र सडकलाई समतल र कडा बनाउँछ। (Road rollers are used to compact soil and road surfaces.)"
+  },
+  {
+    q: "Hydraulic excavator को काम के हो? (What is the function of a hydraulic excavator?)",
+    options: ["Compactor गर्ने (Compacting)", "खाल्डो खन्ने (Digging pits)", "माटो सम्याउने (Leveling soil)", "भारी उठाउने (Lifting heavy loads)"],
+    answer: 1,
+    explanation: "हाइड्रोलिक एक्स्काभेटरले खाल्डो खन्ने र माटो हटाउने काम गर्छ। (Hydraulic excavators are used for digging and removing earth.)"
+  },
+  {
+    q: "निम्न मध्ये कुन उपकरण गाड्ने हो? (Which equipment is used for digging?)",
+    options: ["लोडर (Loader)", "एक्स्काभेटर (Excavator)", "रोड रोलर (Road roller)", "क्रेन (Crane)"],
+    answer: 1,
+    explanation: "एक्स्काभेटर खन्ने कामको लागि डिजाइन गरिएको हो। (Excavators are designed for digging.)"
+  },
+  {
+    q: "In grading operation, a guinea hopper is responsible for:",
+    options: ["Setting the grade hubs", "Directing the trucks dumping the material", "Operating the grader", "Compacting the surface"],
+    answer: 1,
+    explanation: "A guinea hopper directs trucks to dump material accurately during grading operations."
+  },
+  {
+    q: "In order to raise and shift heavy loads from one place to another, the …… are employed in the construction of big works.",
+    options: ["Trucks", "Cranes", "Loaders", "Scrapers"],
+    answer: 1,
+    explanation: "Cranes are used to lift and shift heavy loads in large construction projects."
+  },
+  {
+    q: "If an engine starts but stalls on idle, the problem may be …",
+    options: ["Low fuel in tank", "Clogged air filter", "Faulty fuel pump", "All of the above"],
+    answer: 3,
+    explanation: "Low fuel, clogged filters, or a faulty fuel pump can cause an engine to stall at idle."
+  },
+  {
+    q: "Lifting hook प्रयोग गर्दा प्रयोग गरिने औजार कुन हो? (Which tool is used with a lifting hook?)",
+    options: ["ट्रक (Truck)", "क्रेन (Crane)", "लोडर (Loader)", "रोलर (Roller)"],
+    answer: 1,
+    explanation: "क्रेनले लिफ्टिङ हुकसँग भारी वस्तु उठाउँछ। (A crane is used with a lifting hook to lift heavy objects.)"
+  },
+  {
+    q: "तलका मध्ये कुन machine ले सवारी साधन ट्रकमा राख्न सकिन्छ? (Which machine can load a vehicle onto a truck?)",
+    options: ["Grader machine", "Crane machine", "Roller machine", "Scraper machine"],
+    answer: 1,
+    explanation: "क्रेनले सवारी साधनलाई ट्रकमा राख्न सकिन्छ। (A crane can load a vehicle onto a truck.)"
+  },
+  {
+    q: "To break rock, a rock breaker is attached to:",
+    options: ["Truck", "Excavator", "Road roller", "Grader"],
+    answer: 1,
+    explanation: "A rock breaker is typically attached to an excavator for breaking hard surfaces like rock."
+  },
+  {
+    q: "भारी सवारी साधन टायर चेक गर्न शेरर स्क्रिन मेसिनमा कुन यन्त्र प्रयोग गरिन्छ? (Which device is used to check tire pressure in heavy vehicles?)",
+    options: ["कम्प्रेसर (Compressor)", "एअर गेज (Air gauge)", "ट्याकोमिटर (Tachometer)", "थर्मोमिटर (Thermometer)"],
+    answer: 1,
+    explanation: "एअर गेजले टायरको हावाको चाप जाँच गर्छ। (An air gauge is used to check tire pressure.)"
+  },
+  {
+    q: "ट्रयाक्टर प्रयोग गरिएपछि निम्नमध्ये के कार्य गर्नुपर्छ? (What should be done after using a tractor?)",
+    options: ["रेसिंग गरेर सफा गर्नु (Clean by racing)", "नियमित मर्मत र सफाइ गर्नु (Regular maintenance and cleaning)", "टायरको चाप बढाउनु (Increase tire pressure)", "इन्जिन तताउनु (Warm the engine)"],
+    answer: 1,
+    explanation: "नियमित मर्मत र सफाइले ट्रयाक्टरको आयु बढ्छ। (Regular maintenance and cleaning extend tractor life.)"
+  },
+  {
+    q: "The track life is mainly affected by the condition of:",
+    options: ["Bushings", "Sprockets", "Rollers", "All of the above"],
+    answer: 3,
+    explanation: "Track life depends on bushings, sprockets, and rollers, all of which impact wear and performance."
+  },
+  {
+    q: "Loader कुन कार्यमा प्रयोग हुन्छ? (What is a loader used for?)",
+    options: ["रोलरले सम्याउने कार्य (Leveling with roller)", "माटो र ढुंगा लोड गर्न (Loading soil and stones)", "खाल्डो खन्ने (Digging pits)", "सडक कम्प्याक्ट गर्ने (Compacting roads)"],
+    answer: 1,
+    explanation: "लोडरले माटो, ढुंगा वा सामग्री लोड गर्छ। (Loaders are used to load soil, stones, or other materials.)"
+  },
+  {
+    q: "Jack-type equipment:",
+    options: ["माटो हटाउने यन्त्र (Soil removal device)", "गाडी उठाउने यन्त्र (Vehicle lifting device)", "सडक सम्याउने यन्त्र (Road leveling device)", "पानी पम्प गर्ने यन्त्र (Water pumping device)"],
+    answer: 1,
+    explanation: "ज्याकले गाडी वा भारी वस्तु उठाउँछ। (Jack-type equipment is used to lift vehicles or heavy objects.)"
+  },
+  {
+    q: "For lifting a load 10 feet high, you will use:",
+    options: ["Excavator", "Crane", "Loader", "Dozer"],
+    answer: 1,
+    explanation: "A crane is designed for lifting loads to significant heights, unlike excavators used for digging."
+  }
+];
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
