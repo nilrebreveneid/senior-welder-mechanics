@@ -352,238 +352,131 @@
     <audio id="wrong-sound" src="https://www.soundjay.com/buttons/beep-02.mp3"></audio>
 
     <script>
-       const questions = [
-    // Maintenance
+   const questions = [
+    // Starting System Questions (10)
     {
-        q: "Predictive maintenance involves:",
-        options: ["Performing maintenance based on fixed schedules", "Using data and sensors to predict equipment failures", "Repairing after breakdowns", "Cleaning equipment only"],
+        q: "Which components are part of a vehicle’s starting system?",
+        options: ["Battery, starter, ignition switch", "Battery, alternator, radiator", "Fuel pump, clutch, battery", "Alternator, carburetor, ignition coil"],
+        answer: 0,
+        explanation: "The starting system includes the battery, starter motor, and ignition switch to crank the engine."
+    },
+    {
+        q: "What does a tachometer measure in a vehicle?",
+        options: ["Vehicle speed", "Engine RPM", "Fuel level", "Oil pressure"],
         answer: 1,
-        explanation: "Predictive maintenance uses data from sensors to predict when equipment might fail, allowing timely interventions."
+        explanation: "A tachometer measures the engine’s rotational speed in revolutions per minute (RPM)."
     },
     {
-        q: "Which of the following is NOT a personal safety device?",
-        options: ["Seat belt cover", "Safety goggles", "Gloves", "Helmet"],
-        answer: 0,
-        explanation: "A seat belt cover is an accessory, not a safety device; goggles, gloves, and helmets protect against hazards."
-    },
-    {
-        q: "If a V-belt of a radiator fan in a vehicle is broken, it needs to be replaced. This type of maintenance is:",
-        options: ["Preventive maintenance", "Corrective maintenance", "Predictive maintenance", "Condition-based maintenance"],
+        q: "Which component is NOT part of a vehicle’s starting system?",
+        options: ["Ignition switch", "Timing belt", "Starter motor", "Battery"],
         answer: 1,
-        explanation: "Corrective maintenance addresses failures after they occur, such as replacing a broken V-belt."
+        explanation: "The timing belt is part of the engine’s timing system, not the starting system."
     },
     {
-        q: "With an increase in the cost of preventive maintenance, the cost of breakdown maintenance will:",
-        options: ["Decrease", "Increase", "Remain unchanged", "Double"],
-        answer: 0,
-        explanation: "Investing in preventive maintenance reduces unexpected breakdowns, lowering breakdown maintenance costs."
-    },
-    {
-        q: "Periodic Maintenance कहिले गर्ने भनेर कसरी थाहा पाउने? (How do you know when to perform periodic maintenance?)",
-        options: ["समय तालिका हेरेर (By checking the schedule)", "मर्मत भएपछि (After repairs)", "गाडी बिग्रँदा (When the vehicle breaks down)", "प्रत्येक दिन (Every day)"],
-        answer: 0,
-        explanation: "पिरियडिक मर्मत समय तालिका वा प्रयोगको आधारमा गरिन्छ। (Periodic maintenance is scheduled based on a time table or usage intervals.)"
-    },
-    {
-        q: "मर्मत कार्यको सल्लाह लिनको लागि आधार के हो? (What is the basis for maintenance decisions?)",
-        options: ["सेट गरिएको मापदण्ड अनुसार (Per established standards)", "मापदण्ड बिना (Without standards)", "कर्मचारीको अनुभव (Employee experience)", "ग्राहकको माग (Customer demand)"],
-        answer: 0,
-        explanation: "मर्मत निर्णयहरू स्थापित मापदण्डहरूमा आधारित हुन्छन्। (Maintenance decisions are based on established standards for consistency and reliability.)"
-    },
-    {
-        q: "Periodic maintenance is carried out based on:",
-        options: ["Time-based intervals", "Running hours", "Breakdowns", "Operator preference"],
+        q: "गाडी स्टार्ट गर्ने प्रणालीमा कुन कम्पोनेन्ट प्रयोग हुन्छ? (Which component is used in a vehicle’s starting system?)",
+        options: ["अल्टरनेटर (Alternator)", "स्टार्टर मोटर (Starter motor)", "रेडिएटर (Radiator)", "क्लच (Clutch)"],
         answer: 1,
-        explanation: "Periodic maintenance is often scheduled based on equipment running hours to ensure timely upkeep."
+        explanation: "स्टार्टर मोटरले इन्जिनलाई क्र्यांक गर्छ। (The starter motor cranks the engine to initiate combustion.)"
     },
     {
-        q: "Maintenance helps to improve:",
-        options: ["Quality only", "Reliability, efficiency, and safety", "Aesthetics only", "Fuel consumption only"],
+        q: "In a starting system, contact breaker points are closed by:",
+        options: ["Cam", "Spring tension", "Solenoid", "Distributor cap"],
         answer: 1,
-        explanation: "Maintenance enhances equipment reliability, operational efficiency, and workplace safety."
+        explanation: "Spring tension closes the contact breaker points after the cam opens them."
     },
     {
-        q: "Which is the standard format for recording defects in a vehicle at a service station?",
-        options: ["Job card", "Logbook", "Invoice", "Warranty card"],
-        answer: 0,
-        explanation: "A job card records specific defects and repairs for a vehicle during servicing."
-    },
-    {
-        q: "Regular servicing at pre-planned intervals is known as:",
-        options: ["Run-to-breakdown maintenance", "Preventive maintenance", "Corrective maintenance", "Predictive maintenance"],
+        q: "Which motor type has high starting torque in a vehicle’s starting system?",
+        options: ["AC motor", "DC series motor", "DC shunt motor", "Brushless motor"],
         answer: 1,
-        explanation: "Preventive maintenance involves regular, planned servicing to prevent failures."
+        explanation: "DC series motors provide high starting torque, ideal for starter motors."
     },
     {
-        q: "Cognitive maintenance of equipment refers to maintenance performed:",
-        options: ["Using AI to adapt to new conditions", "Before equipment breakdown", "Manually without data", "After failure"],
+        q: "Why is starting a cold engine often difficult?",
+        options: ["Increased oil viscosity", "Low fuel pressure", "Worn spark plugs", "High battery voltage"],
         answer: 0,
-        explanation: "Cognitive maintenance uses AI and analytics to optimize maintenance under changing conditions."
+        explanation: "Cold engines have thicker oil, increasing resistance and making starting harder."
     },
     {
-        q: "Continually monitoring performance for signs of needed maintenance is known as:",
-        options: ["Corrective maintenance", "Condition-based maintenance", "Preventive maintenance", "Breakdown maintenance"],
+        q: "What is the role of the ignition switch in the starting system?",
+        options: ["To generate power", "To activate the starter circuit", "To cool the engine", "To regulate fuel flow"],
         answer: 1,
-        explanation: "Condition-based maintenance monitors equipment health to schedule maintenance as needed."
+        explanation: "The ignition switch completes the circuit to engage the starter motor."
     },
     {
-        q: "एयर फिल्टरको मर्मतका विभिन्न तरिकाहरू मध्ये एक हो? (Which is a method for air filter maintenance?)",
-        options: ["एयर प्रेशर मार्फत सफा गर्ने (Cleaning with air pressure)", "मेटल फिल्टर फेर्ने (Replacing metal filter)", "पानीले धुने (Washing with water)", "तेलमा डुबाउने (Soaking in oil)"],
-        answer: 0,
-        explanation: "एयर फिल्टरलाई कम्प्रेस्ड हावाले सफा गरिन्छ। (Air filters are often cleaned using compressed air to remove dust and debris.)"
-    },
-    {
-        q: "गाडीको इन्धन फिल्टर कति समयमा सफा गर्नुपर्छ? (How often should a vehicle’s fuel filter be cleaned?)",
-        options: ["प्रत्येक सात दिनमा (Every week)", "निर्माताको सिफारिस अनुसार (Per manufacturer’s recommendation)", "हरेक महिना (Every month)", "हरेक वर्ष (Every year)"],
+        q: "What component supplies electrical power to the starter motor?",
+        options: ["Alternator", "Battery", "Fuse box", "Ignition coil"],
         answer: 1,
-        explanation: "इन्धन फिल्टर निर्माताको सिफारिस अनुसार (सामान्यतः १५,०००-३०,००० किमी) सफा गर्नुपर्छ। (Fuel filters should be cleaned or replaced per manufacturer guidelines, typically every 15,000-30,000 km.)"
+        explanation: "The battery provides the electrical energy needed to power the starter motor."
     },
     {
-        q: "The main purpose of maintenance on a vehicle is:",
-        options: ["To enhance vehicle aesthetics", "To ensure reliable and safe operation", "To increase vehicle weight", "To reduce engine power"],
+        q: "What indicates a weak battery in the starting system?",
+        options: ["Slow cranking speed", "Overheating engine", "Dim headlights", "High fuel consumption"],
+        answer: 0,
+        explanation: "A weak battery causes slow or weak cranking, indicating insufficient power."
+    },
+
+    // Tyre and Wheel Questions (10)
+    {
+        q: "What is the primary purpose of tyres on a vehicle?",
+        options: ["To enhance engine power", "To provide grip and absorb shocks", "To cool the brakes", "To increase vehicle weight"],
         answer: 1,
-        explanation: "Maintenance keeps vehicles operational, safe, and efficient."
+        explanation: "Tyres provide traction, support the vehicle’s weight, and absorb minor road shocks."
     },
     {
-        q: "The maintenance performed after equipment breakdown is called:",
-        options: ["Preventive maintenance", "Breakdown maintenance", "Predictive maintenance", "Condition-based maintenance"],
+        q: "A tyre is marked as 175/65 R14 82 S. What does 65 represent?",
+        options: ["Rim diameter", "Aspect ratio", "Load index", "Speed rating"],
         answer: 1,
-        explanation: "Breakdown maintenance occurs after equipment fails, addressing the issue reactively."
+        explanation: "The number 65 is the aspect ratio, indicating sidewall height as 65% of the tyre’s width."
     },
     {
-        q: "Maintenance document with detailed repair procedures is:",
-        options: ["Workshop manual", "Spare parts manual", "Service invoice", "Logbook"],
-        answer: 0,
-        explanation: "A workshop manual provides detailed repair and maintenance procedures."
-    },
-    {
-        q: "Before getting under a vehicle for repair, ensure:",
-        options: ["Jack handle is down", "Vehicle is supported on safety stands", "Engine is running", "Tires are inflated"],
+        q: "Which wheel type is incompatible with tubeless tyres?",
+        options: ["Alloy wheel", "Wire wheel", "Steel wheel", "Magnesium wheel"],
         answer: 1,
-        explanation: "Safety stands are critical to prevent the vehicle from falling during repairs."
+        explanation: "Wire wheels cannot maintain an airtight seal required for tubeless tyres."
     },
     {
-        q: "Main purpose of a feeler gauge:",
-        options: ["Measuring tire pressure", "Checking gaps like valve clearance", "Measuring engine temperature", "Checking fuel level"],
+        q: "In a truck tyre marked 10.00x20-14 ply, what does 20 indicate?",
+        options: ["Tyre width in cm", "Rim diameter in inches", "Ply rating", "Load capacity"],
         answer: 1,
-        explanation: "Feeler gauges measure small gaps, such as valve clearances in engines."
+        explanation: "The number 20 denotes the rim diameter in inches."
     },
     {
-        q: "What type of maintenance is done at fixed intervals, regardless of condition?",
-        options: ["Preventive maintenance", "Corrective maintenance", "Condition-based maintenance", "Predictive maintenance"],
-        answer: 0,
-        explanation: "Preventive maintenance is scheduled at fixed intervals to prevent failures."
-    },
-    {
-        q: "Which maintenance is performed only after a failure has occurred?",
-        options: ["Breakdown maintenance", "Predictive maintenance", "Preventive maintenance", "Condition-based maintenance"],
-        answer: 0,
-        explanation: "Breakdown maintenance is reactive, performed after equipment failure."
-    },
-    {
-        q: "The main goal of preventive maintenance is to:",
-        options: ["Prevent unexpected breakdowns", "Increase downtime", "Reduce vehicle speed", "Enhance vehicle color"],
-        answer: 0,
-        explanation: "Preventive maintenance aims to avoid unexpected failures and extend equipment life."
-    },
-    {
-        q: "Which document records vehicle defects during service?",
-        options: ["Job card", "Invoice", "Logbook", "Warranty card"],
-        answer: 0,
-        explanation: "A job card documents defects and repairs during vehicle servicing."
-    },
-    {
-        q: "Which tool is used to check valve clearance in an engine?",
-        options: ["Feeler gauge", "Vernier caliper", "Micrometer", "Torque wrench"],
-        answer: 0,
-        explanation: "Feeler gauges are used to measure precise valve clearances in engines."
-    },
-    {
-        q: "Which type of maintenance uses sensors to monitor machine health?",
-        options: ["Condition-based maintenance", "Breakdown maintenance", "Preventive maintenance", "Corrective maintenance"],
-        answer: 0,
-        explanation: "Condition-based maintenance uses sensors to monitor equipment health for timely maintenance."
-    },
-    {
-        q: "Greasing moving parts in a machine is an example of:",
-        options: ["Preventive maintenance", "Corrective maintenance", "Predictive maintenance", "Emergency maintenance"],
-        answer: 0,
-        explanation: "Greasing is a preventive maintenance task to reduce wear and tear."
-    },
-    {
-        q: "Which is NOT a personal safety equipment?",
-        options: ["Screwdriver", "Safety helmet", "Gloves", "Safety boots"],
-        answer: 0,
-        explanation: "A screwdriver is a tool, not personal safety equipment."
-    },
-    {
-        q: "High vibration and noise from a machine often indicates:",
-        options: ["Lack of maintenance", "Proper lubrication", "New equipment", "Correct alignment"],
-        answer: 0,
-        explanation: "Excessive vibration and noise suggest maintenance issues like misalignment or lack of lubrication."
-    },
-    {
-        q: "A maintenance schedule based on equipment usage hours is called:",
-        options: ["Running hour-based maintenance", "Time-based maintenance", "Breakdown maintenance", "Predictive maintenance"],
-        answer: 0,
-        explanation: "Running hour-based maintenance is scheduled based on equipment usage hours."
-    },
-    {
-        q: "गाडीमा प्रयोग हुने हाइड्रोलिक ब्रेक प्रणाली सधैं प्रभावकारी रहन के गर्नुपर्छ? (What ensures the hydraulic brake system remains effective?)",
-        options: ["ब्रेक समयमा मात्र थिच्नु (Press brakes only on time)", "ब्रेक फ्लुइड समयमा परिवर्तन गर्नु (Change brake fluid on time)", "टायरको हावा जाँच्ने (Check tire pressure)", "इन्जिन तेल फेर्ने (Change engine oil)"],
+        q: "What is the purpose of tyre rotation on a vehicle?",
+        options: ["To prevent ply separation", "To equalize wear", "To increase speed", "To reduce noise"],
         answer: 1,
-        explanation: "ब्रेक फ्लुइड समयमा परिवर्तन गर्नाले हाइड्रोलिक ब्रेक प्रणाली प्रभावकारी रहन्छ। (Regularly changing brake fluid maintains hydraulic brake system effectiveness.)"
+        explanation: "Tyre rotation ensures even wear across all tyres, extending their lifespan."
     },
     {
-        q: "सवारी सञ्चालन हुन थालेपछि सवारीको ताप मापन कसरी गरिन्छ? (How is vehicle temperature measured after operation starts?)",
-        options: ["हाइड्रोलिक पम्प प्रयोग गरेर (Using hydraulic pump)", "तापमापक (थर्मोमिटर) प्रयोग गरेर (Using thermometer)", "स्पीडोमिटरले (Using speedometer)", "फ्यूल गेजले (Using fuel gauge)"],
+        q: "गाडीको टायरको दाब मापन गर्न कुन उपकरण प्रयोग गरिन्छ? (Which device is used to measure tyre pressure?)",
+        options: ["टायर प्रेसर गेज (Tyre pressure gauge)", "स्पीडोमिटर (Speedometer)", "ट्याकोमिटर (Tachometer)", "थर्मोमिटर (Thermometer)"],
+        answer: 0,
+        explanation: "टायर प्रेसर गेजले टायरको हावाको चाप मापन गर्छ। (A tyre pressure gauge measures the air pressure inside the tyre.)"
+    },
+    {
+        q: "गाडीको टायर चिप्लिन नदिन के गर्नुपर्छ? (What should be done to prevent tyre slipping?)",
+        options: ["टायरमा ब्रेक लगाउनु (Apply brakes on tyre)", "टायरको अवस्था राम्रो राख्नु (Maintain good tyre condition)", "इन्जिन तेल फेर्नु (Change engine oil)", "ब्याट्री चार्ज गर्नु (Charge battery)"],
         answer: 1,
-        explanation: "सवारीको ताप तापमापक वा तापमान सेन्सरले मापन गरिन्छ। (Vehicle temperature is measured using a thermometer or temperature sensor.)"
+        explanation: "उचित टायर ट्रेड र चाप राख्नाले चिप्लिनबाट बचिन्छ। (Maintaining proper tyre tread and pressure prevents slipping.)"
     },
     {
-        q: "इन्जिनको प्रदर्शन मापन गर्ने कुन यन्त्र हो? (Which device measures engine performance?)",
-        options: ["वाटर मिटर (Water meter)", "डायनामोमिटर (Dynamometer)", "भोल्टमिटर (Voltmeter)", "ट्याकोमिटर (Tachometer)"],
-        answer: 1,
-        explanation: "डायनामोम歪्यामिटरले इन्जिनको शक्ति मापन गर्छ। (A dynamometer measures engine performance, such as power output.)"
-    },
-    {
-        q: "कुन गाडीको टायर सामान्य अवस्थामा सिधा घुम्ने तर ब्रेक लागेपछि भित्री टायर बढी घुम्छ? (Which vehicle tire rotates straight normally but more on the inside when braking?)",
-        options: ["अगाडिको टायर (Front tire)", "पछाडिको टायर (Rear tire)", "स्पेयर टायर (Spare tire)", "सबै टायर (All tires)"],
+        q: "What does the ‘R’ in a tyre designation like 205/55 R16 indicate?",
+        options: ["Radial construction", "Rim width", "Reinforced tyre", "Run-flat tyre"],
         answer: 0,
-        explanation: "डिफरेन्सियल स्टेयरिङ भएको गाडीमा ब्रेकिङको समयमा अगाडिको भित्री टायर बढी घुम्छ। (Front tires in vehicles with differential steering rotate more on the inside during braking due to turning dynamics.)"
+        explanation: "The ‘R’ indicates the tyre has a radial construction."
     },
     {
-        q: "कुन नियमले कणको घुमाउ प्रवृत्ति बताउँछ? (Which law describes a particle’s rotational tendency?)",
-        options: ["न्यूटनको दोस्रो नियम (Newton’s Second Law)", "टर्कको नियम (Law of Torque)", "न्यूटनको पहिलो नियम (Newton’s First Law)", "हूकको नियम (Hooke’s Law)"],
-        answer: 1,
-        explanation: "टर्कको नियमले घुमाउ बल (rotational force) को प्रवृत्ति बताउँछ। (The law of torque describes a particle’s tendency to rotate.)"
-    },
-    {
-        q: "टर्क (Torque) लाई कसरी नापिन्छ? (How is torque measured?)",
-        options: ["बल × दूरी (Force × Distance)", "बल ÷ समय (Force ÷ Time)", "दूरी ÷ समय (Distance ÷ Time)", "बल × समय (Force × Time)"],
+        q: "What is a common cause of uneven tyre wear?",
+        options: ["Misaligned wheels", "Low battery voltage", "Dirty air filter", "Worn brake pads"],
         answer: 0,
-        explanation: "टर्क बल र दूरीको गुणनफल हो (T = F × d)। (Torque is calculated as force multiplied by the distance from the pivot point.)"
+        explanation: "Wheel misalignment causes uneven tyre wear, reducing tyre life."
     },
     {
-        q: "सामान्यतया सवारी साधनको लो-प्रेसर टायरमा सिफारिस गरिएको हावाको चाप कति हुन्छ? (What is the recommended air pressure for low-pressure vehicle tires?)",
-        options: ["30-35 psi", "100-120 psi", "50-60 psi", "15-20 psi"],
+        q: "Which maintenance task ensures optimal tyre performance?",
+        options: ["Checking tyre pressure regularly", "Changing engine oil", "Replacing spark plugs", "Cleaning fuel injectors"],
         answer: 0,
-        explanation: "लो-प्रेसर टायरमा सामान्यतः ३०-३५ psi हावाको चाप सिफारिस गरिन्छ। (Low-pressure tires typically require 30-35 psi, per manufacturer recommendations.)"
-    },
-    {
-        q: "एक्सेलेरेटरले 2 मिनेटसम्म गाडी लोड गर्न नसकेमा इन्जिन स्टार्ट टिप्स के हो? (What should be done if the accelerator fails to start the engine after 2 minutes?)",
-        options: ["इन्जिन बन्द गरेर 5 मिनेट पर्खने (Stop and wait 5 minutes)", "12 मिनेटसम्म स्टार्टर चलाउने (Crank for 12 minutes)", "तुरुन्त ब्याट्री फेर्ने (Replace battery immediately)", "इन्धन ट्याङ्की भर्ने (Fill fuel tank)"],
-        answer: 0,
-        explanation: "इन्जिन स्टार्ट नभएमा ५ मिनेट पर्खेर स्टार्टरलाई क्षति हुनबाट बचाउनुपर्छ। (Stop cranking and wait 5 minutes to prevent starter motor damage.)"
-    },
-    {
-        q: "तत्कालको सुरु अवस्थामा ब्रेक राम्रो हुन्छ कुन अवस्थामा? (When do brakes perform best initially?)",
-        options: ["चिसो अवस्थामा (Cold condition)", "तातो अवस्थामा (Hot condition)", "आर्द्र अवस्थामा (Wet condition)", "सुख्खा अवस्थामा (Dry condition)"],
-        answer: 0,
-        explanation: "ब्रेक चिसो अवस्थामा सबैभन्दा राम्रो काम गर्छ, किनभने तातो अवस्थामा प्रभावकारिता कम हुन सक्छ। (Brakes perform best when cold, as overheating can reduce effectiveness.)"
+        explanation: "Regular tyre pressure checks maintain grip, fuel efficiency, and tyre longevity."
     }
 ];
-
         let currentPage = 0;
         let score = 0;
         let skipped = [];
