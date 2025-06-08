@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Logsewa Steering and Clutch Mock Test</title>
+    <title>Logsewa Safety Practices Mock Test</title>
     <style>
         * {
             margin: 0;
@@ -300,7 +300,7 @@
 </head>
 <body>
     <div class="quiz-container">
-        <h1>Logsewa Steering and Clutch Mock Test</h1>
+        <h1>Logsewa Safety Practices Mock Test</h1>
         <div class="quiz-header">
             <div class="timer" id="timer">Time: 00:00</div>
             <div class="score" id="current-score">Score: 0/40</div>
@@ -334,251 +334,253 @@
     <audio id="wrong-sound" src="https://www.soundjay.com/buttons/beep-02.mp3"></audio>
 
     <script>
-   const questions = [
-    // Steering and Clutch Systems (20 MCQs)
-    {
-        q: "What is the primary function of a vehicle’s steering system?",
-        options: ["To control engine power", "To direct the vehicle’s path", "To regulate braking", "To adjust suspension"],
-        answer: 1,
-        explanation: "The steering system allows the driver to control the vehicle’s direction by turning the wheels."
-    },
-    {
-        q: "Which component connects the steering wheel to the steering gearbox?",
-        options: ["Tie rod", "Steering shaft", "Pitman arm", "Drag link"],
-        answer: 1,
-        explanation: "The steering shaft transmits the driver’s input from the steering wheel to the gearbox."
-    },
-    {
-        q: "What type of steering system is commonly used in modern vehicles?",
-        options: ["Manual steering", "Power-assisted steering", "Worm and roller", "Recirculating ball"],
-        answer: 1,
-        explanation: "Power-assisted steering (hydraulic or electric) reduces driver effort and is standard in modern vehicles."
-    },
-    {
-        q: "What is the purpose of the clutch in a manual transmission vehicle?",
-        options: ["To regulate engine speed", "To engage and disengage engine power", "To control braking", "To adjust gear ratios"],
-        answer: 1,
-        explanation: "The clutch connects or disconnects the engine from the transmission, allowing gear changes."
-    },
-    {
-        q: "Which type of clutch is commonly used in passenger vehicles?",
-        options: ["Multi-plate clutch", "Single-plate clutch", "Centrifugal clutch", "Hydraulic clutch"],
-        answer: 1,
-        explanation: "Single-plate clutches are simple and widely used in passenger vehicles for manual transmissions."
-    },
-    {
-        q: "What causes clutch slippage in a vehicle?",
-        options: ["Worn clutch disc", "Excessive engine oil", "Low tire pressure", "Faulty spark plug"],
-        answer: 0,
-        explanation: "A worn clutch disc fails to grip properly, causing slippage and power loss."
-    },
-    {
-        q: "What is the function of the rack and pinion in a steering system?",
-        options: ["To amplify engine torque", "To convert rotational motion to linear motion", "To cool the engine", "To adjust suspension height"],
-        answer: 1,
-        explanation: "The rack and pinion converts the steering wheel’s rotation into linear motion to turn the wheels."
-    },
-    {
-        q: "What is the role of the pressure plate in a clutch assembly?",
-        options: ["To absorb engine vibrations", "To press the clutch disc against the flywheel", "To lubricate the clutch", "To align the gearbox"],
-        answer: 1,
-        explanation: "The pressure plate ensures the clutch disc engages with the flywheel to transmit power."
-    },
-    {
-        q: "Which fluid is typically used in hydraulic power steering systems?",
-        options: ["Brake fluid", "Power steering fluid", "Engine oil", "Transmission fluid"],
-        answer: 1,
-        explanation: "Power steering fluid is specifically formulated for hydraulic steering systems."
-    },
-    {
-        q: "What indicates a faulty steering system?",
-        options: ["Excessive steering wheel play", "Engine overheating", "Low fuel efficiency", "Brake pedal vibration"],
-        answer: 0,
-        explanation: "Excessive play in the steering wheel suggests issues like worn tie rods or gearbox problems."
-    },
-    {
-        q: "What is the purpose of the throw-out bearing in a clutch system?",
-        options: ["To reduce engine noise", "To disengage the clutch", "To lubricate the flywheel", "To balance the crankshaft"],
-        answer: 1,
-        explanation: "The throw-out bearing presses against the pressure plate to disengage the clutch."
-    },
-    {
-        q: "Which steering system component adjusts wheel alignment?",
-        options: ["Pitman arm", "Tie rod", "Steering shaft", "Idler arm"],
-        answer: 1,
-        explanation: "Tie rods connect the steering mechanism to the wheels and are adjusted for proper alignment."
-    },
-    {
-        q: "What is a common symptom of a worn clutch?",
-        options: ["Difficulty shifting gears", "Increased fuel efficiency", "Engine overheating", "Steering vibration"],
-        answer: 0,
-        explanation: "A worn clutch causes difficulty in shifting gears due to poor engagement."
-    },
-    {
-        q: "What type of steering gear is used in heavy vehicles?",
-        options: ["Rack and pinion", "Worm and roller", "Recirculating ball", "Electric steering"],
-        answer: 1,
-        explanation: "Worm and roller steering is robust and suitable for heavy vehicles."
-    },
-    {
-        q: "What is the function of the clutch pedal in a manual vehicle?",
-        options: ["To control vehicle speed", "To disengage the clutch", "To adjust steering", "To engage brakes"],
-        answer: 1,
-        explanation: "The clutch pedal disengages the clutch, allowing gear changes without engine stall."
-    },
-    {
-        q: "What is the main advantage of electric power steering over hydraulic?",
-        options: ["Lower cost", "Improved fuel efficiency", "Higher steering effort", "Simpler maintenance"],
-        answer: 1,
-        explanation: "Electric power steering eliminates the hydraulic pump, improving fuel efficiency."
-    },
-    {
-        q: "What component in a clutch system absorbs shock during engagement?",
-        options: ["Clutch springs", "Flywheel", "Pressure plate", "Release fork"],
-        answer: 0,
-        explanation: "Clutch springs in the disc absorb shock to ensure smooth power transfer."
-    },
-    {
-        q: "What causes steering wheel vibration?",
-        options: ["Unbalanced wheels", "Low engine oil", "Worn brake pads", "Faulty clutch"],
-        answer: 0,
-        explanation: "Unbalanced wheels cause vibrations felt through the steering wheel."
-    },
-    {
-        q: "What is the purpose of the clutch release fork?",
-        options: ["To align the gearbox", "To move the throw-out bearing", "To lubricate the clutch", "To balance the flywheel"],
-        answer: 1,
-        explanation: "The release fork moves the throw-out bearing to disengage the clutch."
-    },
-    {
-        q: "Which maintenance task prevents steering system wear?",
-        options: ["Regular wheel alignment", "Engine oil change", "Brake fluid replacement", "Fuel filter cleaning"],
-        answer: 0,
-        explanation: "Regular wheel alignment ensures even tire wear and reduces steering component stress."
-    },
+        const questions = [
+            // Importance of Safety (13 MCQs)
+            {
+                q: "Why is safety important in a workshop?",
+                options: ["To increase production speed", "To prevent accidents and injuries", "To reduce material costs", "To enhance tool durability"],
+                answer: 1,
+                explanation: "Safety practices prevent accidents, protecting workers and reducing downtime."
+            },
+            {
+                q: "What is a key benefit of maintaining safety standards?",
+                options: ["Higher fuel consumption", "Reduced workplace injuries", "Increased machine wear", "Lower equipment efficiency"],
+                answer: 1,
+                explanation: "Safety standards minimize injuries, ensuring a safer work environment."
+            },
+            {
+                q: "How does safety training impact a workshop?",
+                options: ["Increases operational costs", "Improves worker awareness and efficiency", "Reduces tool availability", "Delays maintenance schedules"],
+                answer: 1,
+                explanation: "Training enhances awareness, reducing accidents and improving productivity."
+            },
+            {
+                q: "किन कार्यस्थलमा सुरक्षा महत्त्वपूर्ण छ? (Why is safety important in the workplace?)",
+                options: ["उत्पादन बढाउन (To increase production)", "दुर्घटना रोक्न (To prevent accidents)", "उपकरणको मूल्य बढाउन (To increase equipment cost)", "कामको गति कम गर्न (To reduce work speed)"],
+                answer: 1,
+                explanation: "सुरक्षाले दुर्घटना र चोटपटक रोक्छ। (Safety prevents accidents and injuries in the workplace.)"
+            },
+            {
+                q: "What is the financial benefit of safety practices?",
+                options: ["Higher repair costs", "Reduced insurance premiums", "Increased tool replacement", "Lower worker salaries"],
+                answer: 1,
+                explanation: "Safe workplaces lower accident-related costs, reducing insurance premiums."
+            },
+            {
+                q: "Why should safety rules be followed during machine operation?",
+                options: ["To increase machine speed", "To protect operators from hazards", "To reduce fuel efficiency", "To simplify maintenance"],
+                answer: 1,
+                explanation: "Safety rules protect operators from risks like moving parts or electrical hazards."
+            },
+            {
+                q: "What is a consequence of ignoring safety protocols?",
+                options: ["Improved productivity", "Increased risk of accidents", "Lower operational costs", "Enhanced equipment lifespan"],
+                answer: 1,
+                explanation: "Ignoring safety increases the likelihood of accidents and injuries."
+            },
+            {
+                q: "How does safety contribute to workplace morale?",
+                options: ["By increasing workload", "By ensuring worker well-being", "By reducing task variety", "By limiting tool access"],
+                answer: 1,
+                explanation: "A safe environment boosts worker confidence and morale."
+            },
+            {
+                q: "What role does safety play in regulatory compliance?",
+                options: ["Increases fines", "Ensures adherence to laws", "Reduces production", "Limits worker training"],
+                answer: 1,
+                explanation: "Safety practices ensure compliance with occupational health regulations."
+            },
+            {
+                q: "Why is regular safety auditing necessary?",
+                options: ["To increase costs", "To identify and mitigate hazards", "To reduce worker efficiency", "To limit equipment use"],
+                answer: 1,
+                explanation: "Audits identify potential risks, ensuring a safer workplace."
+            },
+            {
+                q: "सुरक्षा नियमहरू पालना नगर्दा के हुन्छ? (What happens if safety rules are not followed?)",
+                options: ["काम छिटो हुन्छ (Work speeds up)", "दुर्घटनाको जोखिम बढ्छ (Accident risk increases)", "उपकरणको आयु बढ्छ (Equipment lifespan increases)", "खर्च कम हुन्छ (Costs decrease)"],
+                answer: 1,
+                explanation: "सुरक्षा नियम पालना नगर्दा दुर्घटना र चोटपटकको जोखिम बढ्छ। (Ignoring safety rules increases the risk of accidents and injuries.)"
+            },
+            {
+                q: "What is the primary goal of safety in a workshop?",
+                options: ["To maximize profits", "To protect human life and health", "To reduce machine maintenance", "To increase tool wear"],
+                answer: 1,
+                explanation: "Safety prioritizes protecting workers’ lives and health."
+            },
+            {
+                q: "How does safety impact equipment longevity?",
+                options: ["Reduces equipment life", "Prevents misuse-related damage", "Increases repair frequency", "Limits machine operation"],
+                answer: 1,
+                explanation: "Proper safety practices prevent equipment damage from misuse."
+            },
 
-    // Related Automotive Systems and Safety (20 MCQs)
-    {
-        q: "Muffler (साइलेन्सर) को मुख्य काम के हो? (What is the main function of a muffler?)",
-        options: ["इञ्जिनको ताप कम गर्ने (Reduce engine heat)", "इञ्जिनको ध्वनि नियन्त्रण गर्ने (Control engine noise)", "इन्धन बचत गर्ने (Save fuel)", "इञ्जिनको शक्ति बढाउने (Increase engine power)"],
-        answer: 1,
-        explanation: "मफ्लरले इन्जिनको निकासको ध्वनि कम गर्छ। (The muffler reduces engine exhaust noise to acceptable levels.)"
-    },
-    {
-        q: "The feeler gauge is used to check:",
-        options: ["Internal diameter", "Clearance between mating surfaces", "Surface roughness", "Thread pitch"],
-        answer: 1,
-        explanation: "Feeler gauges measure small gaps, such as valve clearances, between mating surfaces."
-    },
-    {
-        q: "What is the function of cutting fluids in machining?",
-        options: ["Increase friction", "Reduce friction and cool the workpiece", "Increase tool hardness", "Prevent rust only"],
-        answer: 1,
-        explanation: "Cutting fluids lubricate and cool the tool and workpiece, reducing friction and heat."
-    },
-    {
-        q: "Which is NOT a cutting fluid?",
-        options: ["Soluble oil", "Gasoline", "Mineral oil", "Water-based coolant"],
-        answer: 1,
-        explanation: "Gasoline is not a cutting fluid; soluble oils, mineral oils, and water-based coolants are used for cooling and lubrication."
-    },
-    {
-        q: "Which component in a steam engine facilitates piston reciprocation?",
-        options: ["Crankshaft", "Crosshead", "Flywheel", "Governor"],
-        answer: 1,
-        explanation: "The crosshead guides the piston’s linear motion, connecting it to the connecting rod."
-    },
-    {
-        q: "Which of the following is a permanent fastening?",
-        options: ["Cotter pin", "Rivet", "Nut and bolt", "Screw"],
-        answer: 1,
-        explanation: "Rivets create permanent joints, unlike cotter pins, nuts, or screws, which are removable."
-    },
-    {
-        q: "Why is the handle of a soldering iron made of plastic?",
-        options: ["To conduct heat", "To insulate heat", "To increase weight", "To improve grip only"],
-        answer: 1,
-        explanation: "Plastic is a heat insulator, preventing burns during soldering."
-    },
-    {
-        q: "Which material exhibits magnetism?",
-        options: ["Plastic", "Iron", "Aluminum", "Copper"],
-        answer: 1,
-        explanation: "Iron is ferromagnetic and exhibits magnetism, unlike plastic, aluminum, or copper."
-    },
-    {
-        q: "Which power plant is free from environmental problems?",
-        options: ["Thermal power plant", "Geothermal power plant", "Coal power plant", "Diesel power plant"],
-        answer: 1,
-        explanation: "Geothermal plants have minimal environmental impact compared to thermal, coal, or diesel plants."
-    },
-    {
-        q: "In a steam power plant, what is used as the prime mover?",
-        options: ["I.C. engine", "Turbine", "Electric motor", "Hydraulic pump"],
-        answer: 1,
-        explanation: "Turbines convert steam energy into mechanical work in steam power plants."
-    },
-    {
-        q: "If one V-belt in a multiple V-belt drive system breaks, what is required?",
-        options: ["Replace only the broken belt", "Replace all belts", "Adjust tension only", "Lubricate the pulley"],
-        answer: 1,
-        explanation: "All belts should be replaced to ensure uniform tension and performance."
-    },
-    {
-        q: "1 horsepower (HP) is equivalent to:",
-        options: ["467 watts", "746 watts", "1000 watts", "500 watts"],
-        answer: 1,
-        explanation: "1 HP equals 746 watts, a standard unit of power."
-    },
-    {
-        q: "V-belt drives are generally used for:",
-        options: ["Low-speed applications", "Power transmission", "Cooling systems", "Fuel delivery"],
-        answer: 1,
-        explanation: "V-belts efficiently transmit power in automotive and industrial applications."
-    },
-    {
-        q: "Which turbine is suited for high-head installations?",
-        options: ["Kaplan turbine", "Pelton wheel", "Francis turbine", "Propeller turbine"],
-        answer: 1,
-        explanation: "Pelton wheels are designed for high-head, low-flow conditions."
-    },
-    {
-        q: "What is the unit of speed in aeronautics?",
-        options: ["Km/hr", "Knot", "Meter/sec", "Mile/hr"],
-        answer: 1,
-        explanation: "Knots (nautical miles per hour) are used to measure speed in aeronautics."
-    },
-    {
-        q: "What is the metric system unit for length?",
-        options: ["Foot", "Meter", "Inch", "Yard"],
-        answer: 1,
-        explanation: "The meter is the SI unit for length in the metric system."
-    },
-    {
-        q: "What can a vernier caliper measure?",
-        options: ["Height only", "Internal and external dimensions", "Weight", "Surface area"],
-        answer: 1,
-        explanation: "Vernier calipers measure both internal and external dimensions with precision."
-    },
-    {
-        q: "Which part is NOT related to a shaper machine?",
-        options: ["Tool post", "Tailstock", "Ram", "Clapper box"],
-        answer: 1,
-        explanation: "Tailstock is part of a lathe, not a shaper machine."
-    },
-    {
-        q: "During filing, metal is cut on the:",
-        options: ["Return stroke", "Forward stroke", "Side stroke", "Circular stroke"],
-        answer: 1,
-        explanation: "Filing removes material during the forward stroke, not the return stroke."
-    },
-    {
-        q: "Which type of mirror is used in a motorcycle headlight?",
-        options: ["Convex mirror", "Concave mirror", "Plane mirror", "Spherical mirror"],
-        answer: 1,
-        explanation: "Concave mirrors focus light to produce a strong beam in headlights."
-    }
-];
+            // Types of Safety (13 MCQs)
+            {
+                q: "Which type of safety focuses on protecting workers from physical harm?",
+                options: ["Fire safety", "Personal safety", "Machine safety", "Electrical safety"],
+                answer: 1,
+                explanation: "Personal safety involves measures like PPE to protect workers from physical harm."
+            },
+            {
+                q: "What is an example of machine safety?",
+                options: ["Wearing gloves", "Installing machine guards", "Using fire extinguishers", "Checking electrical wiring"],
+                answer: 1,
+                explanation: "Machine guards prevent contact with hazardous moving parts."
+            },
+            {
+                q: "Which safety type addresses risks from live electrical circuits?",
+                options: ["Personal safety", "Electrical safety", "Fire safety", "Machine safety"],
+                answer: 1,
+                explanation: "Electrical safety involves measures like insulation and grounding to prevent shocks."
+            },
+            {
+                q: "What is fire safety concerned with?",
+                options: ["Preventing equipment wear", "Preventing and controlling fires", "Ensuring machine alignment", "Reducing electrical faults"],
+                answer: 1,
+                explanation: "Fire safety includes fire prevention, detection, and extinguishing measures."
+            },
+            {
+                q: "कुन प्रकारको सुरक्षाले आगलागीबाट जोगाउँछ? (Which type of safety protects against fires?)",
+                options: ["विद्युतीय सुरक्षा (Electrical safety)", "आगो सुरक्षा (Fire safety)", "मेसिन सुरक्षा (Machine safety)", "व्यक्तिगत सुरक्षा (Personal safety)"],
+                answer: 1,
+                explanation: "आगो सुरक्षाले आगलागी रोकथाम र नियन्त्रण गर्छ। (Fire safety prevents and controls fires.)"
+            },
+            {
+                q: "What does personal safety include?",
+                options: ["Machine maintenance", "Wearing PPE like helmets", "Fire alarm installation", "Electrical grounding"],
+                answer: 1,
+                explanation: "Personal safety involves using PPE to protect workers from hazards."
+            },
+            {
+                q: "Which is an example of electrical safety practice?",
+                options: ["Using a fire extinguisher", "Disconnecting power before repairs", "Wearing safety boots", "Installing machine guards"],
+                answer: 1,
+                explanation: "Disconnecting power prevents electrical shocks during maintenance."
+            },
+            {
+                q: "What is a key aspect of machine safety?",
+                options: ["Regular tool calibration", "Preventing operator contact with moving parts", "Using safety goggles", "Fire drills"],
+                answer: 1,
+                explanation: "Machine safety focuses on guarding moving parts to protect operators."
+            },
+            {
+                q: "Which safety type involves practicing evacuation procedures?",
+                options: ["Electrical safety", "Fire safety", "Machine safety", "Personal safety"],
+                answer: 1,
+                explanation: "Fire safety includes evacuation drills to prepare for emergencies."
+            },
+            {
+                q: "What does environmental safety aim to protect?",
+                options: ["Equipment only", "Workers and surroundings", "Machines only", "Tools only"],
+                answer: 1,
+                explanation: "Environmental safety minimizes harm to workers and the environment."
+            },
+            {
+                q: "Which safety type uses lockout/tagout procedures?",
+                options: ["Fire safety", "Electrical safety", "Personal safety", "Machine safety"],
+                answer: 1,
+                explanation: "Lockout/tagout is an electrical and machine safety practice to prevent accidental startup."
+            },
+            {
+                q: "What is an example of personal safety in a workshop?",
+                options: ["Installing fire alarms", "Wearing safety gloves", "Grounding machines", "Using machine guards"],
+                answer: 1,
+                explanation: "Safety gloves protect hands, an example of personal safety."
+            },
+            {
+                q: "कुन सुरक्षा प्रकारले मेसिनको खतरनाक भागबाट जोगाउँछ? (Which safety type protects from hazardous machine parts?)",
+                options: ["आगो सुरक्षा (Fire safety)", "मेसिन सुरक्षा (Machine safety)", "विद्युतीय सुरक्षा (Electrical safety)", "व्यक्तिगत सुरक्षा (Personal safety)"],
+                answer: 1,
+                explanation: "मेसिन सुरक्षाले मेसिनका खतरनाक भागमा गार्ड राख्छ। (Machine safety uses guards to protect from hazardous parts.)"
+            },
+
+            // Safety Tools and Devices (14 MCQs)
+            {
+                q: "Which is a personal protective equipment (PPE)?",
+                options: ["Screwdriver", "Safety helmet", "Wrench", "Pliers"],
+                answer: 1,
+                explanation: "Safety helmets are PPE, protecting the head from falling objects."
+            },
+            {
+                q: "What safety device is used during arc welding?",
+                options: ["Sunglasses", "Welding helmet with shield", "Black gloves", "Regular goggles"],
+                answer: 1,
+                explanation: "A welding helmet with a shield protects eyes from arc welding’s bright light."
+            },
+            {
+                q: "Which tool is essential in fire-prone areas?",
+                options: ["Fire extinguisher", "Hammer", "Ladder", "Screwdriver"],
+                answer: 0,
+                explanation: "Fire extinguishers are critical for controlling fires in high-risk areas."
+            },
+            {
+                q: "What is the purpose of safety goggles?",
+                options: ["To improve vision", "To protect eyes from debris", "To reduce noise", "To prevent burns"],
+                answer: 1,
+                explanation: "Safety goggles shield eyes from flying particles and chemicals."
+            },
+            {
+                q: "कुन उपकरण व्यक्तिगत सुरक्षाको लागि प्रयोग हुन्छ? (Which device is used for personal safety?)",
+                options: ["पेचकस (Screwdriver)", "सुरक्षा पन्जा (Safety gloves)", "रेन्च (Wrench)", "हथौडा (Hammer)"],
+                answer: 1,
+                explanation: "सुरक्षा पन्जाले हातलाई चोटबाट जोगाउँछ। (Safety gloves protect hands from injuries.)"
+            },
+            {
+                q: "What is a machine guard considered?",
+                options: ["A maintenance tool", "A safety device", "A personal protective equipment", "An operational control"],
+                answer: 1,
+                explanation: "Machine guards are safety devices to prevent contact with hazardous parts."
+            },
+            {
+                q: "Which safety tool measures electrical voltage?",
+                options: ["Voltmeter", "Screwdriver", "Pliers", "Tape measure"],
+                answer: 0,
+                explanation: "A voltmeter checks voltage to ensure safe electrical work."
+            },
+            {
+                q: "What is the function of a safety harness?",
+                options: ["To lift heavy tools", "To prevent falls from heights", "To protect against fire", "To reduce noise exposure"],
+                answer: 1,
+                explanation: "Safety harnesses secure workers at heights to prevent falls."
+            },
+            {
+                q: "Which device is used for ear protection in noisy workshops?",
+                options: ["Safety boots", "Earplugs", "Gloves", "Helmets"],
+                answer: 1,
+                explanation: "Earplugs protect against hearing damage from loud machinery."
+            },
+            {
+                q: "What is a first aid kit used for?",
+                options: ["To repair machines", "To treat minor injuries", "To extinguish fires", "To measure voltage"],
+                answer: 1,
+                explanation: "First aid kits provide supplies to treat minor injuries on-site."
+            },
+            {
+                q: "कुन उपकरणले आगलागी नियन्त्रण गर्छ? (Which device controls fires?)",
+                options: ["आगो निभाउने यन्त्र (Fire extinguisher)", "सुरक्षा हेलमेट (Safety helmet)", "पन्जा (Gloves)", "गगल्स (Goggles)"],
+                answer: 0,
+                explanation: "आगो निभाउने यन्त्रले आगलागी नियन्त्रण गर्छ। (Fire extinguishers control fires in emergency situations.)"
+            },
+            {
+                q: "What safety tool is used to isolate electrical circuits?",
+                options: ["Circuit breaker", "Screwdriver", "Wrench", "Tape measure"],
+                answer: 0,
+                explanation: "Circuit breakers isolate circuits to prevent electrical hazards."
+            },
+            {
+                q: "Which PPE protects against chemical splashes?",
+                options: ["Safety boots", "Face shield", "Earplugs", "Gloves"],
+                answer: 1,
+                explanation: "Face shields protect the face from chemical splashes and debris."
+            },
+            {
+                q: "What is the purpose of a safety sign in a workshop?",
+                options: ["To decorate the workplace", "To warn about hazards", "To list inventory", "To track attendance"],
+                answer: 1,
+                explanation: "Safety signs alert workers to potential hazards like high voltage or slippery floors."
+            }
+        ];
 
         let currentPage = 0;
         let score = 0;
@@ -599,23 +601,19 @@
         const correctSound = document.getElementById("correct-sound");
         const wrongSound = document.getElementById("wrong-sound");
 
-        // Load progress from localStorage
-        function loadProgress() {
-            const saved = localStorage.getItem("quizProgressSteeringClutch");
-            if (saved) {
-                const { currentPage: savedPage, score: savedScore, skipped: savedSkipped, answers: savedAnswers, time: savedTime } = JSON.parse(saved);
-                currentPage = savedPage;
-                score = savedScore;
-                skipped = savedSkipped;
-                userAnswers = savedAnswers || Array(questions.length).fill(null);
-                timerSeconds = savedTime || 0;
-                updateCurrentScore();
-            }
+        // Clear progress to start fresh
+        function clearProgress() {
+            localStorage.removeItem("quizProgressSafetyPractices");
+            currentPage = 0;
+            score = 0;
+            skipped = [];
+            userAnswers = Array(questions.length).fill(null);
+            timerSeconds = 0;
         }
 
         // Save progress to localStorage
         function saveProgress() {
-            localStorage.setItem("quizProgressSteeringClutch", JSON.stringify({
+            localStorage.setItem("quizProgressSafetyPractices", JSON.stringify({
                 currentPage,
                 score,
                 skipped,
@@ -793,9 +791,11 @@
                 skipped.push(questions[questionIndex]);
                 userAnswers[questionIndex] = 'Skipped';
                 const questionDiv = document.querySelector(`.question[data-index="${questionIndex}"]`);
-                questionDiv.querySelectorAll('.options button').forEach(btn => btn.disabled = true);
-                questionDiv.querySelector('.skip-button').disabled = true;
-                questionDiv.querySelector('.explanation').style.display = 'block';
+                if (questionDiv) {
+                    questionDiv.querySelectorAll('.options button').forEach(btn => btn.disabled = true);
+                    questionDiv.querySelector('.skip-button').disabled = true;
+                    questionDiv.querySelector('.explanation').style.display = 'block';
+                }
                 saveProgress();
                 const nextButton = quizEl.querySelector('.next-button');
                 if (nextButton) {
@@ -845,7 +845,7 @@
                 const correctAnswer = q.options[q.answer];
                 const status = userAnswers[i] === q.options[q.answer] ? 'Correct' :
                               userAnswers[i] === 'Skipped' ? 'Skipped' :
-                              userAnswers[i] === null ? 'Not attempted' : 'Wrong';
+                              userAnswers[i] === null ? 'Not-attempted' : 'Wrong';
                 return `
                     <tr>
                         <td>${i + 1}. ${q.q}</td>
@@ -857,28 +857,29 @@
                 `;
             }).join('');
 
-            localStorage.removeItem('quizProgressSteeringClutch');
+            localStorage.removeItem('quizProgressSafetyPractices');
         }
 
         // Restart quiz
         function restartQuiz() {
-            currentPage = 0;
-            score = 0;
-            skipped = [];
-            userAnswers = Array(questions.length).fill(null);
-            timerSeconds = 0;
+            clearProgress();
             resultsEl.classList.add('hidden');
             scoreEl.textContent = '';
-            localStorage.removeItem('quizProgressSteeringClutch');
             startTimer();
             showQuestions(currentPage);
             updateCurrentScore();
         }
 
-        // Initialize
-        loadProgress();
-        startTimer();
-        showQuestions(currentPage);
+        // Initialize quiz
+        function initialize() {
+            clearProgress();
+            startTimer();
+            showQuestions(currentPage);
+            updateCurrentScore();
+        }
+
+        // Start quiz on page load
+        initialize();
     </script>
 </body>
 </html>
