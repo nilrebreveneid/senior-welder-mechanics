@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loksewa Mechanical 4th Level Mechanics MCQ Quiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Roboto', -apple-system, Arial, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: linear-gradient(135deg, #e0f7fa, #80deea);
+      color: #1a202c;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1.6;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2b6cb0;
+      margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #c53030;
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+
+    .quiz-container {
+      max-width: 1000px;
+      width: 100%;
+      background: #ffffff;
+      padding: 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+      margin-bottom: 2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .quiz-container:hover {
+      transform: translateY(-5px);
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      background: #edf2f7;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+    }
+
+    .progress {
+      height: 100%;
+      background: linear-gradient(to right, #4299e1, #3182ce);
+      border-radius: 6px;
+      transition: width 0.4s ease-in-out;
+    }
+
+    #timer {
+      text-align: right;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: #c53030;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .question {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      border-radius: 8px;
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      animation: fadeIn 0.5s ease-out;
+      transition: box-shadow 0.3s;
+    }
+
+    .question:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .question p {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #2d3748;
+      margin-bottom: 1rem;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .options button {
+      padding: 0.75rem 1.25rem;
+      width: 100%;
+      background: #ebf8ff;
+      border: 2px solid #bee3f8;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      text-align: left;
+      transition: all 0.3s ease;
+      color: #2d3748;
+    }
+
+    .options button:hover:not(:disabled) {
+      background: #bee3f8;
+      border-color: #90cdf4;
+      transform: translateX(4px);
+    }
+
+    .options button:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+    }
+
+    .options button.correct {
+      background: #c6f6d5 !important;
+      border-color: #68d391 !important;
+      color: #22543d;
+      animation: pulse 0.5s;
+    }
+
+    .options button.wrong {
+      background: #fed7d7 !important;
+      border-color: #f56565 !important;
+      color: #742a2a;
+      animation: shake 0.3s;
+    }
+
+    .options button:disabled {
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
+    .explanation {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #f0fff4;
+      border-left: 4px solid #48bb78;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      color: #2d3748;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity 0.3s ease, max-height 0.3s ease;
+    }
+
+    .explanation.show {
+      opacity: 1;
+      max-height: 200px;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1.5rem;
+      gap: 1rem;
+    }
+
+    .pagination-button {
+      background: #4299e1;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+
+    .pagination-button:hover:not(:disabled) {
+      background: #3182ce;
+    }
+
+    .pagination-button:disabled {
+      background: #e2e8f0;
+      cursor: not-allowed;
+    }
+
+    .submit-button, .restart-button {
+      background: #4299e1;
+      color: #fff;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 1.5rem;
+      width: 100%;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .submit-button:hover:not(:disabled), .restart-button:hover:not(:disabled) {
+      background: #3182ce;
+      transform: translateY(-2px);
+    }
+
+    .submit-button:disabled {
+      background: #e2e8f0;
+      cursor: not-allowed;
+    }
+
+    #score, #results {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      font-weight: 700;
+      color: #2d3748;
+    }
+
+    .results-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .results-table th, .results-table td {
+      border: 1px solid #e2e8f0;
+      padding: 1rem;
+      text-align: left;
+    }
+
+    .results-table th {
+      background: #edf2f7;
+      font-weight: 600;
+      color: #2d3748;
+    }
+
+    .results-table td.correct { color: #2f855a; font-weight: 600; }
+    .results-table td.wrong { color: #c53030; font-weight: 600; }
+    .results-table td.not-attempted { color: #718096; }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+      .quiz-container {
+        padding: 1.5rem;
+      }
+      .question p {
+        font-size: 1.1rem;
+      }
+      .options button {
+        font-size: 0.95rem;
+        padding: 0.6rem 1rem;
+      }
+      .results-table th, .results-table td {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+      }
+      .pagination-button {
+        padding: 0.6rem 1rem;
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.2rem;
+      }
+      .submit-button, .restart-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Loksewa Mechanical 4th Level Mechanics MCQ Quiz</h1>
+  <h2>Test Your Knowledge: Practice Mechanical Engineering Concepts</h2>
+  <div class="quiz-container">
+    <div id="timer">Time: 00:00</div>
+    <div class="progress-bar">
+      <div class="progress" id="progress"></div>
+    </div>
+    <div id="quiz" role="region" aria-live="polite"></div>
+    <div class="pagination">
+      <button class="pagination-button" id="prev-page" disabled aria-label="Previous page">Previous</button>
+      <button class="pagination-button" id="next-page" aria-label="Next page">Next</button>
+    </div>
+    <button class="submit-button" id="submit-button" disabled aria-label="Submit quiz">Submit Quiz</button>
+    <div id="score"></div>
+    <div id="results" class="hidden">
+      <h2>Quiz Results</h2>
+      <div class="overflow-x-auto">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Question</th>
+              <th>Your Answer</th>
+              <th>Correct Answer</th>
+              <th>Status</th>
+              <th>Explanation</th>
+            </tr>
+          </thead>
+          <tbody id="results-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <button class="restart-button hidden" id="restart-button" aria-label="Restart quiz">Restart Quiz</button>
+
+  <audio id="correct-sound" src="https://www.soundjay.com/buttons/beep-01a.mp3"></audio>
+  <audio id="wrong-sound" src="https://www.soundjay.com/buttons/beep-02.mp3"></audio>
+
+  <script>
+    const questions = [
+      {
+        "q": "What is the least count of a standard Vernier Caliper typically used in workshops?",
+        "options": ["0.1 mm", "0.02 mm", "0.5 mm", "1.0 mm"],
+        "answer": 1,
+        "explanation": "The least count of a standard Vernier Caliper is typically 0.02 mm, calculated as the difference between the main scale division and the Vernier scale division."
+      },
+      {
+        "q": "Which welding process is most suitable for joining thin metal sheets in automotive bodywork?",
+        "options": ["Shielded Metal Arc Welding (SMAW)", "Gas Metal Arc Welding (GMAW)", "Submerged Arc Welding (SAW)", "Plasma Arc Welding (PAW)"],
+        "answer": 1,
+        "explanation": "GMAW (MIG welding) is ideal for thin sheets due to its controlled heat input and continuous wire feed, commonly used in automotive applications."
+      },
+      {
+        "q": "What is the primary function of a dozer in construction?",
+        "options": ["Lifting heavy loads", "Pushing and leveling earth", "Digging deep trenches", "Compacting soil"],
+        "answer": 1,
+        "explanation": "A dozer, equipped with a wide blade, is primarily used for pushing and leveling earth, such as in site preparation or road construction."
+      },
+      {
+        "q": "What is a key advantage of a two-stroke engine over a four-stroke engine?",
+        "options": ["Lower fuel consumption", "Higher power-to-weight ratio", "Cleaner exhaust emissions", "Longer engine lifespan"],
+        "answer": 1,
+        "explanation": "Two-stroke engines produce power every crankshaft revolution, resulting in a higher power-to-weight ratio, ideal for applications like chainsaws."
+      },
+      {
+        "q": "What is the primary function of a fuel injection pump in a diesel engine?",
+        "options": ["To mix fuel with air", "To deliver precise fuel quantities at high pressure", "To filter fuel impurities", "To control exhaust emissions"],
+        "answer": 1,
+        "explanation": "The fuel injection pump pressurizes and delivers exact amounts of fuel to the injectors at the right time, ensuring efficient combustion."
+      },
+      {
+        "q": "What is the primary purpose of the cooling system in an internal combustion engine?",
+        "options": ["To increase fuel efficiency", "To maintain optimal engine temperature", "To reduce engine noise", "To improve exhaust emissions"],
+        "answer": 1,
+        "explanation": "The cooling system prevents overheating by dissipating excess heat, ensuring the engine operates within its optimal temperature range."
+      },
+      {
+        "q": "What is the primary purpose of brakes in a motor vehicle?",
+        "options": ["To increase engine power", "To decelerate or stop the vehicle", "To steer the vehicle", "To cool the engine"],
+        "answer": 1,
+        "explanation": "Brakes convert kinetic energy into heat through friction, slowing or stopping the vehicle to ensure safety and control."
+      },
+      {
+        "q": "What is the primary function of a vehicle’s steering system?",
+        "options": ["To regulate engine temperature", "To control the vehicle’s direction of travel", "To absorb road shocks", "To increase fuel efficiency"],
+        "answer": 1,
+        "explanation": "The steering system allows the driver to turn the vehicle’s wheels, directing its path, a core concept frequently tested."
+      },
+      {
+        "q": "What is the primary function of the transmission system in a motor vehicle?",
+        "options": ["To regulate engine cooling", "To transmit engine power to the wheels with varying speed and torque", "To control vehicle steering", "To filter exhaust emissions"],
+        "answer": 1,
+        "explanation": "The transmission system adjusts engine power through gear ratios to provide appropriate speed and torque to the wheels."
+      },
+      {
+        "q": "What is the primary function of a hydraulic system in automotive or machinery applications?",
+        "options": ["To cool the engine", "To transmit power using pressurized fluid", "To regulate fuel flow", "To control electrical systems"],
+        "answer": 1,
+        "explanation": "Hydraulic systems use pressurized fluid to transmit power efficiently for tasks like steering, braking, or lifting."
+      },
+      {
+        "q": "What is a key function of tyres in a vehicle’s wheel system?",
+        "options": ["To regulate engine power", "To provide traction and support vehicle load", "To control steering alignment", "To cool the suspension system"],
+        "answer": 1,
+        "explanation": "Tyres ensure traction for movement and bear the vehicle’s weight, enhancing stability and safety."
+      },
+      {
+        "q": "Which type of maintenance involves addressing equipment issues only after a failure occurs?",
+        "options": ["Preventive maintenance", "Predictive maintenance", "Breakdown maintenance", "Condition-based maintenance"],
+        "answer": 2,
+        "explanation": "Breakdown maintenance involves repairing equipment only after it fails, a reactive approach often tested."
+      },
+      {
+        "q": "What is the primary function of the alternator in a vehicle’s electrical system?",
+        "options": ["To store electrical energy", "To convert mechanical energy to electrical energy for charging the battery", "To regulate fuel injection", "To control the vehicle’s lights"],
+        "answer": 1,
+        "explanation": "The alternator generates electricity to charge the battery and power electrical components."
+      },
+      {
+        "q": "Why is record keeping essential in the maintenance of mechanical equipment?",
+        "options": ["To increase equipment weight", "To track maintenance history and predict future repairs", "To regulate engine temperature", "To enhance fuel efficiency"],
+        "answer": 1,
+        "explanation": "Record keeping documents maintenance activities, helping identify patterns and schedule repairs."
+      },
+      {
+        "q": "Why is safety critical in a mechanical workshop?",
+        "options": ["To increase equipment weight", "To prevent injuries and ensure worker well-being", "To reduce fuel efficiency", "To simplify maintenance procedures"],
+        "answer": 1,
+        "explanation": "Safety practices minimize workplace accidents, protecting workers and maintaining productivity."
+      },
+      {
+        "q": "What is the primary function of a metal working fluid in machining processes?",
+        "options": ["To increase tool weight", "To reduce friction and remove heat from the cutting zone", "To enhance workpiece hardness", "To regulate machine voltage"],
+        "answer": 1,
+        "explanation": "Metal working fluids lubricate and cool the tool-workpiece interface, extending tool life."
+      },
+      {
+        "q": "What property of air is measured in psychrometry to assess its moisture content?",
+        "options": ["Absolute pressure", "Relative humidity", "Air velocity", "Heat capacity"],
+        "answer": 1,
+        "explanation": "Psychrometry studies air properties like relative humidity, crucial for air conditioning design."
+      },
+      {
+        "q": "Which hand tool is used to remove material from a workpiece by scraping or cutting?",
+        "options": ["Screwdriver", "File", "Pliers", "Wrench"],
+        "answer": 1,
+        "explanation": "A file is a hand tool with a rough surface used to remove material from a workpiece by scraping or cutting."
+      },
+      {
+        "q": "Which type of electrode is commonly used in SMAW for welding mild steel?",
+        "options": ["E6010", "E7018", "E308L", "E4043"],
+        "answer": 1,
+        "explanation": "E7018 is a low-hydrogen electrode widely used for mild steel in SMAW, providing strong welds."
+      },
+      {
+        "q": "What is the primary application of a loader in construction?",
+        "options": ["Excavating deep foundations", "Loading loose material into trucks", "Grading roads", "Compacting asphalt"],
+        "answer": 1,
+        "explanation": "Loaders, with a front-mounted bucket, are designed to scoop and load loose materials like sand or gravel."
+      },
+      {
+        "q": "Which engine component converts reciprocating motion into rotational motion?",
+        "options": ["Piston", "Crankshaft", "Camshaft", "Connecting rod"],
+        "answer": 1,
+        "explanation": "The crankshaft converts the piston’s up-and-down motion into rotational motion to drive the vehicle."
+      },
+      {
+        "q": "Which type of fuel injection pump is commonly used in heavy-duty diesel engines?",
+        "options": ["Inline fuel injection pump", "Distributor fuel injection pump", "Unit injector pump", "Common rail pump"],
+        "answer": 0,
+        "explanation": "Inline pumps, with a plunger for each cylinder, are robust and widely used in heavy-duty diesel engines."
+      },
+      {
+        "q": "Which component of the cooling system is responsible for circulating coolant through the engine and radiator?",
+        "options": ["Thermostat", "Water pump", "Radiator cap", "Cooling fan"],
+        "answer": 1,
+        "explanation": "The water pump, driven by the engine, circulates coolant to facilitate heat transfer."
+      },
+      {
+        "q": "Which type of brake is commonly used in heavy vehicles due to its ability to dissipate heat effectively?",
+        "options": ["Drum brake", "Disc brake", "Band brake", "Parking brake"],
+        "answer": 1,
+        "explanation": "Disc brakes, with exposed rotors, dissipate heat more effectively, suitable for heavy vehicles."
+      },
+      {
+        "q": "What is the primary role of the power steering pump in a hydraulic power steering system?",
+        "options": ["To lubricate the steering gear", "To generate hydraulic pressure for steering assistance", "To align the wheels automatically", "To filter steering fluid"],
+        "answer": 1,
+        "explanation": "The power steering pump pressurizes hydraulic fluid to assist in turning the wheels."
+      },
+      {
+        "q": "What is the primary role of the clutch in a manual transmission system?",
+        "options": ["To change gear ratios", "To connect and disconnect the engine from the transmission", "To transfer power to the differential", "To adjust wheel alignment"],
+        "answer": 1,
+        "explanation": "The clutch engages or disengages the engine, allowing smooth gear shifts."
+      },
+      {
+        "q": "Which component in a hydraulic system generates the pressure needed to move fluid?",
+        "options": ["Hydraulic cylinder", "Hydraulic pump", "Control valve", "Reservoir"],
+        "answer": 1,
+        "explanation": "The hydraulic pump pressurizes the fluid to drive the system."
+      },
+      {
+        "q": "What does the number ‘205/55R16’ indicate on a tyre’s sidewall?",
+        "options": ["Tyre weight and load capacity", "Tyre width, aspect ratio, and rim diameter", "Tyre pressure and speed rating", "Tyre manufacturing date and type"],
+        "answer": 1,
+        "explanation": "‘205/55R16’ indicates a tyre width of 205 mm, an aspect ratio of 55%, and a rim diameter of 16 inches."
+      },
+      {
+        "q": "Why is regular maintenance of mechanical equipment critical in a workshop?",
+        "options": ["To increase fuel consumption", "To extend equipment lifespan and prevent costly repairs", "To reduce engine power output", "To complicate operational procedures"],
+        "answer": 1,
+        "explanation": "Maintenance minimizes wear and prevents unexpected failures."
+      },
+      {
+        "q": "What maintenance practice is essential for ensuring the longevity of a vehicle’s battery?",
+        "options": ["Regularly cleaning battery terminals and checking electrolyte levels", "Adjusting the clutch pedal height", "Replacing the hydraulic fluid monthly", "Cleaning the fuel injector"],
+        "answer": 0,
+        "explanation": "Cleaning terminals prevents corrosion, ensuring proper battery function."
+      },
+      {
+        "q": "What is the primary purpose of a maintenance job card in a workshop?",
+        "options": ["To design new equipment", "To document specific maintenance tasks and their completion", "To store spare parts", "To control electrical circuits"],
+        "answer": 1,
+        "explanation": "A job card records maintenance tasks, parts used, and technician notes."
+      },
+      {
+        "q": "Which type of safety focuses on protecting workers from chemical hazards in a workshop?",
+        "options": ["Mechanical safety", "Electrical safety", "Chemical safety", "Fire safety"],
+        "answer": 2,
+        "explanation": "Chemical safety involves handling fuels or cleaners to prevent exposure."
+      },
+      {
+        "q": "Which type of lubricant is most suitable for high-pressure applications in automotive gearboxes?",
+        "options": ["Liquid oil", "Grease", "Solid lubricant", "Gas lubricant"],
+        "answer": 0,
+        "explanation": "Liquid oils, such as gear oils, provide effective lubrication under high pressure."
+      },
+      {
+        "q": "What is a key factor for achieving human comfort in an air-conditioned space?",
+        "options": ["High air pressure", "Maintaining temperature between 20-25°C and 40-60% humidity", "Increasing air speed beyond 5 m/s", "Reducing oxygen levels"],
+        "answer": 1,
+        "explanation": "Optimal temperature and humidity ensure thermal comfort."
+      },
+      {
+        "q": "What is the primary function of a lathe machine in a workshop?",
+        "options": ["To produce flat surfaces", "To create cylindrical shapes", "To grind surfaces to a fine finish", "To drill precise holes"],
+        "answer": 1,
+        "explanation": "A lathe rotates the workpiece to produce cylindrical shapes like shafts."
+      },
+      {
+        "q": "What is the primary cause of porosity in a weld?",
+        "options": ["Excessive welding current", "Contamination of the weld pool", "Incorrect electrode angle", "Too slow welding speed"],
+        "answer": 1,
+        "explanation": "Porosity occurs due to gas entrapment from contaminants like moisture or oil."
+      },
+      {
+        "q": "Which type of excavator is best suited for digging below ground level?",
+        "options": ["Dragline excavator", "Hydraulic excavator", "Skid-steer excavator", "Wheel loader"],
+        "answer": 1,
+        "explanation": "Hydraulic excavators are ideal for digging deep trenches or foundations."
+      },
+      {
+        "q": "Which symptom indicates a need for an engine overhaul?",
+        "options": ["Slight engine vibration at idle", "Excessive blue smoke from the exhaust", "Minor oil leakage from the valve cover", "Temporary loss of power during acceleration"],
+        "answer": 1,
+        "explanation": "Blue smoke suggests burning oil due to worn piston rings, requiring an overhaul."
+      },
+      {
+        "q": "Which component in a fuel injection system atomizes fuel into the combustion chamber?",
+        "options": ["Fuel filter", "Injector nozzle", "Fuel tank", "Delivery valve"],
+        "answer": 1,
+        "explanation": "The injector nozzle sprays fuel in a fine mist for efficient combustion."
+      },
+      {
+        "q": "What is the primary function of anti-freeze in a cooling system?",
+        "options": ["To lubricate the water pump", "To prevent coolant from freezing and boiling", "To increase the coolant’s viscosity", "To clean the radiator"],
+        "answer": 1,
+        "explanation": "Anti-freeze lowers the freezing point and raises the boiling point of coolant."
+      },
+      {
+        "q": "What is the function of the brake master cylinder in a hydraulic braking system?",
+        "options": ["To store brake fluid", "To convert pedal force into hydraulic pressure", "To cool the brake pads", "To adjust brake shoe clearance"],
+        "answer": 1,
+        "explanation": "The master cylinder converts pedal force into hydraulic pressure to actuate brakes."
+      },
+      {
+        "q": "What is a common symptom of low power steering fluid in a hydraulic steering system?",
+        "options": ["Excessive tire wear", "Whining noise when turning the steering wheel", "Overheating engine", "Reduced braking efficiency"],
+        "answer": 1,
+        "explanation": "Low fluid causes the pump to cavitate, producing a whining noise."
+      },
+      {
+        "q": "What is the primary function of a torque converter in an automatic transmission?",
+        "options": ["To manually shift gears", "To transfer and multiply engine torque to the transmission", "To cool the transmission fluid", "To align the wheels"],
+        "answer": 1,
+        "explanation": "The torque converter uses fluid coupling to transmit and amplify torque."
+      },
+      {
+        "q": "What is a common symptom of air contamination in a hydraulic system?",
+        "options": ["Excessive engine noise", "Spongy or erratic actuator response", "Overheating brakes", "Reduced fuel efficiency"],
+        "answer": 1,
+        "explanation": "Air causes compressibility, leading to inconsistent actuator performance."
+      },
+      {
+        "q": "What is a common symptom of improper wheel alignment in a vehicle?",
+        "options": ["Excessive engine noise", "Uneven tyre wear or vehicle pulling to one side", "Reduced braking efficiency", "Overheating transmission"],
+        "answer": 1,
+        "explanation": "Improper alignment causes uneven tyre wear or pulling."
+      },
+      {
+        "q": "Which type of lubricant is most suitable for high-temperature applications in heavy machinery?",
+        "options": ["Mineral oil", "Synthetic oil", "Grease", "Water-based lubricant"],
+        "answer": 1,
+        "explanation": "Synthetic oils resist breakdown at high temperatures."
+      },
+      {
+        "q": "Which type of light is commonly used in modern vehicles for its energy efficiency and brightness?",
+        "options": ["Incandescent bulb", "Halogen lamp", "LED headlight", "Fluorescent tube"],
+        "answer": 2,
+        "explanation": "LED headlights are energy-efficient and provide bright illumination."
+      },
+      {
+        "q": "What is a primary benefit of maintaining accurate maintenance records for a vehicle fleet?",
+        "options": ["Reducing the need for spare parts", "Improving cost efficiency and regulatory compliance", "Increasing vehicle speed", "Simplifying engine design"],
+        "answer": 1,
+        "explanation": "Accurate records optimize maintenance and ensure compliance."
+      },
+      {
+        "q": "Which safety tool is essential for protecting a mechanic’s eyes during welding in a workshop?",
+        "options": ["Safety gloves", "Welding helmet with tinted visor", "Earplugs", "Fire extinguisher"],
+        "answer": 1,
+        "explanation": "A welding helmet protects eyes from bright arcs and UV radiation."
+      },
+      {
+        "q": "Which type of cutting fluid is commonly used for high-speed machining of non-ferrous metals?",
+        "options": ["Straight oil", "Soluble oil emulsion", "Synthetic fluid", "Semi-synthetic fluid"],
+        "answer": 2,
+        "explanation": "Synthetic fluids offer excellent cooling for high-speed machining."
+      },
+      {
+        "q": "Which type of air conditioning system is commonly used in vehicles?",
+        "options": ["Central air conditioning", "Window air conditioning", "Automotive air conditioning", "Split air conditioning"],
+        "answer": 2,
+        "explanation": "Automotive air conditioning systems are designed for vehicle cabins."
+      },
+      {
+        "q": "What is the primary source of heat in arc welding?",
+        "options": ["Combustion of gases", "Electric arc between electrode and workpiece", "Friction between materials", "Chemical reaction"],
+        "answer": 1,
+        "explanation": "Arc welding generates heat through an electric arc, melting materials."
+      },
+      {
+        "q": "What is the primary difference between soldering and brazing?",
+        "options": ["Soldering uses a higher temperature than brazing", "Brazing uses a filler metal with a higher melting point", "Soldering requires a shielding gas", "Brazing is used only for non-metallic materials"],
+        "answer": 1,
+        "explanation": "Soldering uses fillers below 450°C, while brazing uses higher-melting-point fillers."
+      },
+      {
+        "q": "What is the primary purpose of a motor grader in construction?",
+        "options": ["Lifting heavy materials", "Creating a smooth, level surface", "Digging large pits", "Compacting soil layers"],
+        "answer": 1,
+        "explanation": "Graders use a long blade to create flat surfaces for road bases."
+      },
+      {
+        "q": "What is a common cause of an I.C. engine failing to start?",
+        "options": ["Worn piston rings", "Faulty spark plug", "Low coolant level", "Damaged camshaft"],
+        "answer": 1,
+        "explanation": "A faulty spark plug prevents ignition, causing starting issues."
+      },
+      {
+        "q": "What is the primary function of a carburetor in a petrol engine?",
+        "options": ["To pressurize fuel", "To mix air and fuel in the correct ratio", "To filter intake air", "To control exhaust flow"],
+        "answer": 1,
+        "explanation": "The carburetor atomizes fuel and mixes it with air for combustion."
+      },
+      {
+        "q": "What is a common symptom of a failing water pump in a cooling system?",
+        "options": ["Excessive engine noise", "Coolant leakage or overheating", "Increased fuel efficiency", "Reduced exhaust emissions"],
+        "answer": 1,
+        "explanation": "A failing water pump may leak coolant or fail to circulate it, causing overheating."
+      },
+      {
+        "q": "What is a common symptom of air in the hydraulic brake system?",
+        "options": ["Loud engine noise", "Spongy brake pedal", "Overheating brakes", "Increased fuel consumption"],
+        "answer": 1,
+        "explanation": "Air in the system compresses, causing a spongy pedal feel."
+      },
+      {
+        "q": "In an electric power steering (EPS) system, which component directly assists the steering mechanism?",
+        "options": ["Electric motor", "Hydraulic cylinder", "Steering rack", "Tie rod"],
+        "answer": 0,
+        "explanation": "The electric motor provides torque to assist steering without hydraulic fluid."
+      },
+      {
+        "q": "What is a common symptom of a worn clutch in a manual transmission vehicle?",
+        "options": ["Excessive engine noise", "Slipping gears or difficulty shifting", "Overheating brakes", "Reduced fuel efficiency"],
+        "answer": 1,
+        "explanation": "A worn clutch fails to engage fully, causing gear slippage."
+      },
+      {
+        "q": "What is the role of the control valve in a hydraulic system?",
+        "options": ["To store hydraulic fluid", "To direct fluid flow to specific actuators", "To filter contaminants from the fluid", "To cool the hydraulic fluid"],
+        "answer": 1,
+        "explanation": "The control valve regulates fluid flow to actuators for precise operation."
+      },
+      {
+        "q": "What is a primary advantage of tracks over wheels in heavy machinery like dozers?",
+        "options": ["Higher fuel efficiency", "Better traction on uneven terrain", "Easier maintenance", "Increased vehicle speed"],
+        "answer": 1,
+        "explanation": "Tracks provide superior traction on rough surfaces."
+      },
+      {
+        "q": "What is a common task performed during the periodic maintenance of a vehicle’s engine?",
+        "options": ["Replacing the steering gear", "Checking and changing engine oil", "Adjusting the tyre tread depth", "Rebuilding the transmission"],
+        "answer": 1,
+        "explanation": "Regular oil changes reduce engine wear."
+      },
+      {
+        "q": "What is the primary role of a fuse in a vehicle’s electrical system?",
+        "options": ["To amplify electrical current", "To protect circuits from overload by breaking the circuit", "To store excess voltage", "To regulate battery charging"],
+        "answer": 1,
+        "explanation": "Fuses melt to interrupt circuits during overloads."
+      },
+      {
+        "q": "Which information is typically included on a maintenance job card for a vehicle?",
+        "options": ["Vehicle color and model year", "Date, task description, and parts replaced", "Driver’s license details", "Fuel type and engine capacity"],
+        "answer": 1,
+        "explanation": "A job card tracks service history with task and parts details."
+      },
+      {
+        "q": "What safety device should be used when working on a vehicle’s electrical system to prevent shocks?",
+        "options": ["Insulated gloves", "Steel-toed boots", "Dust mask", "Hard hat"],
+        "answer": 0,
+        "explanation": "Insulated gloves prevent electrical shocks when handling live wires."
+      },
+      {
+        "q": "What is a key function of cutting fluids during metal cutting operations?",
+        "options": ["To increase cutting speed beyond machine limits", "To flush away chips and debris from the cutting area", "To harden the workpiece material", "To reduce tool sharpness"],
+        "answer": 1,
+        "explanation": "Cutting fluids remove chips, improving machining accuracy."
+      },
+      {
+        "q": "What is the function of the evaporator in an air conditioning system?",
+        "options": ["To compress the refrigerant", "To absorb heat from the air to be cooled", "To release heat to the outside environment", "To regulate electrical power"],
+        "answer": 1,
+        "explanation": "The evaporator allows refrigerant to absorb heat, cooling the air."
+      },
+      {
+        "q": "What is the SI unit of power?",
+        "options": ["Horsepower", "Watt", "Joule", "Foot-pound"],
+        "answer": 1,
+        "explanation": "The SI unit of power is the Watt, defined as one joule per second."
+      },
+      {
+        "q": "Which tool is primarily used for marking lines on a metal workpiece before cutting?",
+        "options": ["Chisel", "Scriber", "Hacksaw", "File"],
+        "answer": 1,
+        "explanation": "A scriber marks precise lines on metal for cutting or fitting."
+      }
+    ];
+
+    let score = 0;
+    let userAnswers = Array(questions.length).fill(null);
+    let timerSeconds = 0;
+    let timerInterval;
+    let shuffledQuestions = [];
+    let currentPage = 0;
+    const questionsPerPage = 25;
+
+    const quizEl = document.getElementById("quiz");
+    const scoreEl = document.getElementById("score");
+    const resultsEl = document.getElementById("results");
+    const resultsBody = document.getElementById("results-body");
+    const progressEl = document.getElementById("progress");
+    const timerEl = document.getElementById("timer");
+    const submitButton = document.getElementById("submit-button");
+    const restartButton = document.getElementById("restart-button");
+    const prevPageButton = document.getElementById("prev-page");
+    const nextPageButton = document.getElementById("next-page");
+    const correctSound = document.getElementById("correct-sound");
+    const wrongSound = document.getElementById("wrong-sound");
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function shuffleOptions(questions) {
+      return questions.map(q => {
+        const correct = q.options[q.answer];
+        const shuffled = [...q.options].sort(() => Math.random() - 0.5);
+        return {
+          ...q,
+          options: shuffled,
+          answer: shuffled.indexOf(correct)
+        };
+      });
+    }
+
+    function startTimer() {
+      const minutes = Math.floor(timerSeconds / 60);
+      const seconds = timerSeconds % 60;
+      timerEl.textContent = `Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        const minutes = Math.floor(timerSeconds / 60);
+        const seconds = timerSeconds % 60;
+        timerEl.textContent = `Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }, 1000);
+    }
+
+    function updateProgress() {
+      const answered = userAnswers.filter(answer => answer !== null).length;
+      const percentage = (answered / questions.length) * 100;
+      progressEl.style.width = `${percentage}%`;
+      checkAllAnswered();
+    }
+
+    function showPage(pageIndex) {
+      currentPage = pageIndex;
+      const startIndex = pageIndex * questionsPerPage;
+      const endIndex = Math.min(startIndex + questionsPerPage, shuffledQuestions.length);
+      const fragment = document.createDocumentFragment();
+      const pageQuestions = shuffledQuestions.slice(startIndex, endIndex);
+      pageQuestions.forEach((q, index) => {
+        const globalIndex = startIndex + index;
+        const isAnswered = userAnswers[globalIndex] !== null;
+        const selectedAnswer = userAnswers[globalIndex];
+        const options = q.options.map((opt, j) => {
+          let buttonClass = '';
+          if (isAnswered) {
+            if (opt === q.options[q.answer]) buttonClass += ' correct';
+            if (opt === selectedAnswer && selectedAnswer !== q.options[q.answer]) buttonClass += ' wrong';
+          }
+          return `<button class="${buttonClass}" aria-label="Option ${escapeHtml(opt)}" ${isAnswered ? 'disabled' : ''}>${escapeHtml(opt)}</button>`;
+        }).join('');
+        const div = document.createElement('div');
+        div.className = 'question';
+        div.dataset.index = globalIndex;
+        div.innerHTML = `
+          <p>${globalIndex + 1}. ${escapeHtml(q.q)}</p>
+          <div class="options">${options}</div>
+          <div class="explanation ${isAnswered ? 'show' : ''}" id="explanation-${globalIndex}">
+            ${isAnswered ? escapeHtml(q.explanation || 'No explanation available.') : ''}
+          </div>
+        `;
+        fragment.appendChild(div);
+      });
+      quizEl.innerHTML = '';
+      quizEl.appendChild(fragment);
+
+      quizEl.querySelectorAll('.options button').forEach(button => {
+        button.addEventListener('click', (e) => {
+          const questionDiv = e.target.closest('.question');
+          const questionIndex = parseInt(questionDiv.dataset.index);
+          const selected = Array.from(questionDiv.querySelectorAll('.options button')).indexOf(e.target);
+          const selectedText = e.target.textContent;
+          checkAnswer(e.target, questionIndex, selected, selectedText);
+        });
+      });
+
+      prevPageButton.disabled = currentPage === 0;
+      nextPageButton.disabled = endIndex === questions.length;
+      updateProgress();
+    }
+
+    function checkAnswer(button, questionIndex, selected, selectedText) {
+      if (userAnswers[questionIndex] !== null) return;
+      const q = shuffledQuestions[questionIndex];
+      const correct = q.answer;
+      const buttons = button.parentElement.querySelectorAll("button");
+      const explanationEl = document.getElementById(`explanation-${questionIndex}`);
+
+      buttons.forEach((btn, j) => {
+        btn.disabled = true;
+        if (j === correct) btn.classList.add("correct");
+        if (btn === button && selected !== correct) btn.classList.add("wrong");
+      });
+
+      userAnswers[questionIndex] = selectedText;
+      if (selected === correct) {
+        score++;
+        correctSound.play().catch(() => console.log("Correct sound playback failed"));
+      } else {
+        wrongSound.play().catch(() => console.log("Wrong sound playback failed"));
+      }
+
+      explanationEl.textContent = q.explanation || 'No explanation available.';
+      explanationEl.classList.add('show');
+      saveProgress();
+      updateProgress();
+    }
+
+    function checkAllAnswered() {
+      const allAnswered = userAnswers.every(answer => answer !== null);
+      submitButton.disabled = !allAnswered;
+    }
+
+    function endQuiz() {
+      clearInterval(timerInterval);
+      quizEl.innerHTML = '';
+      prevPageButton.classList.add("hidden");
+      nextPageButton.classList.add("hidden");
+      submitButton.classList.add("hidden");
+      scoreEl.innerHTML = `Your score: ${score} / ${questions.length} (${((score / questions.length) * 100).toFixed(2)}%)`;
+      resultsEl.classList.remove("hidden");
+      restartButton.classList.remove("hidden");
+
+      resultsBody.innerHTML = shuffledQuestions.map((q, i) => {
+        const userAnswer = userAnswers[i] === null ? "Not attempted" : escapeHtml(userAnswers[i]);
+        const correctAnswer = escapeHtml(q.options[q.answer]);
+        const status = userAnswers[i] === q.options[q.answer] ? "Correct" :
+                      userAnswers[i] === null ? "Not attempted" : "Wrong";
+        return `
+          <tr>
+            <td>${i + 1}. ${escapeHtml(q.q)}</td>
+            <td>${userAnswer}</td>
+            <td>${correctAnswer}</td>
+            <td class="${status.toLowerCase()}">${status}</td>
+            <td>${escapeHtml(q.explanation || 'No explanation available.')}</td>
+          </tr>
+        `;
+      }).join('');
+      localStorage.removeItem("loksewaMechanicalMCQProgress");
+    }
+
+    function restartQuiz() {
+      score = 0;
+      userAnswers = Array(questions.length).fill(null);
+      timerSeconds = 0;
+      currentPage = 0;
+      shuffledQuestions = shuffleOptions(questions);
+      resultsEl.classList.add("hidden");
+      prevPageButton.classList.remove("hidden");
+      nextPageButton.classList.remove("hidden");
+      submitButton.classList.remove("hidden");
+      scoreEl.innerHTML = "";
+      clearInterval(timerInterval);
+      startTimer();
+      showPage(0);
+    }
+
+    function loadProgress() {
+      const saved = localStorage.getItem("loksewaMechanicalMCQProgress");
+      if (saved) {
+        const { score: savedScore, answers: savedAnswers, time: savedTime } = JSON.parse(saved);
+        score = savedScore || 0;
+        userAnswers = savedAnswers && savedAnswers.length === questions.length ? savedAnswers : Array(questions.length).fill(null);
+        timerSeconds = savedTime || 0;
+      }
+    }
+
+    function saveProgress() {
+      localStorage.setItem("loksewaMechanicalMCQProgress", JSON.stringify({
+        score,
+        answers: userAnswers,
+        time: timerSeconds
+      }));
+    }
+
+    // Initialize
+    shuffledQuestions = shuffleOptions(questions);
+    loadProgress();
+    startTimer();
+    showPage(0);
+
+    // Event listeners
+    submitButton.addEventListener("click", endQuiz);
+    restartButton.addEventListener("click", restartQuiz);
+    prevPageButton.addEventListener("click", () => {
+      if (currentPage > 0) showPage(currentPage - 1);
+    });
+    nextPageButton.addEventListener("click", () => {
+      if ((currentPage + 1) * questionsPerPage < questions.length) showPage(currentPage + 1);
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !submitButton.disabled) {
+        submitButton.click();
+      } else if (e.key === 'ArrowLeft' && !prevPageButton.disabled) {
+        prevPageButton.click();
+      } else if (e.key === 'ArrowRight' && !nextPageButton.disabled) {
+        nextPageButton.click();
+      }
+    });
+  </script>
+</body>
+</html>
