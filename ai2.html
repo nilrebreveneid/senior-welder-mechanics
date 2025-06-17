@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loksewa Mechanical 4th Level Mechanics MCQ Quiz (Set 2)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Roboto', -apple-system, Arial, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: linear-gradient(135deg, #e0f7fa, #80deea);
+      color: #1a202c;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1.6;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2b6cb0;
+      margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #c53030;
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+
+    .quiz-container {
+      max-width: 1000px;
+      width: 100%;
+      background: #ffffff;
+      padding: 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+      margin-bottom: 2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .quiz-container:hover {
+      transform: translateY(-5px);
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      background: #edf2f7;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+    }
+
+    .progress {
+      height: 100%;
+      background: linear-gradient(to right, #4299e1, #3182ce);
+      border-radius: 6px;
+      transition: width 0.4s ease-in-out;
+    }
+
+    #timer {
+      text-align: right;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: #c53030;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .question {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      border-radius: 8px;
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      animation: fadeIn 0.5s ease-out;
+      transition: box-shadow 0.3s;
+    }
+
+    .question:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .question p {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #2d3748;
+      margin-bottom: 1rem;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .options button {
+      padding: 0.75rem 1.25rem;
+      width: 100%;
+      background: #ebf8ff;
+      border: 2px solid #bee3f8;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      text-align: left;
+      transition: all 0.3s ease;
+      color: #2d3748;
+    }
+
+    .options button:hover:not(:disabled) {
+      background: #bee3f8;
+      border-color: #90cdf4;
+      transform: translateX(4px);
+    }
+
+    .options button:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+    }
+
+    .options button.correct {
+      background: #c6f6d5 !important;
+      border-color: #68d391 !important;
+      color: #22543d;
+      animation: pulse 0.5s;
+    }
+
+    .options button.wrong {
+      background: #fed7d7 !important;
+      border-color: #f56565 !important;
+      color: #742a2a;
+      animation: shake 0.3s;
+    }
+
+    .options button:disabled {
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
+    .explanation {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #f0fff4;
+      border-left: 4px solid #48bb78;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      color: #2d3748;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity 0.3s ease, max-height 0.3s ease;
+    }
+
+    .explanation.show {
+      opacity: 1;
+      max-height: 200px;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1.5rem;
+      gap: 1rem;
+    }
+
+    .pagination-button {
+      background: #4299e1;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+
+    .pagination-button:hover:not(:disabled) {
+      background: #3182ce;
+    }
+
+    .pagination-button:disabled {
+      background: #e2e8f0;
+      cursor: not-allowed;
+    }
+
+    .submit-button, .restart-button {
+      background: #4299e1;
+      color: #fff;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 1.5rem;
+      width: 100%;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .submit-button:hover:not(:disabled), .restart-button:hover:not(:disabled) {
+      background: #3182ce;
+      transform: translateY(-2px);
+    }
+
+    .submit-button:disabled {
+      background: #e2e8f0;
+      cursor: not-allowed;
+    }
+
+    #score, #results {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      font-weight: 700;
+      color: #2d3748;
+    }
+
+    .results-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .results-table th, .results-table td {
+      border: 1px solid #e2e8f0;
+      padding: 1rem;
+      text-align: left;
+    }
+
+    .results-table th {
+      background: #edf2f7;
+      font-weight: 600;
+      color: #2d3748;
+    }
+
+    .results-table td.correct { color: #2f855a; font-weight: 600; }
+    .results-table td.wrong { color: #c53030; font-weight: 600; }
+    .results-table td.not-attempted { color: #718096; }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+      .quiz-container {
+        padding: 1.5rem;
+      }
+      .question p {
+        font-size: 1.1rem;
+      }
+      .options button {
+        font-size: 0.95rem;
+        padding: 0.6rem 1rem;
+      }
+      .results-table th, .results-table td {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+      }
+      .pagination-button {
+        padding: 0.6rem 1rem;
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.2rem;
+      }
+      .submit-button, .restart-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Loksewa Mechanical 4th Level Mechanics MCQ Quiz (Set 2)</h1>
+  <h2>Test Your Knowledge: Practice Mechanical Engineering Concepts</h2>
+  <div class="quiz-container">
+    <div id="timer">Time: 00:00</div>
+    <div class="progress-bar">
+      <div class="progress" id="progress"></div>
+    </div>
+    <div id="quiz" role="region" aria-live="polite"></div>
+    <div class="pagination">
+      <button class="pagination-button" id="prev-page" disabled aria-label="Previous page">Previous</button>
+      <button class="pagination-button" id="next-page" aria-label="Next page">Next</button>
+    </div>
+    <button class="submit-button" id="submit-button" disabled aria-label="Submit quiz">Submit Quiz</button>
+    <div id="score"></div>
+    <div id="results" class="hidden">
+      <h2>Quiz Results</h2>
+      <div class="overflow-x-auto">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Question</th>
+              <th>Your Answer</th>
+              <th>Correct Answer</th>
+              <th>Status</th>
+              <th>Explanation</th>
+            </tr>
+          </thead>
+          <tbody id="results-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <button class="restart-button hidden" id="restart-button" aria-label="Restart quiz">Restart Quiz</button>
+
+  <audio id="correct-sound" src="https://www.soundjay.com/buttons/beep-01a.mp3"></audio>
+  <audio id="wrong-sound" src="https://www.soundjay.com/buttons/beep-02.mp3"></audio>
+
+  <script>
+    const questions = [
+      {
+        "q": "Which instrument is used to measure the angle between two surfaces of a workpiece?",
+        "options": ["Vernier Caliper", "Micrometer", "Bevel Protractor", "Feeler Gauge"],
+        "answer": 2,
+        "explanation": "A Bevel Protractor is used to measure the angle between two surfaces of a workpiece with high precision."
+      },
+      {
+        "q": "What is the primary use of a feeler gauge in a workshop?",
+        "options": ["Measure large distances", "Check small gaps or clearances", "Measure surface roughness", "Cut thin materials"],
+        "answer": 1,
+        "explanation": "A feeler gauge is a set of thin metal strips used to measure small gaps or clearances between components, such as in engine valves."
+      },
+      {
+        "q": "In the FPS system, what is the unit of mass?",
+        "options": ["Pound", "Slug", "Ounce", "Ton"],
+        "answer": 1,
+        "explanation": "In the FPS (Foot-Pound-Second) system, the unit of mass is the slug, defined as the mass accelerated at 1 ft/s² by a force of 1 pound."
+      },
+      {
+        "q": "What is the main application of a center punch in a workshop?",
+        "options": ["Cut metal", "Mark a point for drilling", "Measure angles", "Tighten bolts"],
+        "answer": 1,
+        "explanation": "A center punch creates a small indentation on a workpiece to guide a drill bit, ensuring accurate drilling."
+      },
+      {
+        "q": "Which machine tool uses a rotating multi-point cutting tool to remove material?",
+        "options": ["Lathe", "Milling Machine", "Shaper", "Grinder"],
+        "answer": 1,
+        "explanation": "A milling machine uses a rotating multi-point cutting tool to remove material from a workpiece, creating flat or contoured surfaces."
+      },
+      {
+        "q": "What is the main purpose of a drilling machine in a workshop?",
+        "options": ["Create precise holes", "Shape cylindrical parts", "Grind surfaces", "Cut slots"],
+        "answer": 0,
+        "explanation": "A drilling machine is designed to create precise holes in a workpiece using a rotating drill bit."
+      },
+      {
+        "q": "Which gas combination is used in oxy-acetylene welding?",
+        "options": ["Oxygen and Nitrogen", "Oxygen and Acetylene", "Hydrogen and Nitrogen", "Argon and Acetylene"],
+        "answer": 1,
+        "explanation": "Oxy-acetylene welding uses a combination of oxygen and acetylene gases to produce a high-temperature flame for welding."
+      },
+      {
+        "q": "What is a key advantage of arc welding over oxy-acetylene welding?",
+        "options": ["Lower cost", "Faster welding speed for thick materials", "Cleaner welds", "No need for electricity"],
+        "answer": 1,
+        "explanation": "Arc welding is faster for thick materials due to its high heat input and is more efficient in industrial settings."
+      },
+      {
+        "q": "Which power transmission system is most suitable for high-torque applications in a workshop?",
+        "options": ["Belt drive", "Chain drive", "Rope drive", "Gear drive"],
+        "answer": 1,
+        "explanation": "Chain drives are ideal for high-torque applications due to their ability to transmit power without slipping."
+      },
+      {
+        "q": "What is a common disadvantage of using a belt drive for power transmission?",
+        "options": ["High cost", "Slippage under heavy loads", "Complex maintenance", "Low efficiency"],
+        "answer": 1,
+        "explanation": "Belt drives can slip under heavy loads, reducing efficiency and requiring tension adjustments."
+      },
+      {
+        "q": "Which component in a gear drive system ensures smooth power transmission between non-parallel shafts?",
+        "options": ["Spur gear", "Bevel gear", "Worm gear", "Helical gear"],
+        "answer": 1,
+        "explanation": "Bevel gears are used to transmit power between non-parallel shafts, typically at a 90-degree angle."
+      },
+      {
+        "q": "What is a key advantage of Tungsten Inert Gas (TIG) welding over other welding processes?",
+        "options": ["High speed", "Precision and clean welds", "Low cost", "Ease of automation"],
+        "answer": 1,
+        "explanation": "TIG welding offers precision and clean welds, making it suitable for high-quality applications like aerospace."
+      },
+      {
+        "q": "What is the primary function of the flux coating on a welding electrode?",
+        "options": ["Increase heat", "Shield the weld pool", "Reduce current", "Cool the electrode"],
+        "answer": 1,
+        "explanation": "The flux coating shields the weld pool from atmospheric contamination by forming a protective gas and slag."
+      },
+      {
+        "q": "How can incomplete fusion in a weld be remedied?",
+        "options": ["Reduce welding speed", "Ensure proper heat input and joint preparation", "Use a larger electrode", "Decrease current"],
+        "answer": 1,
+        "explanation": "Incomplete fusion is corrected by ensuring adequate heat input and proper joint preparation to allow full penetration."
+      },
+      {
+        "q": "Which tool is essential for applying heat in soldering?",
+        "options": ["Scriber", "Soldering iron", "Chisel", "Pliers"],
+        "answer": 1,
+        "explanation": "A soldering iron is used to apply heat to melt solder, joining metal parts in soldering."
+      },
+      {
+        "q": "What is the purpose of chiseling in the creation of male and female joints?",
+        "options": ["Polish surfaces", "Remove material for precise fitting", "Mark lines", "Bend metal"],
+        "answer": 1,
+        "explanation": "Chiseling removes material to create precise male and female joints for fitting components."
+      },
+      {
+        "q": "Which tool is commonly used for folding sheet metal to create precise bends?",
+        "options": ["Tin snips", "Folding machine", "Scriber", "Hacksaw"],
+        "answer": 1,
+        "explanation": "A folding machine (or press brake) is used to create precise bends in sheet metal."
+      },
+      {
+        "q": "What is the primary purpose of using tin snips in sheet metal work?",
+        "options": ["Bend metal", "Cut thin sheet metal", "Join sheets", "Mark lines"],
+        "answer": 1,
+        "explanation": "Tin snips are hand tools designed to cut thin sheet metal with precision."
+      },
+      {
+        "q": "Which major component of a dozer is responsible for cutting and moving soil?",
+        "options": ["Track", "Blade", "Counterweight", "Cab"],
+        "answer": 1,
+        "explanation": "The blade of a dozer cuts and moves soil during earthmoving operations."
+      },
+      {
+        "q": "Which component of a loader allows it to scoop and lift materials?",
+        "options": ["Blade", "Bucket", "Track", "Cab"],
+        "answer": 1,
+        "explanation": "The bucket of a loader is used to scoop and lift loose materials like gravel or sand."
+      },
+      {
+        "q": "What is the function of the counterweight in an excavator?",
+        "options": ["Increase digging speed", "Balance the machine during digging", "Reduce fuel consumption", "Protect the operator"],
+        "answer": 1,
+        "explanation": "The counterweight balances the excavator during digging, preventing it from tipping over."
+      },
+      {
+        "q": "Which component of a grader is used to adjust the angle and height of the blade?",
+        "options": ["Moldboard", "Circle", "Frame", "Wheel"],
+        "answer": 1,
+        "explanation": "The circle allows the grader’s blade to be adjusted in angle and height for precise leveling."
+      },
+      {
+        "q": "What type of truck is commonly used to transport heavy construction materials like gravel or sand?",
+        "options": ["Flatbed truck", "Dump truck", "Pickup truck", "Tanker truck"],
+        "answer": 1,
+        "explanation": "A dump truck is designed to transport and unload heavy materials like gravel or sand."
+      },
+      {
+        "q": "Which component of a dump truck enables it to unload materials efficiently?",
+        "options": ["Cab", "Hydraulic cylinder", "Wheels", "Chassis"],
+        "answer": 1,
+        "explanation": "The hydraulic cylinder raises the dump truck’s bed to unload materials efficiently."
+      },
+      {
+        "q": "What is the primary function of a crane in construction?",
+        "options": ["Lifting and moving heavy loads", "Compacting soil", "Grading surfaces", "Digging trenches"],
+        "answer": 0,
+        "explanation": "A crane is used to lift and move heavy loads, such as steel beams, in construction."
+      },
+      {
+        "q": "Which component of a crane provides stability during lifting operations?",
+        "options": ["Boom", "Counterweight", "Hook", "Cab"],
+        "answer": 1,
+        "explanation": "The counterweight provides stability to prevent the crane from tipping during lifting."
+      },
+      {
+        "q": "What is the primary purpose of a roller in construction?",
+        "options": ["Lifting materials", "Compacting soil or asphalt", "Grading surfaces", "Transporting materials"],
+        "answer": 1,
+        "explanation": "A roller compacts soil or asphalt to create a stable base for roads or foundations."
+      },
+      {
+        "q": "Which type of roller is most suitable for compacting granular soils?",
+        "options": ["Smooth drum roller", "Vibratory roller", "Pneumatic roller", "Sheepsfoot roller"],
+        "answer": 1,
+        "explanation": "Vibratory rollers are effective for compacting granular soils due to their vibration mechanism."
+      },
+      {
+        "q": "In a four-stroke engine, which stroke is responsible for removing exhaust gases?",
+        "options": ["Intake", "Compression", "Power", "Exhaust"],
+        "answer": 3,
+        "explanation": "The exhaust stroke removes spent gases from the cylinder after combustion."
+      },
+      {
+        "q": "Why are two-stroke engines commonly used in small handheld tools?",
+        "options": ["High fuel efficiency", "Fewer moving parts", "Low noise", "Long lifespan"],
+        "answer": 1,
+        "explanation": "Two-stroke engines have fewer moving parts, making them lighter and suitable for handheld tools."
+      },
+      {
+        "q": "What is the primary function of the camshaft in an I.C. engine?",
+        "options": ["Transmit power", "Control valve opening and closing", "Compress fuel", "Cool the engine"],
+        "answer": 1,
+        "explanation": "The camshaft controls the timing of valve opening and closing to manage air-fuel intake and exhaust."
+      },
+      {
+        "q": "What role does the piston play in an I.C. engine?",
+        "options": ["Ignite fuel", "Compresses the air-fuel mixture", "Cool the cylinder", "Rotate the crankshaft"],
+        "answer": 1,
+        "explanation": "The piston compresses the air-fuel mixture in the cylinder, enabling combustion."
+      },
+      {
+        "q": "What does low compression in an engine cylinder typically indicate?",
+        "options": ["Faulty spark plug", "Worn piston rings or valves", "Clogged fuel injector", "Low oil level"],
+        "answer": 1,
+        "explanation": "Low compression is often caused by worn piston rings or valves, allowing gas leakage."
+      },
+      {
+        "q": "Which symptom suggests that an engine’s bearings may need replacement during an overhaul?",
+        "options": ["Blue smoke", "Knocking noise", "Overheating", "Misfiring"],
+        "answer": 1,
+        "explanation": "A knocking noise indicates worn bearings, causing excessive play in the crankshaft."
+      },
+      {
+        "q": "How can overheating in an I.C. engine be prevented during maintenance?",
+        "options": ["Replace spark plugs", "Check and top up coolant", "Adjust clutch", "Clean fuel tank"],
+        "answer": 1,
+        "explanation": "Checking and topping up coolant ensures the cooling system prevents engine overheating."
+      },
+      {
+        "q": "What should be done if an engine exhibits excessive vibration during operation?",
+        "options": ["Replace fuel filter", "Check and balance the crankshaft", "Adjust brakes", "Clean carburetor"],
+        "answer": 1,
+        "explanation": "Excessive vibration is often due to an unbalanced crankshaft, which needs checking and balancing."
+      },
+      {
+        "q": "Why is high pressure necessary in a fuel injection pump for diesel engines?",
+        "options": ["Cool the fuel", "Atomize fuel for better combustion", "Reduce emissions", "Increase fuel volume"],
+        "answer": 1,
+        "explanation": "High pressure atomizes fuel into a fine mist, ensuring efficient combustion in diesel engines."
+      },
+      {
+        "q": "Which engine parameter is directly controlled by the fuel injection pump’s timing?",
+        "options": ["Air intake", "Fuel delivery timing", "Exhaust flow", "Coolant circulation"],
+        "answer": 1,
+        "explanation": "The fuel injection pump’s timing controls when fuel is delivered to the combustion chamber."
+      },
+      {
+        "q": "What is the function of the plunger in a fuel injection pump?",
+        "options": ["Filter fuel", "Pressurize and deliver fuel", "Mix fuel with air", "Cool the pump"],
+        "answer": 1,
+        "explanation": "The plunger pressurizes and delivers fuel to the injectors in a fuel injection pump."
+      },
+      {
+        "q": "What is the role of the fuel filter in a fuel injection system?",
+        "options": ["Increase pressure", "Remove contaminants from fuel", "Atomize fuel", "Regulate timing"],
+        "answer": 1,
+        "explanation": "The fuel filter removes contaminants to prevent damage to the fuel injection system."
+      },
+      {
+        "q": "Which component prevents fuel from flowing back into the pump after injection?",
+        "options": ["Injector nozzle", "Delivery valve", "Fuel tank", "Plunger"],
+        "answer": 1,
+        "explanation": "The delivery valve prevents backflow, ensuring fuel moves only toward the injectors."
+      },
+      {
+        "q": "Which part of the carburetor regulates airflow to control the air-fuel mixture?",
+        "options": ["Float valve", "Throttle valve", "Jet", "Venturi"],
+        "answer": 1,
+        "explanation": "The throttle valve regulates airflow, controlling the air-fuel mixture in the carburetor."
+      },
+      {
+        "q": "What is a common symptom of a clogged fuel injection pump?",
+        "options": ["Overheating", "Engine misfiring or power loss", "Excessive noise", "High fuel efficiency"],
+        "answer": 1,
+        "explanation": "A clogged fuel injection pump restricts fuel flow, causing misfiring or power loss."
+      },
+      {
+        "q": "How can a carburetor’s performance be maintained during regular servicing?",
+        "options": ["Replace spark plugs", "Clean jets and float chamber", "Adjust brakes", "Top up coolant"],
+        "answer": 1,
+        "explanation": "Cleaning jets and the float chamber removes blockages, ensuring proper carburetor function."
+      },
+      {
+        "q": "Why is maintaining the correct engine temperature critical in a cooling system?",
+        "options": ["Increase fuel efficiency", "Prevent excessive wear and thermal stress", "Reduce noise", "Improve emissions"],
+        "answer": 1,
+        "explanation": "Proper engine temperature prevents excessive wear and thermal stress, ensuring longevity."
+      },
+      {
+        "q": "What is the function of the thermostat in an engine cooling system?",
+        "options": ["Cool the radiator", "Regulate coolant flow based on temperature", "Pump coolant", "Filter coolant"],
+        "answer": 1,
+        "explanation": "The thermostat regulates coolant flow to maintain optimal engine temperature."
+      },
+      {
+        "q": "What role does the radiator play in the cooling system of an engine?",
+        "options": ["Pump coolant", "Dissipate heat to the atmosphere", "Filter coolant", "Store coolant"],
+        "answer": 1,
+        "explanation": "The radiator dissipates heat from the coolant to the atmosphere, cooling the engine."
+      },
+      {
+        "q": "What is a common component of anti-freeze used in automotive cooling systems?",
+        "options": ["Water", "Ethylene glycol", "Oil", "Sugar syrup"],
+        "answer": 1,
+        "explanation": "Ethylene glycol is a common anti-freeze component, lowering the freezing point of coolant."
+      },
+      {
+        "q": "During maintenance, what should be checked to ensure the cooling system operates effectively?",
+        "options": ["Fuel level", "Coolant level and radiator condition", "Brake fluid", "Tire pressure"],
+        "answer": 1,
+        "explanation": "Checking coolant level and radiator condition ensures effective heat dissipation."
+      },
+      {
+        "q": "What should be done if air pockets are suspected in the cooling system?",
+        "options": ["Replace radiator", "Bleed the system to remove air", "Add more coolant", "Clean the thermostat"],
+        "answer": 1,
+        "explanation": "Bleeding the cooling system removes air pockets, restoring proper coolant circulation."
+      },
+      {
+        "q": "What is a key advantage of hydraulic brakes over mechanical brakes in a motor vehicle?",
+        "options": ["Lower cost", "Uniform force distribution", "Less maintenance", "Higher friction"],
+        "answer": 1,
+        "explanation": "Hydraulic brakes distribute force uniformly to all wheels, improving braking efficiency."
+      },
+      {
+        "q": "Which component in a disc brake system directly contacts the rotor to create friction?",
+        "options": ["Brake caliper", "Brake pad", "Master cylinder", "Brake fluid"],
+        "answer": 1,
+        "explanation": "The brake pad contacts the rotor to create friction, slowing the vehicle."
+      },
+      {
+        "q": "How can brake fade be prevented during maintenance of a vehicle’s braking system?",
+        "options": ["Adjust clutch", "Check and replace worn brake pads", "Clean fuel injector", "Top up coolant"],
+        "answer": 1,
+        "explanation": "Replacing worn brake pads prevents brake fade by ensuring adequate friction material."
+      },
+      {
+        "q": "Which characteristic of a steering system enhances driver safety during high-speed maneuvers?",
+        "options": ["High weight", "Precise and responsive control", "Low cost", "Minimal maintenance"],
+        "answer": 1,
+        "explanation": "Precise and responsive control ensures safe handling during high-speed maneuvers."
+      },
+      {
+        "q": "What is a key requirement for an effective steering system in a motor vehicle?",
+        "options": ["High fuel efficiency", "Return wheels to straight position", "Increase engine power", "Reduce tire wear"],
+        "answer": 1,
+        "explanation": "An effective steering system returns wheels to the straight position for stability."
+      },
+      {
+        "q": "What is a key advantage of electric power steering over hydraulic power steering?",
+        "options": ["Higher cost", "No need for hydraulic fluid maintenance", "Lower efficiency", "More complex design"],
+        "answer": 1,
+        "explanation": "Electric power steering eliminates the need for hydraulic fluid, reducing maintenance."
+      },
+      {
+        "q": "How does the control valve in a hydraulic power steering system function?",
+        "options": ["Cools the fluid", "Directs hydraulic fluid to assist steering", "Filters fluid", "Pumps fluid"],
+        "answer": 1,
+        "explanation": "The control valve directs hydraulic fluid to assist steering based on driver input."
+      },
+      {
+        "q": "What maintenance practice is essential for a hydraulic power steering system?",
+        "options": ["Check tire pressure", "Check and replace power steering fluid", "Adjust brakes", "Clean spark plugs"],
+        "answer": 1,
+        "explanation": "Checking and replacing power steering fluid ensures smooth operation of the system."
+      },
+      {
+        "q": "What should be done if a vehicle pulls to one side during steering?",
+        "options": ["Replace fuel filter", "Check wheel alignment and steering linkages", "Adjust clutch", "Clean carburetor"],
+        "answer": 1,
+        "explanation": "Pulling to one side is often due to misaligned wheels or faulty steering linkages."
+      },
+      {
+        "q": "What is the function of the differential in a vehicle’s transmission system?",
+        "options": ["Change gears", "Allow wheels to rotate at different speeds", "Cool transmission fluid", "Increase engine power"],
+        "answer": 1,
+        "explanation": "The differential allows wheels to rotate at different speeds, especially during turns."
+      },
+      {
+        "q": "What maintenance practice helps ensure the longevity of a vehicle’s transmission system?",
+        "options": ["Check tire pressure", "Check and replace transmission fluid", "Clean air filter", "Adjust brakes"],
+        "answer": 1,
+        "explanation": "Regularly checking and replacing transmission fluid reduces wear and ensures smooth operation."
+      },
+      {
+        "q": "What maintenance practice is essential for ensuring the longevity of a hydraulic system?",
+        "options": ["Clean spark plugs", "Check and replace hydraulic fluid", "Adjust tire pressure", "Replace air filter"],
+        "answer": 1,
+        "explanation": "Checking and replacing hydraulic fluid prevents contamination and wear in the system."
+      },
+      {
+        "q": "What maintenance practice is essential for prolonging tyre life in a vehicle?",
+        "options": ["Replace coolant", "Check and adjust tyre pressure", "Clean fuel injector", "Adjust clutch"],
+        "answer": 1,
+        "explanation": "Proper tyre pressure reduces wear and improves fuel efficiency."
+      },
+      {
+        "q": "How often should the air filter of a construction vehicle typically be inspected during periodic maintenance?",
+        "options": ["Yearly", "Monthly or as per conditions", "Every 6 months", "Daily"],
+        "answer": 1,
+        "explanation": "Air filters in construction vehicles should be inspected monthly or based on operating conditions to ensure clean air intake."
+      },
+      {
+        "q": "What is a common symptom of a faulty starter motor in a vehicle’s electrical system?",
+        "options": ["Dim lights", "Clicking sound without starting", "Overheating engine", "Low fuel efficiency"],
+        "answer": 1,
+        "explanation": "A clicking sound without starting indicates a faulty starter motor failing to engage."
+      }
+    ];
+
+    let score = 0;
+    let userAnswers = Array(questions.length).fill(null);
+    let timerSeconds = 0;
+    let timerInterval;
+    let shuffledQuestions = [];
+    let currentPage = 0;
+    const questionsPerPage = 25;
+
+    const quizEl = document.getElementById("quiz");
+    const scoreEl = document.getElementById("score");
+    const resultsEl = document.getElementById("results");
+    const resultsBody = document.getElementById("results-body");
+    const progressEl = document.getElementById("progress");
+    const timerEl = document.getElementById("timer");
+    const submitButton = document.getElementById("submit-button");
+    const restartButton = document.getElementById("restart-button");
+    const prevPageButton = document.getElementById("prev-page");
+    const nextPageButton = document.getElementById("next-page");
+    const correctSound = document.getElementById("correct-sound");
+    const wrongSound = document.getElementById("wrong-sound");
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function shuffleOptions(questions) {
+      return questions.map(q => {
+        const correct = q.options[q.answer];
+        const shuffled = [...q.options].sort(() => Math.random() - 0.5);
+        return {
+          ...q,
+          options: shuffled,
+          answer: shuffled.indexOf(correct)
+        };
+      });
+    }
+
+    function startTimer() {
+      const minutes = Math.floor(timerSeconds / 60);
+      const seconds = timerSeconds % 60;
+      timerEl.textContent = `Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        const minutes = Math.floor(timerSeconds / 60);
+        const seconds = timerSeconds % 60;
+        timerEl.textContent = `Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }, 1000);
+    }
+
+    function updateProgress() {
+      const answered = userAnswers.filter(answer => answer !== null).length;
+      const percentage = (answered / questions.length) * 100;
+      progressEl.style.width = `${percentage}%`;
+      checkAllAnswered();
+    }
+
+    function showPage(pageIndex) {
+      currentPage = pageIndex;
+      const startIndex = pageIndex * questionsPerPage;
+      const endIndex = Math.min(startIndex + questionsPerPage, shuffledQuestions.length);
+      const fragment = document.createDocumentFragment();
+      const pageQuestions = shuffledQuestions.slice(startIndex, endIndex);
+      pageQuestions.forEach((q, index) => {
+        const globalIndex = startIndex + index;
+        const isAnswered = userAnswers[globalIndex] !== null;
+        const selectedAnswer = userAnswers[globalIndex];
+        const options = q.options.map((opt, j) => {
+          let buttonClass = '';
+          if (isAnswered) {
+            if (opt === q.options[q.answer]) buttonClass += ' correct';
+            if (opt === selectedAnswer && selectedAnswer !== q.options[q.answer]) buttonClass += ' wrong';
+          }
+          return `<button class="${buttonClass}" aria-label="Option ${escapeHtml(opt)}" ${isAnswered ? 'disabled' : ''}>${escapeHtml(opt)}</button>`;
+        }).join('');
+        const div = document.createElement('div');
+        div.className = 'question';
+        div.dataset.index = globalIndex;
+        div.innerHTML = `
+          <p>${globalIndex + 1}. ${escapeHtml(q.q)}</p>
+          <div class="options">${options}</div>
+          <div class="explanation ${isAnswered ? 'show' : ''}" id="explanation-${globalIndex}">
+            ${isAnswered ? escapeHtml(q.explanation || 'No explanation available.') : ''}
+          </div>
+        `;
+        fragment.appendChild(div);
+      });
+      quizEl.innerHTML = '';
+      quizEl.appendChild(fragment);
+
+      quizEl.querySelectorAll('.options button').forEach(button => {
+        button.addEventListener('click', (e) => {
+          const questionDiv = e.target.closest('.question');
+          const questionIndex = parseInt(questionDiv.dataset.index);
+          const selected = Array.from(questionDiv.querySelectorAll('.options button')).indexOf(e.target);
+          const selectedText = e.target.textContent;
+          checkAnswer(e.target, questionIndex, selected, selectedText);
+        });
+      });
+
+      prevPageButton.disabled = currentPage === 0;
+      nextPageButton.disabled = endIndex === questions.length;
+      updateProgress();
+    }
+
+    function checkAnswer(button, questionIndex, selected, selectedText) {
+      if (userAnswers[questionIndex] !== null) return;
+      const q = shuffledQuestions[questionIndex];
+      const correct = q.answer;
+      const buttons = button.parentElement.querySelectorAll("button");
+      const explanationEl = document.getElementById(`explanation-${questionIndex}`);
+
+      buttons.forEach((btn, j) => {
+        btn.disabled = true;
+        if (j === correct) btn.classList.add("correct");
+        if (btn === button && selected !== correct) btn.classList.add("wrong");
+      });
+
+      userAnswers[questionIndex] = selectedText;
+      if (selected === correct) {
+        score++;
+        correctSound.play().catch(() => console.log("Correct sound playback failed"));
+      } else {
+        wrongSound.play().catch(() => console.log("Wrong sound playback failed"));
+      }
+
+      explanationEl.textContent = q.explanation || 'No explanation available.';
+      explanationEl.classList.add('show');
+      saveProgress();
+      updateProgress();
+    }
+
+    function checkAllAnswered() {
+      const allAnswered = userAnswers.every(answer => answer !== null);
+      submitButton.disabled = !allAnswered;
+    }
+
+    function endQuiz() {
+      clearInterval(timerInterval);
+      quizEl.innerHTML = '';
+      prevPageButton.classList.add("hidden");
+      nextPageButton.classList.add("hidden");
+      submitButton.classList.add("hidden");
+      scoreEl.innerHTML = `Your score: ${score} / ${questions.length} (${((score / questions.length) * 100).toFixed(2)}%)`;
+      resultsEl.classList.remove("hidden");
+      restartButton.classList.remove("hidden");
+
+      resultsBody.innerHTML = shuffledQuestions.map((q, i) => {
+        const userAnswer = userAnswers[i] === null ? "Not attempted" : escapeHtml(userAnswers[i]);
+        const correctAnswer = escapeHtml(q.options[q.answer]);
+        const status = userAnswers[i] === q.options[q.answer] ? "Correct" :
+                      userAnswers[i] === null ? "Not attempted" : "Wrong";
+        return `
+          <tr>
+            <td>${i + 1}. ${escapeHtml(q.q)}</td>
+            <td>${userAnswer}</td>
+            <td>${correctAnswer}</td>
+            <td class="${status.toLowerCase()}">${status}</td>
+            <td>${escapeHtml(q.explanation || 'No explanation available.')}</td>
+          </tr>
+        `;
+      }).join('');
+      localStorage.removeItem("loksewaMechanicalMCQProgressSet2");
+    }
+
+    function restartQuiz() {
+      score = 0;
+      userAnswers = Array(questions.length).fill(null);
+      timerSeconds = 0;
+      currentPage = 0;
+      shuffledQuestions = shuffleOptions(questions);
+      resultsEl.classList.add("hidden");
+      prevPageButton.classList.remove("hidden");
+      nextPageButton.classList.remove("hidden");
+      submitButton.classList.remove("hidden");
+      scoreEl.innerHTML = "";
+      clearInterval(timerInterval);
+      startTimer();
+      showPage(0);
+    }
+
+    function loadProgress() {
+      const saved = localStorage.getItem("loksewaMechanicalMCQProgressSet2");
+      if (saved) {
+        const { score: savedScore, answers: savedAnswers, time: savedTime } = JSON.parse(saved);
+        score = savedScore || 0;
+        userAnswers = savedAnswers && savedAnswers.length === questions.length ? savedAnswers : Array(questions.length).fill(null);
+        timerSeconds = savedTime || 0;
+      }
+    }
+
+    function saveProgress() {
+      localStorage.setItem("loksewaMechanicalMCQProgressSet2", JSON.stringify({
+        score,
+        answers: userAnswers,
+        time: timerSeconds
+      }));
+    }
+
+    // Initialize
+    shuffledQuestions = shuffleOptions(questions);
+    loadProgress();
+    startTimer();
+    showPage(0);
+
+    // Event listeners
+    submitButton.addEventListener("click", endQuiz);
+    restartButton.addEventListener("click", restartQuiz);
+    prevPageButton.addEventListener("click", () => {
+      if (currentPage > 0) showPage(currentPage - 1);
+    });
+    nextPageButton.addEventListener("click", () => {
+      if ((currentPage + 1) * questionsPerPage < questions.length) showPage(currentPage + 1);
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !submitButton.disabled) {
+        submitButton.click();
+      } else if (e.key === 'ArrowLeft' && !prevPageButton.disabled) {
+        prevPageButton.click();
+      } else if (e.key === 'ArrowRight' && !nextPageButton.disabled) {
+        nextPageButton.click();
+      }
+    });
+  </script>
+</body>
+</html>
